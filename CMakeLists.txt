@@ -15,7 +15,6 @@ file(
 add_library(
 	GUIML
 	SHARED
-	STATIC
 	${sources_files}
 	)
 
