@@ -1,6 +1,6 @@
 #include "EventManager.h"
 
-EventManager::EventManager(sf::Window *win) : w(win), m_mousePos(0, 0), m_oldMousePos(0, 0), m_hasPressed(false), m_isResize(false), m_newSize(sf::Vector2i(w->getSize().x, w->getSize().y)), m_oldSize(sf::Vector2i(w->getSize())), m_defaultSize(w->getSize())
+EventManager::EventManager(sf::Window *win) : w(win), m_mousePos(0, 0), m_oldMousePos(0, 0), m_hasPressedKeyMouse(false), m_hasPressedKeyKey(false), m_isResize(false), m_newSize(sf::Vector2i(w->getSize().x, w->getSize().y)), m_oldSize(sf::Vector2i(w->getSize())), m_defaultSize(w->getSize())
 {
 	for(unsigned int i = 0; i < NBR_KEYS; i++)
 	{
@@ -29,15 +29,19 @@ void EventManager::update()
 	m_clock.restart();
 	m_oldMousePos = m_mousePos;
 
-	if(m_hasPressed)
+	if(m_hasPressedKeyMouse)
 	{
 		for(unsigned int i = 0; i < NBR_CLICS; i++)
 			m_isInputMouse[i] = false;
-		for(unsigned int i = 0; i < NBR_KEYS; i++)
-			m_isInputKey[i] = false;
-		m_hasPressed = false;
+		m_hasPressedKeyMouse(false);
 	}
 
+	if(m_hasPressedKeyKey)
+	{
+		for(unsigned int i = 0; i < NBR_KEYS; i++)
+			m_isInputKey[i] = false;
+		m_hasPressedKeyKey = false;
+	}
 	m_enteredText = false;
 	m_isResize = false;
 
@@ -55,7 +59,7 @@ void EventManager::update()
 			{
 				m_isInputKey[m_event.key.code] = true;
 				m_keys[m_event.key.code] = true;
-				m_hasPressed = true;
+				m_hasPressedKeyKey = true;
 			}
 
 		if(m_event.type == sf::Event::TextEntered)
@@ -72,7 +76,7 @@ void EventManager::update()
 			{
 				m_isInputMouse[m_event.mouseButton.button] = true;
 				m_mouseClicked[m_event.mouseButton.button] = true;
-				m_hasPressed = true;
+				m_hasPressedKeyMouse = true;
 			}
 
 		if(m_event.type == sf::Event::MouseMoved)
@@ -161,9 +165,14 @@ const sf::Event& EventManager::getEvent() const
 	return m_event;
 }
 
-bool EventManager::hasPressed() const
+bool EventManager::hasPressedKeyKey() const
 {
-	return m_hasPressed;
+	return m_hasPressedKeyKey;
+}
+
+bool EventManager::hasPressedKeyMouse() const
+{
+	return m_hasPressedKeyMouse;
 }
 
 bool EventManager::windowIsResize() const
