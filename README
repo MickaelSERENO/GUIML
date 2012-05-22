@@ -1,0 +1,25 @@
+GUIML - Graphics User Interface Media Library
+=============================================
+
+GUIML is a simple cross-platform and object-oriented GUI. It is written in C++ with SFML2.0. You can find a other binding for PYSFML and Python : PYGUIML.
+
+Author
+------
+
+SERENO Mickael (Gaulois94) - main developer (serenomickael@gmail.com)
+
+Downloads 
+---------
+
+You can downloads this lib in the git repository https://github.com/Gaulois94/GUIML
+
+Install
+-------
+
+As this lib is cross-platform, you can compile this project in Windows, Linux, UNIX, MacOS, etc. For compiling this project, you need to use cmake. 
+
+Dependences
+-----------
+
+SFML2.0
+
