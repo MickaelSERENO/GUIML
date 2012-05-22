@@ -150,6 +150,8 @@ namespace guiml
 				sf::Vector2i newWindowSize = event->getNewWindowSize();
 				m_size = sf::Vector2i(x * newWindowSize.x/defaultWindowSize.x, y * newWindowSize.y / defaultWindowSize.y);
 			}
+			else
+				m_size = sf::Vector2i(x, y);
 		}
 		else
 			m_size = sf::Vector2i(x, y);
