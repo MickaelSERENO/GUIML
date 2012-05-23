@@ -2,6 +2,12 @@
 
 namespace guiml
 {
+	enum Position
+	{
+		HORIZONTAL,
+		VERTICAL
+	};
+
 	class Slide : public Widget
 	{
 	public:

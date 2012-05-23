@@ -33,7 +33,7 @@ void EventManager::update()
 	{
 		for(unsigned int i = 0; i < NBR_CLICS; i++)
 			m_isInputMouse[i] = false;
-		m_hasPressedKeyMouse(false);
+		m_hasPressedKeyMouse = false;
 	}
 
 	if(m_hasPressedKeyKey)

@@ -95,6 +95,7 @@ namespace guiml
 		create(x, y);
 		Widget::setSize(x, y);
 		m_backgroundTitle.setSize(sf::Vector2f(m_virtualSize.x, m_backgroundTitle.getSize().y));
+		setTitlePos(m_posTitle);
 	}
 
 	void Frame::setPosition(int x, int y)
