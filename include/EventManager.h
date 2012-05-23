@@ -36,7 +36,8 @@ public:
 
 	float getElapsedTime() const; //Return the time sell between two frames in microSeconds
 	const sf::Event& getEvent() const;
-	bool hasPressed() const;
+	bool hasPressedKeyMouse() const;
+	bool hasPressedKeyKey() const;
 	bool windowIsResize() const;
 	const sf::Vector2i& getNewWindowSize() const;
 	const sf::Vector2i& getOldWindowSize() const;
@@ -54,7 +55,8 @@ private:
 	sf::Clock m_clock;
 	bool m_isInputKey[NBR_KEYS];
 	bool m_isInputMouse[NBR_CLICS];
-	bool m_hasPressed;
+	bool m_hasPressedKeyMouse;
+	bool m_hasPressedKeyKey;
 	bool m_isResize;
 	sf::Vector2i m_newSize;
 	sf::Vector2i m_oldSize;
