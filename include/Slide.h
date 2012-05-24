@@ -1,4 +1,5 @@
 #include "Widget.h"
+#include "Button.h"
 
 namespace guiml
 {
@@ -11,14 +12,34 @@ namespace guiml
 	class Slide : public Widget
 	{
 	public:
-		Slide(Widget *parent, const sf::FloatRect &rect);
+		#include "SurchargeMethode.h"
+		Slide(Widget *parent, const sf::Vector2f& extremesValues, const sf::IntRect &rect, const Position& position = Position::VERTICAL);
+		Slide(Widget *parent, float valueMin, float valueMax, const sf::IntRect &rect, const Position& position = Position::VERTICAL);
+		Slide(Widget *parent);
+		Slide();
 		Slide(const Slide &copy);
 
-		void Update(std::list<sf::Drawable*> &drawable);
+		virtual ~Slide();
 
-		void SetSize(float x, float y);
-		void SetPosition(float x, float y);
+		void update(std::list<sf::Drawable*> &drawable);
 
-		unsigned int GetValue();
+		void setSize(float x, float y);
+		void setPosition(float x, float y);
+
+		void setPosition(const Position &position);
+
+		void setExtremesValues(const sf::Vector2i &extremesValues);
+
+		int getValue();
+		const sf::Vector2i getExtremesValues();
+
+	private:
+		sf::RectangleShape m_rectangleValue;
+		sf::RectangleShape m_rectangleGlobal;
+		Button m_buttonUp;
+		Button m_buttonDown;
+
+		sf::Vector2f m_extremesValues;
+		Position m_position;
 	};
 }
