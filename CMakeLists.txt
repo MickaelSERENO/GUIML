@@ -18,24 +18,28 @@ add_library(
 	${sources_files}
 	)
 
+add_library(
+	GUIMLStatic
+   	STATIC
+	${sources_files}
+	)
+
+#target link for the .so
 target_link_libraries(
 	GUIML
 	${sfml_system_lib_name}
-	)
-
-target_link_libraries(
-	GUIML
 	${sfml_window_lib_name}
-	)
-
-
-target_link_libraries(
-	GUIML
 	${sfml_graphics_lib_name}
-	)
-
-
-target_link_libraries(
-	GUIML
 	${sfml_audio_lib_name}
 	)
+
+#target link for the .a
+target_link_libraries(
+	GUIMLStatic
+	${sfml_system_lib_name}
+	${sfml_window_lib_name}
+	${sfml_graphics_lib_name}
+	${sfml_audio_lib_name}
+	)
+
+set_target_properties(GUIMLStatic PROPERTIES OUTPUT_NAME GUIML)
