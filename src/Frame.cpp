@@ -2,21 +2,23 @@
 
 namespace guiml
 {
-	Frame::Frame(Widget *parent, const sf::IntRect &rect, const sf::Color &backgroundColor, const Image &backgroundImage, const Label &title, const sf::Color &backgroundTitle) : Render(parent, rect, backgroundColor, backgroundImage), sf::RenderTexture(), m_backgroundTitle(sf::Vector2f(rect.width, title.getSize().y)), m_title(title), m_buttonMoveFrame(NULL, guiml::Label(), guiml::Image(), sf::IntRect(0, 0, rect.width, title.getSize().y)), m_posTitle(PosText::CENTER), m_isMoving(false), m_hasAddChild(false)
+	Frame::Frame(Widget *parent, const sf::IntRect &rect, const sf::Color &backgroundColor, const Image &backgroundImage, const Label &title, const sf::Color &backgroundTitle) : Render(parent, rect, backgroundColor, backgroundImage), sf::RenderTexture(), m_title(title), m_buttonMoveFrame(NULL, guiml::Label(), guiml::Image(), sf::IntRect(0, 0, rect.width, title.getSize().y)), m_posTitle(PosText::CENTER), m_isMoving(false), m_hasAddChild(false)
 	{
 		m_movingAllChild = false;
+
+		sf::Texture texture;
+		sf::Sprite sprite(texture, sf::IntRect(0, 0, rect.width, title.getSize().y));
+		sprite.setColor(backgroundTitle);
+
+		m_buttonMoveFrame.setParent(this);
+		m_buttonMoveFrame.setBackground(Image(NULL, sprite));
 
 		m_title.setParent(this);
 		m_title.setOriginMiddle();
 		m_title.setPosition(m_virtualSize.x / 2, 0);
 		m_title.setColor(sf::Color::White);
 
-		m_buttonMoveFrame.setParent(this);
-
-		m_backgroundTitle.setFillColor(backgroundTitle);
-		m_backgroundTitle.setPosition(getPosition().x, getPosition().y);
 		create(m_virtualSize.x, m_virtualSize.y);
-
 		resetView();
 	}
 
@@ -26,9 +28,6 @@ namespace guiml
 		{
 			if(isMoving())
 			{
-				sf::Vector2i defaultWindowSize = getEventManager()->getDefaultWindowSize();
-				sf::Vector2i newWindowSize = getEventManager()->getNewWindowSize();
-
 				sf::Vector2i oldMousePos = getEventManager()->getOldMousePosition();
 				sf::Vector2i mousePos = getEventManager()->getMousePosition();
 				move(mousePos.x - oldMousePos.x, mousePos.y - oldMousePos.y);
@@ -53,7 +52,6 @@ namespace guiml
 
 	void Frame::show(std::list<sf::Drawable*> &drawable)
 	{
-		draw(m_backgroundTitle);
 		for(std::list<sf::Drawable*>::iterator it = drawable.begin(); it != drawable.end(); ++it)
 			draw(*(*it));
 		display();
@@ -67,7 +65,6 @@ namespace guiml
 		m_title.setParent(this);
 		m_buttonMoveFrame.setSize(m_buttonMoveFrame.getSize().x, m_title.getSize().y);
 		setTitlePos(m_posTitle);
-		m_backgroundTitle.setSize(sf::Vector2f(m_virtualSize.x, title.getSize().y));
 		setTitle(title.getString().toAnsiString());
 	}
 
@@ -82,9 +79,14 @@ namespace guiml
 		Render::setView(view);
 		sf::RenderTexture::setView(view);
 		if(&view != &m_renderView)
+		{
 			moveView(m_virtualPos.x, m_virtualPos.y);
+			sf::FloatRect viewPort = getViewport();
+			std::cout << viewPort.left << " " <<  viewPort.top << std::endl;
+			m_buttonMoveFrame.setPosition(viewPort.left + m_virtualPos.x, viewPort.top + m_virtualPos.y);
+		}
 	}
-		
+
 	void Frame::resetView()
 	{
 		setView(sf::RenderTexture::getDefaultView());
@@ -94,7 +96,7 @@ namespace guiml
 	{
 		create(x, y);
 		Widget::setSize(x, y);
-		m_backgroundTitle.setSize(sf::Vector2f(m_virtualSize.x, m_backgroundTitle.getSize().y));
+		m_buttonMoveFrame.setSize(sf::Vector2i(m_virtualSize.x, m_buttonMoveFrame.getSize().y));
 		setTitlePos(m_posTitle);
 	}
 
@@ -102,12 +104,13 @@ namespace guiml
 	{
 		moveView(x - m_virtualPos.x, y - m_virtualPos.y);
 		Widget::setPosition(x, y);
-		m_backgroundTitle.setPosition(m_virtualPos.x, m_virtualPos.y);
 	}
 
 	void Frame::setBackgroundTitle(const sf::Color &colorTitle)
 	{
-		m_backgroundTitle.setFillColor(colorTitle);
+		sf::RectangleShape shape(sf::Vector2f(m_buttonMoveFrame.getSize().x, m_buttonMoveFrame.getSize().y));
+		shape.setFillColor(colorTitle);
+		m_buttonMoveFrame.setBackground(Image(NULL, sf::Sprite(*(shape.getTexture()))));
 	}
 
 	void Frame::setRectMovingFrame(const sf::IntRect &rect)
@@ -140,7 +143,7 @@ namespace guiml
 	void Frame::setBackgroundImage(const Image &backgroundImage)
 	{
 		Render::setBackgroundImage(backgroundImage);
-		m_backgroundImage.setRect(sf::IntRect(m_virtualPos.x, m_virtualPos.y - m_backgroundTitle.getSize().y, m_virtualSize.x, m_virtualSize.y));
+		m_backgroundImage.setRect(sf::IntRect(m_virtualPos.x, m_virtualPos.y - m_buttonMoveFrame.getSize().y, m_virtualSize.x, m_virtualSize.y));
 	}
 
 	const Label& Frame::getLabelTitle() const

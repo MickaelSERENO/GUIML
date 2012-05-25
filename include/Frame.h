@@ -17,6 +17,7 @@ namespace guiml
 	class Frame : public Render, public sf::RenderTexture
 	{
 	public:
+		#include "SurchargeMethode.h"
 		Frame(Widget *parent, const sf::IntRect &rect, const sf::Color &backgroundColor = sf::Color::Black, const Image &backgroundImage = Image(), const Label &title = Label(), const sf::Color &backgroundTitle = sf::Color(255, 255, 255, 255));
 
 		void update(std::list<sf::Drawable*> &drawable);
@@ -41,7 +42,6 @@ namespace guiml
 		bool isMoving();
 	protected:
 		void testIsMoving();
-		sf::RectangleShape m_backgroundTitle;
 		sf::Sprite m_spriteFrame;
 		guiml::Label m_title;
 		Button m_buttonMoveFrame;
