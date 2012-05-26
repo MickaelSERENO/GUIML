@@ -81,12 +81,12 @@ namespace guiml
 
 	void Label::setDefaultOrigin()
 	{
-		setOrigin(m_text.getLocalBounds().left, m_text.getLocalBounds().top);
+		setOrigin(0, 0);
 	}
 
 	void Label::setOriginMiddle()
 	{
-		setOrigin(m_virtualSize.x / 2, m_virtualSize.y / 2);
+		setOrigin(m_text.getGlobalBounds().width / 2, m_text.getGlobalBounds().height / 2);
 	}
 
 	void Label::setRightOrigin()
