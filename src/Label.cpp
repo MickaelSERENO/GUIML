@@ -86,12 +86,12 @@ namespace guiml
 
 	void Label::setOriginMiddle()
 	{
-		setOrigin(m_text.getLocalBounds().left + m_virtualSize.x / 2, m_text.getLocalBounds().top + m_virtualSize.y / 2);
+		setOrigin(m_virtualSize.x / 2, m_virtualSize.y / 2);
 	}
 
 	void Label::setRightOrigin()
 	{
-		setOrigin(m_text.getLocalBounds().left + m_virtualSize.x, m_text.getLocalBounds().top + m_virtualSize.y);
+		setOrigin(m_virtualSize.x, m_virtualSize.y);
 	}
 
 	void Label::rotate(float angle)
@@ -124,14 +124,13 @@ namespace guiml
 
 	void Label::setTextWidthSize(unsigned int size)
 	{
-		std::cout << "the size is " << size << std::endl;
+		std::cout << "the size are" << " " << m_size.x << " " <<size << std::endl;
 		if(getString().getSize() != 0)
-			setCharacterSize(size / getString().getSize());
+			setCharacterSize(m_text.getCharacterSize() * size / m_size.x);
 	}	
 
 	void Label::setCharacterSize(unsigned int size)
 	{
-		std::cout << "the characters is " << size << std::endl;
 		m_text.setCharacterSize(size);
 		Widget::setSize(m_text.getGlobalBounds().width, m_text.getGlobalBounds().height);
 	}
