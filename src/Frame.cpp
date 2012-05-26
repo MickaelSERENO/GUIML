@@ -28,13 +28,11 @@ namespace guiml
 	{
 		if(m_isDrawing)
 		{
-			if(isMoving())
+			if(isMoving() && getEventManager())
 			{
-				sf::Vector2i oldMousePos = getEventManager()->getOldMousePosition();
-				sf::Vector2i mousePos = getEventManager()->getMousePosition();
-				move(mousePos.x - oldMousePos.x, mousePos.y - oldMousePos.y);
+				sf::Vector2i newMousePosition = getEventManager()->getMousePosition();
+				setPosition(newMousePosition.x - m_mousePos.x, newMousePosition.y - m_mousePos.y);
 			}
-
 			for(std::list<Widget*>::iterator it = m_child.begin(); it != m_child.end(); ++it)
 				(*it)->move(m_virtualPos.x, m_virtualPos.y);
 
@@ -181,8 +179,13 @@ namespace guiml
 
 	bool Frame::isMoving()
 	{
-		if(!m_isMoving)
+		if(!m_isMoving && getEventManager())
+		{
 			m_isMoving = m_buttonMoveFrame.isActived();
+			m_mousePos = getEventManager()->getMousePosition();
+			m_mousePos.x -= m_pos.x;
+			m_mousePos.y -= m_pos.y;
+		}
 		else if(!(getEventManager()->getPressedKey(m_buttonMoveFrame.getKeyboardWhoActived()) || getEventManager()->getMouseClicked(m_buttonMoveFrame.getClickMouseWhoActived())))
 			m_isMoving = false;
 		return m_isMoving;
@@ -195,5 +198,11 @@ namespace guiml
 		rect.top -= m_virtualPos.y;
 
 		return rect;
+	}
+
+	void Frame::resizeWidget(const sf::Vector2i& defaultWindowSize, const sf::Vector2i& newWindowSize)
+	{
+		m_mousePos = sf::Vector2i(m_mousePos.x*newWindowSize.x/defaultWindowSize.x, m_mousePos.y*newWindowSize.y/defaultWindowSize.y);
+		Widget::resizeWidget(defaultWindowSize, newWindowSize);
 	}
 }

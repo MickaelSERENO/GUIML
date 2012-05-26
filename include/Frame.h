@@ -44,6 +44,8 @@ namespace guiml
 
 		const PosText& positionTitle() const;
 		bool isMoving();
+
+		virtual void resizeWidget(const sf::Vector2i& defaultWindowSize, const sf::Vector2i& newWindowSize);
 	protected:
 		void testIsMoving();
 		sf::Sprite m_spriteFrame;
@@ -52,6 +54,7 @@ namespace guiml
 		PosText m_posTitle;
 		bool m_isMoving;
 		bool m_hasAddChild;
+		sf::Vector2i m_mousePos;
 	};
 }
 
