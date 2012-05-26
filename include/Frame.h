@@ -18,7 +18,7 @@ namespace guiml
 	{
 	public:
 		#include "SurchargeMethode.h"
-		Frame(Widget *parent, const sf::IntRect &rect, const sf::Color &backgroundColor = sf::Color::Black, const Image &backgroundImage = Image(), const Label &title = Label(), const sf::Color &backgroundTitle = sf::Color(255, 255, 255, 255), bool drawButtonMoveFrame=true);
+		Frame(Widget *parent, const sf::FloatRect &rect, const sf::Color &backgroundColor = sf::Color::Black, const Image &backgroundImage = Image(), const Label &title = Label(), const sf::Color &backgroundTitle = sf::Color(255, 255, 255, 255), bool drawButtonMoveFrame=true);
 
 		void update(std::list<sf::Drawable*> &drawable);
 		void show(std::list<sf::Drawable*> &drawable);
@@ -29,7 +29,7 @@ namespace guiml
 		void setPosition(int x, int y);
 		void setBackgroundTitle(const sf::Color &colorTitle);
 		void setBackgroundTitle(const Image &image);
-		void setRectMovingFrame(const sf::IntRect &rect);
+		void setRectMovingFrame(const sf::FloatRect &rect);
 		void setTitlePos(const PosText &posTitle);
 		void setBackgroundImage(const Image &backgroundImage);
 		void setView(const sf::View &view);
@@ -38,14 +38,14 @@ namespace guiml
 		void resetView();
 
 		const Label& getLabelTitle() const;
-		sf::IntRect getRectMoveFrame() const;
+		sf::FloatRect getRectMoveFrame() const;
 		sf::FloatRect getViewport() const;
 		bool getDrawButtonMoveFrame() const;
 
 		const PosText& positionTitle() const;
 		bool isMoving();
 
-		virtual void resizeWidget(const sf::Vector2i& defaultWindowSize, const sf::Vector2i& newWindowSize);
+		virtual void resizeWidget(const sf::Vector2f& defaultWindowSize, const sf::Vector2f& newWindowSize);
 	protected:
 		void testIsMoving();
 		sf::Sprite m_spriteFrame;
@@ -54,7 +54,8 @@ namespace guiml
 		PosText m_posTitle;
 		bool m_isMoving;
 		bool m_hasAddChild;
-		sf::Vector2i m_mousePos;
+		sf::Vector2f m_mousePos;
+		sf::Vector2f m_multiplicateMousePos;
 	};
 }
 
