@@ -2,7 +2,7 @@
 
 namespace guiml
 {
-	Frame::Frame(Widget *parent, const sf::IntRect &rect, const sf::Color &backgroundColor, const Image &backgroundImage, const Label &title, const sf::Color &backgroundTitle) : Render(parent, rect, backgroundColor, backgroundImage), sf::RenderTexture(), m_title(title), m_buttonMoveFrame(NULL, guiml::Label(), guiml::Image(), sf::IntRect(0, 0, rect.width, title.getSize().y)), m_posTitle(PosText::CENTER), m_isMoving(false), m_hasAddChild(false)
+	Frame::Frame(Widget *parent, const sf::IntRect &rect, const sf::Color &backgroundColor, const Image &backgroundImage, const Label &title, const sf::Color &backgroundTitle, bool drawButtonMoveFrame) : Render(parent, rect, backgroundColor, backgroundImage), sf::RenderTexture(), m_title(title), m_buttonMoveFrame(NULL, guiml::Label(), guiml::Image(), sf::IntRect(0, 0, rect.width, title.getSize().y)), m_posTitle(PosText::CENTER), m_isMoving(false), m_hasAddChild(false)
 	{
 		m_movingAllChild = false;
 
@@ -20,6 +20,8 @@ namespace guiml
 
 		create(m_virtualSize.x, m_virtualSize.y);
 		resetView();
+		if(!drawButtonMoveFrame)
+			m_buttonMoveFrame.drawWidget(false);
 	}
 
 	void Frame::update(std::list<sf::Drawable*> &drawable)
@@ -108,9 +110,15 @@ namespace guiml
 
 	void Frame::setBackgroundTitle(const sf::Color &colorTitle)
 	{
-		sf::RectangleShape shape(sf::Vector2f(m_buttonMoveFrame.getSize().x, m_buttonMoveFrame.getSize().y));
-		shape.setFillColor(colorTitle);
-		m_buttonMoveFrame.setBackground(Image(NULL, sf::Sprite(*(shape.getTexture()))));
+		sf::Texture texture;
+		sf::Sprite sprite(texture, m_buttonMoveFrame.getRect());
+		sprite.setColor(colorTitle);
+		m_buttonMoveFrame.setBackground(Image(NULL, sprite));
+	}
+
+	void Frame::setBackgroundTitle(const Image& image)
+	{
+		m_buttonMoveFrame.setBackground(image);
 	}
 
 	void Frame::setRectMovingFrame(const sf::IntRect &rect)
@@ -146,6 +154,11 @@ namespace guiml
 		m_backgroundImage.setRect(sf::IntRect(m_virtualPos.x, m_virtualPos.y - m_buttonMoveFrame.getSize().y, m_virtualSize.x, m_virtualSize.y));
 	}
 
+	void Frame::setDrawButtonMoveFrame(bool drawButtonMoveFrame)
+	{
+		m_buttonMoveFrame.drawWidget(drawButtonMoveFrame);
+	}
+
 	const Label& Frame::getLabelTitle() const
 	{
 		return m_title;
@@ -154,6 +167,11 @@ namespace guiml
 	sf::IntRect Frame::getRectMoveFrame() const
 	{
 		return m_buttonMoveFrame.getVirtualRect();
+	}
+
+	bool Frame::getDrawButtonMoveFrame() const
+	{
+		return m_buttonMoveFrame.isDrawing();
 	}
 
 	const PosText& Frame::positionTitle() const
