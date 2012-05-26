@@ -13,33 +13,41 @@ namespace guiml
 	{
 	public:
 		#include "SurchargeMethode.h"
-		Slide(Widget *parent, const sf::Vector2f& extremesValues, const sf::IntRect &rect, const Position& position = Position::VERTICAL);
-		Slide(Widget *parent, float valueMin, float valueMax, const sf::IntRect &rect, const Position& position = Position::VERTICAL);
+		Slide(Widget *parent, const sf::Vector2f& extremesValues, const sf::FloatRect &rect, const Position& position = Position::VERTICAL, int pourcentageGlobalRectangle=97);
+		Slide(Widget *parent, float valueMin, float valueMax, const sf::FloatRect &rect, const Position& position = Position::VERTICAL, int pourcentageGlobalRectangle=97);
 		Slide(Widget *parent);
 		Slide();
+
 		Slide(const Slide &copy);
+		Slide& operator=(const Slide &copy);
 
 		virtual ~Slide();
 
 		void update(std::list<sf::Drawable*> &drawable);
 
-		void setSize(float x, float y);
-		void setPosition(float x, float y);
+		void setSize(int x, int y);
+		void setPosition(int x, int y);
 
 		void setPosition(const Position &position);
 
-		void setExtremesValues(const sf::Vector2i &extremesValues);
+		void setExtremesValues(const sf::Vector2f &extremesValues);
 
-		int getValue();
-		const sf::Vector2i getExtremesValues();
+		float getValue();
+		const sf::Vector2f& getExtremesValues();
 
 	private:
-		sf::RectangleShape m_rectangleValue;
-		sf::RectangleShape m_rectangleGlobal;
+		sf::RectangleShape m_globalRectangle;
+		Button m_buttonValue;
 		Button m_buttonUp;
 		Button m_buttonDown;
 
 		sf::Vector2f m_extremesValues;
+		float m_value;
 		Position m_position;
+
+		bool m_isSelect;
+		bool m_isActive;
+
+		int m_pourcentageGlobalRectangle;
 	};
 }

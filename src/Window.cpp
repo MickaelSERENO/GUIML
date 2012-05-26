@@ -2,7 +2,7 @@
 
 namespace guiml
 {
-	Window::Window(const sf::VideoMode &mode, const std::string &title, Widget *parent, unsigned int framerateLimit, const sf::Color &backgroundColor, const Image &backgroundImage) : Render(parent, sf::IntRect(0, 0, mode.width, mode.height), backgroundColor, backgroundImage), sf::RenderWindow(mode, title), m_framerate(framerateLimit)
+	Window::Window(const sf::VideoMode &mode, const std::string &title, Widget *parent, unsigned int framerateLimit, const sf::Color &backgroundColor, const Image &backgroundImage) : Render(parent, sf::FloatRect(0, 0, mode.width, mode.height), backgroundColor, backgroundImage), sf::RenderWindow(mode, title), m_framerate(framerateLimit)
 	{
 		RenderWindow::setPosition(sf::Vector2i(0, 0));
 		setFramerateLimit(framerateLimit);
@@ -80,7 +80,7 @@ namespace guiml
 		return m_framerate;
 	}
 
-	void Window::resizeWidget(const sf::Vector2i& defaultWindowSize, const sf::Vector2i& newWindowSize)
+	void Window::resizeWidget(const sf::Vector2f& defaultWindowSize, const sf::Vector2f& newWindowSize)
 	{
 		return;
 	}

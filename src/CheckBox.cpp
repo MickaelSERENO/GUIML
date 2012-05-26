@@ -2,7 +2,7 @@
 
 namespace guiml
 {
-	CheckBox::CheckBox(Widget *parent, const sf::IntRect &rect) : Widget(parent, rect), m_rectangle(sf::Vector2f(rect.width, rect.height)), m_line1(sf::Lines, 2), m_line2(sf::Lines, 2), m_howActivedKeyboard(sf::Keyboard::End), m_howActivedClickMouse(sf::Mouse::Left), m_isSelect(false), m_isSelectCopy(false), m_isActived(false), m_isActivedCopy(false)
+	CheckBox::CheckBox(Widget *parent, const sf::FloatRect &rect) : Widget(parent, rect), m_rectangle(sf::Vector2f(rect.width, rect.height)), m_line1(sf::Lines, 2), m_line2(sf::Lines, 2), m_howActivedKeyboard(sf::Keyboard::End), m_howActivedClickMouse(sf::Mouse::Left), m_isSelect(false), m_isSelectCopy(false), m_isActived(false), m_isActivedCopy(false)
 	{
 		m_rectangle.setPosition(rect.left, rect.top);
 		setFillColorRectangle(sf::Color(0, 0, 0, 0));

@@ -3,7 +3,7 @@
 namespace guiml
 {
 	//-------------------------All constructor with various parameters--------------------------//
-	Image::Image(Widget *parent, const std::string &path, const sf::IntRect &rect) : Widget(parent, rect)
+	Image::Image(Widget *parent, const std::string &path, const sf::FloatRect &rect) : Widget(parent, rect)
 	{
 		try
 		{
@@ -18,13 +18,13 @@ namespace guiml
 
 		m_sprite.setTexture(m_texture);
 
-		if (rect != sf::IntRect(0, 0, 0, 0))
+		if (rect != sf::FloatRect(0, 0, 0, 0))
 			setRect(rect);
 		else
-			setRect(sf::IntRect(m_sprite.getGlobalBounds().left, m_sprite.getGlobalBounds().top, m_sprite.getGlobalBounds().width, m_sprite.getGlobalBounds().height));
+			setRect(m_sprite.getGlobalBounds());
 	}
 
-	Image::Image(Widget *parent, const sf::Image &image, const sf::IntRect &rect) : Widget(parent, rect)
+	Image::Image(Widget *parent, const sf::Image &image, const sf::FloatRect &rect) : Widget(parent, rect)
 	{
 		try
 		{
@@ -38,28 +38,28 @@ namespace guiml
 		}
 
 		m_sprite.setTexture(m_texture);
-		if (rect != sf::IntRect(0, 0, 0, 0))
+		if (rect != sf::FloatRect(0, 0, 0, 0))
 			setRect(rect);
 		else
-			setRect(sf::IntRect(m_sprite.getGlobalBounds().left, m_sprite.getGlobalBounds().top, m_sprite.getGlobalBounds().width, m_sprite.getGlobalBounds().height));
+			setRect(m_sprite.getGlobalBounds());
 	}
 
-	Image::Image(Widget *parent, const sf::Texture &texture, const sf::IntRect &rect) : Widget(parent, rect), m_texture(texture)
+	Image::Image(Widget *parent, const sf::Texture &texture, const sf::FloatRect &rect) : Widget(parent, rect), m_texture(texture)
 	{
 		m_sprite.setTexture(m_texture);
-		if (rect != sf::IntRect(0, 0, 0, 0))
+		if (rect != sf::FloatRect(0, 0, 0, 0))
 			setRect(rect);
 		else
-			setRect(sf::IntRect(m_sprite.getGlobalBounds().left, m_sprite.getGlobalBounds().top, m_sprite.getGlobalBounds().width, m_sprite.getGlobalBounds().height));
+			setRect(m_sprite.getGlobalBounds());
 	}
 
-	Image::Image(Widget *parent, const sf::Sprite &sprite, const sf::IntRect &rect) : Widget(parent, rect)
+	Image::Image(Widget *parent, const sf::Sprite &sprite, const sf::FloatRect &rect) : Widget(parent, rect)
 	{
 		setImage(sprite);
-		if (rect != sf::IntRect(0, 0, 0, 0))
+		if (rect != sf::FloatRect(0, 0, 0, 0))
 			setRect(rect);
 		else
-			setRect(sf::IntRect(m_sprite.getGlobalBounds().left, m_sprite.getGlobalBounds().top, m_sprite.getGlobalBounds().width, m_sprite.getGlobalBounds().height));
+			setRect(sf::FloatRect(m_sprite.getGlobalBounds().left, m_sprite.getGlobalBounds().top, m_sprite.getGlobalBounds().width, m_sprite.getGlobalBounds().height));
 	}
 
 	Image::Image(Widget *parent) : Widget(parent)
@@ -96,13 +96,13 @@ namespace guiml
 		Widget::update(drawable);
 	}
 
-	void Image::lighten(const sf::IntRect &rect)
+	void Image::lighten(const sf::FloatRect &rect)
 	{
-		if(m_virtualSize != sf::Vector2i(0, 0))
+		if(m_virtualSize != sf::Vector2f(0, 0))
 		{
-			sf::IntRect rect2 = rect;
-			sf::IntRect rect3 = getVirtualRect();
-			if (rect == sf::IntRect(0, 0, 0, 0))
+			sf::FloatRect rect2 = rect;
+			sf::FloatRect rect3 = getVirtualRect();
+			if (rect == sf::FloatRect(0, 0, 0, 0))
 				rect2 = rect3;
 			try
 			{
@@ -135,7 +135,7 @@ namespace guiml
 	}
 
 
-	void Image::setPlageColor(const sf::IntRect &rect, const sf::Color &color)
+	void Image::setPlageColor(const sf::FloatRect &rect, const sf::Color &color)
 	{
 		try
 		{
@@ -196,12 +196,12 @@ namespace guiml
 	void Image::setRotation(float angle)
 	{
 		m_sprite.setRotation(angle);
-		setRect(sf::IntRect(m_sprite.getGlobalBounds().left, m_sprite.getGlobalBounds().top, m_sprite.getGlobalBounds().width, m_sprite.getGlobalBounds().height));
+		setRect(sf::FloatRect(m_sprite.getGlobalBounds().left, m_sprite.getGlobalBounds().top, m_sprite.getGlobalBounds().width, m_sprite.getGlobalBounds().height));
 	}
 
-	void Image::setTextureRect(const sf::IntRect &rect)
+	void Image::setTextureRect(const sf::FloatRect &rect)
 	{
-		m_sprite.setTextureRect(rect);
+		m_sprite.setTextureRect(sf::IntRect(rect.left, rect.top, rect.width, rect.height));
 	}
 
 	void Image::setImage(const sf::Texture &texture)

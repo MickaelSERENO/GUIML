@@ -13,7 +13,7 @@ public:
 	EventManager(sf::Window *win);
 	~EventManager();
 	void update(); //Update events
-	void setDefaultWindowSize(const sf::Vector2i& defaultWindowSize);
+	void setDefaultWindowSize(const sf::Vector2f& defaultWindowSize);
 
 	bool getPressedKey(unsigned int choice) const; //get the key who corresponds of the choice
 	bool getOnePressedKey(unsigned int choice) const;
@@ -21,8 +21,8 @@ public:
 	bool isEnteredText() const;
 	bool getMouseClicked(unsigned int choice) const; //get the key of the mouse who corresponds of the choice
 	bool getOneMouseClicked(unsigned int choice) const;
-	const sf::Vector2i &getMousePosition() const; //get the position of the mouse
-	const sf::Vector2i &getOldMousePosition() const;
+	const sf::Vector2f &getMousePosition() const; //get the position of the mouse
+	const sf::Vector2f &getOldMousePosition() const;
 	template <typename T>
 	bool isMouseInRect(const sf::Rect<T> &rect) const //See if the mouse is in the area of rect.
 	{
@@ -39,9 +39,9 @@ public:
 	bool hasPressedKeyMouse() const;
 	bool hasPressedKeyKey() const;
 	bool windowIsResize() const;
-	const sf::Vector2i& getNewWindowSize() const;
-	const sf::Vector2i& getOldWindowSize() const;
-	const sf::Vector2i& getDefaultWindowSize() const;
+	const sf::Vector2f& getNewWindowSize() const;
+	const sf::Vector2f& getOldWindowSize() const;
+	const sf::Vector2f& getDefaultWindowSize() const;
 private:
 	sf::Window *w;
 	sf::Event m_event;
@@ -49,8 +49,8 @@ private:
 	sf::Uint32 m_text;
 	bool m_enteredText;
 	bool m_mouseClicked[NBR_CLICS];
-	sf::Vector2i m_mousePos;
-	sf::Vector2i m_oldMousePos;
+	sf::Vector2f m_mousePos;
+	sf::Vector2f m_oldMousePos;
 	float m_elapsedTime;
 	sf::Clock m_clock;
 	bool m_isInputKey[NBR_KEYS];
@@ -58,9 +58,9 @@ private:
 	bool m_hasPressedKeyMouse;
 	bool m_hasPressedKeyKey;
 	bool m_isResize;
-	sf::Vector2i m_newSize;
-	sf::Vector2i m_oldSize;
-	sf::Vector2i m_defaultSize;
+	sf::Vector2f m_newSize;
+	sf::Vector2f m_oldSize;
+	sf::Vector2f m_defaultSize;
 };
 
 #endif

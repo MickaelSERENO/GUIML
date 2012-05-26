@@ -2,7 +2,7 @@
 
 namespace guiml
 {
-	Widget::Widget(Widget *parent, const sf::IntRect &rect) : m_parent(NULL), m_isDrawing(true), m_pos(rect.left, rect.top), m_size(rect.width, rect.height), m_virtualPos(rect.left, rect.top), m_virtualSize(rect.width, rect.height), m_movingAllChild(false)
+	Widget::Widget(Widget *parent, const sf::FloatRect &rect) : m_parent(NULL), m_isDrawing(true), m_pos(rect.left, rect.top), m_size(rect.width, rect.height), m_virtualPos(rect.left, rect.top), m_virtualSize(rect.width, rect.height), m_movingAllChild(false)
 	{
 		if(parent)
 			parent->addChild(this);
@@ -105,13 +105,13 @@ namespace guiml
 				(*it)->update(drawables);
 	}
 
-	void Widget::setRect(const sf::IntRect &rect)
+	void Widget::setRect(const sf::FloatRect &rect)
 	{
 		setPosition(rect.left, rect.top);
 		setSize(rect.width, rect.height);
 	}
 
-	void Widget::setPosition(const sf::Vector2i &pos)
+	void Widget::setPosition(const sf::Vector2f &pos)
 	{
 		setPosition(pos.x, pos.y);
 	}
@@ -125,18 +125,18 @@ namespace guiml
 		EventManager *event = getEventManager();
 		if(event)
 		{
-			sf::Vector2i defaultWindowSize = event->getDefaultWindowSize();
+			sf::Vector2f defaultWindowSize = event->getDefaultWindowSize();
 			if(defaultWindowSize.x != 0 && defaultWindowSize.y != 0)
 			{
-				sf::Vector2i newWindowSize = event->getNewWindowSize();
-				m_pos = sf::Vector2i(x * newWindowSize.x/defaultWindowSize.x, y * newWindowSize.y / defaultWindowSize.y);
+				sf::Vector2f newWindowSize = event->getNewWindowSize();
+				m_pos = sf::Vector2f(x * newWindowSize.x/defaultWindowSize.x, y * newWindowSize.y / defaultWindowSize.y);
 			}
 			else
-				m_pos = sf::Vector2i(x, y);
+				m_pos = sf::Vector2f(x, y);
 		}
 		else
-			m_pos = sf::Vector2i(x, y);
-		m_virtualPos = sf::Vector2i(x, y);;
+			m_pos = sf::Vector2f(x, y);
+		m_virtualPos = sf::Vector2f(x, y);;
 	}
 
 	void Widget::setSize(int x, int y)
@@ -144,18 +144,18 @@ namespace guiml
 		EventManager *event = getEventManager();
 		if(event)
 		{
-			sf::Vector2i defaultWindowSize = event->getDefaultWindowSize();
+			sf::Vector2f defaultWindowSize = event->getDefaultWindowSize();
 			if(defaultWindowSize.x != 0 && defaultWindowSize.y != 0)
 			{
-				sf::Vector2i newWindowSize = event->getNewWindowSize();
-				m_size = sf::Vector2i(x * newWindowSize.x/defaultWindowSize.x, y * newWindowSize.y / defaultWindowSize.y);
+				sf::Vector2f newWindowSize = event->getNewWindowSize();
+				m_size = sf::Vector2f(x * newWindowSize.x/defaultWindowSize.x, y * newWindowSize.y / defaultWindowSize.y);
 			}
 			else
-				m_size = sf::Vector2i(x, y);
+				m_size = sf::Vector2f(x, y);
 		}
 		else
-			m_size = sf::Vector2i(x, y);
-		m_virtualSize = sf::Vector2i(x, y);;
+			m_size = sf::Vector2f(x, y);
+		m_virtualSize = sf::Vector2f(x, y);;
 	}
 
 	void Widget::scale(float x)
@@ -178,12 +178,12 @@ namespace guiml
 		setPosition(m_virtualPos.x + x, m_virtualPos.y + y);
 	}
 
-	void Widget::move(const sf::Vector2i &addPosition)
+	void Widget::move(const sf::Vector2f &addPosition)
 	{
 		move(addPosition.x, addPosition.y);
 	}
 
-	void Widget::setSize(const sf::Vector2i &newSize)
+	void Widget::setSize(const sf::Vector2f &newSize)
 	{
 		setSize(newSize.x, newSize.y);	
 	}
@@ -193,7 +193,7 @@ namespace guiml
 		setSize(m_virtualSize.x + x, m_virtualSize.y + y);
 	}
 
-	void Widget::addSize(const sf::Vector2i &addingSize)
+	void Widget::addSize(const sf::Vector2f &addingSize)
 	{
 		addSize(addingSize.x, addingSize.y);
 	}
@@ -241,37 +241,37 @@ namespace guiml
 		return isChild;
 	}
 
-	const sf::Vector2i& Widget::getPosition() const 
+	const sf::Vector2f& Widget::getPosition() const 
 	{
 		return m_pos;
 	}
 
-	const sf::Vector2i& Widget::getSize() const 
+	const sf::Vector2f& Widget::getSize() const 
 	{
 		return m_size;
 	}
 
-	const sf::Vector2i& Widget::getVirtualPosition() const 
+	const sf::Vector2f& Widget::getVirtualPosition() const 
 	{
 		return m_virtualPos;
 	}
 
-	const sf::Vector2i& Widget::getVirtualSize() const 
+	const sf::Vector2f& Widget::getVirtualSize() const 
 	{
 		return m_virtualSize;
 	}
 
-	sf::IntRect Widget::getRect()const 
+	sf::FloatRect Widget::getRect()const 
 	{
-		return sf::IntRect(m_pos.x, m_pos.y, m_size.x, m_size.y);
+		return sf::FloatRect(m_pos.x, m_pos.y, m_size.x, m_size.y);
 	}
 	
-	sf::IntRect Widget::getVirtualRect() const
+	sf::FloatRect Widget::getVirtualRect() const
 	{
-		return sf::IntRect(m_virtualPos.x, m_virtualPos.y, m_virtualSize.x, m_virtualSize.y);
+		return sf::FloatRect(m_virtualPos.x, m_virtualPos.y, m_virtualSize.x, m_virtualSize.y);
 	}
 
-	void Widget::resizeWidget(const sf::Vector2i& defaultWindowSize, const sf::Vector2i& newWindowSize)
+	void Widget::resizeWidget(const sf::Vector2f& defaultWindowSize, const sf::Vector2f& newWindowSize)
 	{
 		m_size.x = m_virtualSize.x * newWindowSize.x / defaultWindowSize.x;
 		m_pos.x = m_virtualPos.x * newWindowSize.x / defaultWindowSize.x;

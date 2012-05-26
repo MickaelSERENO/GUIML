@@ -2,38 +2,38 @@
 
 namespace guiml
 {
-	Button::Button(Widget *parent, const Label &text, const sf::IntRect &rect) : Widget(parent, rect), m_hasBackground(false), m_hasLabel(true), m_background(NULL), m_text(text), m_backgroundLighten(NULL), m_textLighten(text), m_isSelect(false), m_isSelectCopy(false), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left), m_isActived(false)
+	Button::Button(Widget *parent, const Label &text, const sf::FloatRect &rect) : Widget(parent, rect), m_hasBackground(false), m_hasLabel(true), m_background(NULL), m_text(text), m_backgroundLighten(NULL), m_textLighten(text), m_isSelect(false), m_isSelectCopy(false), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left), m_isActived(false)
 	{
 		m_textLighten.lighten();
 		m_currentBackground = &m_background;
 		m_currentLabel = &m_text;
 
-		if(rect == sf::IntRect(0, 0, 0, 0))
+		if(rect == sf::FloatRect(0, 0, 0, 0))
 			setRect(m_text.getVirtualRect());
 		else
 			setRect(rect);
 		drawWidget(true);
 	}
 
-	Button::Button(Widget *parent, const Image &image, const sf::IntRect &rect) : Widget(parent, rect), m_hasBackground(true), m_hasLabel(false), m_background(image), m_text(NULL), m_backgroundLighten(image), m_textLighten(NULL) ,m_isSelect(false), m_isSelectCopy(false), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left), m_isActived(false)
+	Button::Button(Widget *parent, const Image &image, const sf::FloatRect &rect) : Widget(parent, rect), m_hasBackground(true), m_hasLabel(false), m_background(image), m_text(NULL), m_backgroundLighten(image), m_textLighten(NULL) ,m_isSelect(false), m_isSelectCopy(false), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left), m_isActived(false)
 	{
 		m_backgroundLighten.lighten();
 		m_currentBackground = &m_background;
 		m_currentLabel = &m_text;
-		if(rect == sf::IntRect(0, 0, 0, 0))
+		if(rect == sf::FloatRect(0, 0, 0, 0))
 			setRect(m_background.getVirtualRect());
 		else
 			setRect(rect);
 		drawWidget(true);
 	}
 
-	Button::Button(Widget *parent, const Label &text, const Image &image, const sf::IntRect &rect) : Widget(parent, rect), m_hasBackground(true), m_hasLabel(true), m_background(image), m_text(text), m_backgroundLighten(image), m_textLighten(text), m_isSelect(false), m_isSelectCopy(false), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left), m_isActived(false)
+	Button::Button(Widget *parent, const Label &text, const Image &image, const sf::FloatRect &rect) : Widget(parent, rect), m_hasBackground(true), m_hasLabel(true), m_background(image), m_text(text), m_backgroundLighten(image), m_textLighten(text), m_isSelect(false), m_isSelectCopy(false), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left), m_isActived(false)
 	{
 		m_textLighten.lighten();
 		m_backgroundLighten.lighten();
 		m_currentBackground = &m_background;
 		m_currentLabel = &m_text;
-		if(rect == sf::IntRect(0, 0, 0, 0))
+		if(rect == sf::FloatRect(0, 0, 0, 0))
 			setRect(m_background.getVirtualRect());
 		else
 			setRect(rect);

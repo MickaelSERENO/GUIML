@@ -25,7 +25,7 @@ namespace guiml
 
 		virtual EventManager* getEventManager() const;
 		unsigned int getFramerate();
-		virtual void resizeWidget(const sf::Vector2i& defaultWindowSize, const sf::Vector2i& newWindowSize);
+		virtual void resizeWidget(const sf::Vector2f& defaultWindowSize, const sf::Vector2f& newWindowSize);
 	protected:
 		EventManager *m_event;
 		float m_framerate;

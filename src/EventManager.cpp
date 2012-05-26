@@ -1,6 +1,6 @@
 #include "EventManager.h"
 
-EventManager::EventManager(sf::Window *win) : w(win), m_mousePos(0, 0), m_oldMousePos(0, 0), m_hasPressedKeyMouse(false), m_hasPressedKeyKey(false), m_isResize(false), m_newSize(sf::Vector2i(w->getSize().x, w->getSize().y)), m_oldSize(sf::Vector2i(w->getSize())), m_defaultSize(w->getSize())
+EventManager::EventManager(sf::Window *win) : w(win), m_mousePos(0, 0), m_oldMousePos(0, 0), m_hasPressedKeyMouse(false), m_hasPressedKeyKey(false), m_isResize(false), m_newSize(sf::Vector2f(w->getSize().x, w->getSize().y)), m_oldSize(sf::Vector2f(w->getSize())), m_defaultSize(w->getSize())
 {
 	for(unsigned int i = 0; i < NBR_KEYS; i++)
 	{
@@ -82,7 +82,7 @@ void EventManager::update()
 		if(m_event.type == sf::Event::MouseMoved)
 		{
 			m_oldMousePos = m_mousePos;
-			m_mousePos = sf::Vector2i(m_event.mouseMove.x, m_event.mouseMove.y);
+			m_mousePos = sf::Vector2f(m_event.mouseMove.x, m_event.mouseMove.y);
 		}
 
 		if(m_event.type == sf::Event::Closed)
@@ -90,11 +90,11 @@ void EventManager::update()
 
 		if(m_event.type == sf::Event::Resized)
 		{
-			if(m_newSize != sf::Vector2i(m_event.size.width, m_event.size.height))
+			if(m_newSize != sf::Vector2f(m_event.size.width, m_event.size.height))
 			{
 				m_isResize = true;
 				m_oldSize = m_newSize;
-				m_newSize = sf::Vector2i(m_event.size.width, m_event.size.height);
+				m_newSize = sf::Vector2f(m_event.size.width, m_event.size.height);
 			}
 		}
 	}
@@ -103,7 +103,7 @@ void EventManager::update()
 		m_enteredText = false;
 }
 	
-void EventManager::setDefaultWindowSize(const sf::Vector2i& defaultWindowSize)
+void EventManager::setDefaultWindowSize(const sf::Vector2f& defaultWindowSize)
 {
 	m_defaultSize = defaultWindowSize;
 }
@@ -146,11 +146,11 @@ bool EventManager::getMouseClicked(unsigned int choice) const
 	return false;
 }
 
-const sf::Vector2i &EventManager::getMousePosition() const
+const sf::Vector2f &EventManager::getMousePosition() const
 {
 	return m_mousePos;
 }
- const sf::Vector2i &EventManager::getOldMousePosition() const
+ const sf::Vector2f &EventManager::getOldMousePosition() const
 {
 	return m_oldMousePos;
 }
@@ -180,17 +180,17 @@ bool EventManager::windowIsResize() const
 	return m_isResize;
 }
 
-const sf::Vector2i& EventManager::getNewWindowSize() const
+const sf::Vector2f& EventManager::getNewWindowSize() const
 {
 	return m_newSize;
 }
 
-const sf::Vector2i& EventManager::getOldWindowSize() const
+const sf::Vector2f& EventManager::getOldWindowSize() const
 {
 	return m_oldSize;
 }
 
-const sf::Vector2i& EventManager::getDefaultWindowSize() const
+const sf::Vector2f& EventManager::getDefaultWindowSize() const
 {
 	return m_defaultSize;
 }

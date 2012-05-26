@@ -2,19 +2,19 @@
 
 namespace guiml
 {
-	Label::Label(Widget *parent, const std::string &string, const sf::Vector2i &position, int characterSize) : Widget(parent, sf::IntRect(position.x, position.y, characterSize * string.size(), characterSize)), m_text(sf::String(string))
+	Label::Label(Widget *parent, const std::string &string, const sf::Vector2f &position, int characterSize) : Widget(parent, sf::FloatRect(position.x, position.y, characterSize * string.size(), characterSize)), m_text(sf::String(string))
 	{
-		setRect(sf::IntRect(position.x, position.y, characterSize * string.size(), characterSize));
+		setRect(sf::FloatRect(position.x, position.y, characterSize * string.size(), characterSize));
 	}
 
-	Label::Label(Widget *parent, const sf::String &string, const sf::Vector2i &position, int characterSize) : Widget(parent, sf::IntRect(position.x, position.y, characterSize * string.getSize(), characterSize)), m_text(string)
+	Label::Label(Widget *parent, const sf::String &string, const sf::Vector2f &position, int characterSize) : Widget(parent, sf::FloatRect(position.x, position.y, characterSize * string.getSize(), characterSize)), m_text(string)
 	{
-		setRect(sf::IntRect(position.x, position.y, characterSize * string.getSize(), characterSize));
+		setRect(sf::FloatRect(position.x, position.y, characterSize * string.getSize(), characterSize));
 	}
 
-	Label::Label(Widget *parent, const sf::Text &text, const sf::Vector2i &position, int characterSize) : Widget(parent, sf::IntRect(position.x, position.y, characterSize * text.getString().getSize(), characterSize)), m_text(text)
+	Label::Label(Widget *parent, const sf::Text &text, const sf::Vector2f &position, int characterSize) : Widget(parent, sf::FloatRect(position.x, position.y, characterSize * text.getString().getSize(), characterSize)), m_text(text)
 	{
-		setRect(sf::IntRect(position.x, position.y, characterSize * text.getString().getSize(), characterSize));
+		setRect(sf::FloatRect(position.x, position.y, characterSize * text.getString().getSize(), characterSize));
 	}
 
 	Label::Label(Widget *parent) : Widget(parent)
@@ -97,7 +97,7 @@ namespace guiml
 	void Label::rotate(float angle)
 	{
 		m_text.rotate(angle);
-		setRect(sf::IntRect(m_text.getPosition().x, m_text.getPosition().y, m_text.getGlobalBounds().width, m_text.getGlobalBounds().height));
+		setRect(m_text.getGlobalBounds());
 	}
 
 	void Label::setStyle(sf::Uint32 style)
@@ -108,7 +108,7 @@ namespace guiml
 	void Label::setRotation(float angle)
 	{
 		m_text.setRotation(angle);
-		setRect(sf::IntRect(m_text.getPosition().x, m_text.getPosition().y, m_text.getGlobalBounds().width, m_text.getGlobalBounds().height));
+		setRect(m_text.getGlobalBounds());
 	}
 
 	void Label::setPosition(int x, int y)
@@ -124,7 +124,6 @@ namespace guiml
 
 	void Label::setTextWidthSize(unsigned int size)
 	{
-		std::cout << "the size are" << " " << m_size.x << " " <<size << std::endl;
 		if(getString().getSize() != 0)
 			setCharacterSize(m_text.getCharacterSize() * size / m_size.x);
 	}	

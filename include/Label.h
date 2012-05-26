@@ -9,9 +9,9 @@ namespace guiml
 	{
 	public:
 		#include "SurchargeMethode.h"
-		Label(Widget *parent, const std::string &string, const sf::Vector2i &position = sf::Vector2i(0, 0), int characterSize = 12);
-		Label(Widget *parent, const sf::String &string, const sf::Vector2i &position = sf::Vector2i(0, 0), int characterSize = 12);
-		Label(Widget *parent, const sf::Text &text, const sf::Vector2i &position = sf::Vector2i(0, 0), int characterSize = 12);
+		Label(Widget *parent, const std::string &string, const sf::Vector2f &position = sf::Vector2f(0, 0), int characterSize = 12);
+		Label(Widget *parent, const sf::String &string, const sf::Vector2f &position = sf::Vector2f(0, 0), int characterSize = 12);
+		Label(Widget *parent, const sf::Text &text, const sf::Vector2f &position = sf::Vector2f(0, 0), int characterSize = 12);
 		Label(Widget *parent);
 		Label();
 		Label(const Label &copy);

@@ -12,7 +12,7 @@ namespace guiml
 	class Widget
 	{
 	public:
-		Widget(Widget *parent, const sf::IntRect &rect = sf::IntRect(0, 0, 0, 0));
+		Widget(Widget *parent, const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
 		Widget(const Widget &copy);
 
 		virtual ~Widget();
@@ -25,13 +25,13 @@ namespace guiml
 
 		virtual void update(std::list<sf::Drawable*> &drawables); //Update all Children of the Widget
 
-		virtual void setPosition(const sf::Vector2i &newPos);
+		virtual void setPosition(const sf::Vector2f &newPos);
 		virtual void setPosition(int x, int y);
-		virtual void setSize(const sf::Vector2i &newSize);
+		virtual void setSize(const sf::Vector2f &newSize);
 		virtual void setSize(int x, int y);
 		void move(int x, int y);
-		void move(const sf::Vector2i &moving);
-		void addSize(const sf::Vector2i &addingSize);
+		void move(const sf::Vector2f &moving);
+		void addSize(const sf::Vector2f &addingSize);
 		void addSize(int x, int y);
 		virtual void scale(float x, float y);
 		virtual void scale(const sf::Vector2f &scaling);
@@ -45,26 +45,26 @@ namespace guiml
 		bool hasParent() const;
 		virtual EventManager* getEventManager() const; //get de EventManager who will be use for all of children.
 
-		const sf::Vector2i& getPosition() const;
-		const sf::Vector2i& getVirtualPosition() const;
-		const sf::Vector2i& getSize() const;
-		const sf::Vector2i& getVirtualSize() const; 
+		const sf::Vector2f& getPosition() const;
+		const sf::Vector2f& getVirtualPosition() const;
+		const sf::Vector2f& getSize() const;
+		const sf::Vector2f& getVirtualSize() const; 
 
-		virtual sf::IntRect getRect() const;
-		virtual sf::IntRect getVirtualRect() const;
+		virtual sf::FloatRect getRect() const;
+		virtual sf::FloatRect getVirtualRect() const;
 
-		virtual void setRect(const sf::IntRect &rect);
+		virtual void setRect(const sf::FloatRect &rect);
 		virtual Widget& operator=(const Widget &copy);
-		virtual void resizeWidget(const sf::Vector2i& defaultWindowSize, const sf::Vector2i& newWindowSize);
+		virtual void resizeWidget(const sf::Vector2f& defaultWindowSize, const sf::Vector2f& newWindowSize);
 		virtual Widget* copy() const;
 	protected:
 		std::list <Widget*> m_child;
 		Widget *m_parent;
 		bool m_isDrawing;
-		sf::Vector2i m_pos;
-		sf::Vector2i m_size;
-		sf::Vector2i m_virtualPos;
-		sf::Vector2i m_virtualSize;
+		sf::Vector2f m_pos;
+		sf::Vector2f m_size;
+		sf::Vector2f m_virtualPos;
+		sf::Vector2f m_virtualSize;
 		bool m_movingAllChild;
 	};
 }

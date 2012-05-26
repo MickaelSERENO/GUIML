@@ -153,7 +153,19 @@ CMAKE_USE_RELATIVE_PATHS:BOOL=OFF
 // .SILENT directive, and all commands will be echoed to the console
 // during the make.  This is useful for debugging only. With Visual
 // Studio IDE projects all commands are done without /nologo.
-CMAKE_VERBOSE_MAKEFILE:BOOL=TRUE
+CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
+
+sfml_audio_lib:STRING=sfml-audio
+
+sfml_dir_include:FILEPATH=/usr/local/include/
+
+sfml_dir_lib:FILEPATH=/usr/local/lib/
+
+sfml_graphics_lib:STRING=sfml-graphics
+
+sfml_system_lib:STRING=sfml-system
+
+sfml_window_lib:STRING=sfml-window
 
 //Value Computed by CMake
 test_BINARY_DIR:STATIC=/home/mickael/Programmation/Programmes/C++/SFML/En_Cours/GUIML/examples/test
