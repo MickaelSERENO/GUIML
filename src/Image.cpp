@@ -44,7 +44,7 @@ namespace guiml
 			setRect(sf::IntRect(m_sprite.getGlobalBounds().left, m_sprite.getGlobalBounds().top, m_sprite.getGlobalBounds().width, m_sprite.getGlobalBounds().height));
 	}
 
-	Image::Image(Widget *parent, sf::Texture &texture, const sf::IntRect &rect) : Widget(parent, rect), m_texture(texture)
+	Image::Image(Widget *parent, const sf::Texture &texture, const sf::IntRect &rect) : Widget(parent, rect), m_texture(texture)
 	{
 		m_sprite.setTexture(m_texture);
 		if (rect != sf::IntRect(0, 0, 0, 0))
@@ -53,9 +53,9 @@ namespace guiml
 			setRect(sf::IntRect(m_sprite.getGlobalBounds().left, m_sprite.getGlobalBounds().top, m_sprite.getGlobalBounds().width, m_sprite.getGlobalBounds().height));
 	}
 
-	Image::Image(Widget *parent, sf::Sprite &sprite, const sf::IntRect &rect) : Widget(parent, rect)
+	Image::Image(Widget *parent, const sf::Sprite &sprite, const sf::IntRect &rect) : Widget(parent, rect)
 	{
-		m_sprite = sprite;
+		setImage(sprite);
 		if (rect != sf::IntRect(0, 0, 0, 0))
 			setRect(rect);
 		else

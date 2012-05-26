@@ -12,8 +12,8 @@ namespace guiml
 		//-------------one constructor for various parameters-------------//
 		Image(Widget *parent, const std::string &path, const sf::IntRect &rect = sf::IntRect(0, 0, 0, 0));
 		Image(Widget *parent, const sf::Image &image, const sf::IntRect &rect = sf::IntRect(0, 0, 0, 0));
-		Image(Widget *parent, sf::Texture &texture, const sf::IntRect &rect = sf::IntRect(0, 0, 0, 0));
-		Image(Widget *parent, sf::Sprite &sprite, const sf::IntRect &rect = sf::IntRect(0, 0, 0, 0));
+		Image(Widget *parent, const sf::Texture &texture, const sf::IntRect &rect = sf::IntRect(0, 0, 0, 0));
+		Image(Widget *parent, const sf::Sprite &sprite, const sf::IntRect &rect = sf::IntRect(0, 0, 0, 0));
 		Image(Widget *parent);
 		Image();
 		Image(const Image &copy);
