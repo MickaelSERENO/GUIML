@@ -95,6 +95,12 @@ namespace guiml
 			else
 				m_isActived = false;
 		}
+
+		else
+		{
+			m_isSelect = false;
+			m_isActived = false;
+		}
 		Widget::update(drawable);
 	}
 
@@ -175,11 +181,6 @@ namespace guiml
 			m_backgroundLighten.setPosition(posx, posy);
 		}
 
-		if(m_hasLabel)
-		{
-			m_text.setPosition(posx, posy);
-			m_textLighten.setPosition(posx, posy);
-		}
 		Widget::setPosition(posx, posy);
 		centerLabel();
 	}
