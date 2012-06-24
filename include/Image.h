@@ -2,6 +2,7 @@
 #define DEF_IMAGE
 
 #include "Widget.h"
+#include "equation.h"
 
 namespace guiml
 {

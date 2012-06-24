@@ -98,12 +98,53 @@ namespace guiml
 
 	void Image::roundEdge(int size)
 	{
-		
+		if(m_sprite.getTexture())
+		{
+			sf::Image image = m_sprite.getTexture()->copyToImage();
+
+			for(int i = 0; i != size; i++)
+			{
+				sf::Vector2f topleft = circle(i, size, size, size);
+				sf::Vector2f bottomleft = circle(i, size, m_virtualSize.y - size, size);
+			
+				sf::Vector2f topright = circle(i + m_virtualSize.x - size, m_virtualSize.x - size, size, size);
+				sf::Vector2f bottomright = circle(i + m_virtualSize.x - size, m_virtualSize.x - size, m_virtualSize.y - size, size);
+	
+				for(int j = 0; j < topleft.y; j++)
+				{
+					sf::Color pixel = image.getPixel(i, j);
+					pixel.a = 0;
+					image.setPixel(i, j, pixel);
+				}
+	
+				for(int j = m_virtualSize.y; j > bottomleft.x; j--)
+				{
+					sf::Color pixel = image.getPixel(i, j);
+					pixel.a = 0;
+					image.setPixel(i, j, pixel);
+				}
+	
+				for(int j = 0; j < topright.y; j++)
+				{
+					sf::Color pixel = image.getPixel(i + m_virtualSize.x - size, j);
+					pixel.a = 0;
+					image.setPixel(i + m_virtualSize.x - size, j, pixel);
+				}
+	
+				for(int j = m_virtualSize.y ; j > bottomright.x; j--)
+				{
+					sf::Color pixel = image.getPixel(i + m_virtualSize.x - size, j);
+					pixel.a = 0;
+					image.setPixel(i + m_virtualSize.x - size, j, pixel);
+				}
+			}
+			setImage(image);
+		}
 	}
 
 	void Image::lighten(const sf::FloatRect &rect)
 	{
-		if(m_virtualSize != sf::Vector2f(0, 0))
+		if(m_virtualSize != sf::Vector2f(0, 0) && m_sprite.getTexture())
 		{
 			sf::FloatRect rect2 = rect;
 			sf::FloatRect rect3 = getVirtualRect();
