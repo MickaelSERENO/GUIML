@@ -27,7 +27,6 @@ void EventManager::update()
 {
 	m_elapsedTime = m_clock.getElapsedTime().asMilliseconds();
 	m_clock.restart();
-	m_oldMousePos = m_mousePos;
 
 	if(m_hasPressedKeyMouse)
 	{

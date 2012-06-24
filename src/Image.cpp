@@ -96,6 +96,11 @@ namespace guiml
 		Widget::update(drawable);
 	}
 
+	void Image::roundEdge(int size)
+	{
+		
+	}
+
 	void Image::lighten(const sf::FloatRect &rect)
 	{
 		if(m_virtualSize != sf::Vector2f(0, 0))
@@ -107,7 +112,7 @@ namespace guiml
 			try
 			{
 				if(rect2.left + rect2.width > m_size.x || rect2.top + rect2.height > m_size.y)
-					throw std::runtime_error("FATAL ERROR : The Plage color don't can be in the sprite");
+					throw std::runtime_error("Error : The Plage color don't can be in the sprite");
 					else
 				{
 					sf::Image image = m_sprite.getTexture()->copyToImage();
@@ -129,7 +134,7 @@ namespace guiml
 			}
 			catch(const std::runtime_error &error)
 			{
-				throw;
+				std::cout << error.what() << std::endl;
 			}
 		}
 	}

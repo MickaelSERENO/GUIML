@@ -77,7 +77,7 @@ namespace guiml
 
 	void Render::setRectView(const sf::FloatRect& rect)
 	{
-		m_renderView.setViewport(sf::FloatRect(rect.left, rect.top, rect.width, rect.height));
+		m_renderView.setViewport(rect);
 		setView(m_renderView);
 	}
 

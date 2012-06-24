@@ -13,7 +13,6 @@ namespace guiml
 
 			m_buttonUp.setRect(sf::FloatRect(m_pos.x, m_pos.y, sizeMoveButtons.x, sizeMoveButtons.y));
 			m_buttonDown.setRect(sf::FloatRect(m_pos.x, m_pos.y + sizeMoveButtons.y + m_globalRectangle.getSize().y, sizeMoveButtons.x, sizeMoveButtons.y));
-
 		}
 
 		else
