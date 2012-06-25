@@ -75,17 +75,32 @@ namespace guiml
 			m_parent->Widget::addChild(this, pos);
 	}
 
-	void Widget::removeChild(Widget *child)
+	bool Widget::removeChild(Widget *child)
 	{
 		for(std::list<Widget*>::iterator it = m_child.begin(); it != m_child.end(); ++it)
 		{
 			if(*it == child)
 			{
 				m_child.erase(it);
-				return;
+				return true;
 			}
 		}
-	}	
+
+		return false;
+	}
+
+	bool Widget::removeChild(unsigned int pos)
+	{
+		if(pos > m_child.size())
+			return false;
+
+		std::list<Widget*>::iterator it = m_child.begin();
+		for(unsigned int i = 0; i < pos; i++)
+			it++;
+
+		m_child.erase(it);
+		return true;
+	}
 
 	void Widget::drawWidget(bool drawing)
 	{
@@ -116,7 +131,7 @@ namespace guiml
 		setPosition(pos.x, pos.y);
 	}
 
-	void Widget::setPosition(int x, int y)
+	void Widget::setPosition(float x, float y)
 	{
 		if(m_movingAllChild)
 			for(std::list<Widget*>::iterator it = m_child.begin(); it != m_child.end(); ++it)
@@ -139,7 +154,7 @@ namespace guiml
 		m_virtualPos = sf::Vector2f(x, y);;
 	}
 
-	void Widget::setSize(int x, int y)
+	void Widget::setSize(float x, float y)
 	{
 		EventManager *event = getEventManager();
 		if(event)
@@ -173,7 +188,7 @@ namespace guiml
 		setSize(x * m_size.x, y * m_size.y);
 	}
 
-	void Widget::move(int x, int y)
+	void Widget::move(float x, float y)
 	{
 		setPosition(m_virtualPos.x + x, m_virtualPos.y + y);
 	}
@@ -188,7 +203,7 @@ namespace guiml
 		setSize(newSize.x, newSize.y);	
 	}
 
-	void Widget::addSize(int x, int y)
+	void Widget::addSize(float x, float y)
 	{
 		setSize(m_virtualSize.x + x, m_virtualSize.y + y);
 	}
