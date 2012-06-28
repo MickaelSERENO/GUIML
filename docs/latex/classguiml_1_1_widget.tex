@@ -1,0 +1,626 @@
+\section{guiml\-:\-:Widget Class Reference}
+\label{classguiml_1_1_widget}\index{guiml\-::\-Widget@{guiml\-::\-Widget}}
+
+
+Root class for create Widgets.  
+
+
+
+
+{\ttfamily \#include $<$Widget.\-h$>$}
+
+
+
+Inheritance diagram for guiml\-:\-:Widget\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classguiml_1_1_widget__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for guiml\-:\-:Widget\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=218pt]{classguiml_1_1_widget__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Widget} ({\bf Widget} $\ast$parent, const sf\-::\-Float\-Rect \&rect=sf\-::\-Float\-Rect(0, 0, 0, 0))
+\begin{DoxyCompactList}\small\item\em \doxyref{Widget}{p.}{classguiml_1_1_widget}'s Constructor. \end{DoxyCompactList}\item 
+{\bf Widget} (const {\bf Widget} \&{\bf copy})
+\begin{DoxyCompactList}\small\item\em \doxyref{Widget}{p.}{classguiml_1_1_widget}'s Copy Constructor. \end{DoxyCompactList}\item 
+virtual {\bf $\sim$\-Widget} ()\label{classguiml_1_1_widget_af7ab4dbe4762b9387699422a971a00d0}
+
+\begin{DoxyCompactList}\small\item\em \doxyref{Widget}{p.}{classguiml_1_1_widget}'s virtual destructor. When the \doxyref{Widget}{p.}{classguiml_1_1_widget} is destroyed, all objects' child are destroyed this object will be delete in the parent's child's list. \end{DoxyCompactList}\item 
+virtual void {\bf add\-Child} ({\bf Widget} $\ast$child, int pos=-\/1)
+\begin{DoxyCompactList}\small\item\em Add a child. \end{DoxyCompactList}\item 
+void {\bf set\-Parent} ({\bf Widget} $\ast$parent, int pos=-\/1)
+\begin{DoxyCompactList}\small\item\em Set the \doxyref{Widget}{p.}{classguiml_1_1_widget}'s parent. \end{DoxyCompactList}\item 
+bool {\bf remove\-Child} ({\bf Widget} $\ast$child)
+\begin{DoxyCompactList}\small\item\em Remove the child of the \doxyref{Widget}{p.}{classguiml_1_1_widget}'s child's list. It return true if the removing is correct, else it return false(maybe the parameter child is not a widget's child). \end{DoxyCompactList}\item 
+bool {\bf remove\-Child} (unsigned int pos)
+\begin{DoxyCompactList}\small\item\em Remove the child who is in the position indicate. It return true if the removing is correct, else it return false(maybe the position is wrong). \end{DoxyCompactList}\item 
+virtual void {\bf draw\-Widget} (bool drawing)
+\begin{DoxyCompactList}\small\item\em Update the \doxyref{Widget}{p.}{classguiml_1_1_widget} or not. \end{DoxyCompactList}\item 
+void {\bf draw\-All\-Child} (bool drawing)
+\begin{DoxyCompactList}\small\item\em Update the \doxyref{Widget}{p.}{classguiml_1_1_widget}'s children or not. \end{DoxyCompactList}\item 
+virtual void {\bf update} (std\-::list$<$ sf\-::\-Drawable $\ast$ $>$ \&drawables)
+\begin{DoxyCompactList}\small\item\em Update the \doxyref{Widget}{p.}{classguiml_1_1_widget}. \end{DoxyCompactList}\item 
+virtual void {\bf set\-Position} (const sf\-::\-Vector2f \&new\-Pos)
+\begin{DoxyCompactList}\small\item\em Set the absolute position (without \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). \end{DoxyCompactList}\item 
+virtual void {\bf set\-Position} (float x, float y)
+\begin{DoxyCompactList}\small\item\em Set the absolute \doxyref{Widget}{p.}{classguiml_1_1_widget}'s position (without \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). \end{DoxyCompactList}\item 
+virtual void {\bf set\-Size} (const sf\-::\-Vector2f \&new\-Size)
+\begin{DoxyCompactList}\small\item\em Set the absolute \doxyref{Widget}{p.}{classguiml_1_1_widget}'s size (without \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). \end{DoxyCompactList}\item 
+virtual void {\bf set\-Size} (float x, float y)
+\begin{DoxyCompactList}\small\item\em Set the absolute \doxyref{Widget}{p.}{classguiml_1_1_widget}'s size (without \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). \end{DoxyCompactList}\item 
+void {\bf move} (float x, float y)
+\begin{DoxyCompactList}\small\item\em Move the \doxyref{Widget}{p.}{classguiml_1_1_widget}. \end{DoxyCompactList}\item 
+void {\bf move} (const sf\-::\-Vector2f \&moving)
+\begin{DoxyCompactList}\small\item\em Move the \doxyref{Widget}{p.}{classguiml_1_1_widget}. \end{DoxyCompactList}\item 
+void {\bf add\-Size} (const sf\-::\-Vector2f \&adding\-Size)
+\begin{DoxyCompactList}\small\item\em Add values at the \doxyref{Widget}{p.}{classguiml_1_1_widget}'s size. \end{DoxyCompactList}\item 
+void {\bf add\-Size} (float x, float y)
+\begin{DoxyCompactList}\small\item\em Add values at the \doxyref{Widget}{p.}{classguiml_1_1_widget}'s size. \end{DoxyCompactList}\item 
+virtual void {\bf scale} (float x, float y)
+\begin{DoxyCompactList}\small\item\em Scale the \doxyref{Widget}{p.}{classguiml_1_1_widget}. \end{DoxyCompactList}\item 
+virtual void {\bf scale} (const sf\-::\-Vector2f \&scaling)
+\begin{DoxyCompactList}\small\item\em Scale the \doxyref{Widget}{p.}{classguiml_1_1_widget}. \end{DoxyCompactList}\item 
+virtual void {\bf scale} (float x)
+\begin{DoxyCompactList}\small\item\em Scale the \doxyref{Widget}{p.}{classguiml_1_1_widget}. \end{DoxyCompactList}\item 
+void {\bf move\-All\-Child} (bool moving\-All\-Child)
+\begin{DoxyCompactList}\small\item\em If you move the \doxyref{Widget}{p.}{classguiml_1_1_widget}, all child are also in moving. \end{DoxyCompactList}\item 
+bool {\bf get\-Moving\-All\-Child} () const \label{classguiml_1_1_widget_a6cb59252c650e9e26ce8d884a6c6a11b}
+
+\begin{DoxyCompactList}\small\item\em Get m\-\_\-moving\-All\-Child's value. It say if all \doxyref{Widget}{p.}{classguiml_1_1_widget}'s child can move or not, if the \doxyref{Widget}{p.}{classguiml_1_1_widget} is in moving. \end{DoxyCompactList}\item 
+bool {\bf is\-Drawing} () const \label{classguiml_1_1_widget_a8a367d8dfcc1bcd8414f1a854c11c824}
+
+\begin{DoxyCompactList}\small\item\em Return m\-\_\-is\-Drawing. It's a boolean for knowing if the \doxyref{Widget}{p.}{classguiml_1_1_widget} can be updated or not. \end{DoxyCompactList}\item 
+bool {\bf is\-Child} (const {\bf Widget} $\ast$child)
+\begin{DoxyCompactList}\small\item\em Return true if \char`\"{}child\char`\"{} is a \doxyref{Widget}{p.}{classguiml_1_1_widget}'s child, els it return false. \end{DoxyCompactList}\item 
+bool {\bf has\-Parent} () const \label{classguiml_1_1_widget_a3123b7947a813d5843401ab3c7aea9ad}
+
+\begin{DoxyCompactList}\small\item\em Return true if the \doxyref{Widget}{p.}{classguiml_1_1_widget} has a parent, else it return false. \end{DoxyCompactList}\item 
+virtual {\bf Event\-Manager} $\ast$ {\bf get\-Event\-Manager} () const \label{classguiml_1_1_widget_a32c81650f002eb2129fd2d40639e9c85}
+
+\begin{DoxyCompactList}\small\item\em If the root parent is a \doxyref{Window}{p.}{classguiml_1_1_window}, this function return a pointeur about the \doxyref{Window}{p.}{classguiml_1_1_window}'s \doxyref{Event\-Manager}{p.}{class_event_manager}. Else, it return N\-U\-L\-L. \end{DoxyCompactList}\item 
+const sf\-::\-Vector2f \& {\bf get\-Position} () const \label{classguiml_1_1_widget_ae8e384e8d1045f5e7f2f67060fbf2455}
+
+\begin{DoxyCompactList}\small\item\em Return the relative \doxyref{Widget}{p.}{classguiml_1_1_widget}'s position (with \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). \end{DoxyCompactList}\item 
+const sf\-::\-Vector2f \& {\bf get\-Virtual\-Position} () const \label{classguiml_1_1_widget_a1de508008e8b6c8860e91a9c0a5163ff}
+
+\begin{DoxyCompactList}\small\item\em Return the absolute \doxyref{Widget}{p.}{classguiml_1_1_widget}'s position (without \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). \end{DoxyCompactList}\item 
+const sf\-::\-Vector2f \& {\bf get\-Size} () const \label{classguiml_1_1_widget_a63cf053a3cb5973c028e43a94bcfa4fc}
+
+\begin{DoxyCompactList}\small\item\em Return the relative \doxyref{Widget}{p.}{classguiml_1_1_widget}'s size (with \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). \end{DoxyCompactList}\item 
+const sf\-::\-Vector2f \& {\bf get\-Virtual\-Size} () const \label{classguiml_1_1_widget_a1a428c90caa88e28f0bb7e2742997f3f}
+
+\begin{DoxyCompactList}\small\item\em Return the absolute \doxyref{Widget}{p.}{classguiml_1_1_widget}'s size (without \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). \end{DoxyCompactList}\item 
+virtual sf\-::\-Float\-Rect {\bf get\-Rect} () const \label{classguiml_1_1_widget_ab5dbf4e9cb79506b7f43ea32c2fcc3e5}
+
+\begin{DoxyCompactList}\small\item\em Return the relative \doxyref{Widget}{p.}{classguiml_1_1_widget}'s rect (with \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). \end{DoxyCompactList}\item 
+virtual sf\-::\-Float\-Rect {\bf get\-Virtual\-Rect} () const \label{classguiml_1_1_widget_acac6d5908ceb0bbf1fc6cfb4bcf0a439}
+
+\begin{DoxyCompactList}\small\item\em Return the absolute \doxyref{Widget}{p.}{classguiml_1_1_widget}'s rect (without \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). \end{DoxyCompactList}\item 
+virtual void {\bf set\-Rect} (const sf\-::\-Float\-Rect \&rect)
+\begin{DoxyCompactList}\small\item\em Set the relative \doxyref{Widget}{p.}{classguiml_1_1_widget}'s rect (with \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). \end{DoxyCompactList}\item 
+virtual {\bf Widget} \& {\bf operator=} (const {\bf Widget} \&{\bf copy})
+\begin{DoxyCompactList}\small\item\em Copy's Operator. \end{DoxyCompactList}\item 
+virtual void {\bf resize\-Widget} (const sf\-::\-Vector2f \&default\-Window\-Size, const sf\-::\-Vector2f \&new\-Window\-Size)
+\begin{DoxyCompactList}\small\item\em When the \doxyref{Window}{p.}{classguiml_1_1_window} is resize, the virtual\-Size and virtual\-Pos are set (for correspond with the screen. Indeed, the S\-F\-M\-L resize also all of drawables who are displayed). You don't need to call this function. \end{DoxyCompactList}\item 
+virtual {\bf Widget} $\ast$ {\bf copy} () const \label{classguiml_1_1_widget_a4d4823dcd62596b6bbdfbad2b63128e2}
+
+\begin{DoxyCompactList}\small\item\em It return a \doxyref{Widget}{p.}{classguiml_1_1_widget}'s copy. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\-::list$<$ {\bf Widget} $\ast$ $>$ {\bf m\-\_\-child}
+\item 
+{\bf Widget} $\ast$ {\bf m\-\_\-parent}
+\item 
+bool {\bf m\-\_\-is\-Drawing}
+\item 
+sf\-::\-Vector2f {\bf m\-\_\-pos}
+\item 
+sf\-::\-Vector2f {\bf m\-\_\-size}
+\item 
+sf\-::\-Vector2f {\bf m\-\_\-virtual\-Pos}
+\item 
+sf\-::\-Vector2f {\bf m\-\_\-virtual\-Size}
+\item 
+bool {\bf m\-\_\-moving\-All\-Child}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Root class for create Widgets. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{guiml\-::\-Widget@{guiml\-::\-Widget}!Widget@{Widget}}
+\index{Widget@{Widget}!guiml::Widget@{guiml\-::\-Widget}}
+\subsubsection[{Widget}]{\setlength{\rightskip}{0pt plus 5cm}guiml\-::\-Widget\-::\-Widget (
+\begin{DoxyParamCaption}
+\item[{{\bf Widget} $\ast$}]{parent, }
+\item[{const sf\-::\-Float\-Rect \&}]{rect = {\ttfamily sf\-:\-:FloatRect(0,~0,~0,~0)}}
+\end{DoxyParamCaption}
+)}\label{classguiml_1_1_widget_a86724a1bf43168f2a8f57f253c754247}
+
+
+\doxyref{Widget}{p.}{classguiml_1_1_widget}'s Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & The \doxyref{Widget}{p.}{classguiml_1_1_widget} parent who can update this object. \\
+\hline
+{\em rect} & Defined the \doxyref{Widget}{p.}{classguiml_1_1_widget}'s position and size \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Widget@{guiml\-::\-Widget}!Widget@{Widget}}
+\index{Widget@{Widget}!guiml::Widget@{guiml\-::\-Widget}}
+\subsubsection[{Widget}]{\setlength{\rightskip}{0pt plus 5cm}guiml\-::\-Widget\-::\-Widget (
+\begin{DoxyParamCaption}
+\item[{const {\bf Widget} \&}]{copy}
+\end{DoxyParamCaption}
+)}\label{classguiml_1_1_widget_a220ab82fd6d996e3417e012812faefa3}
+
+
+\doxyref{Widget}{p.}{classguiml_1_1_widget}'s Copy Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em copy} & The widget's copy \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{guiml\-::\-Widget@{guiml\-::\-Widget}!add\-Child@{add\-Child}}
+\index{add\-Child@{add\-Child}!guiml::Widget@{guiml\-::\-Widget}}
+\subsubsection[{add\-Child}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Widget\-::add\-Child (
+\begin{DoxyParamCaption}
+\item[{{\bf Widget} $\ast$}]{child, }
+\item[{int}]{pos = {\ttfamily -\/1}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_widget_ae179bddb0597cc0f7cbcd408a85462cb}
+
+
+Add a child. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em child} & \doxyref{Widget}{p.}{classguiml_1_1_widget} who will be the child \\
+\hline
+{\em pos} & It indicated where the child will be place in the child's list (the order is important for the update's order). At the default, the child will be placed at the end of thechild's list. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Widget@{guiml\-::\-Widget}!add\-Size@{add\-Size}}
+\index{add\-Size@{add\-Size}!guiml::Widget@{guiml\-::\-Widget}}
+\subsubsection[{add\-Size}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Widget\-::add\-Size (
+\begin{DoxyParamCaption}
+\item[{const sf\-::\-Vector2f \&}]{adding\-Size}
+\end{DoxyParamCaption}
+)}\label{classguiml_1_1_widget_ad2a564d86023442bf045ec352f3d505d}
+
+
+Add values at the \doxyref{Widget}{p.}{classguiml_1_1_widget}'s size. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em adding\-Size} & The sf\-::\-Vector2f who contain values on \char`\"{}x\char`\"{} and \char`\"{}y\char`\"{}, values who will be add at the \doxyref{Widget}{p.}{classguiml_1_1_widget}'s size. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Widget@{guiml\-::\-Widget}!add\-Size@{add\-Size}}
+\index{add\-Size@{add\-Size}!guiml::Widget@{guiml\-::\-Widget}}
+\subsubsection[{add\-Size}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Widget\-::add\-Size (
+\begin{DoxyParamCaption}
+\item[{float}]{x, }
+\item[{float}]{y}
+\end{DoxyParamCaption}
+)}\label{classguiml_1_1_widget_a7de33b81dc1e043c64a716c4f0e15183}
+
+
+Add values at the \doxyref{Widget}{p.}{classguiml_1_1_widget}'s size. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The value on \char`\"{}x\char`\"{} who will be add at the \doxyref{Widget}{p.}{classguiml_1_1_widget}'s size (on \char`\"{}x\char`\"{}). \\
+\hline
+{\em y} & The value on \char`\"{}y\char`\"{} who will be add at the \doxyref{Widget}{p.}{classguiml_1_1_widget}'s size (on \char`\"{}y\char`\"{}). \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Widget@{guiml\-::\-Widget}!draw\-All\-Child@{draw\-All\-Child}}
+\index{draw\-All\-Child@{draw\-All\-Child}!guiml::Widget@{guiml\-::\-Widget}}
+\subsubsection[{draw\-All\-Child}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Widget\-::draw\-All\-Child (
+\begin{DoxyParamCaption}
+\item[{bool}]{drawing}
+\end{DoxyParamCaption}
+)}\label{classguiml_1_1_widget_a00b89b83f1bbff7b788e5c4bd513e0fc}
+
+
+Update the \doxyref{Widget}{p.}{classguiml_1_1_widget}'s children or not. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em drawing} & Boolean for knowing if you want to update the \doxyref{Widget}{p.}{classguiml_1_1_widget}'s children or not. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Widget@{guiml\-::\-Widget}!draw\-Widget@{draw\-Widget}}
+\index{draw\-Widget@{draw\-Widget}!guiml::Widget@{guiml\-::\-Widget}}
+\subsubsection[{draw\-Widget}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Widget\-::draw\-Widget (
+\begin{DoxyParamCaption}
+\item[{bool}]{drawing}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_widget_a7c41d4b657056577fcf3a1c4c2d76c0e}
+
+
+Update the \doxyref{Widget}{p.}{classguiml_1_1_widget} or not. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em drawing} & Boolean for knowing if you want to update the widget or not. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in {\bf guiml\-::\-Button} \doxyref{}{p.}{classguiml_1_1_button_a8f962e18825e76130a81d44867b09c77}.
+
+\index{guiml\-::\-Widget@{guiml\-::\-Widget}!is\-Child@{is\-Child}}
+\index{is\-Child@{is\-Child}!guiml::Widget@{guiml\-::\-Widget}}
+\subsubsection[{is\-Child}]{\setlength{\rightskip}{0pt plus 5cm}bool guiml\-::\-Widget\-::is\-Child (
+\begin{DoxyParamCaption}
+\item[{const {\bf Widget} $\ast$}]{child}
+\end{DoxyParamCaption}
+)}\label{classguiml_1_1_widget_a47f5e3b7df306f31258d6c9143d6257e}
+
+
+Return true if \char`\"{}child\char`\"{} is a \doxyref{Widget}{p.}{classguiml_1_1_widget}'s child, els it return false. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em child} & The \doxyref{Widget}{p.}{classguiml_1_1_widget} who can be a \doxyref{Widget}{p.}{classguiml_1_1_widget}'s child. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Widget@{guiml\-::\-Widget}!move@{move}}
+\index{move@{move}!guiml::Widget@{guiml\-::\-Widget}}
+\subsubsection[{move}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Widget\-::move (
+\begin{DoxyParamCaption}
+\item[{float}]{x, }
+\item[{float}]{y}
+\end{DoxyParamCaption}
+)}\label{classguiml_1_1_widget_a553afb5b4360fa15c0b3d695cc0aa66b}
+
+
+Move the \doxyref{Widget}{p.}{classguiml_1_1_widget}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The value on \char`\"{}x\char`\"{} of the \doxyref{Widget}{p.}{classguiml_1_1_widget}'s moving. \\
+\hline
+{\em y} & The value on \char`\"{}y\char`\"{} of the \doxyref{Widget}{p.}{classguiml_1_1_widget}'s moving. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Widget@{guiml\-::\-Widget}!move@{move}}
+\index{move@{move}!guiml::Widget@{guiml\-::\-Widget}}
+\subsubsection[{move}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Widget\-::move (
+\begin{DoxyParamCaption}
+\item[{const sf\-::\-Vector2f \&}]{moving}
+\end{DoxyParamCaption}
+)}\label{classguiml_1_1_widget_a2c856ff73dace663a2b5a7a426d7f226}
+
+
+Move the \doxyref{Widget}{p.}{classguiml_1_1_widget}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em moving} & The sf\-::\-Vector2f who contain values on \char`\"{}x\char`\"{} and \char`\"{}y\char`\"{} of the \doxyref{Widget}{p.}{classguiml_1_1_widget}'s moving. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Widget@{guiml\-::\-Widget}!move\-All\-Child@{move\-All\-Child}}
+\index{move\-All\-Child@{move\-All\-Child}!guiml::Widget@{guiml\-::\-Widget}}
+\subsubsection[{move\-All\-Child}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Widget\-::move\-All\-Child (
+\begin{DoxyParamCaption}
+\item[{bool}]{moving\-All\-Child}
+\end{DoxyParamCaption}
+)}\label{classguiml_1_1_widget_a9d20951b579ae23145b711272d65ee5d}
+
+
+If you move the \doxyref{Widget}{p.}{classguiml_1_1_widget}, all child are also in moving. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em moving\-All\-Child} & Boolean for knowing if you want moving all the \doxyref{Widget}{p.}{classguiml_1_1_widget}'s child or not, if the \doxyref{Widget}{p.}{classguiml_1_1_widget} is in moving. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Widget@{guiml\-::\-Widget}!operator=@{operator=}}
+\index{operator=@{operator=}!guiml::Widget@{guiml\-::\-Widget}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Widget} \& guiml\-::\-Widget\-::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Widget} \&}]{copy}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_widget_ac86fae2dd61489ad5f794f02067a5992}
+
+
+Copy's Operator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em copy} & The copy. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Widget@{guiml\-::\-Widget}!remove\-Child@{remove\-Child}}
+\index{remove\-Child@{remove\-Child}!guiml::Widget@{guiml\-::\-Widget}}
+\subsubsection[{remove\-Child}]{\setlength{\rightskip}{0pt plus 5cm}bool guiml\-::\-Widget\-::remove\-Child (
+\begin{DoxyParamCaption}
+\item[{{\bf Widget} $\ast$}]{child}
+\end{DoxyParamCaption}
+)}\label{classguiml_1_1_widget_ac33f81f0a54fe37cacc1ad3b637307ac}
+
+
+Remove the child of the \doxyref{Widget}{p.}{classguiml_1_1_widget}'s child's list. It return true if the removing is correct, else it return false(maybe the parameter child is not a widget's child). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em child} & The pointeur of the child who will be delete of the widget's child's list. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Widget@{guiml\-::\-Widget}!remove\-Child@{remove\-Child}}
+\index{remove\-Child@{remove\-Child}!guiml::Widget@{guiml\-::\-Widget}}
+\subsubsection[{remove\-Child}]{\setlength{\rightskip}{0pt plus 5cm}bool guiml\-::\-Widget\-::remove\-Child (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{pos}
+\end{DoxyParamCaption}
+)}\label{classguiml_1_1_widget_a99d7aeaa31c0ad050bd8ade0490ab224}
+
+
+Remove the child who is in the position indicate. It return true if the removing is correct, else it return false(maybe the position is wrong). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & The child's position in the \doxyref{Widget}{p.}{classguiml_1_1_widget}'s child's list. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Widget@{guiml\-::\-Widget}!resize\-Widget@{resize\-Widget}}
+\index{resize\-Widget@{resize\-Widget}!guiml::Widget@{guiml\-::\-Widget}}
+\subsubsection[{resize\-Widget}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Widget\-::resize\-Widget (
+\begin{DoxyParamCaption}
+\item[{const sf\-::\-Vector2f \&}]{default\-Window\-Size, }
+\item[{const sf\-::\-Vector2f \&}]{new\-Window\-Size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_widget_aee5d11271757f2a34ce1eabf88630028}
+
+
+When the \doxyref{Window}{p.}{classguiml_1_1_window} is resize, the virtual\-Size and virtual\-Pos are set (for correspond with the screen. Indeed, the S\-F\-M\-L resize also all of drawables who are displayed). You don't need to call this function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em default\-Window} & The \doxyref{Window}{p.}{classguiml_1_1_window}'s size without resize (with the mouse). \\
+\hline
+{\em new\-Window\-Size} & The \doxyref{Window}{p.}{classguiml_1_1_window}'s size with resize (with the mouse). \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in {\bf guiml\-::\-Window} \doxyref{}{p.}{classguiml_1_1_window_a31cb044288b53c2a78b8e911aa1b35e7}, {\bf guiml\-::\-Frame} \doxyref{}{p.}{classguiml_1_1_frame_a7f78c1641835689ed856bebdce5c9c0c}, and {\bf guiml\-::\-Layout} \doxyref{}{p.}{classguiml_1_1_layout_ab3e8997f36ceda7ec132e2d7ff388f8b}.
+
+\index{guiml\-::\-Widget@{guiml\-::\-Widget}!scale@{scale}}
+\index{scale@{scale}!guiml::Widget@{guiml\-::\-Widget}}
+\subsubsection[{scale}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Widget\-::scale (
+\begin{DoxyParamCaption}
+\item[{float}]{x, }
+\item[{float}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_widget_a35fb1fcbf103008010cdbffa836b00c8}
+
+
+Scale the \doxyref{Widget}{p.}{classguiml_1_1_widget}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The value on \char`\"{}x\char`\"{} of the \doxyref{Widget}{p.}{classguiml_1_1_widget}'s scaling. \\
+\hline
+{\em y} & The value on \char`\"{}y\char`\"{} of the \doxyref{Widget}{p.}{classguiml_1_1_widget}'s scaling. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Widget@{guiml\-::\-Widget}!scale@{scale}}
+\index{scale@{scale}!guiml::Widget@{guiml\-::\-Widget}}
+\subsubsection[{scale}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Widget\-::scale (
+\begin{DoxyParamCaption}
+\item[{const sf\-::\-Vector2f \&}]{scaling}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_widget_a74fc5300691dc6ceddb4dd8bdc8d1eac}
+
+
+Scale the \doxyref{Widget}{p.}{classguiml_1_1_widget}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scaling} & The sf\-::\-Vector2f who contain values for scalling the \doxyref{Widget}{p.}{classguiml_1_1_widget}. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Widget@{guiml\-::\-Widget}!scale@{scale}}
+\index{scale@{scale}!guiml::Widget@{guiml\-::\-Widget}}
+\subsubsection[{scale}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Widget\-::scale (
+\begin{DoxyParamCaption}
+\item[{float}]{x}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_widget_a537e4d87e6be14746dbc8c16788548a3}
+
+
+Scale the \doxyref{Widget}{p.}{classguiml_1_1_widget}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & This value represent the value on \char`\"{}x\char`\"{} and \char`\"{}y\char`\"{} for scalling the \doxyref{Widget}{p.}{classguiml_1_1_widget}. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Widget@{guiml\-::\-Widget}!set\-Parent@{set\-Parent}}
+\index{set\-Parent@{set\-Parent}!guiml::Widget@{guiml\-::\-Widget}}
+\subsubsection[{set\-Parent}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Widget\-::set\-Parent (
+\begin{DoxyParamCaption}
+\item[{{\bf Widget} $\ast$}]{parent, }
+\item[{int}]{pos = {\ttfamily -\/1}}
+\end{DoxyParamCaption}
+)}\label{classguiml_1_1_widget_aa273831eec61ad089180762f6179e93c}
+
+
+Set the \doxyref{Widget}{p.}{classguiml_1_1_widget}'s parent. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & The \doxyref{Widget}{p.}{classguiml_1_1_widget} who will be the parent. \\
+\hline
+{\em pos} & The widget's position in the parent's child's list. At the default, the \doxyref{Widget}{p.}{classguiml_1_1_widget} will be placed at the end of the child's list. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Widget@{guiml\-::\-Widget}!set\-Position@{set\-Position}}
+\index{set\-Position@{set\-Position}!guiml::Widget@{guiml\-::\-Widget}}
+\subsubsection[{set\-Position}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Widget\-::set\-Position (
+\begin{DoxyParamCaption}
+\item[{const sf\-::\-Vector2f \&}]{new\-Pos}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_widget_af7d853058d9c42a0e81fcfff223ff26c}
+
+
+Set the absolute position (without \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\-Pos} & The sf\-::\-Vector2f who contain the position on \char`\"{}x\char`\"{} and on \char`\"{}y\char`\"{} \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Widget@{guiml\-::\-Widget}!set\-Position@{set\-Position}}
+\index{set\-Position@{set\-Position}!guiml::Widget@{guiml\-::\-Widget}}
+\subsubsection[{set\-Position}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Widget\-::set\-Position (
+\begin{DoxyParamCaption}
+\item[{float}]{x, }
+\item[{float}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_widget_a00d74c21a35f8e83d57e356d915c485f}
+
+
+Set the absolute \doxyref{Widget}{p.}{classguiml_1_1_widget}'s position (without \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The position on \char`\"{}x\char`\"{} \\
+\hline
+{\em y} & The position on \char`\"{}y\char`\"{} \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in {\bf guiml\-::\-Window} \doxyref{}{p.}{classguiml_1_1_window_ab5d7e9f6ae4cabd8d35c58b445046ab1}, {\bf guiml\-::\-Image} \doxyref{}{p.}{classguiml_1_1_image_a1484f352c8ea8f86170a707b9a38dd7b}, {\bf guiml\-::\-Label} \doxyref{}{p.}{classguiml_1_1_label_ad0c73e5ed0d43bf5084f2f4464917325}, {\bf guiml\-::\-Button} \doxyref{}{p.}{classguiml_1_1_button_a60d30b2c8a5cf52a4daa4d15bf8d356d}, {\bf guiml\-::\-Frame} \doxyref{}{p.}{classguiml_1_1_frame_aeb6b97c3121d556eda723e6c66589705}, {\bf guiml\-::\-Slide} \doxyref{}{p.}{classguiml_1_1_slide_a5ddd3da78db58267e3116365e61f2aed}, {\bf guiml\-::\-Check\-Box} \doxyref{}{p.}{classguiml_1_1_check_box_a54fe70eb16b8dc0939fbc0b9d6d6e3bf}, and {\bf guiml\-::\-Layout} \doxyref{}{p.}{classguiml_1_1_layout_a98a3da841a42cff75281974cc9ecbeed}.
+
+\index{guiml\-::\-Widget@{guiml\-::\-Widget}!set\-Rect@{set\-Rect}}
+\index{set\-Rect@{set\-Rect}!guiml::Widget@{guiml\-::\-Widget}}
+\subsubsection[{set\-Rect}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Widget\-::set\-Rect (
+\begin{DoxyParamCaption}
+\item[{const sf\-::\-Float\-Rect \&}]{rect}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_widget_a7cd270065bcac5b97b96db630c21dd72}
+
+
+Set the relative \doxyref{Widget}{p.}{classguiml_1_1_widget}'s rect (with \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rect} & The relative \doxyref{Widget}{p.}{classguiml_1_1_widget}'s rect (with \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Widget@{guiml\-::\-Widget}!set\-Size@{set\-Size}}
+\index{set\-Size@{set\-Size}!guiml::Widget@{guiml\-::\-Widget}}
+\subsubsection[{set\-Size}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Widget\-::set\-Size (
+\begin{DoxyParamCaption}
+\item[{const sf\-::\-Vector2f \&}]{new\-Size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_widget_a88f4ca3692a5867bfd6a06cfe56da9b2}
+
+
+Set the absolute \doxyref{Widget}{p.}{classguiml_1_1_widget}'s size (without \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\-Size} & The sf\-::\-Vector2f who contain the size on \char`\"{}x\char`\"{} and on \char`\"{}y\char`\"{} \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Widget@{guiml\-::\-Widget}!set\-Size@{set\-Size}}
+\index{set\-Size@{set\-Size}!guiml::Widget@{guiml\-::\-Widget}}
+\subsubsection[{set\-Size}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Widget\-::set\-Size (
+\begin{DoxyParamCaption}
+\item[{float}]{x, }
+\item[{float}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_widget_a9ea5b7293332943c62767ab237a9fdee}
+
+
+Set the absolute \doxyref{Widget}{p.}{classguiml_1_1_widget}'s size (without \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The \doxyref{Widget}{p.}{classguiml_1_1_widget}'s size on \char`\"{}x\char`\"{} \\
+\hline
+{\em y} & The \doxyref{Widget}{p.}{classguiml_1_1_widget}'s size on \char`\"{}y\char`\"{} \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in {\bf guiml\-::\-Window} \doxyref{}{p.}{classguiml_1_1_window_a3aebed3cb40ed76b04db5552b625180b}, {\bf guiml\-::\-Image} \doxyref{}{p.}{classguiml_1_1_image_a8324267edc37e30cdbb0bd4f5f39b999}, {\bf guiml\-::\-Label} \doxyref{}{p.}{classguiml_1_1_label_a72a6ed5e83a10eefefc61fccdc2e7f95}, {\bf guiml\-::\-Button} \doxyref{}{p.}{classguiml_1_1_button_a37194b7bcaca1ffb34b182cfcd0362ab}, {\bf guiml\-::\-Frame} \doxyref{}{p.}{classguiml_1_1_frame_a5aecc5d9d2177a03349a43d076d05ad4}, {\bf guiml\-::\-Slide} \doxyref{}{p.}{classguiml_1_1_slide_a737c7153e0a23fa4c4f576713d262856}, {\bf guiml\-::\-Check\-Box} \doxyref{}{p.}{classguiml_1_1_check_box_a6cf7b42974be0ef2b19a9ffae83dc973}, and {\bf guiml\-::\-Layout} \doxyref{}{p.}{classguiml_1_1_layout_a0ce272b221278a1887da589692557861}.
+
+\index{guiml\-::\-Widget@{guiml\-::\-Widget}!update@{update}}
+\index{update@{update}!guiml::Widget@{guiml\-::\-Widget}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Widget\-::update (
+\begin{DoxyParamCaption}
+\item[{std\-::list$<$ sf\-::\-Drawable $\ast$ $>$ \&}]{drawables}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_widget_a98c842e03d9161a719894ed14d445f42}
+
+
+Update the \doxyref{Widget}{p.}{classguiml_1_1_widget}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em drawables} & List who will be complete by \doxyref{Widget}{p.}{classguiml_1_1_widget}'s drawable. This function in this root class doesn't complete drawables (because he haven't) but it update all the \doxyref{Widget}{p.}{classguiml_1_1_widget}'s child. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in {\bf guiml\-::\-Window} \doxyref{}{p.}{classguiml_1_1_window_ad5b1d8bb504b381e3b62b4b483dc9cc4}, {\bf guiml\-::\-Image} \doxyref{}{p.}{classguiml_1_1_image_ab7480a716bdecc331726d3c4a96a4e0f}, {\bf guiml\-::\-Slide} \doxyref{}{p.}{classguiml_1_1_slide_a7867209fa584b5795deb589a683b493a}, {\bf guiml\-::\-Button} \doxyref{}{p.}{classguiml_1_1_button_a7b0e3d806eeb1c35c1a7d5e9bda32ef1}, {\bf guiml\-::\-Frame} \doxyref{}{p.}{classguiml_1_1_frame_a3439237354f49ec8a03af4e49f768ba8}, {\bf guiml\-::\-Label} \doxyref{}{p.}{classguiml_1_1_label_a861fcd87665a209c80d0c7e89ca9512c}, {\bf guiml\-::\-Layout} \doxyref{}{p.}{classguiml_1_1_layout_a9320150ab3dc618cca5cc7e1a60b3f13}, and {\bf guiml\-::\-Check\-Box} \doxyref{}{p.}{classguiml_1_1_check_box_a020add4803001badecdb2c1d3cf8c785}.
+
+
+
+\subsection{Member Data Documentation}
+\index{guiml\-::\-Widget@{guiml\-::\-Widget}!m\-\_\-child@{m\-\_\-child}}
+\index{m\-\_\-child@{m\-\_\-child}!guiml::Widget@{guiml\-::\-Widget}}
+\subsubsection[{m\-\_\-child}]{\setlength{\rightskip}{0pt plus 5cm}std\-::list$<${\bf Widget}$\ast$$>$ guiml\-::\-Widget\-::m\-\_\-child\hspace{0.3cm}{\ttfamily [protected]}}\label{classguiml_1_1_widget_af5af73c9ef09ad0066a3177b5c8b6365}
+Child's list. \index{guiml\-::\-Widget@{guiml\-::\-Widget}!m\-\_\-is\-Drawing@{m\-\_\-is\-Drawing}}
+\index{m\-\_\-is\-Drawing@{m\-\_\-is\-Drawing}!guiml::Widget@{guiml\-::\-Widget}}
+\subsubsection[{m\-\_\-is\-Drawing}]{\setlength{\rightskip}{0pt plus 5cm}bool guiml\-::\-Widget\-::m\-\_\-is\-Drawing\hspace{0.3cm}{\ttfamily [protected]}}\label{classguiml_1_1_widget_a4b083ed61ef88b1a09df82c2be5c92f2}
+Update the \doxyref{Widget}{p.}{classguiml_1_1_widget} or not ? \index{guiml\-::\-Widget@{guiml\-::\-Widget}!m\-\_\-moving\-All\-Child@{m\-\_\-moving\-All\-Child}}
+\index{m\-\_\-moving\-All\-Child@{m\-\_\-moving\-All\-Child}!guiml::Widget@{guiml\-::\-Widget}}
+\subsubsection[{m\-\_\-moving\-All\-Child}]{\setlength{\rightskip}{0pt plus 5cm}bool guiml\-::\-Widget\-::m\-\_\-moving\-All\-Child\hspace{0.3cm}{\ttfamily [protected]}}\label{classguiml_1_1_widget_ad93b7e2728a507f4b9db884f596fb8d9}
+When the \doxyref{Widget}{p.}{classguiml_1_1_widget}'s position is set, do we must moving the child ? \index{guiml\-::\-Widget@{guiml\-::\-Widget}!m\-\_\-parent@{m\-\_\-parent}}
+\index{m\-\_\-parent@{m\-\_\-parent}!guiml::Widget@{guiml\-::\-Widget}}
+\subsubsection[{m\-\_\-parent}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Widget}$\ast$ guiml\-::\-Widget\-::m\-\_\-parent\hspace{0.3cm}{\ttfamily [protected]}}\label{classguiml_1_1_widget_a29dddcdb4846da7c456952cb57eaa099}
+The \doxyref{Widget}{p.}{classguiml_1_1_widget}'s parent. \index{guiml\-::\-Widget@{guiml\-::\-Widget}!m\-\_\-pos@{m\-\_\-pos}}
+\index{m\-\_\-pos@{m\-\_\-pos}!guiml::Widget@{guiml\-::\-Widget}}
+\subsubsection[{m\-\_\-pos}]{\setlength{\rightskip}{0pt plus 5cm}sf\-::\-Vector2f guiml\-::\-Widget\-::m\-\_\-pos\hspace{0.3cm}{\ttfamily [protected]}}\label{classguiml_1_1_widget_a6d10b32caa92a2796bc9d1841dbea7c2}
+The relative \doxyref{Widget}{p.}{classguiml_1_1_widget}'s position (with \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). \index{guiml\-::\-Widget@{guiml\-::\-Widget}!m\-\_\-size@{m\-\_\-size}}
+\index{m\-\_\-size@{m\-\_\-size}!guiml::Widget@{guiml\-::\-Widget}}
+\subsubsection[{m\-\_\-size}]{\setlength{\rightskip}{0pt plus 5cm}sf\-::\-Vector2f guiml\-::\-Widget\-::m\-\_\-size\hspace{0.3cm}{\ttfamily [protected]}}\label{classguiml_1_1_widget_a532990c000b1038237a089f78eacb60f}
+The relative \doxyref{Widget}{p.}{classguiml_1_1_widget}'s size (with \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). \index{guiml\-::\-Widget@{guiml\-::\-Widget}!m\-\_\-virtual\-Pos@{m\-\_\-virtual\-Pos}}
+\index{m\-\_\-virtual\-Pos@{m\-\_\-virtual\-Pos}!guiml::Widget@{guiml\-::\-Widget}}
+\subsubsection[{m\-\_\-virtual\-Pos}]{\setlength{\rightskip}{0pt plus 5cm}sf\-::\-Vector2f guiml\-::\-Widget\-::m\-\_\-virtual\-Pos\hspace{0.3cm}{\ttfamily [protected]}}\label{classguiml_1_1_widget_a677f248a3d013c20aeb5d5c265036603}
+The absolute \doxyref{Widget}{p.}{classguiml_1_1_widget}'s position (without \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). \index{guiml\-::\-Widget@{guiml\-::\-Widget}!m\-\_\-virtual\-Size@{m\-\_\-virtual\-Size}}
+\index{m\-\_\-virtual\-Size@{m\-\_\-virtual\-Size}!guiml::Widget@{guiml\-::\-Widget}}
+\subsubsection[{m\-\_\-virtual\-Size}]{\setlength{\rightskip}{0pt plus 5cm}sf\-::\-Vector2f guiml\-::\-Widget\-::m\-\_\-virtual\-Size\hspace{0.3cm}{\ttfamily [protected]}}\label{classguiml_1_1_widget_a2954113e81eb234e9b1ab3afdf1fde59}
+The absolute \doxyref{Widget}{p.}{classguiml_1_1_widget}'s size (without \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/mickael/\-Programmation/\-Programs/\-C++/\-S\-F\-M\-L/\-En\-\_\-\-Cours/\-G\-U\-I\-M\-L/include/{\bf Widget.\-h}\item 
+/home/mickael/\-Programmation/\-Programs/\-C++/\-S\-F\-M\-L/\-En\-\_\-\-Cours/\-G\-U\-I\-M\-L/src/Widget.\-cpp\end{DoxyCompactItemize}

@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node5" href="$classguiml_1_1_frame.html" title="guiml::Frame" alt="" coords="5,155,104,181"/>
+<area shape="rect" id="node7" href="$classguiml_1_1_window.html" title="Create and manage a Window." alt="" coords="129,155,236,181"/>
+<area shape="rect" id="node2" href="$classguiml_1_1_widget.html" title="Root class for create Widgets." alt="" coords="67,5,169,32"/>
+</map>

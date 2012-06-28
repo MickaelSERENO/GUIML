@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classguiml_1_1_render.html" title="Basic virtual class for create Render&#39;s object. Window class and Frame class inherited of this class..." alt="" coords="5,173,107,200"/>
+<area shape="rect" id="node4" href="$classguiml_1_1_widget.html" title="Root class for create Widgets." alt="" coords="13,5,115,32"/>
+<area shape="rect" id="node7" href="$classguiml_1_1_image.html" title="guiml::Image" alt="" coords="73,83,169,109"/>
+<area shape="rect" id="node10" href="$class_event_manager.html" title="EventManager" alt="" coords="132,173,239,200"/>
+</map>

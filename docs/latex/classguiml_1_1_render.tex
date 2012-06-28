@@ -1,0 +1,389 @@
+\section{guiml\-:\-:Render Class Reference}
+\label{classguiml_1_1_render}\index{guiml\-::\-Render@{guiml\-::\-Render}}
+
+
+Basic virtual class for create \doxyref{Render}{p.}{classguiml_1_1_render}'s object. \doxyref{Window}{p.}{classguiml_1_1_window} class and \doxyref{Frame}{p.}{classguiml_1_1_frame} class inherited of this class.  
+
+
+
+
+{\ttfamily \#include $<$Render.\-h$>$}
+
+
+
+Inheritance diagram for guiml\-:\-:Render\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=253pt]{classguiml_1_1_render__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for guiml\-:\-:Render\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=241pt]{classguiml_1_1_render__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf Event\-Manager}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Render} ({\bf Widget} $\ast$parent, const sf\-::\-Float\-Rect \&rect, const sf\-::\-Color \&background\-Color=sf\-::\-Color\-::\-Black, const {\bf Image} \&background\-Image={\bf Image}())
+\begin{DoxyCompactList}\small\item\em The basic \doxyref{Render}{p.}{classguiml_1_1_render}'s constructor. \end{DoxyCompactList}\item 
+virtual void {\bf show} (std\-::list$<$ sf\-::\-Drawable $\ast$ $>$ \&drawable)=0
+\begin{DoxyCompactList}\small\item\em Draw and display all drawable who contain \char`\"{}drawable\char`\"{} in the order of list. \end{DoxyCompactList}\item 
+void {\bf set\-Background\-Image} (const {\bf Image} \&background\-Image)
+\begin{DoxyCompactList}\small\item\em Set the background image. \end{DoxyCompactList}\item 
+void {\bf set\-Background\-Color} (const sf\-::\-Color \&background\-Color)
+\begin{DoxyCompactList}\small\item\em Set the background color. \end{DoxyCompactList}\item 
+virtual void {\bf set\-Title} (const std\-::string \&title)
+\begin{DoxyCompactList}\small\item\em Set the title. \end{DoxyCompactList}\item 
+virtual void {\bf set\-View} (const sf\-::\-View \&view)
+\begin{DoxyCompactList}\small\item\em Set the view. The class use this function for update his view (for example, if the user move the view with the move\-View function, this function is call for update the view). \end{DoxyCompactList}\item 
+void {\bf move\-View} (const sf\-::\-Vector2f \&{\bf move})
+\begin{DoxyCompactList}\small\item\em Move the view. \end{DoxyCompactList}\item 
+void {\bf move\-View} (float x, float y)
+\begin{DoxyCompactList}\small\item\em Move the view. \end{DoxyCompactList}\item 
+void {\bf resize\-View} (const sf\-::\-Vector2f \&resize)
+\begin{DoxyCompactList}\small\item\em Resize the \doxyref{Render}{p.}{classguiml_1_1_render}'s view. \end{DoxyCompactList}\item 
+void {\bf resize\-View} (float x, float y)
+\begin{DoxyCompactList}\small\item\em Resize the \doxyref{Render}{p.}{classguiml_1_1_render}'s view. \end{DoxyCompactList}\item 
+void {\bf set\-View\-Position} (const sf\-::\-Vector2f \&position)
+\begin{DoxyCompactList}\small\item\em Set Position of the \doxyref{Render}{p.}{classguiml_1_1_render}'s view. \end{DoxyCompactList}\item 
+void {\bf set\-View\-Position} (float x, float y)
+\begin{DoxyCompactList}\small\item\em Set Position of the \doxyref{Render}{p.}{classguiml_1_1_render}'s view. \end{DoxyCompactList}\item 
+void {\bf set\-Rect\-View} (const sf\-::\-Float\-Rect \&rect)
+\begin{DoxyCompactList}\small\item\em Set the view's position and size. \end{DoxyCompactList}\item 
+virtual void {\bf reset\-View} ()=0
+\item 
+const std\-::string \& {\bf get\-Title} () const \label{classguiml_1_1_render_abf9a81a0ec5e812989408b598eb8b8b3}
+
+\begin{DoxyCompactList}\small\item\em get the title. \end{DoxyCompactList}\item 
+const {\bf Image} \& {\bf get\-Background\-Image} () const \label{classguiml_1_1_render_a1fc05705f06c2cd2e52d0d2b5ae1b889}
+
+\begin{DoxyCompactList}\small\item\em get the background image. \end{DoxyCompactList}\item 
+const sf\-::\-Color \& {\bf get\-Background\-Color} () const \label{classguiml_1_1_render_ac72c929000e947d3f7c1e4dfd21d347d}
+
+\begin{DoxyCompactList}\small\item\em get the background color. \end{DoxyCompactList}\item 
+virtual const sf\-::\-View \& {\bf get\-View} () const \label{classguiml_1_1_render_a15ee2d1d1099dfd663a430de06c62ad9}
+
+\begin{DoxyCompactList}\small\item\em get the view. \end{DoxyCompactList}\item 
+virtual sf\-::\-Float\-Rect {\bf get\-Viewport} () const \label{classguiml_1_1_render_a0afbaf20d0eed9ea042f7a3c8fb559c7}
+
+\begin{DoxyCompactList}\small\item\em get the view's rect. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const unsigned int {\bfseries N\-B\-R\-\_\-\-K\-E\-Y\-S} = 321\label{classguiml_1_1_render_a243e69bffd4127e3522360d6d5712f4d}
+
+\item 
+const unsigned int {\bfseries N\-B\-R\-\_\-\-C\-L\-I\-C\-S} = 3\label{classguiml_1_1_render_ac796848eaf8b06f78b2ef1da0fc94b16}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+sf\-::\-View {\bf m\-\_\-render\-View}
+\item 
+sf\-::\-Float\-Rect {\bf m\-\_\-view\-Limit}
+\item 
+sf\-::\-Color {\bf m\-\_\-background\-Color}
+\item 
+std\-::string {\bf m\-\_\-render\-Title}
+\item 
+{\bf Image} {\bf m\-\_\-background\-Image}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Basic virtual class for create \doxyref{Render}{p.}{classguiml_1_1_render}'s object. \doxyref{Window}{p.}{classguiml_1_1_window} class and \doxyref{Frame}{p.}{classguiml_1_1_frame} class inherited of this class. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{guiml\-::\-Render@{guiml\-::\-Render}!Render@{Render}}
+\index{Render@{Render}!guiml::Render@{guiml\-::\-Render}}
+\subsubsection[{Render}]{\setlength{\rightskip}{0pt plus 5cm}guiml\-::\-Render\-::\-Render (
+\begin{DoxyParamCaption}
+\item[{{\bf Widget} $\ast$}]{parent, }
+\item[{const sf\-::\-Float\-Rect \&}]{rect, }
+\item[{const sf\-::\-Color \&}]{background\-Color = {\ttfamily sf\-:\-:Color\-:\-:Black}, }
+\item[{const {\bf Image} \&}]{background\-Image = {\ttfamily {\bf Image}()}}
+\end{DoxyParamCaption}
+)}\label{classguiml_1_1_render_a454e9bfc826625eddc396560d40aea01}
+
+
+The basic \doxyref{Render}{p.}{classguiml_1_1_render}'s constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & The object's parent. \\
+\hline
+{\em rect} & Define the \doxyref{Render}{p.}{classguiml_1_1_render}'s position and size. \\
+\hline
+{\em background\-Color} & The color with which the \doxyref{Window}{p.}{classguiml_1_1_window} is clean. At the default, the background color is Black. \\
+\hline
+{\em background\-Image} & If you want a background \doxyref{Image}{p.}{classguiml_1_1_image}. At the default, the \doxyref{Window}{p.}{classguiml_1_1_window} doesn't have a background image. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{guiml\-::\-Render@{guiml\-::\-Render}!move\-View@{move\-View}}
+\index{move\-View@{move\-View}!guiml::Render@{guiml\-::\-Render}}
+\subsubsection[{move\-View}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Render\-::move\-View (
+\begin{DoxyParamCaption}
+\item[{const sf\-::\-Vector2f \&}]{move}
+\end{DoxyParamCaption}
+)}\label{classguiml_1_1_render_aee0ae31289dbdc7700806d6058dd245f}
+
+
+Move the view. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em move} & The sf\-::\-Vector2f value for knowing that how many pixel the user want to move the view. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Render@{guiml\-::\-Render}!move\-View@{move\-View}}
+\index{move\-View@{move\-View}!guiml::Render@{guiml\-::\-Render}}
+\subsubsection[{move\-View}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Render\-::move\-View (
+\begin{DoxyParamCaption}
+\item[{float}]{x, }
+\item[{float}]{y}
+\end{DoxyParamCaption}
+)}\label{classguiml_1_1_render_a8f84403ebf1b447551104f27f87bb895}
+
+
+Move the view. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The value on \char`\"{}x\char`\"{} which the view is move. \\
+\hline
+{\em y} & The value on \char`\"{}y\char`\"{} which the view is move. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Render@{guiml\-::\-Render}!reset\-View@{reset\-View}}
+\index{reset\-View@{reset\-View}!guiml::Render@{guiml\-::\-Render}}
+\subsubsection[{reset\-View}]{\setlength{\rightskip}{0pt plus 5cm}virtual void guiml\-::\-Render\-::reset\-View (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classguiml_1_1_render_a6794d0567a9866f696457de2d3f7e5b7}
+If you want to have the default view. 
+
+Implemented in {\bf guiml\-::\-Window} \doxyref{}{p.}{classguiml_1_1_window_a7ca10f90fdad54408409abc1108ea3da}, and {\bf guiml\-::\-Frame} \doxyref{}{p.}{classguiml_1_1_frame_ac0660b2eec73d36bc8a307c236a46951}.
+
+\index{guiml\-::\-Render@{guiml\-::\-Render}!resize\-View@{resize\-View}}
+\index{resize\-View@{resize\-View}!guiml::Render@{guiml\-::\-Render}}
+\subsubsection[{resize\-View}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Render\-::resize\-View (
+\begin{DoxyParamCaption}
+\item[{const sf\-::\-Vector2f \&}]{resize}
+\end{DoxyParamCaption}
+)}\label{classguiml_1_1_render_a6841677d8d09a725dafebf7273497ab8}
+
+
+Resize the \doxyref{Render}{p.}{classguiml_1_1_render}'s view. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em resize} & The new view's size. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Render@{guiml\-::\-Render}!resize\-View@{resize\-View}}
+\index{resize\-View@{resize\-View}!guiml::Render@{guiml\-::\-Render}}
+\subsubsection[{resize\-View}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Render\-::resize\-View (
+\begin{DoxyParamCaption}
+\item[{float}]{x, }
+\item[{float}]{y}
+\end{DoxyParamCaption}
+)}\label{classguiml_1_1_render_af5495b0feaf5421f4251b2917547a906}
+
+
+Resize the \doxyref{Render}{p.}{classguiml_1_1_render}'s view. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The new view's size on \char`\"{}x\char`\"{}. \\
+\hline
+{\em y} & The new view's size on \char`\"{}y\char`\"{}. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Render@{guiml\-::\-Render}!set\-Background\-Color@{set\-Background\-Color}}
+\index{set\-Background\-Color@{set\-Background\-Color}!guiml::Render@{guiml\-::\-Render}}
+\subsubsection[{set\-Background\-Color}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Render\-::set\-Background\-Color (
+\begin{DoxyParamCaption}
+\item[{const sf\-::\-Color \&}]{background\-Color}
+\end{DoxyParamCaption}
+)}\label{classguiml_1_1_render_afabd05de4c4c4926a8ff8a697b16e383}
+
+
+Set the background color. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em background\-Color} & The new background Color. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Render@{guiml\-::\-Render}!set\-Background\-Image@{set\-Background\-Image}}
+\index{set\-Background\-Image@{set\-Background\-Image}!guiml::Render@{guiml\-::\-Render}}
+\subsubsection[{set\-Background\-Image}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Render\-::set\-Background\-Image (
+\begin{DoxyParamCaption}
+\item[{const {\bf Image} \&}]{background\-Image}
+\end{DoxyParamCaption}
+)}\label{classguiml_1_1_render_a9f66d724c4437040dacfa2ac20ca3ebf}
+
+
+Set the background image. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em background\-Image} & The new background image. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in {\bf guiml\-::\-Frame} \doxyref{}{p.}{classguiml_1_1_frame_aca212c244194ddc6798d009acae9e3f8}.
+
+\index{guiml\-::\-Render@{guiml\-::\-Render}!set\-Rect\-View@{set\-Rect\-View}}
+\index{set\-Rect\-View@{set\-Rect\-View}!guiml::Render@{guiml\-::\-Render}}
+\subsubsection[{set\-Rect\-View}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Render\-::set\-Rect\-View (
+\begin{DoxyParamCaption}
+\item[{const sf\-::\-Float\-Rect \&}]{rect}
+\end{DoxyParamCaption}
+)}\label{classguiml_1_1_render_ad825e9bb556cd9c93dce1f446524d4c9}
+
+
+Set the view's position and size. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rect} & The new position and size. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Render@{guiml\-::\-Render}!set\-Title@{set\-Title}}
+\index{set\-Title@{set\-Title}!guiml::Render@{guiml\-::\-Render}}
+\subsubsection[{set\-Title}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Render\-::set\-Title (
+\begin{DoxyParamCaption}
+\item[{const std\-::string \&}]{title}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_render_a578c7213628ba1eb2f3f4cf4e5ce2ea9}
+
+
+Set the title. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em title} & The new title. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in {\bf guiml\-::\-Window} \doxyref{}{p.}{classguiml_1_1_window_a29ace6656f1df687b0142537e60f8483}, and {\bf guiml\-::\-Frame} \doxyref{}{p.}{classguiml_1_1_frame_a8fc9ab19079e7710d545bf6f87e8b569}.
+
+\index{guiml\-::\-Render@{guiml\-::\-Render}!set\-View@{set\-View}}
+\index{set\-View@{set\-View}!guiml::Render@{guiml\-::\-Render}}
+\subsubsection[{set\-View}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Render\-::set\-View (
+\begin{DoxyParamCaption}
+\item[{const sf\-::\-View \&}]{view}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_render_ad2e57280411fabaae303aa12d9413c19}
+
+
+Set the view. The class use this function for update his view (for example, if the user move the view with the move\-View function, this function is call for update the view). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em view} & The new view. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in {\bf guiml\-::\-Window} \doxyref{}{p.}{classguiml_1_1_window_aff11697e70d8b1109bf8168c3629a1b1}, and {\bf guiml\-::\-Frame} \doxyref{}{p.}{classguiml_1_1_frame_a3196bfdbef4c692c916e57a5f5ebca2c}.
+
+\index{guiml\-::\-Render@{guiml\-::\-Render}!set\-View\-Position@{set\-View\-Position}}
+\index{set\-View\-Position@{set\-View\-Position}!guiml::Render@{guiml\-::\-Render}}
+\subsubsection[{set\-View\-Position}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Render\-::set\-View\-Position (
+\begin{DoxyParamCaption}
+\item[{const sf\-::\-Vector2f \&}]{position}
+\end{DoxyParamCaption}
+)}\label{classguiml_1_1_render_ae56e8177e4cf27c9de208a895276903f}
+
+
+Set Position of the \doxyref{Render}{p.}{classguiml_1_1_render}'s view. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The new view's position. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Render@{guiml\-::\-Render}!set\-View\-Position@{set\-View\-Position}}
+\index{set\-View\-Position@{set\-View\-Position}!guiml::Render@{guiml\-::\-Render}}
+\subsubsection[{set\-View\-Position}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Render\-::set\-View\-Position (
+\begin{DoxyParamCaption}
+\item[{float}]{x, }
+\item[{float}]{y}
+\end{DoxyParamCaption}
+)}\label{classguiml_1_1_render_aef1c461959c31cccef0d72713f247a00}
+
+
+Set Position of the \doxyref{Render}{p.}{classguiml_1_1_render}'s view. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The new view's position on \char`\"{}x\char`\"{}. \\
+\hline
+{\em y} & The new view's position on \char`\"{}y\char`\"{}. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Render@{guiml\-::\-Render}!show@{show}}
+\index{show@{show}!guiml::Render@{guiml\-::\-Render}}
+\subsubsection[{show}]{\setlength{\rightskip}{0pt plus 5cm}virtual void guiml\-::\-Render\-::show (
+\begin{DoxyParamCaption}
+\item[{std\-::list$<$ sf\-::\-Drawable $\ast$ $>$ \&}]{drawable}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classguiml_1_1_render_ace04c80cbe7489494f12418cbe541227}
+
+
+Draw and display all drawable who contain \char`\"{}drawable\char`\"{} in the order of list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em drawable} & The list of drawable that the method will display. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in {\bf guiml\-::\-Window} \doxyref{}{p.}{classguiml_1_1_window_acf41101b3bcd7ff13dc7f81b9f6a09ab}, and {\bf guiml\-::\-Frame} \doxyref{}{p.}{classguiml_1_1_frame_a718d88e75557639f1f16ea9ea4c9934a}.
+
+
+
+\subsection{Member Data Documentation}
+\index{guiml\-::\-Render@{guiml\-::\-Render}!m\-\_\-background\-Color@{m\-\_\-background\-Color}}
+\index{m\-\_\-background\-Color@{m\-\_\-background\-Color}!guiml::Render@{guiml\-::\-Render}}
+\subsubsection[{m\-\_\-background\-Color}]{\setlength{\rightskip}{0pt plus 5cm}sf\-::\-Color guiml\-::\-Render\-::m\-\_\-background\-Color\hspace{0.3cm}{\ttfamily [protected]}}\label{classguiml_1_1_render_a79d155e466fc6771aea7fb5c2431c1b2}
+The background color. \index{guiml\-::\-Render@{guiml\-::\-Render}!m\-\_\-background\-Image@{m\-\_\-background\-Image}}
+\index{m\-\_\-background\-Image@{m\-\_\-background\-Image}!guiml::Render@{guiml\-::\-Render}}
+\subsubsection[{m\-\_\-background\-Image}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Image} guiml\-::\-Render\-::m\-\_\-background\-Image\hspace{0.3cm}{\ttfamily [protected]}}\label{classguiml_1_1_render_a4fac9fac39b4e9fd6bb6eadf5296fb04}
+The background image. \index{guiml\-::\-Render@{guiml\-::\-Render}!m\-\_\-render\-Title@{m\-\_\-render\-Title}}
+\index{m\-\_\-render\-Title@{m\-\_\-render\-Title}!guiml::Render@{guiml\-::\-Render}}
+\subsubsection[{m\-\_\-render\-Title}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string guiml\-::\-Render\-::m\-\_\-render\-Title\hspace{0.3cm}{\ttfamily [protected]}}\label{classguiml_1_1_render_adb29916781c25c893c0bcacdbd24283d}
+The render's title. \index{guiml\-::\-Render@{guiml\-::\-Render}!m\-\_\-render\-View@{m\-\_\-render\-View}}
+\index{m\-\_\-render\-View@{m\-\_\-render\-View}!guiml::Render@{guiml\-::\-Render}}
+\subsubsection[{m\-\_\-render\-View}]{\setlength{\rightskip}{0pt plus 5cm}sf\-::\-View guiml\-::\-Render\-::m\-\_\-render\-View\hspace{0.3cm}{\ttfamily [protected]}}\label{classguiml_1_1_render_a9acd61502358275c4f597a6faa4ab123}
+The \doxyref{Render}{p.}{classguiml_1_1_render} view \index{guiml\-::\-Render@{guiml\-::\-Render}!m\-\_\-view\-Limit@{m\-\_\-view\-Limit}}
+\index{m\-\_\-view\-Limit@{m\-\_\-view\-Limit}!guiml::Render@{guiml\-::\-Render}}
+\subsubsection[{m\-\_\-view\-Limit}]{\setlength{\rightskip}{0pt plus 5cm}sf\-::\-Float\-Rect guiml\-::\-Render\-::m\-\_\-view\-Limit\hspace{0.3cm}{\ttfamily [protected]}}\label{classguiml_1_1_render_adbd20154a4bc746b0c97965465b687d6}
+The limit of the view's position 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/mickael/\-Programmation/\-Programs/\-C++/\-S\-F\-M\-L/\-En\-\_\-\-Cours/\-G\-U\-I\-M\-L/include/{\bf Render.\-h}\item 
+/home/mickael/\-Programmation/\-Programs/\-C++/\-S\-F\-M\-L/\-En\-\_\-\-Cours/\-G\-U\-I\-M\-L/include/Event\-Manager.\-h\item 
+/home/mickael/\-Programmation/\-Programs/\-C++/\-S\-F\-M\-L/\-En\-\_\-\-Cours/\-G\-U\-I\-M\-L/src/Render.\-cpp\end{DoxyCompactItemize}

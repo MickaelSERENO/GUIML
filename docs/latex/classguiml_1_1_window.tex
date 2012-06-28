@@ -1,0 +1,278 @@
+\section{guiml\-:\-:Window Class Reference}
+\label{classguiml_1_1_window}\index{guiml\-::\-Window@{guiml\-::\-Window}}
+
+
+Create and manage a \doxyref{Window}{p.}{classguiml_1_1_window}.  
+
+
+
+
+{\ttfamily \#include $<$Window.\-h$>$}
+
+
+
+Inheritance diagram for guiml\-:\-:Window\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=160pt]{classguiml_1_1_window__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for guiml\-:\-:Window\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=255pt]{classguiml_1_1_window__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Window} (const sf\-::\-Video\-Mode \&mode, const std\-::string \&title, {\bf Widget} $\ast$parent=N\-U\-L\-L, unsigned int framerate\-Limit=60, const sf\-::\-Color \&background\-Color=sf\-::\-Color\-::\-Black, const {\bf Image} \&background\-Image={\bf Image}())
+\begin{DoxyCompactList}\small\item\em \doxyref{Window}{p.}{classguiml_1_1_window}'s Constructor. \end{DoxyCompactList}\item 
+virtual {\bf $\sim$\-Window} ()\label{classguiml_1_1_window_ac9c1b608ed67321add35872247eac6a6}
+
+\begin{DoxyCompactList}\small\item\em The virtual \doxyref{Window}{p.}{classguiml_1_1_window} destructor. It delete m\-\_\-event. \end{DoxyCompactList}\item 
+void {\bf update} ()\label{classguiml_1_1_window_a7f00feee05261932f8419f927169f2f1}
+
+\begin{DoxyCompactList}\small\item\em Update the \doxyref{Window}{p.}{classguiml_1_1_window} \-: get all \doxyref{Widget}{p.}{classguiml_1_1_widget}'s child drawables. It update the \doxyref{Event\-Manager}{p.}{class_event_manager} too. After, it call the show method. \end{DoxyCompactList}\item 
+void {\bf update} (std\-::list$<$ sf\-::\-Drawable $\ast$ $>$ \&drawable)
+\begin{DoxyCompactList}\small\item\em Update the \doxyref{Window}{p.}{classguiml_1_1_window} \-: get all \doxyref{Widget}{p.}{classguiml_1_1_widget}'s child drawables. It update the \doxyref{Event\-Manager}{p.}{class_event_manager} too. After, it call the show method. \end{DoxyCompactList}\item 
+void {\bf show} (std\-::list$<$ sf\-::\-Drawable $\ast$ $>$ \&drawable)
+\begin{DoxyCompactList}\small\item\em Draw and display all drawable who contain \char`\"{}drawable\char`\"{} in the order of list. \end{DoxyCompactList}\item 
+void {\bf set\-Position} (float x, float y)
+\begin{DoxyCompactList}\small\item\em Set the absolute \doxyref{Widget}{p.}{classguiml_1_1_widget}'s position (without \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). \end{DoxyCompactList}\item 
+void {\bf set\-Size} (float x, float y)
+\begin{DoxyCompactList}\small\item\em Set the absolute \doxyref{Widget}{p.}{classguiml_1_1_widget}'s size (without \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). \end{DoxyCompactList}\item 
+virtual void {\bf set\-Title} (const std\-::string \&title)
+\begin{DoxyCompactList}\small\item\em Set the title. \end{DoxyCompactList}\item 
+void {\bf set\-View} (const sf\-::\-View \&view)
+\begin{DoxyCompactList}\small\item\em Set the view. The class use this function for update his view (for example, if the user move the view with the move\-View function, this function is call for update the view). \end{DoxyCompactList}\item 
+void {\bf reset\-View} ()
+\item 
+virtual {\bf Event\-Manager} $\ast$ {\bf get\-Event\-Manager} () const \label{classguiml_1_1_window_aad6e1252faa2aa425653fe726a1d5f47}
+
+\begin{DoxyCompactList}\small\item\em If the root parent is a \doxyref{Window}{p.}{classguiml_1_1_window}, this function return a pointeur about the \doxyref{Window}{p.}{classguiml_1_1_window}'s \doxyref{Event\-Manager}{p.}{class_event_manager}. Else, it return N\-U\-L\-L. \end{DoxyCompactList}\item 
+unsigned int {\bfseries get\-Framerate} ()\label{classguiml_1_1_window_a44c36c849687f1cb4790ea0c3270a2b1}
+
+\item 
+virtual void {\bf resize\-Widget} (const sf\-::\-Vector2f \&default\-Window\-Size, const sf\-::\-Vector2f \&new\-Window\-Size)
+\begin{DoxyCompactList}\small\item\em When the \doxyref{Window}{p.}{classguiml_1_1_window} is resize, the virtual\-Size and virtual\-Pos are set (for correspond with the screen. Indeed, the S\-F\-M\-L resize also all of drawables who are displayed). You don't need to call this function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Event\-Manager} $\ast$ {\bfseries m\-\_\-event}\label{classguiml_1_1_window_abce75bfc5a8c468c01e5ef398aec3a87}
+
+\item 
+float {\bfseries m\-\_\-framerate}\label{classguiml_1_1_window_ac86a19e5ba042f9a7eb3b24b588d6db8}
+
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Create and manage a \doxyref{Window}{p.}{classguiml_1_1_window}. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{guiml\-::\-Window@{guiml\-::\-Window}!Window@{Window}}
+\index{Window@{Window}!guiml::Window@{guiml\-::\-Window}}
+\subsubsection[{Window}]{\setlength{\rightskip}{0pt plus 5cm}guiml\-::\-Window\-::\-Window (
+\begin{DoxyParamCaption}
+\item[{const sf\-::\-Video\-Mode \&}]{mode, }
+\item[{const std\-::string \&}]{title, }
+\item[{{\bf Widget} $\ast$}]{parent = {\ttfamily NULL}, }
+\item[{unsigned int}]{framerate\-Limit = {\ttfamily 60}, }
+\item[{const sf\-::\-Color \&}]{background\-Color = {\ttfamily sf\-:\-:Color\-:\-:Black}, }
+\item[{const {\bf Image} \&}]{background\-Image = {\ttfamily {\bf Image}()}}
+\end{DoxyParamCaption}
+)}\label{classguiml_1_1_window_a6dfacdb7fd6f765c2fd5fbae3dc82907}
+
+
+\doxyref{Window}{p.}{classguiml_1_1_window}'s Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mode} & A sf\-::\-Video\-Mode. It contain the size and de bit pixel. \\
+\hline
+{\em title} & The \doxyref{Window}{p.}{classguiml_1_1_window}'s title. \\
+\hline
+{\em parent} & The \doxyref{Window}{p.}{classguiml_1_1_window} parent. Generally, parent = N\-U\-L\-L because a \doxyref{Window}{p.}{classguiml_1_1_window} is a root object parent of everything. \\
+\hline
+{\em framerate\-Limit} & The \doxyref{Window}{p.}{classguiml_1_1_window}'s framerate limit. At the default, the framerate Limit is 60. \\
+\hline
+{\em background\-Color} & The color with which the \doxyref{Window}{p.}{classguiml_1_1_window} is clean. At the default, the background color is Black. \\
+\hline
+{\em background\-Image} & If you want a background \doxyref{Image}{p.}{classguiml_1_1_image}. At the default, the \doxyref{Window}{p.}{classguiml_1_1_window} doesn't have a background image. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{guiml\-::\-Window@{guiml\-::\-Window}!reset\-View@{reset\-View}}
+\index{reset\-View@{reset\-View}!guiml::Window@{guiml\-::\-Window}}
+\subsubsection[{reset\-View}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Window\-::reset\-View (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_window_a7ca10f90fdad54408409abc1108ea3da}
+If you want to have the default view. 
+
+Implements {\bf guiml\-::\-Render} \doxyref{}{p.}{classguiml_1_1_render_a6794d0567a9866f696457de2d3f7e5b7}.
+
+\index{guiml\-::\-Window@{guiml\-::\-Window}!resize\-Widget@{resize\-Widget}}
+\index{resize\-Widget@{resize\-Widget}!guiml::Window@{guiml\-::\-Window}}
+\subsubsection[{resize\-Widget}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Window\-::resize\-Widget (
+\begin{DoxyParamCaption}
+\item[{const sf\-::\-Vector2f \&}]{default\-Window\-Size, }
+\item[{const sf\-::\-Vector2f \&}]{new\-Window\-Size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_window_a31cb044288b53c2a78b8e911aa1b35e7}
+
+
+When the \doxyref{Window}{p.}{classguiml_1_1_window} is resize, the virtual\-Size and virtual\-Pos are set (for correspond with the screen. Indeed, the S\-F\-M\-L resize also all of drawables who are displayed). You don't need to call this function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em default\-Window} & The \doxyref{Window}{p.}{classguiml_1_1_window}'s size without resize (with the mouse). \\
+\hline
+{\em new\-Window\-Size} & The \doxyref{Window}{p.}{classguiml_1_1_window}'s size with resize (with the mouse). \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from {\bf guiml\-::\-Widget} \doxyref{}{p.}{classguiml_1_1_widget_aee5d11271757f2a34ce1eabf88630028}.
+
+\index{guiml\-::\-Window@{guiml\-::\-Window}!set\-Position@{set\-Position}}
+\index{set\-Position@{set\-Position}!guiml::Window@{guiml\-::\-Window}}
+\subsubsection[{set\-Position}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Window\-::set\-Position (
+\begin{DoxyParamCaption}
+\item[{float}]{x, }
+\item[{float}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_window_ab5d7e9f6ae4cabd8d35c58b445046ab1}
+
+
+Set the absolute \doxyref{Widget}{p.}{classguiml_1_1_widget}'s position (without \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The position on \char`\"{}x\char`\"{} \\
+\hline
+{\em y} & The position on \char`\"{}y\char`\"{} \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from {\bf guiml\-::\-Widget} \doxyref{}{p.}{classguiml_1_1_widget_a00d74c21a35f8e83d57e356d915c485f}.
+
+\index{guiml\-::\-Window@{guiml\-::\-Window}!set\-Size@{set\-Size}}
+\index{set\-Size@{set\-Size}!guiml::Window@{guiml\-::\-Window}}
+\subsubsection[{set\-Size}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Window\-::set\-Size (
+\begin{DoxyParamCaption}
+\item[{float}]{x, }
+\item[{float}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_window_a3aebed3cb40ed76b04db5552b625180b}
+
+
+Set the absolute \doxyref{Widget}{p.}{classguiml_1_1_widget}'s size (without \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The \doxyref{Widget}{p.}{classguiml_1_1_widget}'s size on \char`\"{}x\char`\"{} \\
+\hline
+{\em y} & The \doxyref{Widget}{p.}{classguiml_1_1_widget}'s size on \char`\"{}y\char`\"{} \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from {\bf guiml\-::\-Widget} \doxyref{}{p.}{classguiml_1_1_widget_a9ea5b7293332943c62767ab237a9fdee}.
+
+\index{guiml\-::\-Window@{guiml\-::\-Window}!set\-Title@{set\-Title}}
+\index{set\-Title@{set\-Title}!guiml::Window@{guiml\-::\-Window}}
+\subsubsection[{set\-Title}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Window\-::set\-Title (
+\begin{DoxyParamCaption}
+\item[{const std\-::string \&}]{title}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_window_a29ace6656f1df687b0142537e60f8483}
+
+
+Set the title. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em title} & The new title. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from {\bf guiml\-::\-Render} \doxyref{}{p.}{classguiml_1_1_render_a578c7213628ba1eb2f3f4cf4e5ce2ea9}.
+
+\index{guiml\-::\-Window@{guiml\-::\-Window}!set\-View@{set\-View}}
+\index{set\-View@{set\-View}!guiml::Window@{guiml\-::\-Window}}
+\subsubsection[{set\-View}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Window\-::set\-View (
+\begin{DoxyParamCaption}
+\item[{const sf\-::\-View \&}]{view}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_window_aff11697e70d8b1109bf8168c3629a1b1}
+
+
+Set the view. The class use this function for update his view (for example, if the user move the view with the move\-View function, this function is call for update the view). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em view} & The new view. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from {\bf guiml\-::\-Render} \doxyref{}{p.}{classguiml_1_1_render_ad2e57280411fabaae303aa12d9413c19}.
+
+\index{guiml\-::\-Window@{guiml\-::\-Window}!show@{show}}
+\index{show@{show}!guiml::Window@{guiml\-::\-Window}}
+\subsubsection[{show}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Window\-::show (
+\begin{DoxyParamCaption}
+\item[{std\-::list$<$ sf\-::\-Drawable $\ast$ $>$ \&}]{drawable}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_window_acf41101b3bcd7ff13dc7f81b9f6a09ab}
+
+
+Draw and display all drawable who contain \char`\"{}drawable\char`\"{} in the order of list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em drawable} & The list of drawable that the method will display. \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf guiml\-::\-Render} \doxyref{}{p.}{classguiml_1_1_render_ace04c80cbe7489494f12418cbe541227}.
+
+\index{guiml\-::\-Window@{guiml\-::\-Window}!update@{update}}
+\index{update@{update}!guiml::Window@{guiml\-::\-Window}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Window\-::update (
+\begin{DoxyParamCaption}
+\item[{std\-::list$<$ sf\-::\-Drawable $\ast$ $>$ \&}]{drawable}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_window_ad5b1d8bb504b381e3b62b4b483dc9cc4}
+
+
+Update the \doxyref{Window}{p.}{classguiml_1_1_window} \-: get all \doxyref{Widget}{p.}{classguiml_1_1_widget}'s child drawables. It update the \doxyref{Event\-Manager}{p.}{class_event_manager} too. After, it call the show method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em drawable} & You can, if you want, give a drawables's list. The \doxyref{Window}{p.}{classguiml_1_1_window}, in the order, go to draw all drawable who contain \char`\"{}drawable\char`\"{}. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from {\bf guiml\-::\-Widget} \doxyref{}{p.}{classguiml_1_1_widget_a98c842e03d9161a719894ed14d445f42}.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/mickael/\-Programmation/\-Programs/\-C++/\-S\-F\-M\-L/\-En\-\_\-\-Cours/\-G\-U\-I\-M\-L/include/{\bf Window.\-h}\item 
+/home/mickael/\-Programmation/\-Programs/\-C++/\-S\-F\-M\-L/\-En\-\_\-\-Cours/\-G\-U\-I\-M\-L/src/Window.\-cpp\end{DoxyCompactItemize}

@@ -1,0 +1,596 @@
+\section{guiml\-:\-:Check\-Box\-:\-:guiml\-:\-:Widget Class Reference}
+\label{classguiml_1_1_check_box_1_1guiml_1_1_widget}\index{guiml\-::\-Check\-Box\-::guiml\-::\-Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}}
+
+
+Root class for create Widgets.  
+
+
+
+
+{\ttfamily \#include $<$Check\-Box.\-h$>$}
+
+
+
+Collaboration diagram for guiml\-:\-:Check\-Box\-:\-:guiml\-:\-:Widget\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=262pt]{classguiml_1_1_check_box_1_1guiml_1_1_widget__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Widget} ({\bf Widget} $\ast$parent, const sf\-::\-Float\-Rect \&rect=sf\-::\-Float\-Rect(0, 0, 0, 0))
+\begin{DoxyCompactList}\small\item\em \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s Constructor. \end{DoxyCompactList}\item 
+{\bf Widget} (const {\bf Widget} \&{\bf copy})
+\begin{DoxyCompactList}\small\item\em \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s Copy Constructor. \end{DoxyCompactList}\item 
+virtual {\bf $\sim$\-Widget} ()\label{classguiml_1_1_check_box_1_1guiml_1_1_widget_aa1f463741ea228b30cf839afddcebe30}
+
+\begin{DoxyCompactList}\small\item\em \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s virtual destructor. When the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget} is destroyed, all objects' child are destroyed this object will be delete in the parent's child's list. \end{DoxyCompactList}\item 
+virtual void {\bf add\-Child} ({\bf Widget} $\ast$child, int pos=-\/1)
+\begin{DoxyCompactList}\small\item\em Add a child. \end{DoxyCompactList}\item 
+void {\bf set\-Parent} ({\bf Widget} $\ast$parent, int pos=-\/1)
+\begin{DoxyCompactList}\small\item\em Set the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s parent. \end{DoxyCompactList}\item 
+bool {\bf remove\-Child} ({\bf Widget} $\ast$child)
+\begin{DoxyCompactList}\small\item\em Remove the child of the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s child's list. It return true if the removing is correct, else it return false(maybe the parameter child is not a widget's child). \end{DoxyCompactList}\item 
+bool {\bf remove\-Child} (unsigned int pos)
+\begin{DoxyCompactList}\small\item\em Remove the child who is in the position indicate. It return true if the removing is correct, else it return false(maybe the position is wrong). \end{DoxyCompactList}\item 
+virtual void {\bf draw\-Widget} (bool drawing)
+\begin{DoxyCompactList}\small\item\em Update the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget} or not. \end{DoxyCompactList}\item 
+void {\bf draw\-All\-Child} (bool drawing)
+\begin{DoxyCompactList}\small\item\em Update the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s children or not. \end{DoxyCompactList}\item 
+virtual void {\bf update} (std\-::list$<$ sf\-::\-Drawable $\ast$ $>$ \&drawables)
+\begin{DoxyCompactList}\small\item\em Update the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}. \end{DoxyCompactList}\item 
+virtual void {\bf set\-Position} (const sf\-::\-Vector2f \&new\-Pos)
+\begin{DoxyCompactList}\small\item\em Set the absolute position (without \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). \end{DoxyCompactList}\item 
+virtual void {\bf set\-Position} (float x, float y)
+\begin{DoxyCompactList}\small\item\em Set the absolute \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s position (without \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). \end{DoxyCompactList}\item 
+virtual void {\bf set\-Size} (const sf\-::\-Vector2f \&new\-Size)
+\begin{DoxyCompactList}\small\item\em Set the absolute \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s size (without \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). \end{DoxyCompactList}\item 
+virtual void {\bf set\-Size} (float x, float y)
+\begin{DoxyCompactList}\small\item\em Set the absolute \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s size (without \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). \end{DoxyCompactList}\item 
+void {\bf move} (float x, float y)
+\begin{DoxyCompactList}\small\item\em Move the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}. \end{DoxyCompactList}\item 
+void {\bf move} (const sf\-::\-Vector2f \&moving)
+\begin{DoxyCompactList}\small\item\em Move the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}. \end{DoxyCompactList}\item 
+void {\bf add\-Size} (const sf\-::\-Vector2f \&adding\-Size)
+\begin{DoxyCompactList}\small\item\em Add values at the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s size. \end{DoxyCompactList}\item 
+void {\bf add\-Size} (float x, float y)
+\begin{DoxyCompactList}\small\item\em Add values at the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s size. \end{DoxyCompactList}\item 
+virtual void {\bf scale} (float x, float y)
+\begin{DoxyCompactList}\small\item\em Scale the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}. \end{DoxyCompactList}\item 
+virtual void {\bf scale} (const sf\-::\-Vector2f \&scaling)
+\begin{DoxyCompactList}\small\item\em Scale the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}. \end{DoxyCompactList}\item 
+virtual void {\bf scale} (float x)
+\begin{DoxyCompactList}\small\item\em Scale the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}. \end{DoxyCompactList}\item 
+void {\bf move\-All\-Child} (bool moving\-All\-Child)
+\begin{DoxyCompactList}\small\item\em If you move the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}, all child are also in moving. \end{DoxyCompactList}\item 
+bool {\bf get\-Moving\-All\-Child} () const \label{classguiml_1_1_check_box_1_1guiml_1_1_widget_abbd30e0c6e027b48975f17f7f05d0d81}
+
+\begin{DoxyCompactList}\small\item\em Get m\-\_\-moving\-All\-Child's value. It say if all \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s child can move or not, if the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget} is in moving. \end{DoxyCompactList}\item 
+bool {\bf is\-Drawing} () const \label{classguiml_1_1_check_box_1_1guiml_1_1_widget_a504c94c296d00cf749ec473ea0355be7}
+
+\begin{DoxyCompactList}\small\item\em Return m\-\_\-is\-Drawing. It's a boolean for knowing if the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget} can be updated or not. \end{DoxyCompactList}\item 
+bool {\bf is\-Child} (const {\bf Widget} $\ast$child)
+\begin{DoxyCompactList}\small\item\em Return true if \char`\"{}child\char`\"{} is a \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s child, els it return false. \end{DoxyCompactList}\item 
+bool {\bf has\-Parent} () const \label{classguiml_1_1_check_box_1_1guiml_1_1_widget_a96db44d265a1456d3d257ad713ae8195}
+
+\begin{DoxyCompactList}\small\item\em Return true if the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget} has a parent, else it return false. \end{DoxyCompactList}\item 
+virtual {\bf Event\-Manager} $\ast$ {\bf get\-Event\-Manager} () const \label{classguiml_1_1_check_box_1_1guiml_1_1_widget_a39011492c470f1f84912a0116b9940c4}
+
+\begin{DoxyCompactList}\small\item\em If the root parent is a \doxyref{Window}{p.}{classguiml_1_1_window}, this function return a pointeur about the \doxyref{Window}{p.}{classguiml_1_1_window}'s \doxyref{Event\-Manager}{p.}{classguiml_1_1_check_box_1_1_event_manager}. Else, it return N\-U\-L\-L. \end{DoxyCompactList}\item 
+const sf\-::\-Vector2f \& {\bf get\-Position} () const \label{classguiml_1_1_check_box_1_1guiml_1_1_widget_a4a7104b15ed5fb2668858ef2a8721957}
+
+\begin{DoxyCompactList}\small\item\em Return the relative \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s position (with \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). \end{DoxyCompactList}\item 
+const sf\-::\-Vector2f \& {\bf get\-Virtual\-Position} () const \label{classguiml_1_1_check_box_1_1guiml_1_1_widget_a454e920ad768cd6fde2bd5fd18163f45}
+
+\begin{DoxyCompactList}\small\item\em Return the absolute \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s position (without \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). \end{DoxyCompactList}\item 
+const sf\-::\-Vector2f \& {\bf get\-Size} () const \label{classguiml_1_1_check_box_1_1guiml_1_1_widget_a2abd3fd7bd3e1ae14f1653d170e8ba80}
+
+\begin{DoxyCompactList}\small\item\em Return the relative \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s size (with \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). \end{DoxyCompactList}\item 
+const sf\-::\-Vector2f \& {\bf get\-Virtual\-Size} () const \label{classguiml_1_1_check_box_1_1guiml_1_1_widget_aff8feb9d4eaea9c2f0ca543b4b33f85c}
+
+\begin{DoxyCompactList}\small\item\em Return the absolute \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s size (without \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). \end{DoxyCompactList}\item 
+virtual sf\-::\-Float\-Rect {\bf get\-Rect} () const \label{classguiml_1_1_check_box_1_1guiml_1_1_widget_ac044b092a4bd4c19fd7155b3167d6ab6}
+
+\begin{DoxyCompactList}\small\item\em Return the relative \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s rect (with \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). \end{DoxyCompactList}\item 
+virtual sf\-::\-Float\-Rect {\bf get\-Virtual\-Rect} () const \label{classguiml_1_1_check_box_1_1guiml_1_1_widget_aa9f2364038a3687d7cd14fce6d3a1c48}
+
+\begin{DoxyCompactList}\small\item\em Return the absolute \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s rect (without \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). \end{DoxyCompactList}\item 
+virtual void {\bf set\-Rect} (const sf\-::\-Float\-Rect \&rect)
+\begin{DoxyCompactList}\small\item\em Set the relative \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s rect (with \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). \end{DoxyCompactList}\item 
+virtual {\bf Widget} \& {\bf operator=} (const {\bf Widget} \&{\bf copy})
+\begin{DoxyCompactList}\small\item\em Copy's Operator. \end{DoxyCompactList}\item 
+virtual void {\bf resize\-Widget} (const sf\-::\-Vector2f \&default\-Window\-Size, const sf\-::\-Vector2f \&new\-Window\-Size)
+\begin{DoxyCompactList}\small\item\em When the \doxyref{Window}{p.}{classguiml_1_1_window} is resize, the virtual\-Size and virtual\-Pos are set (for correspond with the screen. Indeed, the S\-F\-M\-L resize also all of drawables who are displayed). You don't need to call this function. \end{DoxyCompactList}\item 
+virtual {\bf Widget} $\ast$ {\bf copy} () const \label{classguiml_1_1_check_box_1_1guiml_1_1_widget_a7f8fd3cc1cf425688d76c1a52d99a7e7}
+
+\begin{DoxyCompactList}\small\item\em It return a \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s copy. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\-::list$<$ {\bf Widget} $\ast$ $>$ {\bf m\-\_\-child}
+\item 
+{\bf Widget} $\ast$ {\bf m\-\_\-parent}
+\item 
+bool {\bf m\-\_\-is\-Drawing}
+\item 
+sf\-::\-Vector2f {\bf m\-\_\-pos}
+\item 
+sf\-::\-Vector2f {\bf m\-\_\-size}
+\item 
+sf\-::\-Vector2f {\bf m\-\_\-virtual\-Pos}
+\item 
+sf\-::\-Vector2f {\bf m\-\_\-virtual\-Size}
+\item 
+bool {\bf m\-\_\-moving\-All\-Child}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Root class for create Widgets. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{guiml\-::\-Check\-Box\-::guiml\-::\-Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}!Widget@{Widget}}
+\index{Widget@{Widget}!guiml::CheckBox::guiml::Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}}
+\subsubsection[{Widget}]{\setlength{\rightskip}{0pt plus 5cm}guiml\-::\-Check\-Box\-::guiml\-::\-Widget\-::\-Widget (
+\begin{DoxyParamCaption}
+\item[{{\bf Widget} $\ast$}]{parent, }
+\item[{const sf\-::\-Float\-Rect \&}]{rect = {\ttfamily sf\-:\-:FloatRect(0,~0,~0,~0)}}
+\end{DoxyParamCaption}
+)}\label{classguiml_1_1_check_box_1_1guiml_1_1_widget_a9654e43621cf60652ef9765555acdaec}
+
+
+\doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & The \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget} parent who can update this object. \\
+\hline
+{\em rect} & Defined the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s position and size \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Check\-Box\-::guiml\-::\-Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}!Widget@{Widget}}
+\index{Widget@{Widget}!guiml::CheckBox::guiml::Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}}
+\subsubsection[{Widget}]{\setlength{\rightskip}{0pt plus 5cm}guiml\-::\-Check\-Box\-::guiml\-::\-Widget\-::\-Widget (
+\begin{DoxyParamCaption}
+\item[{const {\bf Widget} \&}]{copy}
+\end{DoxyParamCaption}
+)}\label{classguiml_1_1_check_box_1_1guiml_1_1_widget_a4b1798af206a21d6f32224e5e13b6e28}
+
+
+\doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s Copy Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em copy} & The widget's copy \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{guiml\-::\-Check\-Box\-::guiml\-::\-Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}!add\-Child@{add\-Child}}
+\index{add\-Child@{add\-Child}!guiml::CheckBox::guiml::Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}}
+\subsubsection[{add\-Child}]{\setlength{\rightskip}{0pt plus 5cm}virtual void guiml\-::\-Check\-Box\-::guiml\-::\-Widget\-::add\-Child (
+\begin{DoxyParamCaption}
+\item[{{\bf Widget} $\ast$}]{child, }
+\item[{int}]{pos = {\ttfamily -\/1}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_check_box_1_1guiml_1_1_widget_a74d7e816f636ef91b79b52019ed172b9}
+
+
+Add a child. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em child} & \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget} who will be the child \\
+\hline
+{\em pos} & It indicated where the child will be place in the child's list (the order is important for the update's order). At the default, the child will be placed at the end of thechild's list. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Check\-Box\-::guiml\-::\-Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}!add\-Size@{add\-Size}}
+\index{add\-Size@{add\-Size}!guiml::CheckBox::guiml::Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}}
+\subsubsection[{add\-Size}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Check\-Box\-::guiml\-::\-Widget\-::add\-Size (
+\begin{DoxyParamCaption}
+\item[{const sf\-::\-Vector2f \&}]{adding\-Size}
+\end{DoxyParamCaption}
+)}\label{classguiml_1_1_check_box_1_1guiml_1_1_widget_a6b5e26f68e007659b141c26572fcb1ec}
+
+
+Add values at the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s size. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em adding\-Size} & The sf\-::\-Vector2f who contain values on \char`\"{}x\char`\"{} and \char`\"{}y\char`\"{}, values who will be add at the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s size. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Check\-Box\-::guiml\-::\-Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}!add\-Size@{add\-Size}}
+\index{add\-Size@{add\-Size}!guiml::CheckBox::guiml::Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}}
+\subsubsection[{add\-Size}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Check\-Box\-::guiml\-::\-Widget\-::add\-Size (
+\begin{DoxyParamCaption}
+\item[{float}]{x, }
+\item[{float}]{y}
+\end{DoxyParamCaption}
+)}\label{classguiml_1_1_check_box_1_1guiml_1_1_widget_a7343dd498b3b53e016e47d026c33b3ec}
+
+
+Add values at the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s size. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The value on \char`\"{}x\char`\"{} who will be add at the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s size (on \char`\"{}x\char`\"{}). \\
+\hline
+{\em y} & The value on \char`\"{}y\char`\"{} who will be add at the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s size (on \char`\"{}y\char`\"{}). \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Check\-Box\-::guiml\-::\-Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}!draw\-All\-Child@{draw\-All\-Child}}
+\index{draw\-All\-Child@{draw\-All\-Child}!guiml::CheckBox::guiml::Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}}
+\subsubsection[{draw\-All\-Child}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Check\-Box\-::guiml\-::\-Widget\-::draw\-All\-Child (
+\begin{DoxyParamCaption}
+\item[{bool}]{drawing}
+\end{DoxyParamCaption}
+)}\label{classguiml_1_1_check_box_1_1guiml_1_1_widget_a573c997b62d0c1a367dd06ff177cb82f}
+
+
+Update the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s children or not. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em drawing} & Boolean for knowing if you want to update the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s children or not. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Check\-Box\-::guiml\-::\-Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}!draw\-Widget@{draw\-Widget}}
+\index{draw\-Widget@{draw\-Widget}!guiml::CheckBox::guiml::Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}}
+\subsubsection[{draw\-Widget}]{\setlength{\rightskip}{0pt plus 5cm}virtual void guiml\-::\-Check\-Box\-::guiml\-::\-Widget\-::draw\-Widget (
+\begin{DoxyParamCaption}
+\item[{bool}]{drawing}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_check_box_1_1guiml_1_1_widget_a8700971b8d8d42387567d636820c102b}
+
+
+Update the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget} or not. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em drawing} & Boolean for knowing if you want to update the widget or not. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Check\-Box\-::guiml\-::\-Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}!is\-Child@{is\-Child}}
+\index{is\-Child@{is\-Child}!guiml::CheckBox::guiml::Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}}
+\subsubsection[{is\-Child}]{\setlength{\rightskip}{0pt plus 5cm}bool guiml\-::\-Check\-Box\-::guiml\-::\-Widget\-::is\-Child (
+\begin{DoxyParamCaption}
+\item[{const {\bf Widget} $\ast$}]{child}
+\end{DoxyParamCaption}
+)}\label{classguiml_1_1_check_box_1_1guiml_1_1_widget_a65f5d4437ba07e1b3bb4d675805aaf0e}
+
+
+Return true if \char`\"{}child\char`\"{} is a \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s child, els it return false. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em child} & The \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget} who can be a \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s child. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Check\-Box\-::guiml\-::\-Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}!move@{move}}
+\index{move@{move}!guiml::CheckBox::guiml::Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}}
+\subsubsection[{move}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Check\-Box\-::guiml\-::\-Widget\-::move (
+\begin{DoxyParamCaption}
+\item[{float}]{x, }
+\item[{float}]{y}
+\end{DoxyParamCaption}
+)}\label{classguiml_1_1_check_box_1_1guiml_1_1_widget_ab5c5298b4ef7552c3a06f07e7974719a}
+
+
+Move the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The value on \char`\"{}x\char`\"{} of the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s moving. \\
+\hline
+{\em y} & The value on \char`\"{}y\char`\"{} of the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s moving. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Check\-Box\-::guiml\-::\-Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}!move@{move}}
+\index{move@{move}!guiml::CheckBox::guiml::Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}}
+\subsubsection[{move}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Check\-Box\-::guiml\-::\-Widget\-::move (
+\begin{DoxyParamCaption}
+\item[{const sf\-::\-Vector2f \&}]{moving}
+\end{DoxyParamCaption}
+)}\label{classguiml_1_1_check_box_1_1guiml_1_1_widget_a43972bf425dd012f5bb217f8132b914a}
+
+
+Move the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em moving} & The sf\-::\-Vector2f who contain values on \char`\"{}x\char`\"{} and \char`\"{}y\char`\"{} of the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s moving. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Check\-Box\-::guiml\-::\-Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}!move\-All\-Child@{move\-All\-Child}}
+\index{move\-All\-Child@{move\-All\-Child}!guiml::CheckBox::guiml::Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}}
+\subsubsection[{move\-All\-Child}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Check\-Box\-::guiml\-::\-Widget\-::move\-All\-Child (
+\begin{DoxyParamCaption}
+\item[{bool}]{moving\-All\-Child}
+\end{DoxyParamCaption}
+)}\label{classguiml_1_1_check_box_1_1guiml_1_1_widget_a65cfb679ce2fbc0ac3604ebbf99cd851}
+
+
+If you move the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}, all child are also in moving. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em moving\-All\-Child} & Boolean for knowing if you want moving all the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s child or not, if the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget} is in moving. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Check\-Box\-::guiml\-::\-Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}!operator=@{operator=}}
+\index{operator=@{operator=}!guiml::CheckBox::guiml::Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Widget}\& guiml\-::\-Check\-Box\-::guiml\-::\-Widget\-::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Widget} \&}]{copy}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_check_box_1_1guiml_1_1_widget_a9901d567b577a70d858e2d7da8077bf7}
+
+
+Copy's Operator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em copy} & The copy. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Check\-Box\-::guiml\-::\-Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}!remove\-Child@{remove\-Child}}
+\index{remove\-Child@{remove\-Child}!guiml::CheckBox::guiml::Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}}
+\subsubsection[{remove\-Child}]{\setlength{\rightskip}{0pt plus 5cm}bool guiml\-::\-Check\-Box\-::guiml\-::\-Widget\-::remove\-Child (
+\begin{DoxyParamCaption}
+\item[{{\bf Widget} $\ast$}]{child}
+\end{DoxyParamCaption}
+)}\label{classguiml_1_1_check_box_1_1guiml_1_1_widget_af40878919e34f525379d94e8e8d658be}
+
+
+Remove the child of the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s child's list. It return true if the removing is correct, else it return false(maybe the parameter child is not a widget's child). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em child} & The pointeur of the child who will be delete of the widget's child's list. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Check\-Box\-::guiml\-::\-Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}!remove\-Child@{remove\-Child}}
+\index{remove\-Child@{remove\-Child}!guiml::CheckBox::guiml::Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}}
+\subsubsection[{remove\-Child}]{\setlength{\rightskip}{0pt plus 5cm}bool guiml\-::\-Check\-Box\-::guiml\-::\-Widget\-::remove\-Child (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{pos}
+\end{DoxyParamCaption}
+)}\label{classguiml_1_1_check_box_1_1guiml_1_1_widget_ad7eb6148c42fee7fd002a1a10769ddda}
+
+
+Remove the child who is in the position indicate. It return true if the removing is correct, else it return false(maybe the position is wrong). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & The child's position in the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s child's list. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Check\-Box\-::guiml\-::\-Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}!resize\-Widget@{resize\-Widget}}
+\index{resize\-Widget@{resize\-Widget}!guiml::CheckBox::guiml::Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}}
+\subsubsection[{resize\-Widget}]{\setlength{\rightskip}{0pt plus 5cm}virtual void guiml\-::\-Check\-Box\-::guiml\-::\-Widget\-::resize\-Widget (
+\begin{DoxyParamCaption}
+\item[{const sf\-::\-Vector2f \&}]{default\-Window\-Size, }
+\item[{const sf\-::\-Vector2f \&}]{new\-Window\-Size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_check_box_1_1guiml_1_1_widget_a9e51f34a2e3d59a6e87b0bbe5c4f503c}
+
+
+When the \doxyref{Window}{p.}{classguiml_1_1_window} is resize, the virtual\-Size and virtual\-Pos are set (for correspond with the screen. Indeed, the S\-F\-M\-L resize also all of drawables who are displayed). You don't need to call this function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em default\-Window} & The \doxyref{Window}{p.}{classguiml_1_1_window}'s size without resize (with the mouse). \\
+\hline
+{\em new\-Window\-Size} & The \doxyref{Window}{p.}{classguiml_1_1_window}'s size with resize (with the mouse). \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Check\-Box\-::guiml\-::\-Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}!scale@{scale}}
+\index{scale@{scale}!guiml::CheckBox::guiml::Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}}
+\subsubsection[{scale}]{\setlength{\rightskip}{0pt plus 5cm}virtual void guiml\-::\-Check\-Box\-::guiml\-::\-Widget\-::scale (
+\begin{DoxyParamCaption}
+\item[{float}]{x, }
+\item[{float}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_check_box_1_1guiml_1_1_widget_a8efd843d1b0dd86ca9564edb20771eac}
+
+
+Scale the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The value on \char`\"{}x\char`\"{} of the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s scaling. \\
+\hline
+{\em y} & The value on \char`\"{}y\char`\"{} of the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s scaling. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Check\-Box\-::guiml\-::\-Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}!scale@{scale}}
+\index{scale@{scale}!guiml::CheckBox::guiml::Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}}
+\subsubsection[{scale}]{\setlength{\rightskip}{0pt plus 5cm}virtual void guiml\-::\-Check\-Box\-::guiml\-::\-Widget\-::scale (
+\begin{DoxyParamCaption}
+\item[{const sf\-::\-Vector2f \&}]{scaling}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_check_box_1_1guiml_1_1_widget_ae6012884b08503ed4b0175476eb4ae9d}
+
+
+Scale the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scaling} & The sf\-::\-Vector2f who contain values for scalling the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Check\-Box\-::guiml\-::\-Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}!scale@{scale}}
+\index{scale@{scale}!guiml::CheckBox::guiml::Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}}
+\subsubsection[{scale}]{\setlength{\rightskip}{0pt plus 5cm}virtual void guiml\-::\-Check\-Box\-::guiml\-::\-Widget\-::scale (
+\begin{DoxyParamCaption}
+\item[{float}]{x}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_check_box_1_1guiml_1_1_widget_af4fdddcc0fcf210ea2321e5e1c461cf9}
+
+
+Scale the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & This value represent the value on \char`\"{}x\char`\"{} and \char`\"{}y\char`\"{} for scalling the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Check\-Box\-::guiml\-::\-Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}!set\-Parent@{set\-Parent}}
+\index{set\-Parent@{set\-Parent}!guiml::CheckBox::guiml::Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}}
+\subsubsection[{set\-Parent}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Check\-Box\-::guiml\-::\-Widget\-::set\-Parent (
+\begin{DoxyParamCaption}
+\item[{{\bf Widget} $\ast$}]{parent, }
+\item[{int}]{pos = {\ttfamily -\/1}}
+\end{DoxyParamCaption}
+)}\label{classguiml_1_1_check_box_1_1guiml_1_1_widget_a278f7b9cc6645637084fa40e603b4a4e}
+
+
+Set the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s parent. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & The \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget} who will be the parent. \\
+\hline
+{\em pos} & The widget's position in the parent's child's list. At the default, the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget} will be placed at the end of the child's list. \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Check\-Box\-::guiml\-::\-Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}!set\-Position@{set\-Position}}
+\index{set\-Position@{set\-Position}!guiml::CheckBox::guiml::Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}}
+\subsubsection[{set\-Position}]{\setlength{\rightskip}{0pt plus 5cm}virtual void guiml\-::\-Check\-Box\-::guiml\-::\-Widget\-::set\-Position (
+\begin{DoxyParamCaption}
+\item[{const sf\-::\-Vector2f \&}]{new\-Pos}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_check_box_1_1guiml_1_1_widget_a37d6ac8712f4a5abbac40011f352a5fa}
+
+
+Set the absolute position (without \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\-Pos} & The sf\-::\-Vector2f who contain the position on \char`\"{}x\char`\"{} and on \char`\"{}y\char`\"{} \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Check\-Box\-::guiml\-::\-Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}!set\-Position@{set\-Position}}
+\index{set\-Position@{set\-Position}!guiml::CheckBox::guiml::Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}}
+\subsubsection[{set\-Position}]{\setlength{\rightskip}{0pt plus 5cm}virtual void guiml\-::\-Check\-Box\-::guiml\-::\-Widget\-::set\-Position (
+\begin{DoxyParamCaption}
+\item[{float}]{x, }
+\item[{float}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_check_box_1_1guiml_1_1_widget_a89cbff6f55e2a7f05fe4aa6df8297c3a}
+
+
+Set the absolute \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s position (without \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The position on \char`\"{}x\char`\"{} \\
+\hline
+{\em y} & The position on \char`\"{}y\char`\"{} \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Check\-Box\-::guiml\-::\-Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}!set\-Rect@{set\-Rect}}
+\index{set\-Rect@{set\-Rect}!guiml::CheckBox::guiml::Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}}
+\subsubsection[{set\-Rect}]{\setlength{\rightskip}{0pt plus 5cm}virtual void guiml\-::\-Check\-Box\-::guiml\-::\-Widget\-::set\-Rect (
+\begin{DoxyParamCaption}
+\item[{const sf\-::\-Float\-Rect \&}]{rect}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_check_box_1_1guiml_1_1_widget_a8ac11c657e77ab50d4fff5bc2b403c92}
+
+
+Set the relative \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s rect (with \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rect} & The relative \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s rect (with \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Check\-Box\-::guiml\-::\-Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}!set\-Size@{set\-Size}}
+\index{set\-Size@{set\-Size}!guiml::CheckBox::guiml::Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}}
+\subsubsection[{set\-Size}]{\setlength{\rightskip}{0pt plus 5cm}virtual void guiml\-::\-Check\-Box\-::guiml\-::\-Widget\-::set\-Size (
+\begin{DoxyParamCaption}
+\item[{const sf\-::\-Vector2f \&}]{new\-Size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_check_box_1_1guiml_1_1_widget_a60baa754765a8f0fb3146fae6ec836ec}
+
+
+Set the absolute \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s size (without \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\-Size} & The sf\-::\-Vector2f who contain the size on \char`\"{}x\char`\"{} and on \char`\"{}y\char`\"{} \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Check\-Box\-::guiml\-::\-Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}!set\-Size@{set\-Size}}
+\index{set\-Size@{set\-Size}!guiml::CheckBox::guiml::Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}}
+\subsubsection[{set\-Size}]{\setlength{\rightskip}{0pt plus 5cm}virtual void guiml\-::\-Check\-Box\-::guiml\-::\-Widget\-::set\-Size (
+\begin{DoxyParamCaption}
+\item[{float}]{x, }
+\item[{float}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_check_box_1_1guiml_1_1_widget_a4fa02ee1174947eb723f03513e898ee0}
+
+
+Set the absolute \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s size (without \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s size on \char`\"{}x\char`\"{} \\
+\hline
+{\em y} & The \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s size on \char`\"{}y\char`\"{} \\
+\hline
+\end{DoxyParams}
+\index{guiml\-::\-Check\-Box\-::guiml\-::\-Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}!update@{update}}
+\index{update@{update}!guiml::CheckBox::guiml::Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}virtual void guiml\-::\-Check\-Box\-::guiml\-::\-Widget\-::update (
+\begin{DoxyParamCaption}
+\item[{std\-::list$<$ sf\-::\-Drawable $\ast$ $>$ \&}]{drawables}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_check_box_1_1guiml_1_1_widget_aa9a3725bf1315a94283c908796d84485}
+
+
+Update the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em drawables} & List who will be complete by \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s drawable. This function in this root class doesn't complete drawables (because he haven't) but it update all the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s child. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\index{guiml\-::\-Check\-Box\-::guiml\-::\-Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}!m\-\_\-child@{m\-\_\-child}}
+\index{m\-\_\-child@{m\-\_\-child}!guiml::CheckBox::guiml::Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}}
+\subsubsection[{m\-\_\-child}]{\setlength{\rightskip}{0pt plus 5cm}std\-::list$<${\bf Widget}$\ast$$>$ guiml\-::\-Check\-Box\-::guiml\-::\-Widget\-::m\-\_\-child\hspace{0.3cm}{\ttfamily [protected]}}\label{classguiml_1_1_check_box_1_1guiml_1_1_widget_ae2ea9221ff698e77ec437823e3da44af}
+Child's list. \index{guiml\-::\-Check\-Box\-::guiml\-::\-Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}!m\-\_\-is\-Drawing@{m\-\_\-is\-Drawing}}
+\index{m\-\_\-is\-Drawing@{m\-\_\-is\-Drawing}!guiml::CheckBox::guiml::Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}}
+\subsubsection[{m\-\_\-is\-Drawing}]{\setlength{\rightskip}{0pt plus 5cm}bool guiml\-::\-Check\-Box\-::guiml\-::\-Widget\-::m\-\_\-is\-Drawing\hspace{0.3cm}{\ttfamily [protected]}}\label{classguiml_1_1_check_box_1_1guiml_1_1_widget_a759e30be4d9ac882bb80d12555dcd466}
+Update the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget} or not ? \index{guiml\-::\-Check\-Box\-::guiml\-::\-Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}!m\-\_\-moving\-All\-Child@{m\-\_\-moving\-All\-Child}}
+\index{m\-\_\-moving\-All\-Child@{m\-\_\-moving\-All\-Child}!guiml::CheckBox::guiml::Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}}
+\subsubsection[{m\-\_\-moving\-All\-Child}]{\setlength{\rightskip}{0pt plus 5cm}bool guiml\-::\-Check\-Box\-::guiml\-::\-Widget\-::m\-\_\-moving\-All\-Child\hspace{0.3cm}{\ttfamily [protected]}}\label{classguiml_1_1_check_box_1_1guiml_1_1_widget_aeb49db3281d406de682f1a9ebf94a398}
+When the \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s position is set, do we must moving the child ? \index{guiml\-::\-Check\-Box\-::guiml\-::\-Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}!m\-\_\-parent@{m\-\_\-parent}}
+\index{m\-\_\-parent@{m\-\_\-parent}!guiml::CheckBox::guiml::Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}}
+\subsubsection[{m\-\_\-parent}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Widget}$\ast$ guiml\-::\-Check\-Box\-::guiml\-::\-Widget\-::m\-\_\-parent\hspace{0.3cm}{\ttfamily [protected]}}\label{classguiml_1_1_check_box_1_1guiml_1_1_widget_a1b3f390f639d050dd2533f8fa374d3e4}
+The \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s parent. \index{guiml\-::\-Check\-Box\-::guiml\-::\-Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}!m\-\_\-pos@{m\-\_\-pos}}
+\index{m\-\_\-pos@{m\-\_\-pos}!guiml::CheckBox::guiml::Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}}
+\subsubsection[{m\-\_\-pos}]{\setlength{\rightskip}{0pt plus 5cm}sf\-::\-Vector2f guiml\-::\-Check\-Box\-::guiml\-::\-Widget\-::m\-\_\-pos\hspace{0.3cm}{\ttfamily [protected]}}\label{classguiml_1_1_check_box_1_1guiml_1_1_widget_ac56bf0bd009df726c297d068bf8f2be2}
+The relative \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s position (with \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). \index{guiml\-::\-Check\-Box\-::guiml\-::\-Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}!m\-\_\-size@{m\-\_\-size}}
+\index{m\-\_\-size@{m\-\_\-size}!guiml::CheckBox::guiml::Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}}
+\subsubsection[{m\-\_\-size}]{\setlength{\rightskip}{0pt plus 5cm}sf\-::\-Vector2f guiml\-::\-Check\-Box\-::guiml\-::\-Widget\-::m\-\_\-size\hspace{0.3cm}{\ttfamily [protected]}}\label{classguiml_1_1_check_box_1_1guiml_1_1_widget_a7eecf382e80d9f7cbd6ee9da22b80971}
+The relative \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s size (with \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). \index{guiml\-::\-Check\-Box\-::guiml\-::\-Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}!m\-\_\-virtual\-Pos@{m\-\_\-virtual\-Pos}}
+\index{m\-\_\-virtual\-Pos@{m\-\_\-virtual\-Pos}!guiml::CheckBox::guiml::Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}}
+\subsubsection[{m\-\_\-virtual\-Pos}]{\setlength{\rightskip}{0pt plus 5cm}sf\-::\-Vector2f guiml\-::\-Check\-Box\-::guiml\-::\-Widget\-::m\-\_\-virtual\-Pos\hspace{0.3cm}{\ttfamily [protected]}}\label{classguiml_1_1_check_box_1_1guiml_1_1_widget_a0e1ca5a7ad300c1aacadf8c72bbe45b0}
+The absolute \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s position (without \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). \index{guiml\-::\-Check\-Box\-::guiml\-::\-Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}!m\-\_\-virtual\-Size@{m\-\_\-virtual\-Size}}
+\index{m\-\_\-virtual\-Size@{m\-\_\-virtual\-Size}!guiml::CheckBox::guiml::Widget@{guiml\-::\-Check\-Box\-::guiml\-::\-Widget}}
+\subsubsection[{m\-\_\-virtual\-Size}]{\setlength{\rightskip}{0pt plus 5cm}sf\-::\-Vector2f guiml\-::\-Check\-Box\-::guiml\-::\-Widget\-::m\-\_\-virtual\-Size\hspace{0.3cm}{\ttfamily [protected]}}\label{classguiml_1_1_check_box_1_1guiml_1_1_widget_a5a570df9c4570f17489ab79a39055f40}
+The absolute \doxyref{Widget}{p.}{classguiml_1_1_check_box_1_1guiml_1_1_widget}'s size (without \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). 
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/home/mickael/\-Programmation/\-Programs/\-C++/\-S\-F\-M\-L/\-En\-\_\-\-Cours/\-G\-U\-I\-M\-L/include/{\bf Widget.\-h}\end{DoxyCompactItemize}

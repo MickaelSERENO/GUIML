@@ -1,0 +1,190 @@
+\section{guiml\-:\-:Layout Class Reference}
+\label{classguiml_1_1_layout}\index{guiml\-::\-Layout@{guiml\-::\-Layout}}
+
+
+Inheritance diagram for guiml\-:\-:Layout\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=156pt]{classguiml_1_1_layout__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for guiml\-:\-:Layout\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=218pt]{classguiml_1_1_layout__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf Event\-Manager}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Layout} ({\bf Widget} $\ast$parent, const sf\-::\-Float\-Rect \&rect, const std\-::vector$<$ std\-::vector$<$ {\bf Widget} $\ast$ $>$ $>$ \&widgets=std\-::vector$<$ std\-::vector$<$ {\bf Widget} $\ast$ $>$ $>$(), const sf\-::\-Vector2f \&distance=sf\-::\-Vector2f(0, 0))\label{classguiml_1_1_layout_ab028aa4df66856230f3ed39e95a789de}
+
+\item 
+{\bfseries Layout} (const {\bf Layout} \&{\bf copy})\label{classguiml_1_1_layout_a9c7053b72bc10c56f15d68527fdaf5f7}
+
+\item 
+{\bf Layout} \& {\bfseries operator=} (const {\bf Layout} \&{\bf copy})\label{classguiml_1_1_layout_ae762ca908415733f007dc215762b52b2}
+
+\item 
+void {\bf update} (std\-::list$<$ sf\-::\-Drawable $\ast$ $>$ \&drawable)
+\begin{DoxyCompactList}\small\item\em Update the \doxyref{Widget}{p.}{classguiml_1_1_widget}. \end{DoxyCompactList}\item 
+void {\bf set\-Size} (float x, float y)
+\begin{DoxyCompactList}\small\item\em Set the absolute \doxyref{Widget}{p.}{classguiml_1_1_widget}'s size (without \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). \end{DoxyCompactList}\item 
+void {\bf set\-Position} (float x, float y)
+\begin{DoxyCompactList}\small\item\em Set the absolute \doxyref{Widget}{p.}{classguiml_1_1_widget}'s position (without \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). \end{DoxyCompactList}\item 
+void {\bfseries set\-Distance} (float x, float y)\label{classguiml_1_1_layout_af75480e8f0016e025e031e7e3c3727b8}
+
+\item 
+void {\bfseries set\-Distance} (const sf\-::\-Vector2f \&distance)\label{classguiml_1_1_layout_a3ccc3b3728dfebfd318d5582d1bd4973}
+
+\item 
+void {\bfseries add\-Widget} (const {\bf Widget} $\ast$widget, const sf\-::\-Vector2f \&pos, const sf\-::\-Vector2f \&nb\-Case=sf\-::\-Vector2f(1, 1))\label{classguiml_1_1_layout_a39eb19212db9d396c9e5c2b99320ba69}
+
+\item 
+void {\bfseries remove\-Child} (const sf\-::\-Vector2f \&pos)\label{classguiml_1_1_layout_a7edf26d8675c0ccb7138b029f2689b19}
+
+\item 
+bool {\bfseries is\-Empty} () const \label{classguiml_1_1_layout_aa18de01cd4bfbab2385bc3bff67fd8e1}
+
+\item 
+sf\-::\-Vector2f {\bfseries get\-Size\-Grid} () const \label{classguiml_1_1_layout_add5ab95a98f7f769fb7fb00efa80c692}
+
+\item 
+const {\bf Widget} $\ast$ {\bfseries get\-Widget} (const sf\-::\-Vector2f \&pos) const \label{classguiml_1_1_layout_ac419d3454b26158f1d660afffdd7ffca}
+
+\item 
+const {\bf Widget} $\ast$ {\bfseries get\-Widget} (unsigned int x, unsigned int y) const \label{classguiml_1_1_layout_ada3de3aaea055b641013c44485e5e003}
+
+\item 
+const sf\-::\-Vector2f \& {\bfseries get\-Virtual\-Distance} () const \label{classguiml_1_1_layout_a17a757320112d25a621f1b8b9123995d}
+
+\item 
+sf\-::\-Vector2f {\bfseries get\-Real\-Distance} () const \label{classguiml_1_1_layout_a49d3ed9b66d4ac6e201cced1ed6e1533}
+
+\item 
+virtual void {\bf resize\-Widget} (const sf\-::\-Vector2f \&old\-Window\-Size, const sf\-::\-Vector2f \&new\-Window\-Size)
+\begin{DoxyCompactList}\small\item\em When the \doxyref{Window}{p.}{classguiml_1_1_window} is resize, the virtual\-Size and virtual\-Pos are set (for correspond with the screen. Indeed, the S\-F\-M\-L resize also all of drawables who are displayed). You don't need to call this function. \end{DoxyCompactList}\item 
+sf\-::\-Vector2f {\bfseries has\-Big\-Widget} (const sf\-::\-Vector2f \&pos) const \label{classguiml_1_1_layout_a1fe3967c68a87cd9e51be5e38348c4f6}
+
+\item 
+const sf\-::\-Vector2f {\bfseries get\-Pos\-Widget} (const {\bf Widget} \&widget) const \label{classguiml_1_1_layout_a68e1b18714071d6ab971b9e6b6088502}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const unsigned int {\bfseries N\-B\-R\-\_\-\-K\-E\-Y\-S} = 321\label{classguiml_1_1_layout_a56a24826e0ce2e1f08d9870ae18a2a9a}
+
+\item 
+const unsigned int {\bfseries N\-B\-R\-\_\-\-C\-L\-I\-C\-S} = 3\label{classguiml_1_1_layout_a2374b1d960efe31c2986a597eaceff73}
+
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\index{guiml\-::\-Layout@{guiml\-::\-Layout}!resize\-Widget@{resize\-Widget}}
+\index{resize\-Widget@{resize\-Widget}!guiml::Layout@{guiml\-::\-Layout}}
+\subsubsection[{resize\-Widget}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Layout\-::resize\-Widget (
+\begin{DoxyParamCaption}
+\item[{const sf\-::\-Vector2f \&}]{default\-Window\-Size, }
+\item[{const sf\-::\-Vector2f \&}]{new\-Window\-Size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_layout_ab3e8997f36ceda7ec132e2d7ff388f8b}
+
+
+When the \doxyref{Window}{p.}{classguiml_1_1_window} is resize, the virtual\-Size and virtual\-Pos are set (for correspond with the screen. Indeed, the S\-F\-M\-L resize also all of drawables who are displayed). You don't need to call this function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em default\-Window} & The \doxyref{Window}{p.}{classguiml_1_1_window}'s size without resize (with the mouse). \\
+\hline
+{\em new\-Window\-Size} & The \doxyref{Window}{p.}{classguiml_1_1_window}'s size with resize (with the mouse). \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from {\bf guiml\-::\-Widget} \doxyref{}{p.}{classguiml_1_1_widget_aee5d11271757f2a34ce1eabf88630028}.
+
+\index{guiml\-::\-Layout@{guiml\-::\-Layout}!set\-Position@{set\-Position}}
+\index{set\-Position@{set\-Position}!guiml::Layout@{guiml\-::\-Layout}}
+\subsubsection[{set\-Position}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Layout\-::set\-Position (
+\begin{DoxyParamCaption}
+\item[{float}]{x, }
+\item[{float}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_layout_a98a3da841a42cff75281974cc9ecbeed}
+
+
+Set the absolute \doxyref{Widget}{p.}{classguiml_1_1_widget}'s position (without \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The position on \char`\"{}x\char`\"{} \\
+\hline
+{\em y} & The position on \char`\"{}y\char`\"{} \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from {\bf guiml\-::\-Widget} \doxyref{}{p.}{classguiml_1_1_widget_a00d74c21a35f8e83d57e356d915c485f}.
+
+\index{guiml\-::\-Layout@{guiml\-::\-Layout}!set\-Size@{set\-Size}}
+\index{set\-Size@{set\-Size}!guiml::Layout@{guiml\-::\-Layout}}
+\subsubsection[{set\-Size}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Layout\-::set\-Size (
+\begin{DoxyParamCaption}
+\item[{float}]{x, }
+\item[{float}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_layout_a0ce272b221278a1887da589692557861}
+
+
+Set the absolute \doxyref{Widget}{p.}{classguiml_1_1_widget}'s size (without \doxyref{Window}{p.}{classguiml_1_1_window}'s resize). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The \doxyref{Widget}{p.}{classguiml_1_1_widget}'s size on \char`\"{}x\char`\"{} \\
+\hline
+{\em y} & The \doxyref{Widget}{p.}{classguiml_1_1_widget}'s size on \char`\"{}y\char`\"{} \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from {\bf guiml\-::\-Widget} \doxyref{}{p.}{classguiml_1_1_widget_a9ea5b7293332943c62767ab237a9fdee}.
+
+\index{guiml\-::\-Layout@{guiml\-::\-Layout}!update@{update}}
+\index{update@{update}!guiml::Layout@{guiml\-::\-Layout}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}void guiml\-::\-Layout\-::update (
+\begin{DoxyParamCaption}
+\item[{std\-::list$<$ sf\-::\-Drawable $\ast$ $>$ \&}]{drawables}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classguiml_1_1_layout_a9320150ab3dc618cca5cc7e1a60b3f13}
+
+
+Update the \doxyref{Widget}{p.}{classguiml_1_1_widget}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em drawables} & List who will be complete by \doxyref{Widget}{p.}{classguiml_1_1_widget}'s drawable. This function in this root class doesn't complete drawables (because he haven't) but it update all the \doxyref{Widget}{p.}{classguiml_1_1_widget}'s child. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from {\bf guiml\-::\-Widget} \doxyref{}{p.}{classguiml_1_1_widget_a98c842e03d9161a719894ed14d445f42}.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/mickael/\-Programmation/\-Programs/\-C++/\-S\-F\-M\-L/\-En\-\_\-\-Cours/\-G\-U\-I\-M\-L/include/Layout.\-h\item 
+/home/mickael/\-Programmation/\-Programs/\-C++/\-S\-F\-M\-L/\-En\-\_\-\-Cours/\-G\-U\-I\-M\-L/include/Event\-Manager.\-h\item 
+/home/mickael/\-Programmation/\-Programs/\-C++/\-S\-F\-M\-L/\-En\-\_\-\-Cours/\-G\-U\-I\-M\-L/src/Layout.\-cpp\end{DoxyCompactItemize}
