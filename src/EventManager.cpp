@@ -1,6 +1,6 @@
 #include "EventManager.h"
 
-EventManager::EventManager(sf::Window *win) : w(win), m_mousePos(0, 0), m_oldMousePos(0, 0), m_hasPressedKeyMouse(false), m_hasPressedKeyKey(false), m_isResize(false), m_newSize(sf::Vector2f(w->getSize().x, w->getSize().y)), m_oldSize(sf::Vector2f(w->getSize())), m_defaultSize(w->getSize())
+EventManager::EventManager(sf::Window *win) : w(win), m_mousePos(0, 0), m_oldMousePos(0, 0), m_hasPressedKeyMouse(false), m_hasPressedKeyKey(false), m_isResize(false), m_newSize(sf::Vector2f(w->getSize().x, w->getSize().y)), m_oldSize(sf::Vector2f(w->getSize())), m_defaultSize(w->getSize()), m_multiplicateMousePos(1, 1)
 {
 	for(unsigned int i = 0; i < NBR_KEYS; i++)
 	{
@@ -100,6 +100,12 @@ void EventManager::update()
 
 	if(m_keys[sf::Keyboard::Back])
 		m_enteredText = false;
+
+	if(m_isResize && m_defaultSize.x != 0 && m_defaultSize.y != 0)
+	{
+		m_multiplicateMousePos.x = m_newSize.x / m_defaultSize.x;
+		m_multiplicateMousePos.y = m_newSize.y / m_defaultSize.y;
+	}
 }
 	
 void EventManager::setDefaultWindowSize(const sf::Vector2f& defaultWindowSize)
@@ -192,4 +198,9 @@ const sf::Vector2f& EventManager::getOldWindowSize() const
 const sf::Vector2f& EventManager::getDefaultWindowSize() const
 {
 	return m_defaultSize;
+}
+
+const sf::Vector2f& EventManager::getMultiplicateMousePos() const
+{
+	return m_multiplicateMousePos;
 }

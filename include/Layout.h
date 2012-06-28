@@ -15,9 +15,9 @@ namespace guiml
 		~Layout();
 
 		void update(std::list<sf::Drawable*> &drawable);
-		void setSize(int x, int y);
-		void setPosition(int x, int y);
-		void setDistance(unsigned int x, unsigned int y);
+		void setSize(float x, float y);
+		void setPosition(float x, float y);
+		void setDistance(float x, float y);
 		void setDistance(const sf::Vector2f &distance);
 		void addWidget(const Widget *widget, const sf::Vector2f &pos, const sf::Vector2f &nbCase = sf::Vector2f(1, 1));
 		void removeChild(const sf::Vector2f &pos);

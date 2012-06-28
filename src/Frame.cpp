@@ -2,7 +2,7 @@
 
 namespace guiml
 {
-	Frame::Frame(Widget *parent, const sf::FloatRect &rect, const sf::Color &backgroundColor, const Image &backgroundImage, const Label &title, const sf::Color &backgroundTitle, bool drawButtonMoveFrame) : Render(parent, rect, backgroundColor, backgroundImage), sf::RenderTexture(), m_title(title), m_buttonMoveFrame(NULL, guiml::Label(), guiml::Image(), sf::FloatRect(0, 0, rect.width, title.getSize().y)), m_posTitle(PosText::CENTER), m_isMoving(false), m_hasAddChild(false), m_multiplicateMousePos(1, 1)
+	Frame::Frame(Widget *parent, const sf::FloatRect &rect, const sf::Color &backgroundColor, const Image &backgroundImage, const Label &title, const sf::Color &backgroundTitle, bool drawButtonMoveFrame) : Render(parent, rect, backgroundColor, backgroundImage), sf::RenderTexture(), m_title(title), m_buttonMoveFrame(NULL, guiml::Label(), guiml::Image(), sf::FloatRect(0, 0, rect.width, title.getSize().y)), m_posTitle(PosText::CENTER), m_isMoving(false), m_hasAddChild(false)
 	{
 		m_movingAllChild = false;
 
@@ -28,10 +28,11 @@ namespace guiml
 	{
 		if(m_isDrawing)
 		{
-			if(isMoving() && getEventManager())
+			if(getEventManager() && isMoving())
 			{
 				sf::Vector2f newMousePosition = getEventManager()->getMousePosition();
-				setPosition((newMousePosition.x/m_multiplicateMousePos.x)-m_mousePos.x, (newMousePosition.y/m_multiplicateMousePos.y)-m_mousePos.y);
+				sf::Vector2f multiplicateMousePos = getEventManager()->getMultiplicateMousePos();
+				setPosition((newMousePosition.x/multiplicateMousePos.x)-m_mousePos.x, (newMousePosition.y/multiplicateMousePos.y)-m_mousePos.y);
 			}
 			for(std::list<Widget*>::iterator it = m_child.begin(); it != m_child.end(); ++it)
 				(*it)->move(m_virtualPos.x, m_virtualPos.y);
@@ -41,19 +42,17 @@ namespace guiml
 			Widget::update(drawableForFrame);
 			show(drawableForFrame);
 			drawable.push_back(&m_spriteFrame);
-
+			
 			for(std::list<Widget*>::iterator it = m_child.begin(); it != m_child.end(); ++it)
 				(*it)->move(-m_virtualPos.x, -m_virtualPos.y);
 		}
-		
-		else
-			clear(sf::Color(0, 0, 0, 255));
 	}
 
 	void Frame::show(std::list<sf::Drawable*> &drawable)
 	{
 		for(std::list<sf::Drawable*>::iterator it = drawable.begin(); it != drawable.end(); ++it)
-			draw(*(*it));
+			if(*it)
+				draw(*(*it));
 		display();
 		m_spriteFrame.setTexture(getTexture());
 		m_spriteFrame.setPosition(sf::Vector2f(m_virtualPos.x, m_virtualPos.y));
@@ -91,7 +90,7 @@ namespace guiml
 		setView(sf::RenderTexture::getDefaultView());
 	}
 
-	void Frame::setSize(int x, int y)
+	void Frame::setSize(float x, float y)
 	{
 		create(x, y);
 		Widget::setSize(x, y);
@@ -99,7 +98,7 @@ namespace guiml
 		setTitlePos(m_posTitle);
 	}
 
-	void Frame::setPosition(int x, int y)
+	void Frame::setPosition(float x, float y)
 	{
 		moveView(x - m_virtualPos.x, y - m_virtualPos.y);
 		Widget::setPosition(x, y);
@@ -183,9 +182,11 @@ namespace guiml
 		{
 			m_isMoving = m_buttonMoveFrame.isActived();
 			m_mousePos = getEventManager()->getMousePosition();
-			m_mousePos.x /= m_multiplicateMousePos.x;
+			sf::Vector2f multiplicateMousePos = getEventManager()->getMultiplicateMousePos();
+
+			m_mousePos.x /= multiplicateMousePos.x;
 			m_mousePos.x -= m_virtualPos.x;	
-			m_mousePos.y /= m_multiplicateMousePos.y;
+			m_mousePos.y /= multiplicateMousePos.y;
 			m_mousePos.y -= m_virtualPos.y;
 		}
 		else if(!(getEventManager()->getPressedKey(m_buttonMoveFrame.getKeyboardWhoActived()) || getEventManager()->getMouseClicked(m_buttonMoveFrame.getClickMouseWhoActived())))
@@ -200,16 +201,5 @@ namespace guiml
 		rect.top -= m_virtualPos.y;
 
 		return rect;
-	}
-
-	void Frame::resizeWidget(const sf::Vector2f& defaultWindowSize, const sf::Vector2f& newWindowSize)
-	{
-		if(defaultWindowSize.x !=0 && defaultWindowSize.y != 0)
-		{
-			m_multiplicateMousePos.x = newWindowSize.x / defaultWindowSize.x;
-			m_multiplicateMousePos.y = newWindowSize.y / defaultWindowSize.y;
-		}
-
-		Widget::resizeWidget(defaultWindowSize, newWindowSize);
 	}
 }

@@ -30,7 +30,7 @@ namespace guiml
 			 */
 			Render(Widget *parent, const sf::FloatRect &rect, const sf::Color &backgroundColor = sf::Color::Black, const Image &backgroundImage = Image());
 
-			/*! \brief Draw and display all drawable who contain "drawable" in the order of list.
+			/*! \brief Draw all drawable who contain "drawable" in the order of list.
 			 *
 			 *	\param drawable The list of drawable that the method will display.
 			 */

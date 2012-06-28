@@ -106,10 +106,13 @@ namespace guiml
 
 	void Button::centerLabel()
 	{
-		m_text.setOriginMiddle();
-		m_text.setPosition(m_virtualPos.x + m_virtualSize.x / 2, m_virtualPos.y + m_virtualSize.y / 2);
-		m_textLighten.setOriginMiddle();
-		m_textLighten.setPosition(m_virtualPos.x + m_virtualSize.x / 2, m_virtualPos.y + m_virtualSize.y / 2);
+		if(m_hasLabel)
+		{
+			m_text.setOriginMiddle();
+			m_text.setPosition(m_virtualPos.x + m_virtualSize.x / 2, m_virtualPos.y + m_virtualSize.y / 2);
+			m_textLighten.setOriginMiddle();
+			m_textLighten.setPosition(m_virtualPos.x + m_virtualSize.x / 2, m_virtualPos.y + m_virtualSize.y / 2);
+		}
 	}
 
 	bool Button::cursorInButton()
@@ -173,7 +176,7 @@ namespace guiml
 		m_textLighten.drawWidget(drawing);
 	}
 
-	void Button::setPosition(int posx, int posy)
+	void Button::setPosition(float posx, float posy)
 	{
 		if(m_hasBackground)
 		{
@@ -185,7 +188,7 @@ namespace guiml
 		centerLabel();
 	}
 
-	void Button::setSize(int sizex, int sizey)
+	void Button::setSize(float sizex, float sizey)
 	{
 		if(m_hasBackground)
 		{
@@ -213,7 +216,6 @@ namespace guiml
 
 	void Button::setLabel(const Label &string)
 	{
-		centerLabel();
 		m_text = string;
 		m_textLighten = string;
 		m_textLighten.lighten();

@@ -8,7 +8,9 @@ namespace guiml
 		try
 		{
 			if(!(m_texture.loadFromFile(path)))
-				throw  std::runtime_error("FATAL ERROR : The path is invalid");
+			{
+				throw  std::runtime_error("FATAL ERROR");
+			}
 		}
 
 		catch(const std::exception &error)
@@ -59,7 +61,7 @@ namespace guiml
 		if (rect != sf::FloatRect(0, 0, 0, 0))
 			setRect(rect);
 		else
-			setRect(sf::FloatRect(m_sprite.getGlobalBounds().left, m_sprite.getGlobalBounds().top, m_sprite.getGlobalBounds().width, m_sprite.getGlobalBounds().height));
+			setRect(m_sprite.getGlobalBounds());
 	}
 
 	Image::Image(Widget *parent) : Widget(parent)
@@ -69,7 +71,10 @@ namespace guiml
 	{}
 
 	Image::Image(const Image &copy) : Widget(copy), m_sprite(copy.m_sprite), m_texture(copy.m_texture)
-	{}
+	{
+		if(copy.m_sprite.getTexture())
+			m_sprite.setTexture(m_texture);
+	}
 
 	Image& Image::operator=(const Image &copy)
 	{
@@ -144,12 +149,15 @@ namespace guiml
 
 	void Image::lighten(const sf::FloatRect &rect)
 	{
-		if(m_virtualSize != sf::Vector2f(0, 0) && m_sprite.getTexture())
+		if(m_sprite.getTexture() && m_sprite.getTexture()->getSize() != sf::Vector2u(0, 0))
 		{
-			sf::FloatRect rect2 = rect;
+			sf::FloatRect rect2;
 			sf::FloatRect rect3 = getVirtualRect();
 			if (rect == sf::FloatRect(0, 0, 0, 0))
 				rect2 = rect3;
+			else
+				rect2 = rect;
+
 			try
 			{
 				if(rect2.left + rect2.width > m_size.x || rect2.top + rect2.height > m_size.y)
@@ -204,12 +212,6 @@ namespace guiml
 		return m_sprite;
 	}
 
-	void Image::setPosition(int x, int y)
-	{
-		m_sprite.setPosition(x, y);
-		Widget::setPosition(x, y);
-	}
-
 	void Image::setOrigin(float x, float y)
 	{
 		m_sprite.setOrigin(x, y);
@@ -242,7 +244,7 @@ namespace guiml
 	void Image::setRotation(float angle)
 	{
 		m_sprite.setRotation(angle);
-		setRect(sf::FloatRect(m_sprite.getGlobalBounds().left, m_sprite.getGlobalBounds().top, m_sprite.getGlobalBounds().width, m_sprite.getGlobalBounds().height));
+		setRect(m_sprite.getGlobalBounds());
 	}
 
 	void Image::setTextureRect(const sf::FloatRect &rect)
@@ -260,7 +262,8 @@ namespace guiml
 	void Image::setImage(const sf::Sprite &sprite)
 	{
 		m_sprite = sprite;
-		setRect(getVirtualRect());
+		if(sprite.getTexture())
+			setImage(*(sprite.getTexture()));
 	}
 
 	void Image::setImage(const std::string &path)
@@ -297,10 +300,16 @@ namespace guiml
 		setRect(getVirtualRect());
 	}
 	
-	void Image::setSize(int x, int y)
+	void Image::setSize(float x, float y)
 	{
 		m_sprite.setScale(x/m_sprite.getLocalBounds().width, y/m_sprite.getLocalBounds().height);
 		Widget::setSize(x, y);
+	}
+
+	void Image::setPosition(float x, float y)
+	{
+		m_sprite.setPosition(x, y);
+		Widget::setPosition(x, y);
 	}
 
     Widget*	Image::copy() const

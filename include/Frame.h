@@ -25,8 +25,8 @@ namespace guiml
 
 		void setTitle(const Label &title);
 		void setTitle(const std::string &title);
-		void setSize(int x, int y);
-		void setPosition(int x, int y);
+		void setSize(float x, float y);
+		void setPosition(float x, float y);
 		void setBackgroundTitle(const sf::Color &colorTitle);
 		void setBackgroundTitle(const Image &image);
 		void setRectMovingFrame(const sf::FloatRect &rect);
@@ -44,8 +44,6 @@ namespace guiml
 
 		const PosText& positionTitle() const;
 		bool isMoving();
-
-		virtual void resizeWidget(const sf::Vector2f& defaultWindowSize, const sf::Vector2f& newWindowSize);
 	protected:
 		void testIsMoving();
 		sf::Sprite m_spriteFrame;
@@ -55,7 +53,6 @@ namespace guiml
 		bool m_isMoving;
 		bool m_hasAddChild;
 		sf::Vector2f m_mousePos;
-		sf::Vector2f m_multiplicateMousePos;
 	};
 }
 

@@ -42,6 +42,7 @@ public:
 	const sf::Vector2f& getNewWindowSize() const;
 	const sf::Vector2f& getOldWindowSize() const;
 	const sf::Vector2f& getDefaultWindowSize() const;
+	const sf::Vector2f& getMultiplicateMousePos() const;
 private:
 	sf::Window *w;
 	sf::Event m_event;
@@ -61,6 +62,7 @@ private:
 	sf::Vector2f m_newSize;
 	sf::Vector2f m_oldSize;
 	sf::Vector2f m_defaultSize;
+	sf::Vector2f m_multiplicateMousePos;
 };
 
 #endif

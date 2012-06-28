@@ -53,7 +53,7 @@ namespace guiml
 		Widget::update(drawable);
 	}
 
-	void CheckBox::setSize(int x, int y)
+	void CheckBox::setSize(float x, float y)
 	{
 		m_rectangle.setSize(sf::Vector2f(x, y));
 		m_line1[1].position = sf::Vector2f(m_virtualPos.x + x, m_virtualPos.y + y);
@@ -63,7 +63,7 @@ namespace guiml
 		Widget::setSize(x, y);
 	}
 
-	void CheckBox::setPosition(int x, int y)
+	void CheckBox::setPosition(float x, float y)
 	{
 		m_rectangle.setPosition(x, y);
 

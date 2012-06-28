@@ -42,8 +42,8 @@ namespace guiml
 		void setImage(const sf::Sprite &sprite);
 		void setImage(const std::string &path);
 		void setImage(const sf::Image &image);
-		void setSize(int x, int y);
-		void setPosition(int x, int y);
+		void setSize(float x, float y);
+		void setPosition(float x, float y);
 
 		Widget* copy() const;
 	protected:

@@ -84,7 +84,7 @@ namespace guiml
 		Widget::update(drawable);
 	}
 
-	void Layout::setSize(int x, int y)
+	void Layout::setSize(float x, float y)
 	{
 		sf::Vector2f addSize(-(getRealDistance().x-getRealDistance().x/getSizeGrid().x), -(getRealDistance().y - getRealDistance().y/getSizeGrid().y)); //We need to remove a part of the widget's size for correspond at m_distance.
 
@@ -100,7 +100,7 @@ namespace guiml
 		setPosition(getPosition());
 	}
 
-	void Layout::setPosition(int x, int y)
+	void Layout::setPosition(float x, float y)
 	{
 		for(unsigned int i=0; i < getSizeGrid().x; ++i)
 			for(unsigned int j=0; j < getSizeGrid().y; ++j)
@@ -120,7 +120,7 @@ namespace guiml
 		Widget::setPosition(x, y);
 	}
 
-	void Layout::setDistance(unsigned int x, unsigned int y)
+	void Layout::setDistance(float x, float y)
 	{
 		m_distance = sf::Vector2f(x, y);
 		setSize(getSize());

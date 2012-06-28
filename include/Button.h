@@ -26,8 +26,8 @@ namespace guiml
 
 		//------------------------------------------Mutateurs---------------------------------------------------//
 		virtual void drawWidget(bool drawing);
-		void setPosition(int posx, int posy);
-		void setSize(int sizex, int sizey);
+		void setPosition(float posx, float posy);
+		void setSize(float sizex, float sizey);
 		void setBackground(const Image &image);
 		void setLabel(const Label &string);
 		void selectIt(bool select);

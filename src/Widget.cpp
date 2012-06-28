@@ -17,9 +17,9 @@ namespace guiml
 	{
 		if(m_parent)
 			m_parent->removeChild(this);
-		for(std::list<Widget*>::iterator it = m_child.begin(); it != m_child.end(); ++it)
+		for(std::list<Widget*>::iterator it = m_child.begin(); it != m_child.end(); ++it) //delete all the child of the Widget
 		{
-			delete (*it); //delete all the child of the Widget
+			delete (*it);
 			it = m_child.erase(it);
 		}
 	}
@@ -57,7 +57,7 @@ namespace guiml
 
 			else
 			{
-				std::list<Widget*>::iterator it;
+				std::list<Widget*>::iterator it = m_child.begin();
 				for(unsigned int i = 0; i < pos; ++i)
 					it++;
 				m_child.insert(it, child);
@@ -70,9 +70,15 @@ namespace guiml
 		if(m_parent)
 			m_parent->removeChild(this);
 		
+		EventManager* event = getEventManager();
 		m_parent = parent;	
+		EventManager* newEvent = getEventManager();
+
 		if(parent)
 			m_parent->Widget::addChild(this, pos);
+
+		if(newEvent != NULL && event != newEvent) //if the EventManager is not the same, then the Window's root parent is not the same. Then, we update the relative rect.
+			setRect(getVirtualRect());
 	}
 
 	bool Widget::removeChild(Widget *child)

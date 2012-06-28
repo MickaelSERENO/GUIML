@@ -43,12 +43,12 @@ namespace guiml
 
 	}
 
-	void Slide::setSize(int x, int y)
+	void Slide::setSize(float x, float y)
 	{
 
 	}
 
-	void Slide::setPosition(int x, int y)
+	void Slide::setPosition(float x, float y)
 	{
 
 	}

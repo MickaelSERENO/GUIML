@@ -25,8 +25,8 @@ namespace guiml
 
 		void update(std::list<sf::Drawable*> &drawable);
 
-		void setSize(int x, int y);
-		void setPosition(int x, int y);
+		void setSize(float x, float y);
+		void setPosition(float x, float y);
 
 		void setPosition(const Position &position);
 

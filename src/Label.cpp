@@ -111,7 +111,7 @@ namespace guiml
 		setRect(m_text.getGlobalBounds());
 	}
 
-	void Label::setPosition(int x, int y)
+	void Label::setPosition(float x, float y)
 	{
 		Widget::setPosition(x, y);
 		m_text.setPosition(x, y);
@@ -139,7 +139,7 @@ namespace guiml
 		m_text.setColor(color);
 	}
 
-	void Label::setSize(int x, int y)
+	void Label::setSize(float x, float y)
 	{
 		m_text.setScale(x/m_text.getLocalBounds().width, y/m_text.getLocalBounds().height);
 		Widget::setSize(m_text.getGlobalBounds().width, m_text.getGlobalBounds().height);

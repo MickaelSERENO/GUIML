@@ -23,12 +23,12 @@ namespace guiml
 
 	void Window::update(std::list <sf::Drawable*> &drawable)
 	{
+		clear(m_backgroundColor);
 		m_event->update();
 		if(m_event->windowIsResize())
 			Widget::resizeWidget(m_event->getDefaultWindowSize(), m_event->getNewWindowSize());
 		m_framerate = 1 / (m_event->getElapsedTime() * 0.001);
 
-		clear(m_backgroundColor);
 		Widget::update(drawable);
 		show(drawable);
 	}
@@ -36,17 +36,18 @@ namespace guiml
 	void Window::show(std::list<sf::Drawable*> &drawable)
 	{
 		for(std::list<sf::Drawable*>::iterator it = drawable.begin(); it != drawable.end(); ++it)
-			draw(*(*it));
+			if(*it)
+				draw(*(*it));
 		display();
 	}
 
-	void Window::setPosition(int x, int y)
+	void Window::setPosition(float x, float y)
 	{
 		RenderWindow::setPosition(sf::Vector2i(x, y));
 		Widget::setPosition(x, y);
 	}
 
-	void Window::setSize(int x, int y)
+	void Window::setSize(float x, float y)
 	{
 		RenderWindow::setSize(sf::Vector2u(x, y));
 		Widget::setSize(x, y);

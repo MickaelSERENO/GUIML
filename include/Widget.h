@@ -188,34 +188,34 @@ namespace guiml
 		 */
 		virtual EventManager* getEventManager() const; //get de EventManager who will be use for all of children.
 
-		/*! \brief Return the absolute Widget's position (without Window's resize).
+		/*! \brief Return the relative Widget's position (with Window's resize).
 		 */
 		const sf::Vector2f& getPosition() const;
 
-		/*! \brief Return the relative Widget's position (with Window's resize).
+		/*! \brief Return the absolute Widget's position (without Window's resize).
 		 */
 		const sf::Vector2f& getVirtualPosition() const;
 
-		/*! \brief Return the absolute Widget's size (without Window's resize).
+		/*! \brief Return the relative Widget's size (with Window's resize).
 		 */
 		const sf::Vector2f& getSize() const;
 
-		/*! \brief Return the relative Widget's size (with Window's resize).
+		/*! \brief Return the absolute Widget's size (without Window's resize).
 		 */
 		const sf::Vector2f& getVirtualSize() const; 
 
 
-		/*! \brief Return the absolute Widget's rect (without Window's resize).
+		/*! \brief Return the relative Widget's rect (with Window's resize).
 		 */
 		virtual sf::FloatRect getRect() const;
 
-		/*! \brief Return the relative Widget's rect (with Window's resize).
+		/*! \brief Return the absolute Widget's rect (without Window's resize).
 		 */
 		virtual sf::FloatRect getVirtualRect() const;
 
-		/*! \brief Set the absolute Widget's rect (without Window's resize).
+		/*! \brief Set the relative Widget's rect (with Window's resize).
 		 *
-		 * \param rect The absolute Widget's rect (without Window's resize).
+		 * \param rect The relative Widget's rect (with Window's resize).
 		 */
 		virtual void setRect(const sf::FloatRect &rect);
 
@@ -236,14 +236,14 @@ namespace guiml
 		 */
 		virtual Widget* copy() const;
 	protected:
-		std::list <Widget*> m_child;
-		Widget *m_parent;
-		bool m_isDrawing;
-		sf::Vector2f m_pos;
-		sf::Vector2f m_size;
-		sf::Vector2f m_virtualPos;
-		sf::Vector2f m_virtualSize;
-		bool m_movingAllChild;
+		std::list <Widget*> m_child; /*!< Child's list. */
+		Widget *m_parent; /*!< The Widget's parent. */
+		bool m_isDrawing; /*!< Update the Widget or not ? */
+		sf::Vector2f m_pos; /*!< The relative Widget's position (with Window's resize). */
+		sf::Vector2f m_size; /*!< The relative Widget's size (with Window's resize). */
+		sf::Vector2f m_virtualPos; /*!< The absolute Widget's position (without Window's resize). */
+		sf::Vector2f m_virtualSize; /*!< The absolute Widget's size (without Window's resize). */
+		bool m_movingAllChild; /*!< When the Widget's position is set, do we must moving the child ? */
 	};
 }
 

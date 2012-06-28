@@ -40,8 +40,8 @@ namespace guiml
 		void setLabel(const sf::String &string);
 		void setLabel(const std::string &string);
 
-		void setPosition(int x, int y);
-		void setSize(int x, int y);
+		void setPosition(float x, float y);
+		void setSize(float x, float y);
 		Label& operator=(const Label &copy);
 		Widget* copy() const;
 	private:
