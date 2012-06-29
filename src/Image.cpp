@@ -46,7 +46,7 @@ namespace guiml
 			setRect(m_sprite.getGlobalBounds());
 	}
 
-	Image::Image(Widget *parent, const sf::Texture &texture, const sf::FloatRect &rect) : Widget(parent, rect), m_texture(texture)
+	Image::Image(Widget *parent, const sf::Texture &texture, const sf::FloatRect &rect) : Widget(parent, rect)
 	{
 		m_sprite.setTexture(m_texture);
 		if (rect != sf::FloatRect(0, 0, 0, 0))
@@ -70,10 +70,12 @@ namespace guiml
 	Image::Image() : Widget(NULL)
 	{}
 
-	Image::Image(const Image &copy) : Widget(copy), m_sprite(copy.m_sprite), m_texture(copy.m_texture)
+	Image::Image(const Image &copy) : Widget(copy), m_sprite(copy.m_sprite)
 	{
 		if(copy.m_sprite.getTexture())
-			m_sprite.setTexture(m_texture);
+			setImage(copy.m_texture);
+		else
+			m_texture = sf::Texture();
 	}
 
 	Image& Image::operator=(const Image &copy)
@@ -82,7 +84,10 @@ namespace guiml
 		{
 			Widget::operator=(copy);
 			m_sprite = copy.m_sprite;
-			m_texture = copy.m_texture;
+			if(copy.m_sprite.getTexture())
+				setImage(copy.m_texture);
+			else
+				m_texture = sf::Texture();
 		}
 
 		return *this;
@@ -100,7 +105,6 @@ namespace guiml
 			drawable.push_back(&m_sprite);
 		Widget::update(drawable);
 	}
-
 	void Image::roundEdge(int size)
 	{
 		if(m_sprite.getTexture())
@@ -110,37 +114,37 @@ namespace guiml
 			for(int i = 0; i != size; i++)
 			{
 				sf::Vector2f topleft = circle(i, size, size, size);
-				sf::Vector2f bottomleft = circle(i, size, m_virtualSize.y - size, size);
-			
-				sf::Vector2f topright = circle(i + m_virtualSize.x - size, m_virtualSize.x - size, size, size);
-				sf::Vector2f bottomright = circle(i + m_virtualSize.x - size, m_virtualSize.x - size, m_virtualSize.y - size, size);
-	
+				sf::Vector2f bottomleft = circle(i, size, m_sprite.getTexture()->getSize().y - size, size);
+
+				sf::Vector2f topright = circle(i + m_sprite.getTexture()->getSize().x - size, m_sprite.getTexture()->getSize().x - size, size, size);
+				sf::Vector2f bottomright = circle(i + m_sprite.getTexture()->getSize().x - size, m_sprite.getTexture()->getSize().x - size, m_sprite.getTexture()->getSize().y - size, size);
+
 				for(int j = 0; j < topleft.y; j++)
 				{
 					sf::Color pixel = image.getPixel(i, j);
-					pixel.a = 0;
+					pixel.a = 255 * (1.f - std::max(std::min((float((sqrt((float)((i-size)*(i-size) + (j-size)*(j-size)))-size+1)/2.f)), 1.f), 0.f));
 					image.setPixel(i, j, pixel);
 				}
-	
-				for(int j = m_virtualSize.y; j > bottomleft.x; j--)
+
+				for(int j = m_sprite.getTexture()->getSize().y; j > bottomleft.x; j--)
 				{
 					sf::Color pixel = image.getPixel(i, j);
-					pixel.a = 0;
+					pixel.a = 255 * (1.f - std::max(std::min((float((sqrt((float)((i-size)*(i-size) + (j-(m_sprite.getTexture()->getSize().y - size))*(j-(m_sprite.getTexture()->getSize().y - size))))-size+1)/2.f)), 1.f), 0.f));
 					image.setPixel(i, j, pixel);
 				}
-	
+
 				for(int j = 0; j < topright.y; j++)
 				{
-					sf::Color pixel = image.getPixel(i + m_virtualSize.x - size, j);
-					pixel.a = 0;
-					image.setPixel(i + m_virtualSize.x - size, j, pixel);
+					sf::Color pixel = image.getPixel(i + m_sprite.getTexture()->getSize().x - size, j);
+					pixel.a = 255 * (1.f - std::max(std::min((float((sqrt((float)((i-(m_sprite.getTexture()->getSize().x - size))*(i-(m_sprite.getTexture()->getSize().x - size)) + (j-size)*(j-size)))-size+1)/2.f)), 1.f), 0.f));
+					image.setPixel(i + m_sprite.getTexture()->getSize().x - size, j, pixel);
 				}
-	
-				for(int j = m_virtualSize.y ; j > bottomright.x; j--)
+
+				for(int j = m_sprite.getTexture()->getSize().y ; j > bottomright.x; j--)
 				{
-					sf::Color pixel = image.getPixel(i + m_virtualSize.x - size, j);
-					pixel.a = 0;
-					image.setPixel(i + m_virtualSize.x - size, j, pixel);
+					sf::Color pixel = image.getPixel(i + m_sprite.getTexture()->getSize().x - size, j);
+					pixel.a = 255 * (1.f - std::max(std::min((float((sqrt((float)((i-(m_sprite.getTexture()->getSize().x - size))*(i-(m_sprite.getTexture()->getSize().x - size)) + (j-(m_sprite.getTexture()->getSize().y - size))*(j-(m_sprite.getTexture()->getSize().y - size))))-size+1)/2.f)), 1.f), 0.f));
+					image.setPixel(i + m_sprite.getTexture()->getSize().x - size, j, pixel);
 				}
 			}
 			setImage(image);
@@ -152,17 +156,21 @@ namespace guiml
 		if(m_sprite.getTexture() && m_sprite.getTexture()->getSize() != sf::Vector2u(0, 0))
 		{
 			sf::FloatRect rect2;
-			sf::FloatRect rect3 = getVirtualRect();
+			sf::FloatRect rect3 = m_sprite.getLocalBounds();
 			if (rect == sf::FloatRect(0, 0, 0, 0))
 				rect2 = rect3;
 			else
+			{
 				rect2 = rect;
+				rect2.width *= m_sprite.getLocalBounds().width / m_sprite.getGlobalBounds().width;
+				rect2.height *= m_sprite.getLocalBounds().height / m_sprite.getGlobalBounds().height;
+			}
 
 			try
 			{
-				if(rect2.left + rect2.width > m_size.x || rect2.top + rect2.height > m_size.y)
+				if(rect2.left + rect2.width > m_sprite.getLocalBounds().width || rect2.top + rect2.height > m_sprite.getLocalBounds().height)
 					throw std::runtime_error("Error : The Plage color don't can be in the sprite");
-					else
+				else
 				{
 					sf::Image image = m_sprite.getTexture()->copyToImage();
 					for(float i=rect2.left; i < (rect2.left + rect2.width) ; i++)
@@ -196,11 +204,12 @@ namespace guiml
 			if(rect.left + rect.width > m_virtualSize.x || rect.top + rect.height > m_virtualSize.y)
 				throw std::runtime_error("FATAL ERROR : The Plage color don't can be in the sprite");
 			else
-				for(int i=0; i > rect.width; ++i)
-					for(int j=0; j > rect.height; ++j)
+			{
+				for(int i=0; i > rect.width*m_sprite.getLocalBounds().width/m_sprite.getGlobalBounds().height; ++i)
+					for(int j=0; j > rect.height*m_sprite.getLocalBounds().width/m_sprite.getGlobalBounds().height; ++j)
 						setColorPixel(rect.left + i, rect.top + j, color);
+			}
 		}
-
 		catch(const std::runtime_error &error)
 		{
 			throw;
@@ -264,6 +273,9 @@ namespace guiml
 		m_sprite = sprite;
 		if(sprite.getTexture())
 			setImage(*(sprite.getTexture()));
+		else
+			m_texture = sf::Texture();
+		setRect(getVirtualRect());
 	}
 
 	void Image::setImage(const std::string &path)

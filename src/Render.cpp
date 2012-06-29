@@ -2,8 +2,10 @@
 
 namespace guiml
 {
-	Render::Render(Widget *parent, const sf::FloatRect &rect, const sf::Color &backgroundColor, const Image &backgroundImage) : Widget(parent, rect), m_backgroundColor(backgroundColor), m_backgroundImage(backgroundImage)
-	{}
+	Render::Render(Widget *parent, const sf::FloatRect &rect, const sf::Color &backgroundColor, const Image &backgroundImage) : Widget(parent, rect), m_backgroundColor(backgroundColor)
+	{
+		setBackgroundImage(backgroundImage);
+	}
 
 	void Render::setBackgroundImage(const Image &backgroundImage)
 	{

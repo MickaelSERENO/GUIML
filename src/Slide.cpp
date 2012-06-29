@@ -6,7 +6,7 @@ namespace guiml
 	{
 		if(position == Position::VERTICAL)
 		{
-			sf::Vector2f sizeMoveButtons(rect.width, (100-pourcentageGlobalRectangle)*rect.height/200); //size for m_buttonUp and m_buttonDown
+			sf::Vector2f sizeMoveButtons(rect.width, (100-pourcentageGlobalRectangle)*rect.height/200);
 
 			m_globalRectangle.setSize(sf::Vector2f(rect.width - 2*sizeMoveButtons.x, rect.height - 2*sizeMoveButtons.y));
 			m_globalRectangle.setPosition(m_pos.x, m_pos.y + sizeMoveButtons.y);

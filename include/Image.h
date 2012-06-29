@@ -3,6 +3,7 @@
 
 #include "Widget.h"
 #include "equation.h"
+#include <algorithm>
 
 namespace guiml
 {
