@@ -19,6 +19,7 @@ namespace guiml
 			m_parent->removeChild(this);
 		for(std::list<Widget*>::iterator it = m_child.begin(); it != m_child.end(); ++it) //delete all the child of the Widget
 		{
+			std::cout << 1 << std::endl;
 			delete (*it);
 			it = m_child.erase(it);
 		}

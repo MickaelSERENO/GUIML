@@ -16,8 +16,7 @@ namespace guiml
 		Image(Widget *parent, const sf::Image &image, const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
 		Image(Widget *parent, const sf::Texture &texture, const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
 		Image(Widget *parent, const sf::Sprite &sprite, const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
-		Image(Widget *parent);
-		Image();
+		Image(Widget *parent = NULL);
 		Image(const Image &copy);
 		Image& operator=(const Image &copy);
 
@@ -27,7 +26,8 @@ namespace guiml
 		virtual void update(std::list<sf::Drawable*> &drawable); //methode Show version guiml::Image
 		void lighten(const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
 		void roundEdge(int size);
-		const sf::Sprite &getSprite(); //return the sprite
+		const sf::Sprite &getSprite() const; //return the sprite
+		int getSizeRoundEdge() const;
 			
 		void setOrigin(float x, float y);
 		void setOrigin(const sf::Vector2f &pos);
@@ -50,6 +50,7 @@ namespace guiml
 	protected:
 		sf::Sprite m_sprite; //the sprite of the image
 		sf::Texture m_texture;
+		int m_sizeRoundEdge;
 	};
 }
 

@@ -47,7 +47,7 @@ namespace guiml
 		drawWidget(copy.m_isDrawing);
 	}
 
-	Button::Button(Widget *parent) : Widget(parent)
+	Button::Button(Widget *parent, const sf::FloatRect &rect) : Widget(parent, rect), m_hasBackground(false), m_hasLabel(false), m_currentBackground(NULL), m_currentLabel(NULL), m_isSelect(false), m_isSelectCopy(false), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left), m_isActived(false)
 	{}
 
 	Button::Button() : Widget (NULL), m_hasBackground(false), m_hasLabel(false), m_currentBackground(NULL), m_currentLabel(NULL), m_isSelect(false), m_isSelectCopy(false), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left), m_isActived(false)
@@ -211,6 +211,7 @@ namespace guiml
 		m_backgroundLighten = image;
 		m_backgroundLighten.lighten();
 		m_hasBackground = true;
+		cursorInButton();
 		setRect(getVirtualRect());
 	}
 
@@ -220,6 +221,7 @@ namespace guiml
 		m_textLighten = string;
 		m_textLighten.lighten();
 		m_hasLabel = true;
+		cursorInButton();
 		setRect(getVirtualRect());
 	}
 

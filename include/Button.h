@@ -15,7 +15,7 @@ namespace guiml
 		Button(Widget *parent, const Label &text, const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
 		Button(Widget *parent, const Image &image, const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
 		Button(Widget *parent, const Label &text, const Image &image, const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
-		Button(Widget *parent);
+		Button(Widget *parent, const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
 		Button();
 		Button(const Button &copy);
 		//-------------------------------------------End of constructors--------------------------------------------//

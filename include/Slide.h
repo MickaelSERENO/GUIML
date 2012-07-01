@@ -9,12 +9,18 @@ namespace guiml
 		VERTICAL
 	};
 
+	enum SlideStyle
+	{
+		LINEAIRE,
+		BUTTON
+	};
+
 	class Slide : public Widget
 	{
 	public:
 		#include "SurchargeMethode.h"
-		Slide(Widget *parent, const sf::Vector2f& extremesValues, const sf::FloatRect &rect, const Position& position = Position::VERTICAL, int pourcentageGlobalRectangle=97);
-		Slide(Widget *parent, float valueMin, float valueMax, const sf::FloatRect &rect, const Position& position = Position::VERTICAL, int pourcentageGlobalRectangle=97);
+		Slide(Widget *parent, const sf::Vector2f& extremesValues, const sf::FloatRect &globalRect, int cursorSize=-1, const Position& position = Position::VERTICAL, int pourcentageGlobalRectangle=100);
+		Slide(Widget *parent, float valueMin, float valueMax, const sf::FloatRect &rect, int cursorSize = -1, const Position& position = Position::VERTICAL, int pourcentageGlobalRectangle=100);
 		Slide(Widget *parent);
 		Slide();
 
@@ -36,8 +42,9 @@ namespace guiml
 		const sf::Vector2f& getExtremesValues();
 
 	private:
-		sf::RectangleShape m_globalRectangle;
-		Button m_buttonValue;
+		Button m_globalRectangle;
+
+		Button m_cursor;
 		Button m_buttonUp;
 		Button m_buttonDown;
 

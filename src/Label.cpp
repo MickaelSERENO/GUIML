@@ -131,7 +131,6 @@ namespace guiml
 	void Label::setCharacterSize(unsigned int size)
 	{
 		m_text.setCharacterSize(size);
-		std::cout << size << std::endl;
 		Widget::setSize(m_text.getGlobalBounds().width, m_text.getGlobalBounds().height);
 	}
 

@@ -3,7 +3,7 @@
 namespace guiml
 {
 	//-------------------------All constructor with various parameters--------------------------//
-	Image::Image(Widget *parent, const std::string &path, const sf::FloatRect &rect) : Widget(parent, rect)
+	Image::Image(Widget *parent, const std::string &path, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0)
 	{
 		try
 		{
@@ -26,7 +26,7 @@ namespace guiml
 			setRect(m_sprite.getGlobalBounds());
 	}
 
-	Image::Image(Widget *parent, const sf::Image &image, const sf::FloatRect &rect) : Widget(parent, rect)
+	Image::Image(Widget *parent, const sf::Image &image, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0)
 	{
 		try
 		{
@@ -46,7 +46,7 @@ namespace guiml
 			setRect(m_sprite.getGlobalBounds());
 	}
 
-	Image::Image(Widget *parent, const sf::Texture &texture, const sf::FloatRect &rect) : Widget(parent, rect)
+	Image::Image(Widget *parent, const sf::Texture &texture, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0)
 	{
 		m_sprite.setTexture(m_texture);
 		if (rect != sf::FloatRect(0, 0, 0, 0))
@@ -55,7 +55,7 @@ namespace guiml
 			setRect(m_sprite.getGlobalBounds());
 	}
 
-	Image::Image(Widget *parent, const sf::Sprite &sprite, const sf::FloatRect &rect) : Widget(parent, rect)
+	Image::Image(Widget *parent, const sf::Sprite &sprite, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0)
 	{
 		setImage(sprite);
 		if (rect != sf::FloatRect(0, 0, 0, 0))
@@ -64,10 +64,7 @@ namespace guiml
 			setRect(m_sprite.getGlobalBounds());
 	}
 
-	Image::Image(Widget *parent) : Widget(parent)
-	{}
-
-	Image::Image() : Widget(NULL)
+	Image::Image(Widget *parent) : Widget(parent), m_sizeRoundEdge(0)
 	{}
 
 	Image::Image(const Image &copy) : Widget(copy), m_sprite(copy.m_sprite)
@@ -76,6 +73,7 @@ namespace guiml
 			setImage(copy.m_texture);
 		else
 			m_texture = sf::Texture();
+		m_sizeRoundEdge = copy.m_sizeRoundEdge;
 	}
 
 	Image& Image::operator=(const Image &copy)
@@ -88,6 +86,7 @@ namespace guiml
 				setImage(copy.m_texture);
 			else
 				m_texture = sf::Texture();
+			m_sizeRoundEdge = copy.m_sizeRoundEdge;
 		}
 
 		return *this;
@@ -105,12 +104,12 @@ namespace guiml
 			drawable.push_back(&m_sprite);
 		Widget::update(drawable);
 	}
+
 	void Image::roundEdge(int size)
 	{
 		if(m_sprite.getTexture())
 		{
 			sf::Image image = m_sprite.getTexture()->copyToImage();
-
 			for(int i = 0; i != size; i++)
 			{
 				sf::Vector2f topleft = circle(i, size, size, size);
@@ -126,7 +125,7 @@ namespace guiml
 					image.setPixel(i, j, pixel);
 				}
 
-				for(int j = m_sprite.getTexture()->getSize().y; j > bottomleft.x; j--)
+				for(int j = m_sprite.getTexture()->getSize().y-1; j > bottomleft.x; j--)
 				{
 					sf::Color pixel = image.getPixel(i, j);
 					pixel.a = 255 * (1.f - std::max(std::min((float((sqrt((float)((i-size)*(i-size) + (j-(m_sprite.getTexture()->getSize().y - size))*(j-(m_sprite.getTexture()->getSize().y - size))))-size+1)/2.f)), 1.f), 0.f));
@@ -140,7 +139,7 @@ namespace guiml
 					image.setPixel(i + m_sprite.getTexture()->getSize().x - size, j, pixel);
 				}
 
-				for(int j = m_sprite.getTexture()->getSize().y ; j > bottomright.x; j--)
+				for(int j = m_sprite.getTexture()->getSize().y -1; j > bottomright.x; j--)
 				{
 					sf::Color pixel = image.getPixel(i + m_sprite.getTexture()->getSize().x - size, j);
 					pixel.a = 255 * (1.f - std::max(std::min((float((sqrt((float)((i-(m_sprite.getTexture()->getSize().x - size))*(i-(m_sprite.getTexture()->getSize().x - size)) + (j-(m_sprite.getTexture()->getSize().y - size))*(j-(m_sprite.getTexture()->getSize().y - size))))-size+1)/2.f)), 1.f), 0.f));
@@ -148,6 +147,17 @@ namespace guiml
 				}
 			}
 			setImage(image);
+			m_sizeRoundEdge = size;
+		}
+
+		else
+		{
+			sf::RenderTexture texture;
+			texture.create(m_virtualSize.x, m_virtualSize.y);
+			texture.draw(m_sprite);
+			texture.display();
+			m_texture = texture.getTexture();
+			roundEdge(size);
 		}
 	}
 
@@ -216,9 +226,14 @@ namespace guiml
 		}
 	}
 
-	const sf::Sprite &Image::getSprite()
+	const sf::Sprite &Image::getSprite() const
 	{
 		return m_sprite;
+	}
+
+	int Image::getSizeRoundEdge() const
+	{
+		return m_sizeRoundEdge;
 	}
 
 	void Image::setOrigin(float x, float y)
