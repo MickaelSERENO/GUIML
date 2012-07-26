@@ -1,5 +1,7 @@
 #include "Widget.h"
 
+RessourcesManager<sf::Texture*> guiml::Widget::fileLoading;
+
 namespace guiml
 {
 	Widget::Widget(Widget *parent, const sf::FloatRect &rect) : m_parent(NULL), m_isDrawing(true), m_pos(rect.left, rect.top), m_size(rect.width, rect.height), m_virtualPos(rect.left, rect.top), m_virtualSize(rect.width, rect.height), m_movingAllChild(false)

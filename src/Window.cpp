@@ -8,11 +8,13 @@ namespace guiml
 		setFramerateLimit(framerateLimit);
 		m_event = new EventManager(this);
 		resetView();
+		clear(backgroundColor);
 	}	
 
 	Window::~Window()
 	{
 		delete m_event;
+		Widget::fileLoading.remove("ressource.jpg");
 	}
 
 	void Window::update()
@@ -23,7 +25,6 @@ namespace guiml
 
 	void Window::update(std::list <sf::Drawable*> &drawable)
 	{
-		clear(m_backgroundColor);
 		m_event->update();
 		if(m_event->windowIsResize())
 			Widget::resizeWidget(m_event->getDefaultWindowSize(), m_event->getNewWindowSize());
@@ -31,6 +32,7 @@ namespace guiml
 
 		Widget::update(drawable);
 		show(drawable);
+		clear(m_backgroundColor);
 	}
 
 	void Window::show(std::list<sf::Drawable*> &drawable)

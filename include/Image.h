@@ -4,6 +4,7 @@
 #include "Widget.h"
 #include "equation.h"
 #include <algorithm>
+#include <sstream>
 
 namespace guiml
 {
@@ -12,10 +13,10 @@ namespace guiml
 	public:
 		#include "SurchargeMethode.h"
 		//-------------one constructor for various parameters-------------//
-		Image(Widget *parent, const std::string &path, const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
-		Image(Widget *parent, const sf::Image &image, const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
-		Image(Widget *parent, const sf::Texture &texture, const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
-		Image(Widget *parent, const sf::Sprite &sprite, const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
+		Image(Widget *parent, const std::string &path, bool delTextureCreated = false, const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
+		Image(Widget *parent, const sf::Image &image, bool delTextureCreated = false, const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
+		Image(Widget *parent, const sf::Texture &texture, bool delTextureCreated  = false, const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
+		Image(Widget *parent, const sf::Sprite &sprite, bool delTextureCreated = false, const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
 		Image(Widget *parent = NULL);
 		Image(const Image &copy);
 		Image& operator=(const Image &copy);
@@ -28,13 +29,12 @@ namespace guiml
 		void roundEdge(int size);
 		const sf::Sprite &getSprite() const; //return the sprite
 		int getSizeRoundEdge() const;
-			
+		bool getDelTextureCreated() const;	
+
 		void setOrigin(float x, float y);
 		void setOrigin(const sf::Vector2f &pos);
 		void setOriginMiddle();
 		void setColor(const sf::Color &color);
-		void setColorPixel(float x, float y, const sf::Color &color);
-		void setPlageColor(const sf::FloatRect &rect, const sf::Color &color);
 
 		void setTextureRect(const sf::FloatRect &rect);
 		void setRotation(float angle);
@@ -45,12 +45,16 @@ namespace guiml
 		void setImage(const sf::Image &image);
 		void setSize(float x, float y);
 		void setPosition(float x, float y);
+		void setDelTextureCreated(bool delTextureCreated);
 
 		Widget* copy() const;
 	protected:
 		sf::Sprite m_sprite; //the sprite of the image
-		sf::Texture m_texture;
+		static RessourcesManager<sf::Texture*> textures;
+		sf::Texture *spriteTexture;
 		int m_sizeRoundEdge;
+		bool m_delTextureCreated;
+		std::vector<std::string> m_textureCreated;
 	};
 }
 

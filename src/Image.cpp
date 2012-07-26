@@ -1,24 +1,34 @@
 #include "Image.h"
 
+RessourcesManager<sf::Texture*> guiml::Image::Image::textures;
+
 namespace guiml
 {
 	//-------------------------All constructor with various parameters--------------------------//
-	Image::Image(Widget *parent, const std::string &path, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0)
+	Image::Image(Widget *parent, const std::string &path, bool delTextureCreated, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0), m_delTextureCreated(delTextureCreated)
 	{
-		try
+		sf::Texture *texture;
+		if(!Widget::fileLoading.existe(path))
 		{
-			if(!(m_texture.loadFromFile(path)))
+			texture = new sf::Texture();
+			try
 			{
-				throw  std::runtime_error("FATAL ERROR");
+				if(!(texture->loadFromFile(path)))
+				{
+					throw  std::runtime_error("FATAL ERROR");
+				}
 			}
-		}
 
-		catch(const std::exception &error)
-		{
-			throw;
-		}
+			catch(const std::exception &error)
+			{
+				throw;
+			}
 
-		m_sprite.setTexture(m_texture);
+			Widget::fileLoading.add(path, texture);
+		}
+		else
+			texture = Widget::fileLoading.get(path);
+		setImage(*(texture));
 
 		if (rect != sf::FloatRect(0, 0, 0, 0))
 			setRect(rect);
@@ -26,11 +36,12 @@ namespace guiml
 			setRect(m_sprite.getGlobalBounds());
 	}
 
-	Image::Image(Widget *parent, const sf::Image &image, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0)
+	Image::Image(Widget *parent, const sf::Image &image, bool delTextureCreated, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0), m_delTextureCreated(delTextureCreated)
 	{
+		sf::Texture *texture = new sf::Texture();
 		try
 		{
-			if(!(m_texture.loadFromImage(image)))
+			if(!(texture->loadFromImage(image)))
 				throw std::string ("The image is invalid");
 		}
 
@@ -39,23 +50,29 @@ namespace guiml
 			std::cerr << error << std::endl;
 		}
 
-		m_sprite.setTexture(m_texture);
+		std::string name("texture");
+		std::ostringstream number;
+		number << Image::textures.getSize();
+		name += number.str();
+		Image::textures.add(name, texture);
+		m_textureCreated.push_back(name);
+		setImage(*texture);
 		if (rect != sf::FloatRect(0, 0, 0, 0))
 			setRect(rect);
 		else
 			setRect(m_sprite.getGlobalBounds());
 	}
 
-	Image::Image(Widget *parent, const sf::Texture &texture, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0)
+	Image::Image(Widget *parent, const sf::Texture &texture, bool delTextureCreated, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0), m_delTextureCreated(delTextureCreated)
 	{
-		m_sprite.setTexture(m_texture);
+		setImage(texture);
 		if (rect != sf::FloatRect(0, 0, 0, 0))
 			setRect(rect);
 		else
 			setRect(m_sprite.getGlobalBounds());
 	}
 
-	Image::Image(Widget *parent, const sf::Sprite &sprite, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0)
+	Image::Image(Widget *parent, const sf::Sprite &sprite, bool delTextureCreated, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0), m_delTextureCreated(delTextureCreated)
 	{
 		setImage(sprite);
 		if (rect != sf::FloatRect(0, 0, 0, 0))
@@ -64,16 +81,15 @@ namespace guiml
 			setRect(m_sprite.getGlobalBounds());
 	}
 
-	Image::Image(Widget *parent) : Widget(parent), m_sizeRoundEdge(0)
+	Image::Image(Widget *parent) : Widget(parent), m_sizeRoundEdge(0), m_delTextureCreated(false)
 	{}
 
-	Image::Image(const Image &copy) : Widget(copy), m_sprite(copy.m_sprite)
+	Image::Image(const Image &copy) : Widget(copy)
 	{
-		if(copy.m_sprite.getTexture())
-			setImage(copy.m_texture);
-		else
-			m_texture = sf::Texture();
+		setImage(copy.m_sprite);
 		m_sizeRoundEdge = copy.m_sizeRoundEdge;
+		m_delTextureCreated = copy.m_delTextureCreated;
+		m_textureCreated = copy.m_textureCreated;
 	}
 
 	Image& Image::operator=(const Image &copy)
@@ -82,11 +98,9 @@ namespace guiml
 		{
 			Widget::operator=(copy);
 			m_sprite = copy.m_sprite;
-			if(copy.m_sprite.getTexture())
-				setImage(copy.m_texture);
-			else
-				m_texture = sf::Texture();
 			m_sizeRoundEdge = copy.m_sizeRoundEdge;
+		m_delTextureCreated = copy.m_delTextureCreated;
+		m_textureCreated = copy.m_textureCreated;
 		}
 
 		return *this;
@@ -94,7 +108,9 @@ namespace guiml
 
 	Image::~Image()
 	{
-
+		if(m_delTextureCreated)
+			for(unsigned int i=0; i < m_textureCreated.size(); ++i)
+				Image::textures.remove(m_textureCreated[i]);
 	}
 	//-----------------------------End of constructor------------------------------------------//
 
@@ -152,11 +168,19 @@ namespace guiml
 
 		else
 		{
-			sf::RenderTexture texture;
-			texture.create(m_virtualSize.x, m_virtualSize.y);
-			texture.draw(m_sprite);
-			texture.display();
-			m_texture = texture.getTexture();
+			sf::RenderTexture render;
+			render.create(m_virtualSize.x, m_virtualSize.y);
+			render.draw(m_sprite);
+			render.display();
+			sf::Texture *texture = new sf::Texture(render.getTexture());
+			
+			std::string name("texture");
+			std::ostringstream number;
+			number << Image::textures.getSize();
+			name += number.str();
+			Image::textures.add(name, texture);
+			m_textureCreated.push_back(name);
+			setImage(*texture);
 			roundEdge(size);
 		}
 	}
@@ -206,26 +230,6 @@ namespace guiml
 		}
 	}
 
-
-	void Image::setPlageColor(const sf::FloatRect &rect, const sf::Color &color)
-	{
-		try
-		{
-			if(rect.left + rect.width > m_virtualSize.x || rect.top + rect.height > m_virtualSize.y)
-				throw std::runtime_error("FATAL ERROR : The Plage color don't can be in the sprite");
-			else
-			{
-				for(int i=0; i > rect.width*m_sprite.getLocalBounds().width/m_sprite.getGlobalBounds().height; ++i)
-					for(int j=0; j > rect.height*m_sprite.getLocalBounds().width/m_sprite.getGlobalBounds().height; ++j)
-						setColorPixel(rect.left + i, rect.top + j, color);
-			}
-		}
-		catch(const std::runtime_error &error)
-		{
-			throw;
-		}
-	}
-
 	const sf::Sprite &Image::getSprite() const
 	{
 		return m_sprite;
@@ -234,6 +238,11 @@ namespace guiml
 	int Image::getSizeRoundEdge() const
 	{
 		return m_sizeRoundEdge;
+	}
+
+	bool Image::getDelTextureCreated() const
+	{
+		return m_delTextureCreated;
 	}
 
 	void Image::setOrigin(float x, float y)
@@ -256,15 +265,6 @@ namespace guiml
 		m_sprite.setColor(color);
 	}
 
-	
-	void Image::setColorPixel(float x, float y, const sf::Color &color)
-	{
-		sf::Image image = m_sprite.getTexture()->copyToImage();
-		image.setPixel(x, y, color);
-		m_texture.loadFromImage(image);
-		m_sprite.setTexture(m_texture);
-	}
-
 	void Image::setRotation(float angle)
 	{
 		m_sprite.setRotation(angle);
@@ -278,43 +278,44 @@ namespace guiml
 
 	void Image::setImage(const sf::Texture &texture)
 	{
-		m_texture = texture;
-		m_sprite.setTexture(m_texture);
+		m_sprite.setTexture(texture);
 		setRect(getVirtualRect());
 	}
 
 	void Image::setImage(const sf::Sprite &sprite)
 	{
 		m_sprite = sprite;
-		if(sprite.getTexture())
-			setImage(*(sprite.getTexture()));
-		else
-			m_texture = sf::Texture();
 		setRect(getVirtualRect());
 	}
 
 	void Image::setImage(const std::string &path)
 	{
-		try
+		sf::Texture *texture;
+		if(!Widget::fileLoading.existe(path))
 		{
-			if(!(m_texture.loadFromFile(path)))
-				throw std::string ("The path is invalid");
-		}
+			texture = new sf::Texture;
+			try
+			{
+				if(!(texture->loadFromFile(path)))
+					throw std::string ("The path is invalid");
+			}
 
-		catch(const std::string &error)
-		{
-			std::cerr << error << std::endl;
+			catch(const std::string &error)
+			{
+				std::cerr << error << std::endl;
+			}
+			Widget::fileLoading.add(path, texture);
 		}
-
-		m_sprite.setTexture(m_texture);
+		m_sprite.setTexture(*texture);
 		setRect(getVirtualRect());
 	}
 
 	void Image::setImage(const sf::Image &image)
 	{
+		sf::Texture *texture = new sf::Texture;
 		try
 		{
-			if(!(m_texture.loadFromImage(image)))
+			if(!(texture->loadFromImage(image)))
 				throw std::string ("The image is invalid");
 		}
 
@@ -323,7 +324,13 @@ namespace guiml
 			std::cerr << error << std::endl;
 		}
 
-		m_sprite.setTexture(m_texture);
+		std::string name("texture");
+		std::ostringstream number;
+		number << Image::textures.getSize();
+		name += number.str();
+		Image::textures.add(name, texture);
+		m_textureCreated.push_back(name);
+		m_sprite.setTexture(*texture);
 		setRect(getVirtualRect());
 	}
 	
@@ -337,6 +344,11 @@ namespace guiml
 	{
 		m_sprite.setPosition(x, y);
 		Widget::setPosition(x, y);
+	}
+
+	void Image::setDelTextureCreated(bool delTextureCreated)
+	{
+		m_delTextureCreated = delTextureCreated;
 	}
 
     Widget*	Image::copy() const

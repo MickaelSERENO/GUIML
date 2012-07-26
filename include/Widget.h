@@ -13,6 +13,7 @@
 #include <iostream>
 #include <stdexcept>
 #include "EventManager.h"
+#include "RessourcesManager.h"
 
 /*! \namespace guiml
  *
@@ -244,6 +245,8 @@ namespace guiml
 		sf::Vector2f m_virtualPos; /*!< The absolute Widget's position (without Window's resize). */
 		sf::Vector2f m_virtualSize; /*!< The absolute Widget's size (without Window's resize). */
 		bool m_movingAllChild; /*!< When the Widget's position is set, do we must moving the child ? */
+
+		static RessourcesManager<sf::Texture*> fileLoading;
 	};
 }
 
