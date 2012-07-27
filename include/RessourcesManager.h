@@ -53,6 +53,9 @@ public:
 	T &get(const std::string &name);
 	const std::string &get(const T &ressource) const;
 	bool existe(const std::string &name) const;
+	
+	void clean();
+
 	int getSize() const;
 protected:
 	std::map <std::string, T> m_ressources;
@@ -83,7 +86,7 @@ template <typename T, typename CT>
 inline void RessourcesManager<T, CT>::remove(const std::string &name)
 {
 	if(existe(name))
-/bin/bash: q : commande introuvable
+		CT::release(m_ressources[name]);
 }
 
 template <typename T, typename CT>
@@ -98,6 +101,13 @@ template <typename T, typename CT>
 inline T &RessourcesManager<T, CT>::get(const std::string &name)
 {
 	return m_ressources.find(name)->second;
+}
+
+template <typename T, typename CT>
+inline void RessourcesManager<T, CT>::clean()
+{
+	for(auto & p : m_ressources)
+		CT::release(p.second);
 }
 
 template <typename T, typename CT>
