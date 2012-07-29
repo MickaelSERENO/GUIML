@@ -98,7 +98,7 @@ void EventManager::update()
 		}
 	}
 
-	if(m_keys[sf::Keyboard::Back])
+	if(m_keys[sf::Keyboard::BackSpace])
 		m_enteredText = false;
 
 	if(m_isResize && m_defaultSize.x != 0 && m_defaultSize.y != 0)
