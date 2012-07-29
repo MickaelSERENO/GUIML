@@ -87,6 +87,7 @@ inline void RessourcesManager<T, CT>::remove(const std::string &name)
 {
 	if(existe(name))
 		CT::release(m_ressources[name]);
+	m_ressources.erase(name);
 }
 
 template <typename T, typename CT>
@@ -94,7 +95,10 @@ inline void RessourcesManager<T, CT>::remove(T &ressource)
 {
 	for(typename std::map<std::string, T>::iterator it = m_ressources.begin(); it != m_ressources.end(); ++it)
 		if(it == &ressource)
+		{
+			m_ressources.erase(it);
 			cleanning_traits::release(*it);
+		}
 }
 
 template <typename T, typename CT>
@@ -108,6 +112,7 @@ inline void RessourcesManager<T, CT>::clean()
 {
 	for(auto & p : m_ressources)
 		CT::release(p.second);
+	m_ressources.clear();
 }
 
 template <typename T, typename CT>
