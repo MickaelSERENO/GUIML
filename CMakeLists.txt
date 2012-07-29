@@ -43,3 +43,9 @@ target_link_libraries(
 	)
 
 set_target_properties(GUIMLStatic PROPERTIES OUTPUT_NAME GUIML)
+set(sfml_include_dir "/usr/include" CACHE FILEPATH "Où se situe le Dossier SFML")
+set(sfml_link_dir "/usr/lib" CACHE FILEPATH "Où se situe les lib SFML dynamique")
+set(sfml-system_lib_name "sfml-system" CACHE STRING "Le nom de la lib system de la sfml")
+set(sfml-window_lib_name "sfml-window" CACHE STRING "Le nom de la lib window de la sfml")
+set(sfml-graphics_lib_name "sfml-graphics" CACHE STRING "Le nom de la lib graphics de la sfml")
+set(sfml-audio_lib_name "sfml-audio" CACHE STRING "Le nom de la lib audio de la sfml")
