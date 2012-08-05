@@ -48,18 +48,18 @@ public:
 	~RessourcesManager();
 
 	void add(const std::string &name, const T &type);
-	void remove(const std::string &name);
-	void remove(T &ressource);
+	bool remove(const std::string &name);
+	bool remove(T &ressource);
 	T &get(const std::string &name);
 	const std::string &get(const T &ressource) const;
 	bool existe(const std::string &name) const;
+	bool existe(const T &ressource) const;
 	
 	void clean();
 
 	int getSize() const;
 protected:
 	std::map <std::string, T> m_ressources;
-	typename std::map<std::string, T>::iterator it;
 };
 
 template <typename T, typename CT>
@@ -83,22 +83,29 @@ inline void RessourcesManager<T, CT>::add(const std::string &name, const T &type
 }
 
 template <typename T, typename CT>
-inline void RessourcesManager<T, CT>::remove(const std::string &name)
+inline bool RessourcesManager<T, CT>::remove(const std::string &name)
 {
 	if(existe(name))
+	{
 		CT::release(m_ressources[name]);
-	m_ressources.erase(name);
+		m_ressources.erase(name);
+		return true;
+	}
+	return false;
 }
 
 template <typename T, typename CT>
-inline void RessourcesManager<T, CT>::remove(T &ressource)
+inline bool RessourcesManager<T, CT>::remove(T &ressource)
 {
 	for(typename std::map<std::string, T>::iterator it = m_ressources.begin(); it != m_ressources.end(); ++it)
 		if(it == &ressource)
 		{
 			m_ressources.erase(it);
 			cleanning_traits::release(*it);
+			return true;
 		}
+
+	return false;
 }
 
 template <typename T, typename CT>
@@ -132,6 +139,15 @@ inline bool RessourcesManager<T, CT>::existe(const std::string &name) const
 	if(m_ressources.find(name) == m_ressources.end())
 		return false;
 	return true;
+}
+
+template <typename T, typename CT>
+inline bool RessourcesManager<T, CT>::existe(const T &ressource) const
+{
+	for(typename std::map<std::string, T>::iterator it = m_ressources.begin(); it != m_ressources.end(); ++it)
+		if(it = &ressource)
+			return true;
+	return false;
 }
 
 template <typename T, typename CT>
