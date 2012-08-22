@@ -124,8 +124,10 @@ namespace guiml
 
 	void Label::setTextWidthSize(unsigned int size)
 	{
+		guiml::Label copy(NULL, getText().getString());
+		copy.setCharacterSize(getText().getCharacterSize());
 		if(getString().getSize() != 0)
-			setCharacterSize(m_text.getCharacterSize() * size / m_size.x);
+			setCharacterSize(m_text.getCharacterSize() * size / copy.getVirtualSize().x);
 	}	
 
 	void Label::setCharacterSize(unsigned int size)
