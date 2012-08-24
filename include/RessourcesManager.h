@@ -63,27 +63,27 @@ protected:
 };
 
 template <typename T, typename CT>
-inline RessourcesManager<T, CT>::RessourcesManager()
+ RessourcesManager<T, CT>::RessourcesManager()
 {
 
 }
 
 template <typename T, typename CT>
-inline RessourcesManager<T, CT>::~RessourcesManager()
+ RessourcesManager<T, CT>::~RessourcesManager()
 {
 	for(auto & p : m_ressources)
 		CT::release(p.second);
 }
 
 template <typename T, typename CT>
-inline void RessourcesManager<T, CT>::add(const std::string &name, const T &type)
+ void RessourcesManager<T, CT>::add(const std::string &name, const T &type)
 {
 	if(m_ressources.find(name) == m_ressources.end())
 		m_ressources.insert(std::make_pair(name, type));
 }
 
 template <typename T, typename CT>
-inline bool RessourcesManager<T, CT>::remove(const std::string &name)
+ bool RessourcesManager<T, CT>::remove(const std::string &name)
 {
 	if(existe(name))
 	{
@@ -95,7 +95,7 @@ inline bool RessourcesManager<T, CT>::remove(const std::string &name)
 }
 
 template <typename T, typename CT>
-inline bool RessourcesManager<T, CT>::remove(T &ressource)
+ bool RessourcesManager<T, CT>::remove(T &ressource)
 {
 	for(typename std::map<std::string, T>::iterator it = m_ressources.begin(); it != m_ressources.end(); ++it)
 		if(it == &ressource)
@@ -109,13 +109,13 @@ inline bool RessourcesManager<T, CT>::remove(T &ressource)
 }
 
 template <typename T, typename CT>
-inline T &RessourcesManager<T, CT>::get(const std::string &name)
+ T &RessourcesManager<T, CT>::get(const std::string &name)
 {
 	return m_ressources.find(name)->second;
 }
 
 template <typename T, typename CT>
-inline void RessourcesManager<T, CT>::clean()
+ void RessourcesManager<T, CT>::clean()
 {
 	for(auto & p : m_ressources)
 		CT::release(p.second);
@@ -123,7 +123,7 @@ inline void RessourcesManager<T, CT>::clean()
 }
 
 template <typename T, typename CT>
-inline const std::string  &RessourcesManager<T, CT>::get(const T &ressource) const
+ const std::string  &RessourcesManager<T, CT>::get(const T &ressource) const
 {
 	for(typename std::map<std::string, T>::iterator it=m_ressources.begin(); it != m_ressources.end(); ++it)
 		if(it == &ressource)
@@ -134,7 +134,7 @@ inline const std::string  &RessourcesManager<T, CT>::get(const T &ressource) con
 }
 
 template <typename T, typename CT>
-inline bool RessourcesManager<T, CT>::existe(const std::string &name) const
+ bool RessourcesManager<T, CT>::existe(const std::string &name) const
 {
 	if(m_ressources.find(name) == m_ressources.end())
 		return false;
@@ -142,7 +142,7 @@ inline bool RessourcesManager<T, CT>::existe(const std::string &name) const
 }
 
 template <typename T, typename CT>
-inline bool RessourcesManager<T, CT>::existe(const T &ressource) const
+ bool RessourcesManager<T, CT>::existe(const T &ressource) const
 {
 	for(typename std::map<std::string, T>::iterator it = m_ressources.begin(); it != m_ressources.end(); ++it)
 		if(it = &ressource)
@@ -151,7 +151,7 @@ inline bool RessourcesManager<T, CT>::existe(const T &ressource) const
 }
 
 template <typename T, typename CT>
-inline int RessourcesManager<T, CT>::getSize() const
+ int RessourcesManager<T, CT>::getSize() const
 {
 	return m_ressources.size();
 }
