@@ -19,9 +19,9 @@ namespace guiml
 	{
 	public:
 		#include "SurchargeMethode.h"
-		Slide(Widget *parent, const sf::Vector2f& extremesValues, const sf::FloatRect &globalRect, int cursorSize=-1, const Position& position = Position::VERTICAL, int pourcentageGlobalRectangle=100);
-		Slide(Widget *parent, float valueMin, float valueMax, const sf::FloatRect &rect, int cursorSize = -1, const Position& position = Position::VERTICAL, int pourcentageGlobalRectangle=100);
-		Slide(Widget *parent);
+		Slide(Updatable *parent, const sf::Vector2f& extremesValues, const sf::FloatRect &globalRect, int cursorSize=-1, const Position& position = Position::VERTICAL, int pourcentageGlobalRectangle=100);
+		Slide(Updatable *parent, float valueMin, float valueMax, const sf::FloatRect &rect, int cursorSize = -1, const Position& position = Position::VERTICAL, int pourcentageGlobalRectangle=100);
+		Slide(Updatable *parent);
 		Slide();
 
 		Slide(const Slide &copy);

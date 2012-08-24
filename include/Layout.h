@@ -9,7 +9,7 @@ namespace guiml
 	{
 	public:
 		#include "SurchargeMethode.h"
-		Layout(Widget *parent, const sf::FloatRect &rect, const std::vector<std::vector<Widget*> > &widgets = std::vector<std::vector<Widget*> >(), const sf::Vector2f &distance = sf::Vector2f(0, 0));
+		Layout(Updatable *parent, const sf::FloatRect &rect, const std::vector<std::vector<Widget*> > &widgets = std::vector<std::vector<Widget*> >(), const sf::Vector2f &distance = sf::Vector2f(0, 0));
 		Layout(const Layout &copy);
 		Layout& operator=(const Layout &copy);
 		~Layout();

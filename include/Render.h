@@ -28,7 +28,7 @@ namespace guiml
 			 *	\param backgroundColor The color with which the Window is clean. At the default, the background color is Black.
 			 *	\param backgroundImage If you want a background Image. At the default, the Window doesn't have a background image.
 			 */
-			Render(Widget *parent, const sf::FloatRect &rect, const sf::Color &backgroundColor = sf::Color::Black, const Image &backgroundImage = Image());
+			Render(Updatable *parent, const sf::FloatRect &rect, const sf::Color &backgroundColor = sf::Color::Black, const Image &backgroundImage = Image());
 
 			/*! \brief Draw all drawable who contain "drawable" in the order of list.
 			 *

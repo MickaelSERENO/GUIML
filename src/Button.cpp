@@ -2,7 +2,7 @@
 
 namespace guiml
 {
-	Button::Button(Widget *parent, const Label &text, const sf::FloatRect &rect) : Widget(parent, rect), m_hasBackground(false), m_hasLabel(true), m_background(NULL), m_text(text), m_backgroundLighten(NULL), m_textLighten(text), m_isSelect(false), m_isSelectCopy(false), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left), m_isActived(false)
+	Button::Button(Updatable *parent, const Label &text, const sf::FloatRect &rect) : Widget(parent, rect), m_hasBackground(false), m_hasLabel(true), m_background(NULL), m_text(text), m_backgroundLighten(NULL), m_textLighten(text), m_isSelect(false), m_isSelectCopy(false), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left), m_isActived(false)
 	{
 		m_textLighten.lighten();
 		m_currentBackground = &m_background;
@@ -15,7 +15,7 @@ namespace guiml
 		drawWidget(true);
 	}
 
-	Button::Button(Widget *parent, const Image &image, const sf::FloatRect &rect) : Widget(parent, rect), m_hasBackground(true), m_hasLabel(false), m_background(image), m_text(NULL), m_backgroundLighten(image), m_textLighten(NULL) ,m_isSelect(false), m_isSelectCopy(false), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left), m_isActived(false)
+	Button::Button(Updatable *parent, const Image &image, const sf::FloatRect &rect) : Widget(parent, rect), m_hasBackground(true), m_hasLabel(false), m_background(image), m_text(NULL), m_backgroundLighten(image), m_textLighten(NULL) ,m_isSelect(false), m_isSelectCopy(false), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left), m_isActived(false)
 	{
 		m_backgroundLighten.lighten();
 		m_currentBackground = &m_background;
@@ -27,7 +27,7 @@ namespace guiml
 		drawWidget(true);
 	}
 
-	Button::Button(Widget *parent, const Label &text, const Image &image, const sf::FloatRect &rect) : Widget(parent, rect), m_hasBackground(true), m_hasLabel(true), m_background(image), m_text(text), m_backgroundLighten(image), m_textLighten(text), m_isSelect(false), m_isSelectCopy(false), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left), m_isActived(false)
+	Button::Button(Updatable *parent, const Label &text, const Image &image, const sf::FloatRect &rect) : Widget(parent, rect), m_hasBackground(true), m_hasLabel(true), m_background(image), m_text(text), m_backgroundLighten(image), m_textLighten(text), m_isSelect(false), m_isSelectCopy(false), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left), m_isActived(false)
 	{
 		m_textLighten.lighten();
 		m_backgroundLighten.lighten();
@@ -40,18 +40,18 @@ namespace guiml
 		drawWidget(true);
 	}
 
+	Button::Button(Updatable *parent, const sf::FloatRect &rect) : Widget(parent, rect), m_hasBackground(false), m_hasLabel(false), m_currentBackground(NULL), m_currentLabel(NULL), m_isSelect(false), m_isSelectCopy(false), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left), m_isActived(false)
+	{}
+
+	Button::Button() : Widget (NULL), m_hasBackground(false), m_hasLabel(false), m_currentBackground(NULL), m_currentLabel(NULL), m_isSelect(false), m_isSelectCopy(false), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left), m_isActived(false)
+	{}
+
 	Button::Button(const Button &copy) : Widget(copy), m_hasBackground(copy.m_hasBackground), m_hasLabel(copy.m_hasLabel), m_background(copy.m_background), m_text(copy.m_text), m_backgroundLighten(copy.m_backgroundLighten), m_textLighten(copy.m_textLighten), m_isSelect(copy.m_isSelect), m_isSelectCopy(copy.m_isSelectCopy), m_howActivedKeyboard(copy.m_howActivedKeyboard), m_howActivedClickMouse(copy.m_howActivedClickMouse), m_isActived(copy.m_isActived)
 	{
 		m_currentBackground = &m_background;
 		m_currentLabel = &m_text;
 		drawWidget(copy.m_isDrawing);
 	}
-
-	Button::Button(Widget *parent, const sf::FloatRect &rect) : Widget(parent, rect), m_hasBackground(false), m_hasLabel(false), m_currentBackground(NULL), m_currentLabel(NULL), m_isSelect(false), m_isSelectCopy(false), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left), m_isActived(false)
-	{}
-
-	Button::Button() : Widget (NULL), m_hasBackground(false), m_hasLabel(false), m_currentBackground(NULL), m_currentLabel(NULL), m_isSelect(false), m_isSelectCopy(false), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left), m_isActived(false)
-	{}
 
 	Button& Button::operator=(const Button &copy)
 	{
@@ -101,7 +101,7 @@ namespace guiml
 			m_isSelect = false;
 			m_isActived = false;
 		}
-		Widget::update(drawable);
+		Updatable::update(drawable);
 	}
 
 	void Button::centerLabel()

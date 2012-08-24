@@ -28,7 +28,7 @@ namespace guiml
 		 *	\param backgroundColor The color with which the Window is clean. At the default, the background color is Black.
 		 *	\param backgroundImage If you want a background Image. At the default, the Window doesn't have a background image.
 		 */
-		Window(const sf::VideoMode &mode, const std::string &title, Widget *parent = NULL, unsigned int framerateLimit = 60, const sf::Color &backgroundColor = sf::Color::Black, const Image &backgroundImage = Image());
+		Window(const sf::VideoMode &mode, const std::string &title, Updatable *parent = NULL, unsigned int framerateLimit = 60, const sf::Color &backgroundColor = sf::Color::Black, const Image &backgroundImage = Image());
 
 		/*! \brief The virtual Window destructor. It delete m_event.
 		 */

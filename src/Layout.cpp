@@ -2,7 +2,7 @@
 
 namespace guiml
 {
-	Layout::Layout(Widget *parent, const sf::FloatRect &rect, const std::vector<std::vector<Widget*> > &widgets, const sf::Vector2f &distance) : Widget(parent, rect), m_distance(distance), m_scale(1, 1)
+	Layout::Layout(Updatable *parent, const sf::FloatRect &rect, const std::vector<std::vector<Widget*> > &widgets, const sf::Vector2f &distance) : Widget(parent, rect), m_distance(distance), m_scale(1, 1)
 	{
 
 		unsigned int i, j;
@@ -81,7 +81,7 @@ namespace guiml
 
 	void Layout::update(std::list<sf::Drawable*> &drawable)
 	{
-		Widget::update(drawable);
+		Updatable::update(drawable);
 	}
 
 	void Layout::setSize(float x, float y)

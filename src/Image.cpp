@@ -5,7 +5,7 @@ RessourcesManager<sf::Texture*> guiml::Image::Image::textures;
 namespace guiml
 {
 	//-------------------------All constructor with various parameters--------------------------//
-	Image::Image(Widget *parent, const std::string &path, bool delTextureCreated, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0), m_delTextureCreated(delTextureCreated)
+	Image::Image(Updatable *parent, const std::string &path, bool delTextureCreated, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0), m_delTextureCreated(delTextureCreated)
 	{
 		sf::Texture *texture;
 		if(!Widget::fileLoading.existe(path))
@@ -36,7 +36,7 @@ namespace guiml
 			setRect(m_sprite.getGlobalBounds());
 	}
 
-	Image::Image(Widget *parent, const sf::Image &image, bool delTextureCreated, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0), m_delTextureCreated(delTextureCreated)
+	Image::Image(Updatable *parent, const sf::Image &image, bool delTextureCreated, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0), m_delTextureCreated(delTextureCreated)
 	{
 		sf::Texture *texture = new sf::Texture();
 		try
@@ -63,7 +63,7 @@ namespace guiml
 			setRect(m_sprite.getGlobalBounds());
 	}
 
-	Image::Image(Widget *parent, const sf::Texture &texture, bool delTextureCreated, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0), m_delTextureCreated(delTextureCreated)
+	Image::Image(Updatable *parent, const sf::Texture &texture, bool delTextureCreated, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0), m_delTextureCreated(delTextureCreated)
 	{
 		setImage(texture);
 		if (rect != sf::FloatRect(0, 0, 0, 0))
@@ -72,7 +72,7 @@ namespace guiml
 			setRect(m_sprite.getGlobalBounds());
 	}
 
-	Image::Image(Widget *parent, const sf::Sprite &sprite, bool delTextureCreated, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0), m_delTextureCreated(delTextureCreated)
+	Image::Image(Updatable *parent, const sf::Sprite &sprite, bool delTextureCreated, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0), m_delTextureCreated(delTextureCreated)
 	{
 		setImage(sprite);
 		if (rect != sf::FloatRect(0, 0, 0, 0))
@@ -81,7 +81,7 @@ namespace guiml
 			setRect(m_sprite.getGlobalBounds());
 	}
 
-	Image::Image(Widget *parent) : Widget(parent), m_sizeRoundEdge(0), m_delTextureCreated(false)
+	Image::Image(Updatable *parent) : Widget(parent), m_sizeRoundEdge(0), m_delTextureCreated(false)
 	{}
 
 	Image::Image(const Image &copy) : Widget(copy)
@@ -118,7 +118,7 @@ namespace guiml
 	{
 		if(m_isDrawing)
 			drawable.push_back(&m_sprite);
-		Widget::update(drawable);
+		Updatable::update(drawable);
 	}
 
 	void Image::roundEdge(int size)

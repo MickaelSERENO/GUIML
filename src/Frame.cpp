@@ -2,7 +2,7 @@
 
 namespace guiml
 {
-	Frame::Frame(Widget *parent, const sf::FloatRect &rect, const sf::Color &backgroundColor, const Image &backgroundImage, const Label &title, const sf::Color &backgroundTitle, bool drawButtonMoveFrame) : Render(parent, rect, backgroundColor, backgroundImage), sf::RenderTexture(), m_title(title), m_buttonMoveFrame(NULL, guiml::Label(), guiml::Image(), sf::FloatRect(0, 0, rect.width, title.getSize().y)), m_posTitle(PosText::CENTER), m_isMoving(false), m_hasAddChild(false)
+	Frame::Frame(Updatable *parent, const sf::FloatRect &rect, const sf::Color &backgroundColor, const Image &backgroundImage, const Label &title, const sf::Color &backgroundTitle, bool drawButtonMoveFrame) : Render(parent, rect, backgroundColor, backgroundImage), sf::RenderTexture(), m_title(title), m_buttonMoveFrame(NULL, guiml::Label(), guiml::Image(), sf::FloatRect(0, 0, rect.width, title.getSize().y)), m_posTitle(PosText::CENTER), m_isMoving(false), m_hasAddChild(false)
 	{
 		m_movingAllChild = false;
 
@@ -39,7 +39,7 @@ namespace guiml
 
 			clear(m_backgroundColor);
 			std::list<sf::Drawable*> drawableForFrame;
-			Widget::update(drawableForFrame);
+			Updatable::update(drawableForFrame);
 			show(drawableForFrame);
 			drawable.push_back(&m_spriteFrame);
 			

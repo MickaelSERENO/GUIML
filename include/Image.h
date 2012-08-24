@@ -13,11 +13,11 @@ namespace guiml
 	public:
 		#include "SurchargeMethode.h"
 		//-------------one constructor for various parameters-------------//
-		Image(Widget *parent, const std::string &path, bool delTextureCreated = false, const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
-		Image(Widget *parent, const sf::Image &image, bool delTextureCreated = false, const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
-		Image(Widget *parent, const sf::Texture &texture, bool delTextureCreated  = false, const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
-		Image(Widget *parent, const sf::Sprite &sprite, bool delTextureCreated = false, const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
-		Image(Widget *parent = NULL);
+		Image(Updatable *parent, const std::string &path, bool delTextureCreated = false, const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
+		Image(Updatable *parent, const sf::Image &image, bool delTextureCreated = false, const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
+		Image(Updatable *parent, const sf::Texture &texture, bool delTextureCreated  = false, const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
+		Image(Updatable *parent, const sf::Sprite &sprite, bool delTextureCreated = false, const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
+		Image(Updatable *parent = NULL);
 		Image(const Image &copy);
 		Image& operator=(const Image &copy);
 

@@ -12,10 +12,10 @@ namespace guiml
 	public:	
 		#include "SurchargeMethode.h"
 		//-----------------------------------All constructors for various parameters-------------------------------------//
-		Button(Widget *parent, const Label &text, const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
-		Button(Widget *parent, const Image &image, const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
-		Button(Widget *parent, const Label &text, const Image &image, const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
-		Button(Widget *parent, const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
+		Button(Updatable *parent, const Label &text, const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
+		Button(Updatable *parent, const Image &image, const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
+		Button(Updatable *parent, const Label &text, const Image &image, const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
+		Button(Updatable *parent, const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
 		Button();
 		Button(const Button &copy);
 		//-------------------------------------------End of constructors--------------------------------------------//

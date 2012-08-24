@@ -14,6 +14,7 @@
 #include <stdexcept>
 #include "EventManager.h"
 #include "RessourcesManager.h"
+#include "Updatable.h"
 
 /*! \namespace guiml
  *
@@ -26,7 +27,7 @@ namespace guiml
 	 * \class Widget
 	 * \brief Root class for create Widgets.
 	 */
-	class Widget
+	class Widget : public Updatable
 	{
 	public:
 		/*! \brief Widget's Constructor
@@ -34,7 +35,7 @@ namespace guiml
 		 * \param parent The Widget parent who can update this object.
 		 * \param rect Defined the Widget's position and size
 		 * */
-		Widget(Widget *parent, const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
+		Widget(Updatable *parent, const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
 
 		/*! \brief Widget's Copy Constructor.
 		 * 
@@ -46,32 +47,6 @@ namespace guiml
 		 * */
 		virtual ~Widget();
 	
-		/*! \brief Add a child.
-		 *
-		 * \param child Widget who will be the child
-		 * \param pos It indicated where the child will be place in the child's list (the order is important for the update's order). At the default, the child will be placed at the end of thechild's list.
-		 * */
-		virtual void addChild(Widget *child, int pos = -1);
-
-		/*! \brief Set the Widget's parent.
-		 *
-		 *  \param parent The Widget who will be the parent.
-		 *  \param pos The widget's position in the parent's child's list. At the default, the Widget will be placed at the end of the child's list.
-		 * */
-		void setParent(Widget *parent, int pos = -1);
-
-		/*! \brief Remove the child of the Widget's child's list. It return true if the removing is correct, else it return false(maybe the parameter child is not a widget's child).
-		 *
-		 *  \param child The pointeur of the child who will be delete of the widget's child's list. 
-		 */
-		bool removeChild(Widget *child);
-
-		/*! \brief Remove the child who is in the position indicate. It return true if the removing is correct, else it return false(maybe the position is wrong).
-		 *
-		 * \param pos The child's position in the Widget's child's list.
-		 * */
-		bool removeChild(unsigned int pos);
-
 		/*! \brief Update the Widget or not.
 		 * 
 		 *	\param drawing Boolean for knowing if you want to update the widget or not.
@@ -84,11 +59,6 @@ namespace guiml
 		 */
 		void drawAllChild(bool drawing);
 
-		/*! \brief Update the Widget.
-		 *
-		 *	\param drawables List who will be complete by Widget's drawable. This function in this root class doesn't complete drawables (because he haven't) but it update all the Widget's child.
-		 */
-		virtual void update(std::list<sf::Drawable*> &drawables); //Update all Children of the Widget
 
 		/*! \brief Set the absolute position (without Window's resize).
 		 *
@@ -175,18 +145,6 @@ namespace guiml
 		 * */
 		bool isDrawing() const;
 
-		/*! \brief Return true if "child" is a Widget's child, els it return false.
-		 *
-		 *  \param child The Widget who can be a Widget's child.
-		 * */
-		bool isChild(const Widget *child);
-
-		/*! \brief Return true if the Widget has a parent, else it return false.
-		 */
-		bool hasParent() const;
-
-		/*! \brief If the root parent is a Window, this function return a pointeur about the Window's EventManager. Else, it return NULL.
-		 */
 		virtual EventManager* getEventManager() const; //get de EventManager who will be use for all of children.
 
 		/*! \brief Return the relative Widget's position (with Window's resize).
@@ -232,13 +190,7 @@ namespace guiml
 		 * \param newWindowSize The Window's size with resize (with the mouse).
 		 */
 		virtual void resizeWidget(const sf::Vector2f& defaultWindowSize, const sf::Vector2f& newWindowSize);
-
-		/*! \brief It return a Widget's copy.
-		 */
-		virtual Widget* copy() const;
 	protected:
-		std::list <Widget*> m_child; /*!< Child's list. */
-		Widget *m_parent; /*!< The Widget's parent. */
 		bool m_isDrawing; /*!< Update the Widget or not ? */
 		sf::Vector2f m_pos; /*!< The relative Widget's position (with Window's resize). */
 		sf::Vector2f m_size; /*!< The relative Widget's size (with Window's resize). */

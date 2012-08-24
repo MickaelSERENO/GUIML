@@ -2,7 +2,7 @@
 
 namespace guiml
 {
-	Slide::Slide(Widget *parent, const sf::Vector2f &extremesValues, const sf::FloatRect &rect, int cursorSize, const Position& position, int pourcentageGlobalRectangle) : Widget(parent, rect), m_cursor(this), m_buttonUp(this), m_buttonDown(this), m_extremesValues(extremesValues), m_value(0), m_position(position), m_isSelect(false), m_isActive(false), m_pourcentageGlobalRectangle(pourcentageGlobalRectangle)
+	Slide::Slide(Updatable *parent, const sf::Vector2f &extremesValues, const sf::FloatRect &rect, int cursorSize, const Position& position, int pourcentageGlobalRectangle) : Widget(parent, rect), m_cursor(this), m_buttonUp(this), m_buttonDown(this), m_extremesValues(extremesValues), m_value(0), m_position(position), m_isSelect(false), m_isActive(false), m_pourcentageGlobalRectangle(pourcentageGlobalRectangle)
 	{
 		if(position == Position::VERTICAL)
 		{
@@ -27,12 +27,12 @@ namespace guiml
 		}
 	}
 
-	Slide::Slide(Widget *parent, float valueMin, float valueMax, const sf::FloatRect &rect, int cursorSize, const Position &position, int pourcentageGlobalRectangle) : Widget(parent, rect), m_extremesValues(sf::Vector2f(valueMin, valueMax)), m_value(0), m_position(position), m_isSelect(false), m_isActive(false), m_pourcentageGlobalRectangle(pourcentageGlobalRectangle)
+	Slide::Slide(Updatable *parent, float valueMin, float valueMax, const sf::FloatRect &rect, int cursorSize, const Position &position, int pourcentageGlobalRectangle) : Widget(parent, rect), m_extremesValues(sf::Vector2f(valueMin, valueMax)), m_value(0), m_position(position), m_isSelect(false), m_isActive(false), m_pourcentageGlobalRectangle(pourcentageGlobalRectangle)
 	{
 
 	}
 
-	Slide::Slide(Widget *parent) : Widget(parent, sf::FloatRect(0, 0, 0, 0)), m_extremesValues(sf::Vector2f(0, 0)), m_position(Position::VERTICAL)
+	Slide::Slide(Updatable *parent) : Widget(parent, sf::FloatRect(0, 0, 0, 0)), m_extremesValues(sf::Vector2f(0, 0)), m_position(Position::VERTICAL)
 	{
 
 	}

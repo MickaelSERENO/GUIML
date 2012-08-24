@@ -2,7 +2,7 @@
 
 namespace guiml
 {
-	Render::Render(Widget *parent, const sf::FloatRect &rect, const sf::Color &backgroundColor, const Image &backgroundImage) : Widget(parent, rect), m_backgroundColor(backgroundColor)
+	Render::Render(Updatable *parent, const sf::FloatRect &rect, const sf::Color &backgroundColor, const Image &backgroundImage) : Widget(parent, rect), m_backgroundColor(backgroundColor)
 	{
 		setBackgroundImage(backgroundImage);
 	}

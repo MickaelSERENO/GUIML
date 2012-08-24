@@ -18,7 +18,7 @@ namespace guiml
 	{
 	public:
 		#include "SurchargeMethode.h"
-		Frame(Widget *parent, const sf::FloatRect &rect, const sf::Color &backgroundColor = sf::Color::Black, const Image &backgroundImage = Image(), const Label &title = Label(), const sf::Color &backgroundTitle = sf::Color(255, 255, 255, 255), bool drawButtonMoveFrame=true);
+		Frame(Updatable *parent, const sf::FloatRect &rect, const sf::Color &backgroundColor = sf::Color::Black, const Image &backgroundImage = Image(), const Label &title = Label(), const sf::Color &backgroundTitle = sf::Color(255, 255, 255, 255), bool drawButtonMoveFrame=true);
 
 		void update(std::list<sf::Drawable*> &drawable);
 		void show(std::list<sf::Drawable*> &drawable);

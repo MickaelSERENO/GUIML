@@ -9,7 +9,7 @@ namespace guiml
 	{
 	public:
 		#include "SurchargeMethode.h"
-		CheckBox(Widget* parent, const sf::FloatRect &rect);
+		CheckBox(Updatable* parent, const sf::FloatRect &rect);
 		CheckBox(const CheckBox &copy);
 
 		virtual void update(std::list<sf::Drawable*> &drawable);
