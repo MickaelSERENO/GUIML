@@ -192,7 +192,7 @@ namespace guiml
 		virtual void resizeWidget(const sf::Vector2f& defaultWindowSize, const sf::Vector2f& newWindowSize);
 		virtual Widget* copy() const;
 
-//	static std::list<Widget*> getWidgetList(const std::list<Updatable*> &list);
+		static std::list<Widget*> extractWidgetList(const std::list<Updatable*> &list);
 	protected:
 		bool m_isDrawing; /*!< Update the Widget or not ? */
 		sf::Vector2f m_pos; /*!< The relative Widget's position (with Window's resize). */
@@ -200,6 +200,7 @@ namespace guiml
 		sf::Vector2f m_virtualPos; /*!< The absolute Widget's position (without Window's resize). */
 		sf::Vector2f m_virtualSize; /*!< The absolute Widget's size (without Window's resize). */
 		bool m_movingAllChild; /*!< When the Widget's position is set, do we must moving the child ? */
+		std::list<Widget*> m_widgetChild;
 
 		static RessourcesManager<sf::Texture*> fileLoading;
 	};

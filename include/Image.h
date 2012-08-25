@@ -39,7 +39,7 @@ namespace guiml
 		void setTextureRect(const sf::FloatRect &rect);
 		void setRotation(float angle);
 
-		void setImage(const sf::Texture &texture);
+		void setImage(const sf::Texture &texture, bool resetRect = false);
 		void setImage(const sf::Sprite &sprite);
 		void setImage(const std::string &path);
 		void setImage(const sf::Image &image);

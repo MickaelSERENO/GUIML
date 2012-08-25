@@ -31,6 +31,7 @@ namespace guiml
 		if(m_changeWindow)
 			setRect(getVirtualRect());
 		Updatable::update(drawable);
+		m_changeWindow = false;
 	}
 
 	void Widget::drawWidget(bool drawing)
@@ -205,13 +206,13 @@ namespace guiml
 		return new Widget(*this);
 	}
 
-/* 	std::list<Widget*> Widget::getWidgetList(const std::list<Updatable*> &list)
+ 	std::list<Widget*> Widget::extractWidgetList(const std::list<Updatable*> &list)
 	{
 		std::list<Widget*> widgetList;
-		for(std::list<Updatable*>::iterator it = list.begin(); it != list.end(); ++it)
+		for(std::list<Updatable*>::const_iterator it = list.begin(); it != list.end(); ++it)
 			if(Widget* child = dynamic_cast<Widget*>(*it))
-				widgetList.push_back(*it);
+				widgetList.push_back(child);
 
 		return widgetList;
-	}*/
+	}
 }

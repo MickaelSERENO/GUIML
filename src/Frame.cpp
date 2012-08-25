@@ -36,7 +36,7 @@ namespace guiml
 			}
 			for(std::list<Updatable*>::iterator it = m_child.begin(); it != m_child.end(); ++it)
 				if(Widget* child = dynamic_cast<Widget*>(*it))
-					child->move(m_virtualPos.x, m_virtualPos.y);
+					child->move(m_virtualPos.x, m_virtualPos.y); 
 
 			clear(m_backgroundColor);
 			std::list<sf::Drawable*> drawableForFrame;
@@ -46,7 +46,7 @@ namespace guiml
 			
 			for(std::list<Updatable*>::iterator it = m_child.begin(); it != m_child.end(); ++it)
 				if(Widget* child = dynamic_cast<Widget*>(*it))
-					child->move(-m_virtualPos.x, -m_virtualPos.y);
+					child->move(-m_virtualPos.x, -m_virtualPos.y); 
 		}
 	}
 

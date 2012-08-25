@@ -33,7 +33,7 @@ namespace guiml
 		if (rect != sf::FloatRect(0, 0, 0, 0))
 			setRect(rect);
 		else
-			setRect(m_sprite.getGlobalBounds());
+			setRect(sf::FloatRect(0, 0, texture->getSize().x, texture->getSize().y));
 	}
 
 	Image::Image(Updatable *parent, const sf::Image &image, bool delTextureCreated, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0), m_delTextureCreated(delTextureCreated)
@@ -60,7 +60,7 @@ namespace guiml
 		if (rect != sf::FloatRect(0, 0, 0, 0))
 			setRect(rect);
 		else
-			setRect(m_sprite.getGlobalBounds());
+			setRect(sf::FloatRect(0, 0, texture->getSize().x, texture->getSize().y));
 	}
 
 	Image::Image(Updatable *parent, const sf::Texture &texture, bool delTextureCreated, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0), m_delTextureCreated(delTextureCreated)
@@ -69,7 +69,7 @@ namespace guiml
 		if (rect != sf::FloatRect(0, 0, 0, 0))
 			setRect(rect);
 		else
-			setRect(m_sprite.getGlobalBounds());
+			setRect(sf::FloatRect(0, 0, texture.getSize().x, texture.getSize().y));
 	}
 
 	Image::Image(Updatable *parent, const sf::Sprite &sprite, bool delTextureCreated, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0), m_delTextureCreated(delTextureCreated)
@@ -276,9 +276,9 @@ namespace guiml
 		m_sprite.setTextureRect(sf::IntRect(rect.left, rect.top, rect.width, rect.height));
 	}
 
-	void Image::setImage(const sf::Texture &texture)
+	void Image::setImage(const sf::Texture &texture, bool resetRect)
 	{
-		m_sprite.setTexture(texture);
+		m_sprite.setTexture(texture, resetRect);
 		setRect(getVirtualRect());
 	}
 
@@ -338,7 +338,6 @@ namespace guiml
 	{
 		m_sprite.setScale(x/m_sprite.getLocalBounds().width, y/m_sprite.getLocalBounds().height);
 		Widget::setSize(x, y);
-		std::cout << m_size.x << " " << m_size.y << std::endl;
 	}
 
 	void Image::setPosition(float x, float y)
