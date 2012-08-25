@@ -4,6 +4,7 @@ set(LIBRARY_OUTPUT_PATH lib)
 set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -std=c++0x")
 include_directories(${sfml_include_dir} include)
 link_directories(${sfml_link_dir})
+set(CMAKE_BUILD_TYPE "Release")
 
 file(
 	GLOB_RECURSE
