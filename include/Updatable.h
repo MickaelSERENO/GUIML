@@ -35,13 +35,13 @@ namespace guiml
 			 *  \param parent The Updatable who will be the parent.
 			 *  \param pos The widget's position in the parent's child's list. At the default, the Updatable will be placed at the end of the child's list.
 			 * */
-			void setParent(Updatable *parent, int pos);
+			void setParent(Updatable *parent, int pos = -1);
 
 			/*! \brief Remove the child of the Updatable's child's list. It return true if the removing is correct, else it return false(maybe the parameter child is not a widget's child).
 			 *
 			 *  \param child The pointeur of the child who will be delete of the widget's child's list. 
 			 */
-			bool removeChild(const Updatable *child);
+			bool removeChild(Updatable *child);
 
 			/*! \brief Remove the child who is in the position indicate. It return true if the removing is correct, else it return false(maybe the position is wrong).
 			 *
@@ -55,9 +55,9 @@ namespace guiml
 			 * */
 			bool isChild(const Updatable *child);
 
-			/*! \brief Return true if the Updatable has a parent, else it return false.
+			/*! \brief Return Updatable's parent.
 			 */
-			bool hasParent() const;
+			const Updatable* getParent() const;
 
 			/*! \brief If the root parent is a Window, this function return a pointeur about the Window's EventManager. Else, it return NULL.
 			 */
@@ -66,9 +66,10 @@ namespace guiml
 			/*! \brief It return a Updatable's copy.
 			 */
 			virtual Updatable *copy();
-		private:
+		protected:
 			std::list <Updatable*> m_child; /*!< Child's list. */
-			Updatable *m_parent; /*!< The Widget's parent. */
+			Updatable *m_parent; /*!< The Updatable's parent. */
+			bool m_changeWindow; /*!< If Window is change in the setParent's function */
 	};
 }
 

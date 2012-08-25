@@ -3,19 +3,22 @@
 namespace guiml
 {
 
-	Updatable::Updatable(Updatable *parent) : m_parent(NULL)
+	Updatable::Updatable(Updatable *parent) : m_parent(NULL), m_changeWindow(false)
 	{
 		if(parent)
 			parent->addChild(this);
 	}
 
-	Updatable::Updatable(const Updatable &copy) : m_parent(NULL)
+	Updatable::Updatable(const Updatable &copy) : m_parent(NULL), m_changeWindow(false)
 	{}
 
 	Updatable& Updatable::operator=(const Updatable &copy)
 	{
 		if(&copy != this)
+		{
 			m_parent = NULL;
+			m_changeWindow = false;
+		}
 		return *this;
 	}
 
@@ -63,33 +66,41 @@ namespace guiml
 			m_parent->Updatable::addChild(this, pos);
 
 		if(newEvent != NULL && event != newEvent) //if the EventManager is not the same, then the Window's root parent is not the same. Then, we update the relative rect.
-			setRect(getVirtualRect());
+			m_changeWindow=true;
 	}
 
 	bool Updatable::removeChild(Updatable *child)
 	{
-		for(std::list<Updatable*>::iterator it = m_child.begin(); it != m_child.end(); ++it)
+		if(child->getParent() == this)
 		{
-			if(*it == child)
-			{
-				m_child.erase(it);
-				return true;
-			}
+			child->setParent(NULL);
+			return true;
 		}
 
-		return false;
+		else
+		{
+			for(std::list<Updatable*>::iterator it = m_child.begin(); it != m_child.end(); ++it)
+			{
+				if(*it == child)
+				{
+					m_child.erase(it);
+					return true;
+				}
+			}
+			return false;
+		}
 	}
 
 	bool Updatable::removeChild(unsigned int pos)
 	{
-		if(pos > m_child.size())
+		if(pos >= m_child.size())
 			return false;
 
 		std::list<Updatable*>::iterator it = m_child.begin();
-		for(unsigned int i = 0; i < pos; i++)
+		for(unsigned int i = 0; i != pos; i++)
 			it++;
 
-		m_child.erase(it);
+		(*it)->setParent(NULL);
 		return true;
 	}
 
@@ -121,7 +132,7 @@ namespace guiml
 				(*it)->update(drawables);
 	}
 
-	bool Updatable::hasParent() const
+	const Updatable* Updatable::getParent() const
 	{
 		return m_parent;
 	}
