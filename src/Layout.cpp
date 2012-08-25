@@ -79,11 +79,6 @@ namespace guiml
 		}
 	}
 
-	void Layout::update(std::list<sf::Drawable*> &drawable)
-	{
-		Updatable::update(drawable);
-	}
-
 	void Layout::setSize(float x, float y)
 	{
 		sf::Vector2f addSize(-(getRealDistance().x-getRealDistance().x/getSizeGrid().x), -(getRealDistance().y - getRealDistance().y/getSizeGrid().y)); //We need to remove a part of the widget's size for correspond at m_distance.
