@@ -101,7 +101,7 @@ namespace guiml
 			m_isSelect = false;
 			m_isActived = false;
 		}
-		Updatable::update(drawable);
+		Widget::update(drawable);
 	}
 
 	void Button::centerLabel()

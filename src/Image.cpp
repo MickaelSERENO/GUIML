@@ -118,7 +118,7 @@ namespace guiml
 	{
 		if(m_isDrawing)
 			drawable.push_back(&m_sprite);
-		Updatable::update(drawable);
+		Widget::update(drawable);
 	}
 
 	void Image::roundEdge(int size)
@@ -338,6 +338,7 @@ namespace guiml
 	{
 		m_sprite.setScale(x/m_sprite.getLocalBounds().width, y/m_sprite.getLocalBounds().height);
 		Widget::setSize(x, y);
+		std::cout << m_size.x << " " << m_size.y << std::endl;
 	}
 
 	void Image::setPosition(float x, float y)

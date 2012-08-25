@@ -30,7 +30,7 @@ namespace guiml
 			Widget::resizeWidget(m_event->getDefaultWindowSize(), m_event->getNewWindowSize());
 		m_framerate = 1 / (m_event->getElapsedTime() * 0.001);
 
-		Updatable::update(drawable);
+		Widget::update(drawable);
 		show(drawable);
 		clear(m_backgroundColor);
 	}

@@ -43,10 +43,12 @@ namespace guiml
 		 */
 		Widget(const Widget &copy);
 
-		/*! \brief Widget's virtual destructor. When the Widget is destroyed, all objects' child are destroyed this object will be delete in the parent's child's list.
-		 * */
-		virtual ~Widget();
-	
+		/*! \brief Update the Widget.
+		 *
+		 *	\param drawables List who will be complete by Widget's drawable. This function in this root class doesn't complete drawables (because he haven't) but it update all the Widget's child.
+		 */
+		virtual void update(std::list<sf::Drawable*> &drawable);
+
 		/*! \brief Update the Widget or not.
 		 * 
 		 *	\param drawing Boolean for knowing if you want to update the widget or not.
@@ -145,8 +147,6 @@ namespace guiml
 		 * */
 		bool isDrawing() const;
 
-		virtual EventManager* getEventManager() const; //get de EventManager who will be use for all of children.
-
 		/*! \brief Return the relative Widget's position (with Window's resize).
 		 */
 		const sf::Vector2f& getPosition() const;
@@ -190,6 +190,9 @@ namespace guiml
 		 * \param newWindowSize The Window's size with resize (with the mouse).
 		 */
 		virtual void resizeWidget(const sf::Vector2f& defaultWindowSize, const sf::Vector2f& newWindowSize);
+		virtual Widget* copy() const;
+
+//	static std::list<Widget*> getWidgetList(const std::list<Updatable*> &list);
 	protected:
 		bool m_isDrawing; /*!< Update the Widget or not ? */
 		sf::Vector2f m_pos; /*!< The relative Widget's position (with Window's resize). */

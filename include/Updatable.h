@@ -63,9 +63,7 @@ namespace guiml
 			 */
 			virtual EventManager* getEventManager() const;
 
-			/*! \brief It return a Updatable's copy.
-			 */
-			virtual Updatable *copy();
+			bool hasChangeWindow() const;
 		protected:
 			std::list <Updatable*> m_child; /*!< Child's list. */
 			Updatable *m_parent; /*!< The Updatable's parent. */

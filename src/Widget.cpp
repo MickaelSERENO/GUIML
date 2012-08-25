@@ -21,14 +21,16 @@ namespace guiml
 			m_virtualPos = copy.m_virtualPos;
 			m_virtualSize = copy.m_virtualSize;
 			m_movingAllChild = copy.m_movingAllChild;
-			for(std::list<Widget*>::iterator it = m_child.begin(); it != m_child.end(); ++it)
-			{
-				delete *it;
-				it = m_child.erase(it);
-			}
 		}
 
 		return *this;
+	}
+
+	void Widget::update(std::list<sf::Drawable*> &drawable)
+	{
+		if(m_changeWindow)
+			setRect(getVirtualRect());
+		Updatable::update(drawable);
 	}
 
 	void Widget::drawWidget(bool drawing)
@@ -38,8 +40,9 @@ namespace guiml
 
 	void Widget::drawAllChild(bool drawing)
 	{
-		for(std::list<Widget*>::iterator it = m_child.begin(); it != m_child.end(); ++it)
-			(*it)->drawWidget(drawing);
+		for(std::list<Updatable*>::iterator it = m_child.begin(); it != m_child.end(); ++it)
+			if(Widget* child = dynamic_cast<Widget*>(*it))
+				child->drawWidget(drawing);
 	}
 
 	void Widget::setPosition(const sf::Vector2f &pos)
@@ -50,8 +53,9 @@ namespace guiml
 	void Widget::setPosition(float x, float y)
 	{
 		if(m_movingAllChild)
-			for(std::list<Widget*>::iterator it = m_child.begin(); it != m_child.end(); ++it)
-				(*it)->move(x - m_virtualPos.x, y - m_virtualPos.y);
+			for(std::list<Updatable*>::iterator it = m_child.begin(); it != m_child.end(); ++it)
+				if(Widget* child = dynamic_cast<Widget*>(*it))
+					child->move(x - m_virtualPos.x, y - m_virtualPos.y);
 
 		EventManager *event = getEventManager();
 		if(event)
@@ -138,8 +142,9 @@ namespace guiml
 	void Widget::moveAllChild(bool movingAllChild)
 	{
 		m_movingAllChild = movingAllChild;
-		for(std::list<Widget*>::iterator it = m_child.begin(); it != m_child.end(); ++it)
-			(*it)->moveAllChild(movingAllChild);
+		for(std::list<Updatable*>::iterator it = m_child.begin(); it != m_child.end(); ++it)
+			if(Widget* child = dynamic_cast<Widget*>(*it))
+				child->moveAllChild(movingAllChild);
 	}
 
 	bool Widget::getMovingAllChild() const
@@ -190,12 +195,23 @@ namespace guiml
 		m_size.y = m_virtualSize.y * newWindowSize.y / defaultWindowSize.y;
 		m_pos.y = m_virtualPos.y * newWindowSize.y / defaultWindowSize.y;
 
-		for(std::list<Widget*>::iterator it = m_child.begin(); it!=m_child.end(); ++it)
-			(*it)->resizeWidget(defaultWindowSize, newWindowSize);
+		for(std::list<Updatable*>::iterator it = m_child.begin(); it!=m_child.end(); ++it)
+			if(Widget* child = dynamic_cast<Widget*>(*it))
+				child->resizeWidget(defaultWindowSize, newWindowSize);
 	}
 
 	Widget* Widget::copy() const
 	{
 		return new Widget(*this);
 	}
+
+/* 	std::list<Widget*> Widget::getWidgetList(const std::list<Updatable*> &list)
+	{
+		std::list<Widget*> widgetList;
+		for(std::list<Updatable*>::iterator it = list.begin(); it != list.end(); ++it)
+			if(Widget* child = dynamic_cast<Widget*>(*it))
+				widgetList.push_back(*it);
+
+		return widgetList;
+	}*/
 }

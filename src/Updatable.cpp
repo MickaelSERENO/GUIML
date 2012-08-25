@@ -33,6 +33,13 @@ namespace guiml
 		}
 	}
 
+	void Updatable::update(std::list<sf::Drawable*> &drawables)
+	{
+		for(std::list<Updatable*>::iterator it = m_child.begin(); it!=m_child.end(); ++it)
+			if(*it)
+				(*it)->update(drawables);
+	}
+
 	void Updatable::addChild(Updatable *child, int pos)
 	{
 		if(child->m_parent != this)
@@ -72,23 +79,16 @@ namespace guiml
 	bool Updatable::removeChild(Updatable *child)
 	{
 		if(child->getParent() == this)
-		{
-			child->setParent(NULL);
-			return true;
-		}
-
-		else
-		{
 			for(std::list<Updatable*>::iterator it = m_child.begin(); it != m_child.end(); ++it)
 			{
 				if(*it == child)
 				{
 					m_child.erase(it);
+					child->m_parent = NULL;
 					return true;
 				}
 			}
-			return false;
-		}
+		return false;
 	}
 
 	bool Updatable::removeChild(unsigned int pos)
@@ -125,15 +125,13 @@ namespace guiml
 		return isChild;
 	}
 
-	void Updatable::update(std::list<sf::Drawable*> &drawables)
-	{
-		for(std::list<Updatable*>::iterator it = m_child.begin(); it!=m_child.end(); ++it)
-			if(*it)
-				(*it)->update(drawables);
-	}
-
 	const Updatable* Updatable::getParent() const
 	{
 		return m_parent;
+	}
+
+	bool Updatable::hasChangeWindow() const
+	{
+		return m_changeWindow;
 	}
 }

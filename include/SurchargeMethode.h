@@ -3,3 +3,4 @@
 using guiml::Widget::scale;
 using guiml::Widget::setPosition;
 using guiml::Widget::setSize;
+using guiml::Widget::move;

@@ -2,12 +2,12 @@
 
 namespace guiml
 {
-	Label::Label(Updatable *parent, const std::string &string, const sf::Vector2f &position, int characterSize) : Widget(parent, sf::FloatRect(position.x, position.y, characterSize * string.size(), characterSize)), m_text(sf::String(string))
+	Label::Label(Updatable *parent, const std::string &string, const sf::Font &font, const sf::Vector2f &position, int characterSize) : Widget(parent, sf::FloatRect(position.x, position.y, characterSize * string.size(), characterSize)), m_text(sf::String(string), font)
 	{
 		setRect(sf::FloatRect(position.x, position.y, characterSize * string.size(), characterSize));
 	}
 
-	Label::Label(Updatable *parent, const sf::String &string, const sf::Vector2f &position, int characterSize) : Widget(parent, sf::FloatRect(position.x, position.y, characterSize * string.getSize(), characterSize)), m_text(string)
+	Label::Label(Updatable *parent, const sf::String &string, const sf::Font &font, const sf::Vector2f &position, int characterSize) : Widget(parent, sf::FloatRect(position.x, position.y, characterSize * string.getSize(), characterSize)), m_text(string, font)
 	{
 		setRect(sf::FloatRect(position.x, position.y, characterSize * string.getSize(), characterSize));
 	}
@@ -41,7 +41,7 @@ namespace guiml
 	{
 		if(m_isDrawing)
 			drawable.push_back(&m_text);
-		Updatable::update(drawable);
+		Widget::update(drawable);
 	}
 
 	void Label::lighten()
@@ -124,7 +124,7 @@ namespace guiml
 
 	void Label::setTextWidthSize(unsigned int size)
 	{
-		guiml::Label copy(NULL, getText().getString());
+		guiml::Label copy(NULL, m_text.getString(), *(m_text.getFont()));
 		copy.setCharacterSize(getText().getCharacterSize());
 		if(getString().getSize() != 0)
 			setCharacterSize(m_text.getCharacterSize() * size / copy.getVirtualSize().x);

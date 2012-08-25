@@ -35,7 +35,8 @@ namespace guiml
 				setPosition((newMousePosition.x/multiplicateMousePos.x)-m_mousePos.x, (newMousePosition.y/multiplicateMousePos.y)-m_mousePos.y);
 			}
 			for(std::list<Updatable*>::iterator it = m_child.begin(); it != m_child.end(); ++it)
-				(*it)->move(m_virtualPos.x, m_virtualPos.y);
+				if(Widget* child = dynamic_cast<Widget*>(*it))
+					child->move(m_virtualPos.x, m_virtualPos.y);
 
 			clear(m_backgroundColor);
 			std::list<sf::Drawable*> drawableForFrame;
@@ -43,8 +44,9 @@ namespace guiml
 			show(drawableForFrame);
 			drawable.push_back(&m_spriteFrame);
 			
-			for(std::list<Widget*>::iterator it = m_child.begin(); it != m_child.end(); ++it)
-				(*it)->move(-m_virtualPos.x, -m_virtualPos.y);
+			for(std::list<Updatable*>::iterator it = m_child.begin(); it != m_child.end(); ++it)
+				if(Widget* child = dynamic_cast<Widget*>(*it))
+					child->move(-m_virtualPos.x, -m_virtualPos.y);
 		}
 	}
 
@@ -62,15 +64,9 @@ namespace guiml
 	{
 		m_title = title;
 		m_title.setParent(this);
-		m_buttonMoveFrame.setSize(m_buttonMoveFrame.getSize().x, m_title.getSize().y);
+		m_buttonMoveFrame.setCharacterSize(m_buttonMoveFrame.getVirtualSize().y);
 		setTitlePos(m_posTitle);
-		setTitle(title.getString().toAnsiString());
-	}
-
-	void Frame::setTitle(const std::string &title)
-	{
-		setTitle(Label(NULL, title));
-		Render::setTitle(title);
+		Render::setTitle(title.getString().toAnsiString());
 	}
 
 	void Frame::setView(const sf::View &view)
@@ -94,7 +90,7 @@ namespace guiml
 	{
 		create(x, y);
 		Widget::setSize(x, y);
-		m_buttonMoveFrame.setSize(sf::Vector2f(m_virtualSize.x, m_buttonMoveFrame.getSize().y));
+		m_buttonMoveFrame.setSize(sf::Vector2f(m_virtualSize.x, m_buttonMoveFrame.getVirtualSize().y));
 		setTitlePos(m_posTitle);
 	}
 

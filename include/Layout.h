@@ -14,7 +14,6 @@ namespace guiml
 		Layout& operator=(const Layout &copy);
 		~Layout();
 
-		void update(std::list<sf::Drawable*> &drawable);
 		void setSize(float x, float y);
 		void setPosition(float x, float y);
 		void setDistance(float x, float y);

@@ -24,7 +24,6 @@ namespace guiml
 		void show(std::list<sf::Drawable*> &drawable);
 
 		void setTitle(const Label &title);
-		void setTitle(const std::string &title);
 		void setSize(float x, float y);
 		void setPosition(float x, float y);
 		void setBackgroundTitle(const sf::Color &colorTitle);

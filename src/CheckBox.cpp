@@ -50,7 +50,7 @@ namespace guiml
 				drawable.push_back(&m_line2);
 			}
 		}
-		Updatable::update(drawable);
+		Widget::update(drawable);
 	}
 
 	void CheckBox::setSize(float x, float y)
