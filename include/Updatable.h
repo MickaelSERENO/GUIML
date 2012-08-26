@@ -41,7 +41,7 @@ namespace guiml
 			 *
 			 *  \param child The pointeur of the child who will be delete of the widget's child's list. 
 			 */
-			bool removeChild(Updatable *child);
+			virtual bool removeChild(Updatable *child);
 
 			/*! \brief Remove the child who is in the position indicate. It return true if the removing is correct, else it return false(maybe the position is wrong).
 			 *
@@ -64,10 +64,14 @@ namespace guiml
 			virtual EventManager* getEventManager() const;
 
 			bool hasChangeWindow() const;
+
+			template <typename T>
 		protected:
 			std::list <Updatable*> m_child; /*!< Child's list. */
 			Updatable *m_parent; /*!< The Updatable's parent. */
 			bool m_changeWindow; /*!< If Window is change in the setParent's function */
+
+			std::list<T*> extractFromUpdatableChild() const;
 	};
 }
 

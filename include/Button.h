@@ -39,7 +39,6 @@ namespace guiml
 
 		//-----------------------------------------End of Mutateurs--------------------------------------------//
 
-
 		const Label* getLabel() const;
 		const Image* getBackground() const;
 		const unsigned int getKeyboardWhoActived() const;

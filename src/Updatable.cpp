@@ -134,4 +134,15 @@ namespace guiml
 	{
 		return m_changeWindow;
 	}
+
+	template <typename T>
+ 	std::list<T*> Updatable::extractFromUpdatableChild() const
+	{
+		std::list<T*> list;
+		for(std::list<Updatable*>::iterator it = m_child.begin(); it != m_child.end(); ++it)
+			if(T* child = dynamic_cast<T*>(*it))
+				list.push_back(child);
+
+		return list;
+	}
 }

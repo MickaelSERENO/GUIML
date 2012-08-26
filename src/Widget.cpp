@@ -205,14 +205,4 @@ namespace guiml
 	{
 		return new Widget(*this);
 	}
-
- 	std::list<Widget*> Widget::extractWidgetList(const std::list<Updatable*> &list)
-	{
-		std::list<Widget*> widgetList;
-		for(std::list<Updatable*>::const_iterator it = list.begin(); it != list.end(); ++it)
-			if(Widget* child = dynamic_cast<Widget*>(*it))
-				widgetList.push_back(child);
-
-		return widgetList;
-	}
 }

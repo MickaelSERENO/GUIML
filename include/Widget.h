@@ -191,8 +191,6 @@ namespace guiml
 		 */
 		virtual void resizeWidget(const sf::Vector2f& defaultWindowSize, const sf::Vector2f& newWindowSize);
 		virtual Widget* copy() const;
-
-		static std::list<Widget*> extractWidgetList(const std::list<Updatable*> &list);
 	protected:
 		bool m_isDrawing; /*!< Update the Widget or not ? */
 		sf::Vector2f m_pos; /*!< The relative Widget's position (with Window's resize). */

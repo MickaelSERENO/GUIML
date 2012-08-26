@@ -34,9 +34,12 @@ namespace guiml
 				sf::Vector2f multiplicateMousePos = getEventManager()->getMultiplicateMousePos();
 				setPosition((newMousePosition.x/multiplicateMousePos.x)-m_mousePos.x, (newMousePosition.y/multiplicateMousePos.y)-m_mousePos.y);
 			}
-			for(std::list<Updatable*>::iterator it = m_child.begin(); it != m_child.end(); ++it)
-				if(Widget* child = dynamic_cast<Widget*>(*it))
-					child->move(m_virtualPos.x, m_virtualPos.y); 
+
+			std::list<Widget*> child = extractFromUpdatableChild<Widget>();
+
+			for(std::list<Widget*>::iterator it = child.begin(); it != child.end(); ++it)
+				if(*it)
+					(*it)->move(m_virtualPos.x, m_virtualPos.y); 
 
 			clear(m_backgroundColor);
 			std::list<sf::Drawable*> drawableForFrame;
@@ -44,9 +47,9 @@ namespace guiml
 			show(drawableForFrame);
 			drawable.push_back(&m_spriteFrame);
 			
-			for(std::list<Updatable*>::iterator it = m_child.begin(); it != m_child.end(); ++it)
-				if(Widget* child = dynamic_cast<Widget*>(*it))
-					child->move(-m_virtualPos.x, -m_virtualPos.y); 
+			for(std::list<Widget*>::iterator it = child.begin(); it != child.end(); ++it)
+				if(*it)
+					(*it)->move(-m_virtualPos.x, -m_virtualPos.y); 
 		}
 	}
 
