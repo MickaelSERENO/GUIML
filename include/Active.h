@@ -1,20 +1,19 @@
 #ifndef DEF_ACTIVE
 #define DEF_ACTIVE
 
-#include "Updatable.h"
-
 namespace guiml
 {
-	class Active : public Updatable
+	class Active
 	{
 		public:
-			Active(Updatable *parent, bool select = false, bool active = false, bool alwaysUpdateSelection = false, bool alwaysUpdateActivation = false);
+			Active(bool select = false, bool active = false, bool alwaysUpdateSelection = false, bool alwaysUpdateActivation = false);
 			Active(const Active &copy);
+			virtual Active& operator=(const Active &copy);
 
-			virtual void update(std::list<sf::Drawable*> drawable);
+			virtual void update();
 
-			virtual void updateSelection();
-			virtual void updateActivation();
+			virtual bool updateSelection();
+			virtual bool updateActivation();
 
 			virtual void selectIt();
 			virtual void deselectIt();

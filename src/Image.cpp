@@ -89,7 +89,6 @@ namespace guiml
 		setImage(copy.m_sprite);
 		m_sizeRoundEdge = copy.m_sizeRoundEdge;
 		m_delTextureCreated = copy.m_delTextureCreated;
-		m_textureCreated = copy.m_textureCreated;
 	}
 
 	Image& Image::operator=(const Image &copy)
@@ -99,8 +98,7 @@ namespace guiml
 			Widget::operator=(copy);
 			m_sprite = copy.m_sprite;
 			m_sizeRoundEdge = copy.m_sizeRoundEdge;
-		m_delTextureCreated = copy.m_delTextureCreated;
-		m_textureCreated = copy.m_textureCreated;
+			m_delTextureCreated = copy.m_delTextureCreated;
 		}
 
 		return *this;
@@ -306,6 +304,9 @@ namespace guiml
 			}
 			Widget::fileLoading.add(path, texture);
 		}
+
+		else
+			texture = Widget::fileLoading.get(path);
 		m_sprite.setTexture(*texture);
 		setRect(getVirtualRect());
 	}

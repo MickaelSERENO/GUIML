@@ -179,7 +179,7 @@ namespace guiml
 	{
 		if(!m_isMoving && getEventManager())
 		{
-			m_isMoving = m_buttonMoveFrame.isActived();
+			m_isMoving = m_buttonMoveFrame.isActive();
 			m_mousePos = getEventManager()->getMousePosition();
 			sf::Vector2f multiplicateMousePos = getEventManager()->getMultiplicateMousePos();
 

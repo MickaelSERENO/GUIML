@@ -56,22 +56,30 @@ namespace guiml
 			bool isChild(const Updatable *child);
 
 			/*! \brief Return Updatable's parent.
-			 */
+			*/
 			const Updatable* getParent() const;
 
 			/*! \brief If the root parent is a Window, this function return a pointeur about the Window's EventManager. Else, it return NULL.
-			 */
+			*/
 			virtual EventManager* getEventManager() const;
 
 			bool hasChangeWindow() const;
 
-			template <typename T>
 		protected:
 			std::list <Updatable*> m_child; /*!< Child's list. */
 			Updatable *m_parent; /*!< The Updatable's parent. */
 			bool m_changeWindow; /*!< If Window is change in the setParent's function */
 
-			std::list<T*> extractFromUpdatableChild() const;
+			template <typename T>
+			std::list<T*> extractFromUpdatableChild() const
+			{
+				std::list<T*> list;
+				for(std::list<Updatable*>::const_iterator it = m_child.begin(); it != m_child.end(); ++it)
+					if(T* child = dynamic_cast<T*>(*it))
+						list.push_back(child);
+
+				return list;
+			}
 	};
 }
 

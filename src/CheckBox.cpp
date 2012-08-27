@@ -2,7 +2,7 @@
 
 namespace guiml
 {
-	CheckBox::CheckBox(Updatable *parent, const sf::FloatRect &rect) : Widget(parent, rect), m_rectangle(sf::Vector2f(rect.width, rect.height)), m_line1(sf::Lines, 2), m_line2(sf::Lines, 2), m_howActivedKeyboard(sf::Keyboard::End), m_howActivedClickMouse(sf::Mouse::Left), m_isSelect(false), m_isSelectCopy(false), m_isActived(false), m_isActivedCopy(false)
+	CheckBox::CheckBox(Updatable *parent, const sf::FloatRect &rect) : Widget(parent, rect), Active(), m_rectangle(sf::Vector2f(rect.width, rect.height)), m_line1(sf::Lines, 2), m_line2(sf::Lines, 2), m_howActivedKeyboard(sf::Keyboard::End), m_howActivedClickMouse(sf::Mouse::Left)
 	{
 		m_rectangle.setPosition(rect.left, rect.top);
 		setFillColorRectangle(sf::Color(0, 0, 0, 0));
@@ -16,23 +16,19 @@ namespace guiml
 		m_line2[1].position = sf::Vector2f(rect.left, rect.top + rect.height);
 	}
 
-	CheckBox::CheckBox(const CheckBox &copy) : Widget(copy), m_rectangle(copy.m_rectangle), m_line1(copy.m_line1), m_line2(copy.m_line2), m_howActivedKeyboard(copy.m_howActivedKeyboard), m_howActivedClickMouse(copy.m_howActivedClickMouse), m_isSelect(copy.m_isSelect), m_isSelectCopy(copy.m_isSelectCopy), m_isActived(copy.m_isActived), m_isActivedCopy(copy.m_isActivedCopy)
-	{}
+	CheckBox::CheckBox(const CheckBox &copy) : Widget(copy), Active(), m_rectangle(copy.m_rectangle), m_line1(copy.m_line1), m_line2(copy.m_line2), m_howActivedKeyboard(copy.m_howActivedKeyboard), m_howActivedClickMouse(copy.m_howActivedClickMouse){}
 
 	CheckBox& CheckBox::operator=(const CheckBox &copy)
 	{
 		if(this != &copy)
 		{
 			Widget::operator=(copy);
+			Active::operator=(copy);
 			m_rectangle = copy.m_rectangle;
 			m_line1 = copy.m_line1;
 			m_line2 = copy.m_line2;
 			m_howActivedKeyboard = copy.m_howActivedKeyboard;
 			m_howActivedClickMouse = copy.m_howActivedClickMouse;
-			m_isSelect = copy.m_isSelect;
-			m_isSelectCopy = copy.m_isSelectCopy;
-			m_isActived = copy.m_isActived;
-			m_isActivedCopy = copy.m_isActivedCopy;
 			m_isInput = copy.m_isInput;
 		}
 		return *this;
@@ -43,8 +39,8 @@ namespace guiml
 		if(m_isDrawing)
 		{
 			drawable.push_back(&m_rectangle);
-			testActived();
-			if(isActived())
+			Active::update();
+			if(m_isActive)
 			{
 				drawable.push_back(&m_line1);
 				drawable.push_back(&m_line2);
@@ -110,45 +106,28 @@ namespace guiml
 		m_rectangle.setOutlineThickness(x);
 	}
 
-	void CheckBox::selectIt(bool select)
-	{
-		m_isSelect = m_isSelectCopy = select;
-	}
-
-	void CheckBox::activedIt(bool actived)
-	{
-		m_isActived = m_isActivedCopy = actived;
-	}
-
-	bool CheckBox:: cursorInCase()
+	bool CheckBox::updateSelection()
 	{
 		if(getEventManager()->isMouseInRect(getVirtualRect()) || m_isSelectCopy)
-		{
 			m_isSelect = true;
-			return true;
-		}
 
 		else
-		{
 			m_isSelect = false;
-			return false;
-		}
+
+		return m_isSelect;
 	}
 
-	bool CheckBox::isActived() const
+	bool CheckBox::updateActivation()
 	{
-		return m_isActived;
-	}
-
-	void CheckBox::testActived()
-	{
-		if(cursorInCase() && (getEventManager()->getOneMouseClicked(m_howActivedClickMouse) || getEventManager()->getOnePressedKey(m_howActivedKeyboard)) && !m_isActivedCopy)
+		if(m_isSelect && (getEventManager()->getOneMouseClicked(m_howActivedClickMouse) || getEventManager()->getOnePressedKey(m_howActivedKeyboard)))
 		{
-			if(m_isActived)
-				m_isActived = false; 
+			if(m_isActive)
+				m_isActive = false; 
 			else
-				m_isActived = true;
+				m_isActive = true;
 		}
+
+		return m_isActive;
 	}
 
 	Widget* CheckBox::copy() const

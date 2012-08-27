@@ -2,10 +2,11 @@
 #define DEF_CASEBOX
 
 #include "Widget.h"
+#include "Active.h"
 
 namespace guiml
 {
-	class CheckBox : public Widget
+	class CheckBox : public Widget, public Active
 	{
 	public:
 		#include "SurchargeMethode.h"
@@ -13,7 +14,6 @@ namespace guiml
 		CheckBox(const CheckBox &copy);
 
 		virtual void update(std::list<sf::Drawable*> &drawable);
-
 
 		void setSize(float x, float y);
 		void setPosition(float x, float y);
@@ -26,26 +26,20 @@ namespace guiml
 		void setOutlineThickness(float x);
 
 		void setColorCross(const sf::Color &color);
-		void selectIt(bool select);
-		void activedIt(bool actived);
+		
+		bool updateSelection();
+		bool updateActivation();
 
 		bool cursorInCase();
-		bool isActived() const;
 		CheckBox& operator=(const CheckBox &copy);
 		Widget* copy() const;
 	private:
-		void testActived();
 		sf::RectangleShape m_rectangle;
 		sf::VertexArray m_line1;
 		sf::VertexArray m_line2;
 
 		unsigned int m_howActivedKeyboard;
 		unsigned int m_howActivedClickMouse;
-
-		bool m_isSelect;
-		bool m_isSelectCopy;
-		bool m_isActived;
-		bool m_isActivedCopy;
 
 		bool m_isInput;
 	};

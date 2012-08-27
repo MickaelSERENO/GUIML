@@ -1,13 +1,13 @@
 #ifndef DEF_BUTTON
 #define DEF_BUTTON
 
-#include "Widget.h"
+#include "Active.h"
 #include "Image.h"
 #include "Label.h"
 
 namespace guiml
 {
-	class Button : public Widget
+	class Button : public Widget, public Active
 	{
 	public:	
 		#include "SurchargeMethode.h"
@@ -21,7 +21,12 @@ namespace guiml
 		//-------------------------------------------End of constructors--------------------------------------------//
 
 		virtual void update(std::list<sf::Drawable*> &drawable);
-		bool cursorInButton();
+		virtual bool updateSelection();
+		virtual bool updateActivation();
+
+		virtual void selectIt();
+		virtual void deselectIt();
+
 		void lightUpDrawable(bool lighten = true);
 
 		//------------------------------------------Mutateurs---------------------------------------------------//
@@ -30,8 +35,6 @@ namespace guiml
 		void setSize(float sizex, float sizey);
 		void setBackground(const Image &image);
 		void setLabel(const Label &string);
-		void selectIt(bool select);
-		void activedIt(bool actived);
 
 		void setKeyboardWhoActived(const sf::Keyboard::Key &key);
 		void setClickMouseWhoActived(const sf::Mouse::Button &mouseButton);
@@ -46,8 +49,6 @@ namespace guiml
 
 		bool hasImage()const ;
 		bool hasLabel() const ;
-		bool isSelect() const ;	
-		bool isActived() const ;
 
 		Button& operator=(const Button &copy);
 		Widget* copy() const;
@@ -63,12 +64,9 @@ namespace guiml
 		Label m_textLighten;
 		Image *m_currentBackground;
 		Label *m_currentLabel;
-		bool m_isSelect;
-		bool m_isSelectCopy;
 
 		unsigned int m_howActivedKeyboard;
 		unsigned int m_howActivedClickMouse;
-		bool m_isActived;
 	};
 }
 
