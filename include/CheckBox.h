@@ -30,7 +30,6 @@ namespace guiml
 		bool updateSelection();
 		bool updateActivation();
 
-		bool cursorInCase();
 		CheckBox& operator=(const CheckBox &copy);
 		Widget* copy() const;
 	private:
@@ -40,8 +39,6 @@ namespace guiml
 
 		unsigned int m_howActivedKeyboard;
 		unsigned int m_howActivedClickMouse;
-
-		bool m_isInput;
 	};
 }
 

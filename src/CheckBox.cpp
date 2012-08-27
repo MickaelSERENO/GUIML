@@ -29,7 +29,6 @@ namespace guiml
 			m_line2 = copy.m_line2;
 			m_howActivedKeyboard = copy.m_howActivedKeyboard;
 			m_howActivedClickMouse = copy.m_howActivedClickMouse;
-			m_isInput = copy.m_isInput;
 		}
 		return *this;
 	}
