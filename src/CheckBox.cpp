@@ -107,7 +107,7 @@ namespace guiml
 
 	bool CheckBox::updateSelection()
 	{
-		if(getEventManager()->isMouseInRect(getVirtualRect()) || m_isSelectCopy)
+		if(m_event && m_event->isMouseInRect(getVirtualRect()) || m_isSelectCopy)
 			m_isSelect = true;
 
 		else
@@ -118,7 +118,7 @@ namespace guiml
 
 	bool CheckBox::updateActivation()
 	{
-		if(m_isSelect && (getEventManager()->getOneMouseClicked(m_howActivedClickMouse) || getEventManager()->getOnePressedKey(m_howActivedKeyboard)))
+		if(m_isSelect && m_event && (m_event->getOneMouseClicked(m_howActivedClickMouse) || m_event->getOnePressedKey(m_howActivedKeyboard)))
 		{
 			if(m_isActive)
 				m_isActive = false; 

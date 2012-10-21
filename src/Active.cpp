@@ -33,7 +33,7 @@ namespace guiml
 
 	bool Active::updateSelection()
 	{
-		if(m_isSelect)
+		if(m_isSelect || m_isSelectCopy)
 			selectIt();
 		else
 			deselectIt();
@@ -43,7 +43,7 @@ namespace guiml
 
 	bool Active::updateActivation()
 	{
-		if(m_isActive)
+		if(m_isActive || m_isActiveCopy)
 			activeIt();
 		else
 			disactiveIt();

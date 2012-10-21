@@ -28,10 +28,10 @@ namespace guiml
 	{
 		if(m_isDrawing)
 		{
-			if(getEventManager() && isMoving())
+			if(m_event && isMoving())
 			{
-				sf::Vector2f newMousePosition = getEventManager()->getMousePosition();
-				sf::Vector2f multiplicateMousePos = getEventManager()->getMultiplicateMousePos();
+				sf::Vector2f newMousePosition = m_event->getMousePosition();
+				sf::Vector2f multiplicateMousePos = m_event->getMultiplicateMousePos();
 				setPosition((newMousePosition.x/multiplicateMousePos.x)-m_mousePos.x, (newMousePosition.y/multiplicateMousePos.y)-m_mousePos.y);
 			}
 
@@ -177,18 +177,18 @@ namespace guiml
 
 	bool Frame::isMoving()
 	{
-		if(!m_isMoving && getEventManager())
+		if(!m_isMoving && m_event)
 		{
 			m_isMoving = m_buttonMoveFrame.isActive();
-			m_mousePos = getEventManager()->getMousePosition();
-			sf::Vector2f multiplicateMousePos = getEventManager()->getMultiplicateMousePos();
+			m_mousePos = m_event->getMousePosition();
+			sf::Vector2f multiplicateMousePos = m_event->getMultiplicateMousePos();
 
 			m_mousePos.x /= multiplicateMousePos.x;
 			m_mousePos.x -= m_virtualPos.x;	
 			m_mousePos.y /= multiplicateMousePos.y;
 			m_mousePos.y -= m_virtualPos.y;
 		}
-		else if(!(getEventManager()->getPressedKey(m_buttonMoveFrame.getKeyboardWhoActived()) || getEventManager()->getMouseClicked(m_buttonMoveFrame.getClickMouseWhoActived())))
+		else if(!(m_event && (m_event->getPressedKey(m_buttonMoveFrame.getKeyboardWhoActived()) || m_event->getMouseClicked(m_buttonMoveFrame.getClickMouseWhoActived()))))
 			m_isMoving = false;
 		return m_isMoving;
 	}

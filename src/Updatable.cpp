@@ -3,13 +3,13 @@
 namespace guiml
 {
 
-	Updatable::Updatable(Updatable *parent) : m_parent(NULL), m_changeWindow(false)
+	Updatable::Updatable(Updatable *parent) : m_parent(NULL), m_changeWindow(false), m_event(NULL)
 	{
 		if(parent)
 			parent->addChild(this);
 	}
 
-	Updatable::Updatable(const Updatable &copy) : m_parent(NULL), m_changeWindow(false)
+	Updatable::Updatable(const Updatable &copy) : m_parent(NULL), m_changeWindow(false), m_event(NULL)
 	{}
 
 	Updatable& Updatable::operator=(const Updatable &copy)
@@ -65,14 +65,14 @@ namespace guiml
 		if(m_parent)
 			m_parent->removeChild(this);
 		
-		EventManager* event = getEventManager();
+		EventManager* event = getEventManagerFromRootParent();
 		m_parent = parent;	
-		EventManager* newEvent = getEventManager();
+		m_event = getEventManagerFromRootParent();
 
 		if(parent)
 			m_parent->Updatable::addChild(this, pos);
 
-		if(newEvent != NULL && event != newEvent) //if the EventManager is not the same, then the Window's root parent is not the same. Then, we update the relative rect.
+		if(event != m_event) //if the EventManager is not the same, then the Window's root parent is not the same. Then, we update the relative rect.
 			m_changeWindow=true;
 	}
 
@@ -104,7 +104,7 @@ namespace guiml
 		return true;
 	}
 
-	EventManager* Updatable::getEventManager() const
+	EventManager* Updatable::getEventManagerFromRootParent() const
 	{
 		if(m_parent == NULL)
 			return NULL;
@@ -133,5 +133,10 @@ namespace guiml
 	bool Updatable::hasChangeWindow() const
 	{
 		return m_changeWindow;
+	}
+
+	EventManager* Updatable::getEventManager()
+	{
+		return m_event;
 	}
 }

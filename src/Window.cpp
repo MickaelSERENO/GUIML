@@ -56,6 +56,14 @@ namespace guiml
 		m_event->setDefaultWindowSize(m_size);
 	}
 
+	void Window::setParent(Updatable* parent, int pos)
+	{
+		EventManager* event = m_event;
+		Updatable::setParent(parent, pos);
+		m_event = event;
+		event=NULL;
+	}
+
 	void Window::setTitle(const std::string &title)
 	{
 		Render::setTitle(title);
@@ -71,11 +79,6 @@ namespace guiml
 	void Window::resetView()
 	{
 		setView(sf::RenderWindow::getDefaultView());
-	}
-
-	EventManager* Window::getEventManager() const
-	{
-		return m_event;
 	}
 
 	unsigned int Window::getFramerate()

@@ -58,13 +58,12 @@ namespace guiml
 				if(Widget* child = dynamic_cast<Widget*>(*it))
 					child->move(x - m_virtualPos.x, y - m_virtualPos.y);
 
-		EventManager *event = getEventManager();
-		if(event)
+		if(m_event)
 		{
-			sf::Vector2f defaultWindowSize = event->getDefaultWindowSize();
+			sf::Vector2f defaultWindowSize = m_event->getDefaultWindowSize();
 			if(defaultWindowSize.x != 0 && defaultWindowSize.y != 0)
 			{
-				sf::Vector2f newWindowSize = event->getNewWindowSize();
+				sf::Vector2f newWindowSize = m_event->getNewWindowSize();
 				m_pos = sf::Vector2f(x * newWindowSize.x/defaultWindowSize.x, y * newWindowSize.y / defaultWindowSize.y);
 			}
 			else
@@ -77,13 +76,12 @@ namespace guiml
 
 	void Widget::setSize(float x, float y)
 	{
-		EventManager *event = getEventManager();
-		if(event)
+		if(m_event)
 		{
-			sf::Vector2f defaultWindowSize = event->getDefaultWindowSize();
+			sf::Vector2f defaultWindowSize = m_event->getDefaultWindowSize();
 			if(defaultWindowSize.x != 0 && defaultWindowSize.y != 0)
 			{
-				sf::Vector2f newWindowSize = event->getNewWindowSize();
+				sf::Vector2f newWindowSize = m_event->getNewWindowSize();
 				m_size = sf::Vector2f(x * newWindowSize.x/defaultWindowSize.x, y * newWindowSize.y / defaultWindowSize.y);
 			}
 			else

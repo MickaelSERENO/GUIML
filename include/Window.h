@@ -52,13 +52,12 @@ namespace guiml
 		void setSize(float x, float y);
 		virtual void setTitle(const std::string &title);
 		void setView(const sf::View &view);
+		virtual void setParent(Updatable* parent, int pos = -1);
 		void resetView();
 
-		virtual EventManager* getEventManager() const;
 		unsigned int getFramerate();
 		virtual void resizeWidget(const sf::Vector2f& defaultWindowSize, const sf::Vector2f& newWindowSize);
 	protected:
-		EventManager *m_event;
 		float m_framerate;
 	};
 }

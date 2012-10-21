@@ -109,7 +109,7 @@ namespace guiml
 
 	bool Button::updateSelection()
 	{
-		if(getEventManager()->isMouseInRect(getRect()) || m_isSelectCopy)
+		if((m_event && m_event->isMouseInRect(getRect())) || m_isSelectCopy)
 			m_isSelect = true;
 
 		else
@@ -132,7 +132,7 @@ namespace guiml
 
 	bool Button::updateActivation()
 	{
-		if(m_isSelect && (getEventManager()->getOneMouseClicked(m_howActivedClickMouse) || getEventManager()->getOnePressedKey(m_howActivedKeyboard)))
+		if((m_isSelect && m_event && (m_event->getOneMouseClicked(m_howActivedClickMouse) || m_event->getOnePressedKey(m_howActivedKeyboard))) || m_isActiveCopy)
 			m_isActive = true;
 		else
 			m_isActive = false;
