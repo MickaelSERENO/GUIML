@@ -24,7 +24,7 @@ namespace guiml
 			m_buttonMoveFrame.drawWidget(false);
 	}
 
-	void Frame::update(std::list<sf::Drawable*> &drawable)
+	void Frame::update(IRender &render)
 	{
 		if(m_isDrawing)
 		{
@@ -42,10 +42,11 @@ namespace guiml
 					(*it)->move(m_virtualPos.x, m_virtualPos.y); 
 
 			clear(m_backgroundColor);
-			std::list<sf::Drawable*> drawableForFrame;
-			Widget::update(drawableForFrame);
-			show(drawableForFrame);
-			drawable.push_back(&m_spriteFrame);
+			Widget::update(*this);
+			display();
+			m_spriteFrame.setTexture(getTexture());
+			m_spriteFrame.setPosition(sf::Vector2f(m_virtualPos.x, m_virtualPos.y));
+			render.draw(m_spriteFrame);
 			
 			for(std::list<Widget*>::iterator it = child.begin(); it != child.end(); ++it)
 				if(*it)
@@ -53,14 +54,9 @@ namespace guiml
 		}
 	}
 
-	void Frame::show(std::list<sf::Drawable*> &drawable)
+	void Frame::draw(const sf::Drawable &drawable, const sf::RenderStates &states)
 	{
-		for(std::list<sf::Drawable*>::iterator it = drawable.begin(); it != drawable.end(); ++it)
-			if(*it)
-				draw(*(*it));
-		display();
-		m_spriteFrame.setTexture(getTexture());
-		m_spriteFrame.setPosition(sf::Vector2f(m_virtualPos.x, m_virtualPos.y));
+		sf::RenderTexture::draw(drawable, states);
 	}
 
 	void Frame::setTitle(const Label &title)

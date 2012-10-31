@@ -33,11 +33,11 @@ namespace guiml
 		}
 	}
 
-	void Updatable::update(std::list<sf::Drawable*> &drawables)
+	void Updatable::update(IRender &render)
 	{
 		for(std::list<Updatable*>::iterator it = m_child.begin(); it!=m_child.end(); ++it)
 			if(*it)
-				(*it)->update(drawables);
+				(*it)->update(render);
 	}
 
 	void Updatable::addChild(Updatable *child, int pos)

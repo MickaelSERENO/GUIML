@@ -83,7 +83,7 @@ namespace guiml
 
 	//................Escape of Constructor..............
 	
-	void Button::update(std::list<sf::Drawable*> &drawable)
+	void Button::update(IRender &render)
 	{
 		if(m_isDrawing)
 			Active::update();
@@ -93,7 +93,7 @@ namespace guiml
 			deselectIt();
 			disactiveIt();
 		}
-		Widget::update(drawable);
+		Widget::update(render);
 	}
 
 	void Button::centerLabel()

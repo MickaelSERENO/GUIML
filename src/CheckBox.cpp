@@ -33,19 +33,19 @@ namespace guiml
 		return *this;
 	}
 
-	void CheckBox::update(std::list<sf::Drawable*> &drawable)
+	void CheckBox::update(IRender &render)
 	{
 		if(m_isDrawing)
 		{
-			drawable.push_back(&m_rectangle);
+			render.draw(m_rectangle);
 			Active::update();
 			if(m_isActive)
 			{
-				drawable.push_back(&m_line1);
-				drawable.push_back(&m_line2);
+				render.draw(m_line1);
+				render.draw(m_line2);
 			}
 		}
-		Widget::update(drawable);
+		Widget::update(render);
 	}
 
 	void CheckBox::setSize(float x, float y)

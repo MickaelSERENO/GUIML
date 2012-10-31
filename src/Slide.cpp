@@ -45,7 +45,7 @@ namespace guiml
 	Slide::~Slide()
 	{}
 
-	void Slide::update(std::list<sf::Drawable*> &drawable)
+	void Slide::update(IRender &render)
 	{
 
 	}

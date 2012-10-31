@@ -41,12 +41,9 @@ namespace guiml
 		/*! \brief Update the Window : get all Widget's child drawables. It update the EventManager too. After, it call the show method.
 		 * \param drawable You can, if you want, give a drawables's list. The Window, in the order, go to draw all drawable who contain "drawable".
 		 */
-		void update(std::list<sf::Drawable*> &drawable); 
+		void update(IRender &render); 
 
-		/*! \brief Draw and display all sf::Drawable that contain drawable.
-		 * \param drawable All sf::Drawable that Window will draw and display. It draw drawable in the order of the list.
-		 */
-		void show(std::list<sf::Drawable*> &drawable); 
+		virtual void draw(const sf::Drawable &drawable, const sf::RenderStates &states=sf::RenderStates::Default);
 
 		void setPosition(float x, float y);
 		void setSize(float x, float y);

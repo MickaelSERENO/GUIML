@@ -24,7 +24,7 @@ namespace guiml
 		virtual ~Image();
 		//-----------------------and of constructor----------------------//
 
-		virtual void update(std::list<sf::Drawable*> &drawable); //methode Show version guiml::Image
+		virtual void update(IRender &render); //methode Show version guiml::Image
 		void lighten(const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
 		void roundEdge(int size);
 		const sf::Sprite &getSprite() const; //return the sprite

@@ -20,8 +20,8 @@ namespace guiml
 		#include "SurchargeMethode.h"
 		Frame(Updatable *parent, const sf::FloatRect &rect, const sf::Color &backgroundColor = sf::Color::Black, const Image &backgroundImage = Image(), const Label &title = Label(), const sf::Color &backgroundTitle = sf::Color(255, 255, 255, 255), bool drawButtonMoveFrame=true);
 
-		void update(std::list<sf::Drawable*> &drawable);
-		void show(std::list<sf::Drawable*> &drawable);
+		void update(IRender &render);
+		virtual void draw(const sf::Drawable &drawable, const sf::RenderStates &states=sf::RenderStates::Default);
 
 		void setTitle(const Label &title);
 		void setSize(float x, float y);

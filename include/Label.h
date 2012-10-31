@@ -16,7 +16,7 @@ namespace guiml
 		Label();
 		Label(const Label &copy);
 
-		virtual void update(std::list<sf::Drawable*> &drawable);
+		virtual void update(IRender &render);
 		void lighten();
 
 		const sf::String &getString() const;

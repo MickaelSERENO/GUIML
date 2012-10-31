@@ -112,11 +112,11 @@ namespace guiml
 	}
 	//-----------------------------End of constructor------------------------------------------//
 
-	void Image::update(std::list<sf::Drawable*> &drawable)
+	void Image::update(IRender &render)
 	{
 		if(m_isDrawing)
-			drawable.push_back(&m_sprite);
-		Widget::update(drawable);
+			render.draw(m_sprite);
+		Widget::update(render);
 	}
 
 	void Image::roundEdge(int size)

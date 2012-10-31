@@ -47,7 +47,7 @@ namespace guiml
 		 *
 		 *	\param drawables List who will be complete by Widget's drawable. This function in this root class doesn't complete drawables (because he haven't) but it update all the Widget's child.
 		 */
-		virtual void update(std::list<sf::Drawable*> &drawable);
+		virtual void update(IRender &render);
 
 		/*! \brief Update the Widget or not.
 		 * 

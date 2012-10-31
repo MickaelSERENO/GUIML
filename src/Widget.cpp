@@ -26,11 +26,11 @@ namespace guiml
 		return *this;
 	}
 
-	void Widget::update(std::list<sf::Drawable*> &drawable)
+	void Widget::update(IRender &render)
 	{
 		if(m_changeWindow)
 			setRect(getVirtualRect());
-		Updatable::update(drawable);
+		Updatable::update(render);
 		m_changeWindow = false;
 	}
 

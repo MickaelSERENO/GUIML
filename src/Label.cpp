@@ -37,11 +37,11 @@ namespace guiml
 		return *this;
 	}
 
-	void Label::update(std::list<sf::Drawable*> &drawable)
+	void Label::update(IRender &render)
 	{
 		if(m_isDrawing)
-			drawable.push_back(&m_text);
-		Widget::update(drawable);
+			render.draw(m_text);
+		Widget::update(render);
 	}
 
 	void Label::lighten()

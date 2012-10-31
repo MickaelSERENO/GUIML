@@ -11,13 +11,14 @@
 #include "Widget.h"
 #include "Image.h"
 #include "Slide.h"
+#include "IRender.h"
 
 namespace guiml
 {
 	/*! \class Render
 	 *  \brief Basic virtual class for create Render's object. Window class and Frame class inherited of this class.
 	 */
-	class Render : public Widget
+	class Render : public Widget, public IRender
 	{
 		public:
 		#include "SurchargeMethode.h"
@@ -29,12 +30,6 @@ namespace guiml
 			 *	\param backgroundImage If you want a background Image. At the default, the Window doesn't have a background image.
 			 */
 			Render(Updatable *parent, const sf::FloatRect &rect, const sf::Color &backgroundColor = sf::Color::Black, const Image &backgroundImage = Image());
-
-			/*! \brief Draw all drawable who contain "drawable" in the order of list.
-			 *
-			 *	\param drawable The list of drawable that the method will display.
-			 */
-			virtual void show(std::list<sf::Drawable*> &drawable) = 0;
 
 			/*! \brief Set the background image.
 			 *	\param backgroundImage The new background image.

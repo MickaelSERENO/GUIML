@@ -13,7 +13,7 @@ namespace guiml
 		CheckBox(Updatable* parent, const sf::FloatRect &rect);
 		CheckBox(const CheckBox &copy);
 
-		virtual void update(std::list<sf::Drawable*> &drawable);
+		virtual void update(IRender &render);
 
 		void setSize(float x, float y);
 		void setPosition(float x, float y);

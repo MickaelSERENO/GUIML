@@ -19,28 +19,24 @@ namespace guiml
 
 	void Window::update()
 	{
-		std::list<sf::Drawable*> drawable;
-		update(drawable);
+		update(*this);
 	}
 
-	void Window::update(std::list <sf::Drawable*> &drawable)
+	void Window::update(IRender &render)
 	{
 		m_event->update();
 		if(m_event->windowIsResize())
 			Widget::resizeWidget(m_event->getDefaultWindowSize(), m_event->getNewWindowSize());
 		m_framerate = 1 / (m_event->getElapsedTime() * 0.001);
 
-		Widget::update(drawable);
-		show(drawable);
 		clear(m_backgroundColor);
+		Widget::update(*this);
+		display();
 	}
 
-	void Window::show(std::list<sf::Drawable*> &drawable)
+	void Window::draw(const sf::Drawable &drawable, const sf::RenderStates &states)
 	{
-		for(std::list<sf::Drawable*>::iterator it = drawable.begin(); it != drawable.end(); ++it)
-			if(*it)
-				draw(*(*it));
-		display();
+		sf::RenderWindow::draw(drawable, states);
 	}
 
 	void Window::setPosition(float x, float y)

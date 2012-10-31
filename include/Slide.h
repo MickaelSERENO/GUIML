@@ -29,7 +29,7 @@ namespace guiml
 
 		virtual ~Slide();
 
-		void update(std::list<sf::Drawable*> &drawable);
+		void update(IRender &render);
 
 		void setSize(float x, float y);
 		void setPosition(float x, float y);

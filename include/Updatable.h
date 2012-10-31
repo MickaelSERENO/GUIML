@@ -5,6 +5,7 @@
 #include <iostream>
 #include <stdexcept>
 #include "EventManager.h"
+#include "IRender.h"
 
 namespace guiml
 {
@@ -21,7 +22,7 @@ namespace guiml
 			 *
 			 *	\param drawables List who will be complete by Updatable's drawable. This function in this root class doesn't complete drawables (because he haven't) but it update all the Updatable's child.
 			 */
-			virtual void update(std::list<sf::Drawable*> &drawable);
+			virtual void update(IRender &render);
 
 			/*! \brief Add a child.
 			 *

@@ -20,7 +20,7 @@ namespace guiml
 		Button(const Button &copy);
 		//-------------------------------------------End of constructors--------------------------------------------//
 
-		virtual void update(std::list<sf::Drawable*> &drawable);
+		virtual void update(IRender &render);
 		virtual bool updateSelection();
 		virtual bool updateActivation();
 
