@@ -86,4 +86,9 @@ namespace guiml
 	{
 		return;
 	}
+
+	virtual EventManager* Window::getEventManagerFromRootParent() const
+	{
+		return m_event;
+	}
 }

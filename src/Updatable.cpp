@@ -28,7 +28,8 @@ namespace guiml
 			m_parent->removeChild(this);
 		for(std::list<Updatable*>::iterator it = m_child.begin(); it != m_child.end(); ++it)
 		{
-			delete (*it);
+			if(*it)
+				delete (*it);
 			it = m_child.erase(it);
 		}
 	}
@@ -70,7 +71,7 @@ namespace guiml
 		m_event = getEventManagerFromRootParent();
 
 		if(parent)
-			m_parent->Updatable::addChild(this, pos);
+			m_parent->addChild(this, pos);
 
 		if(event != m_event) //if the EventManager is not the same, then the Window's root parent is not the same. Then, we update the relative rect.
 			m_changeWindow=true;
@@ -108,7 +109,7 @@ namespace guiml
 	{
 		if(m_parent == NULL)
 			return NULL;
-		return m_parent->getEventManager();
+		return m_parent->getEventManagerFromRootParent();
 	}
 
 	bool Updatable::isChild(const Updatable *child)

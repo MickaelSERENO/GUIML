@@ -56,6 +56,8 @@ namespace guiml
 		virtual void resizeWidget(const sf::Vector2f& defaultWindowSize, const sf::Vector2f& newWindowSize);
 	protected:
 		float m_framerate;
+
+		virtual EventManager* getEventManagerFromRootParent() const;
 	};
 }
 
