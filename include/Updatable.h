@@ -71,6 +71,7 @@ namespace guiml
 			Updatable *m_parent; /*!< The Updatable's parent. */
 			EventManager *m_event;
 			bool m_changeWindow; /*!< If Window is change in the setParent's function */
+			static bool focusIsCheck;
 
 			template <typename T>
 			std::list<T*> extractFromUpdatableChild() const

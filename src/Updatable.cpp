@@ -1,5 +1,7 @@
 #include "Updatable.h"
 
+bool guiml::Updatable::focusIsCheck = false;
+
 namespace guiml
 {
 
@@ -37,18 +39,21 @@ namespace guiml
 
 	void Updatable::updateFocus()
 	{
-		return;
+		for(std::list<Updatable*>::reverse_iterator it = m_child.rbegin(); it != m_child.rend(); ++it)
+		{
+			if(Updatable::focusIsCheck == true)
+				return;
+			(*it)->updateFocus();
+		}
 	}
 
 	void Updatable::update(IRender &render)
 	{
 		for(std::list<Updatable*>::iterator it = m_child.begin(); it!=m_child.end(); ++it)
 			if(*it)
-			{
-				(*it)->updateFocus();
 				(*it)->update(render);
-			}
 	}
+
 	void Updatable::addChild(Updatable *child, int pos)
 	{
 		if(child->m_parent != this)

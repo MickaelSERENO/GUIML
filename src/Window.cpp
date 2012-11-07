@@ -31,8 +31,12 @@ namespace guiml
 
 		clear(m_backgroundColor);
 		if(!m_parent)
+		{
 			Widget::widgetMouseSelect=NULL;
+			Updatable::focusIsCheck=false;
+		}
 
+		Updatable::updateFocus();
 		Widget::update(*this);
 		display();
 	}
