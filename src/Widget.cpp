@@ -31,13 +31,7 @@ namespace guiml
 	void Widget::updateFocus()
 	{
 		if(m_isDrawing && m_event && m_event->isMouseInRect(getRect()))
-		{
-			Updatable::focusIsCheck = true;
 			Widget::widgetMouseSelect=this;
-			return;
-		}
-
-		Updatable::updateFocus();
 	}
 
 	void Widget::update(IRender &render)
