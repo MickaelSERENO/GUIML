@@ -4,6 +4,7 @@ namespace guiml
 {
 	Window::Window(const sf::VideoMode &mode, const std::string &title, Updatable *parent, unsigned int framerateLimit, const sf::Color &backgroundColor, const Image &backgroundImage) : Render(parent, sf::FloatRect(0, 0, mode.width, mode.height), backgroundColor, backgroundImage), sf::RenderWindow(mode, title), m_framerate(framerateLimit)
 	{
+		m_isStaticToView = false;
 		RenderWindow::setPosition(sf::Vector2i(0, 0));
 		setFramerateLimit(framerateLimit);
 		m_event = new EventManager(this);
@@ -14,7 +15,6 @@ namespace guiml
 	Window::~Window()
 	{
 		delete m_event;
-		Widget::fileLoading.remove("ressource.jpg");
 	}
 
 	void Window::update()
@@ -30,6 +30,13 @@ namespace guiml
 		m_framerate = 1 / (m_event->getElapsedTime() * 0.001);
 
 		clear(m_backgroundColor);
+		if(!m_parent)
+		{
+			Widget::widgetMouseSelect=NULL;
+			Updatable::focusIsCheck=false;
+		}
+
+		Updatable::updateFocus();
 		Widget::update(*this);
 		display();
 	}
@@ -82,13 +89,13 @@ namespace guiml
 		return m_framerate;
 	}
 
+	EventManager* Window::getEventManagerFromRootParent() const
+	{
+		return m_event;
+	}
+
 	void Window::resizeWidget(const sf::Vector2f& defaultWindowSize, const sf::Vector2f& newWindowSize)
 	{
 		return;
-	}
-
-	virtual EventManager* Window::getEventManagerFromRootParent() const
-	{
-		return m_event;
 	}
 }

@@ -5,7 +5,7 @@ RessourcesManager<sf::Texture*> guiml::Image::Image::textures;
 namespace guiml
 {
 	//-------------------------All constructor with various parameters--------------------------//
-	Image::Image(Updatable *parent, const std::string &path, bool delTextureCreated, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0), m_delTextureCreated(delTextureCreated)
+	Image::Image(Updatable *parent, const std::string &path, bool delTextureCreated, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0), m_delTextureCreated(delTextureCreated), m_updateFocus(false)
 	{
 		sf::Texture *texture;
 		if(!Widget::fileLoading.existe(path))
@@ -36,7 +36,7 @@ namespace guiml
 			setRect(sf::FloatRect(0, 0, texture->getSize().x, texture->getSize().y));
 	}
 
-	Image::Image(Updatable *parent, const sf::Image &image, bool delTextureCreated, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0), m_delTextureCreated(delTextureCreated)
+	Image::Image(Updatable *parent, const sf::Image &image, bool delTextureCreated, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0), m_delTextureCreated(delTextureCreated), m_updateFocus(false)
 	{
 		sf::Texture *texture = new sf::Texture();
 		try
@@ -63,7 +63,7 @@ namespace guiml
 			setRect(sf::FloatRect(0, 0, texture->getSize().x, texture->getSize().y));
 	}
 
-	Image::Image(Updatable *parent, const sf::Texture &texture, bool delTextureCreated, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0), m_delTextureCreated(delTextureCreated)
+	Image::Image(Updatable *parent, const sf::Texture &texture, bool delTextureCreated, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0), m_delTextureCreated(delTextureCreated), m_updateFocus(false)
 	{
 		setImage(texture);
 		if (rect != sf::FloatRect(0, 0, 0, 0))
@@ -72,7 +72,7 @@ namespace guiml
 			setRect(sf::FloatRect(0, 0, texture.getSize().x, texture.getSize().y));
 	}
 
-	Image::Image(Updatable *parent, const sf::Sprite &sprite, bool delTextureCreated, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0), m_delTextureCreated(delTextureCreated)
+	Image::Image(Updatable *parent, const sf::Sprite &sprite, bool delTextureCreated, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0), m_delTextureCreated(delTextureCreated), m_updateFocus(false)
 	{
 		setImage(sprite);
 		if (rect != sf::FloatRect(0, 0, 0, 0))
@@ -81,7 +81,7 @@ namespace guiml
 			setRect(m_sprite.getGlobalBounds());
 	}
 
-	Image::Image(Updatable *parent) : Widget(parent), m_sizeRoundEdge(0), m_delTextureCreated(false)
+	Image::Image(Updatable *parent) : Widget(parent), m_sizeRoundEdge(0), m_delTextureCreated(false), m_updateFocus(false)
 	{}
 
 	Image::Image(const Image &copy) : Widget(copy)
@@ -89,6 +89,7 @@ namespace guiml
 		setImage(copy.m_sprite);
 		m_sizeRoundEdge = copy.m_sizeRoundEdge;
 		m_delTextureCreated = copy.m_delTextureCreated;
+		m_updateFocus = copy.m_updateFocus;
 	}
 
 	Image& Image::operator=(const Image &copy)
@@ -99,6 +100,7 @@ namespace guiml
 			m_sprite = copy.m_sprite;
 			m_sizeRoundEdge = copy.m_sizeRoundEdge;
 			m_delTextureCreated = copy.m_delTextureCreated;
+			m_updateFocus = copy.m_updateFocus;
 		}
 
 		return *this;
@@ -111,12 +113,16 @@ namespace guiml
 				Image::textures.remove(m_textureCreated[i]);
 	}
 	//-----------------------------End of constructor------------------------------------------//
-
-	void Image::update(IRender &render)
+	
+	void Image::updateFocus()
 	{
-		if(m_isDrawing)
-			render.draw(m_sprite);
-		Widget::update(render);
+		if(m_updateFocus)
+			Widget::updateFocus();
+	}
+
+	void Image::draw(IRender &render)
+	{
+		render.draw(m_sprite);
 	}
 
 	void Image::roundEdge(int size)
@@ -243,6 +249,11 @@ namespace guiml
 		return m_delTextureCreated;
 	}
 
+	bool Image::getUpdateFocus() const
+	{
+		return m_updateFocus;
+	}
+
 	void Image::setOrigin(float x, float y)
 	{
 		m_sprite.setOrigin(x, y);
@@ -350,6 +361,11 @@ namespace guiml
 	void Image::setDelTextureCreated(bool delTextureCreated)
 	{
 		m_delTextureCreated = delTextureCreated;
+	}
+
+	void Image::setUpdateFocus(bool updateFocus)
+	{
+		m_updateFocus = updateFocus;
 	}
 
     Widget*	Image::copy() const

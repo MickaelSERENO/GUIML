@@ -5,6 +5,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -std=c++0x")
 include_directories(${sfml_include_dir} include)
 link_directories(${sfml_link_dir})
 set(CMAKE_BUILD_TYPE "Release")
+add_definitions(-DSFML_DYNAMIC)
 
 file(
 	GLOB_RECURSE
@@ -44,9 +45,9 @@ target_link_libraries(
 	)
 
 set_target_properties(GUIMLStatic PROPERTIES OUTPUT_NAME GUIML)
-set(sfml_include_dir "/usr/include" CACHE FILEPATH "Où se situe le Dossier SFML")
-set(sfml_link_dir "/usr/lib" CACHE FILEPATH "Où se situe les lib SFML dynamique")
-set(sfml-system_lib_name "sfml-system" CACHE STRING "Le nom de la lib system de la sfml")
-set(sfml-window_lib_name "sfml-window" CACHE STRING "Le nom de la lib window de la sfml")
-set(sfml-graphics_lib_name "sfml-graphics" CACHE STRING "Le nom de la lib graphics de la sfml")
-set(sfml-audio_lib_name "sfml-audio" CACHE STRING "Le nom de la lib audio de la sfml")
+set(sfml_include_dir "/usr/include" CACHE PATH "Où se situe le Dossier SFML")
+set(sfml_link_dir "/usr/lib" CACHE PATH "Où se situe les lib SFML dynamique")
+set(sfml_system_lib_name "sfml-system" CACHE STRING "Le nom de la lib system de la sfml")
+set(sfml_window_lib_name "sfml-window" CACHE STRING "Le nom de la lib window de la sfml")
+set(sfml_graphics_lib_name "sfml-graphics" CACHE STRING "Le nom de la lib graphics de la sfml")
+set(sfml_audio_lib_name "sfml-audio" CACHE STRING "Le nom de la lib audio de la sfml")

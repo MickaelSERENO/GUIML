@@ -5,9 +5,9 @@ namespace guiml
 	CheckBox::CheckBox(Updatable *parent, const sf::FloatRect &rect) : Widget(parent, rect), Active(), m_rectangle(sf::Vector2f(rect.width, rect.height)), m_line1(sf::Lines, 2), m_line2(sf::Lines, 2), m_howActivedKeyboard(sf::Keyboard::End), m_howActivedClickMouse(sf::Mouse::Left)
 	{
 		m_rectangle.setPosition(rect.left, rect.top);
-		setFillColorRectangle(sf::Color(0, 0, 0, 0));
-		setOutlineColorRectangle(sf::Color(255, 255, 255));
+		setOutlineColorRectangle(sf::Color::White);
 		setOutlineThickness(2);
+		setCrossColor(sf::Color::Black);
 
 		m_line1[0].position = sf::Vector2f(rect.left, rect.top);
 		m_line1[1].position = sf::Vector2f(rect.left + rect.width, rect.top + rect.height);
@@ -35,17 +35,18 @@ namespace guiml
 
 	void CheckBox::update(IRender &render)
 	{
-		if(m_isDrawing)
-		{
-			render.draw(m_rectangle);
-			Active::update();
-			if(m_isActive)
-			{
-				render.draw(m_line1);
-				render.draw(m_line2);
-			}
-		}
+		Active::update();
 		Widget::update(render);
+	}
+
+	void CheckBox::draw(IRender &render)
+	{
+		render.draw(m_rectangle);
+		if(m_isActive)
+		{
+			render.draw(m_line1);
+			render.draw(m_line2);
+		}
 	}
 
 	void CheckBox::setSize(float x, float y)
@@ -81,9 +82,18 @@ namespace guiml
 		m_howActivedClickMouse = mouseButton;
 	}
 
+	void CheckBox::setCrossColor(const sf::Color &color)
+	{
+		m_line1[0].color=color;
+		m_line1[1].color=color;
+		m_line2[0].color=color;
+		m_line2[1].color=color;
+	}
+
 	void CheckBox::setOutlineColorRectangle(const sf::Color &color)
 	{
 		m_rectangle.setOutlineColor(color);
+		setSize(m_virtualSize);
 	}
 
 	void CheckBox::setFillColorRectangle(const sf::Color &color)
@@ -107,7 +117,7 @@ namespace guiml
 
 	bool CheckBox::updateSelection()
 	{
-		if(m_event && m_event->isMouseInRect(getVirtualRect()) || m_isSelectCopy)
+		if(Widget::widgetMouseSelect == this || m_isSelectCopy)
 			m_isSelect = true;
 
 		else
@@ -119,13 +129,8 @@ namespace guiml
 	bool CheckBox::updateActivation()
 	{
 		if(m_isSelect && m_event && (m_event->getOneMouseClicked(m_howActivedClickMouse) || m_event->getOnePressedKey(m_howActivedKeyboard)))
-		{
-			if(m_isActive)
-				m_isActive = false; 
-			else
-				m_isActive = true;
-		}
-
+			m_isActive = !m_isActive; 
+		
 		return m_isActive;
 	}
 

@@ -2,28 +2,28 @@
 
 namespace guiml
 {
-	Label::Label(Updatable *parent, const std::string &string, const sf::Font &font, const sf::Vector2f &position, int characterSize) : Widget(parent, sf::FloatRect(position.x, position.y, characterSize * string.size(), characterSize)), m_text(sf::String(string), font)
+	Label::Label(Updatable *parent, const std::string &string, const sf::Font &font, const sf::Vector2f &position, int characterSize) : Widget(parent, sf::FloatRect(position.x, position.y, characterSize * string.size(), characterSize)), m_text(sf::String(string), font), m_updateFocus(false)
 	{
 		setRect(sf::FloatRect(position.x, position.y, characterSize * string.size(), characterSize));
 	}
 
-	Label::Label(Updatable *parent, const sf::String &string, const sf::Font &font, const sf::Vector2f &position, int characterSize) : Widget(parent, sf::FloatRect(position.x, position.y, characterSize * string.getSize(), characterSize)), m_text(string, font)
+	Label::Label(Updatable *parent, const sf::String &string, const sf::Font &font, const sf::Vector2f &position, int characterSize) : Widget(parent, sf::FloatRect(position.x, position.y, characterSize * string.getSize(), characterSize)), m_text(string, font), m_updateFocus(false)
 	{
 		setRect(sf::FloatRect(position.x, position.y, characterSize * string.getSize(), characterSize));
 	}
 
-	Label::Label(Updatable *parent, const sf::Text &text, const sf::Vector2f &position, int characterSize) : Widget(parent, sf::FloatRect(position.x, position.y, characterSize * text.getString().getSize(), characterSize)), m_text(text)
+	Label::Label(Updatable *parent, const sf::Text &text, const sf::Vector2f &position, int characterSize) : Widget(parent, sf::FloatRect(position.x, position.y, characterSize * text.getString().getSize(), characterSize)), m_text(text), m_updateFocus(false)
 	{
 		setRect(sf::FloatRect(position.x, position.y, characterSize * text.getString().getSize(), characterSize));
 	}
 
-	Label::Label(Updatable *parent) : Widget(parent)
+	Label::Label(Updatable *parent) : Widget(parent), m_updateFocus(false)
 	{}
 
-	Label::Label() : Widget(NULL)
+	Label::Label() : Widget(NULL), m_updateFocus(false)
 	{}
 
-	Label::Label(const Label &copy) : Widget(copy), m_text(copy.m_text)
+	Label::Label(const Label &copy) : Widget(copy), m_text(copy.m_text), m_updateFocus(false)
 	{
 	}
 
@@ -33,15 +33,20 @@ namespace guiml
 		{
 			Widget::operator=(copy);
 			m_text = copy.m_text;
+			m_updateFocus = copy.m_updateFocus;
 		}
 		return *this;
 	}
 
-	void Label::update(IRender &render)
+	void Label::updateFocus()
 	{
-		if(m_isDrawing)
-			render.draw(m_text);
-		Widget::update(render);
+		if(m_updateFocus)
+			Widget::updateFocus();
+	}
+
+	void Label::draw(IRender &render)
+	{
+		render.draw(m_text);
 	}
 
 	void Label::lighten()
@@ -68,6 +73,10 @@ namespace guiml
 		return m_text;
 	}
 
+	bool Label::getUpdateFocus() const
+	{
+		return m_updateFocus;
+	}
 
 	void Label::setOrigin(float x, float y)
 	{
@@ -163,6 +172,11 @@ namespace guiml
 	{
 		setLabel(sf::String(string));
 		setRect(getVirtualRect());
+	}
+
+	void Label::setUpdateFocus(bool updateFocus)
+	{
+		m_updateFocus = updateFocus;
 	}
 
 	Widget* Label::copy() const

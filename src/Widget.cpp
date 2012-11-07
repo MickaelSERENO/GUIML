@@ -1,13 +1,15 @@
 #include "Widget.h"
 
 RessourcesManager<sf::Texture*> guiml::Widget::fileLoading;
+bool guiml::Widget::focusIsCheck = false;
+guiml::Widget* guiml::Widget::widgetMouseSelect = NULL;
 
 namespace guiml
 {
-	Widget::Widget(Updatable *parent, const sf::FloatRect &rect) : Updatable(parent), m_isDrawing(true), m_pos(rect.left, rect.top), m_size(rect.width, rect.height), m_virtualPos(rect.left, rect.top), m_virtualSize(rect.width, rect.height), m_movingAllChild(false)
+	Widget::Widget(Updatable *parent, const sf::FloatRect &rect) : Updatable(parent), m_isDrawing(true), m_isStaticToView(true), m_pos(rect.left, rect.top), m_size(rect.width, rect.height), m_virtualPos(rect.left, rect.top), m_virtualSize(rect.width, rect.height), m_movingAllChild(false)
 	{}
 
-	Widget::Widget(const Widget &copy) : Updatable(copy), m_isDrawing(copy.m_isDrawing), m_pos(copy.m_pos), m_size(copy.m_size), m_virtualPos(copy.m_virtualPos), m_virtualSize(copy.m_virtualSize), m_movingAllChild(copy.m_movingAllChild)
+	Widget::Widget(const Widget &copy) : Updatable(copy), m_isDrawing(copy.m_isDrawing), m_isStaticToView(true), m_pos(copy.m_pos), m_size(copy.m_size), m_virtualPos(copy.m_virtualPos), m_virtualSize(copy.m_virtualSize), m_movingAllChild(copy.m_movingAllChild)
 	{}
 
 	Widget& Widget::operator=(const Widget &copy)
@@ -26,13 +28,34 @@ namespace guiml
 		return *this;
 	}
 
+	void Widget::updateFocus()
+	{
+		if(m_isDrawing && m_event && m_event->isMouseInRect(getRect()))
+		{
+			Updatable::focusIsCheck = true;
+			Widget::widgetMouseSelect=this;
+			return;
+		}
+
+		Updatable::updateFocus();
+	}
+
 	void Widget::update(IRender &render)
 	{
 		if(m_changeWindow)
 			setRect(getVirtualRect());
+
+//		if(m_isStaticToView)
+//			setPosition(m_virtualPos.x + render.getViewPosition().x - render.getView().getSize().x/2, m_virtualPos.y + render.getViewPosition().y - render.getView().getSize().y/2); 
+		if(m_isDrawing && render.isInView(getVirtualRect()))
+			draw(render);
+
 		Updatable::update(render);
 		m_changeWindow = false;
 	}
+
+	void Widget::draw(IRender &render)
+	{}
 
 	void Widget::drawWidget(bool drawing)
 	{
@@ -44,6 +67,11 @@ namespace guiml
 		for(std::list<Updatable*>::iterator it = m_child.begin(); it != m_child.end(); ++it)
 			if(Widget* child = dynamic_cast<Widget*>(*it))
 				child->drawWidget(drawing);
+	}
+
+	void Widget::setStaticToView(bool dontMove)
+	{
+		m_isStaticToView=dontMove;
 	}
 
 	void Widget::setPosition(const sf::Vector2f &pos)
@@ -94,8 +122,8 @@ namespace guiml
 
 	void Widget::setRect(const sf::FloatRect &rect)
 	{
-		setPosition(rect.left, rect.top);
 		setSize(rect.width, rect.height);
+		setPosition(rect.left, rect.top);
 	}
 
 	void Widget::scale(float x)
@@ -156,6 +184,11 @@ namespace guiml
 		return m_isDrawing;
 	}
 
+	bool Widget::isStaticToView() const
+	{
+		return m_isStaticToView;
+	}
+
 	const sf::Vector2f& Widget::getPosition() const 
 	{
 		return m_pos;
@@ -202,5 +235,10 @@ namespace guiml
 	Widget* Widget::copy() const
 	{
 		return new Widget(*this);
+	}
+
+	const Widget* Widget::getFocus()
+	{
+		return Widget::widgetMouseSelect;
 	}
 }

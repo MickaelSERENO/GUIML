@@ -14,6 +14,7 @@ namespace guiml
 		CheckBox(const CheckBox &copy);
 
 		virtual void update(IRender &render);
+		virtual void draw(IRender &render);
 
 		void setSize(float x, float y);
 		void setPosition(float x, float y);
@@ -21,6 +22,7 @@ namespace guiml
 		void setKeyboardWhoActived(const sf::Keyboard::Key &key);
 		void setClickMouseWhoActived(const sf::Mouse::Button &mouseButton);
 
+		void setCrossColor(const sf::Color &color);
 		void setOutlineColorRectangle(const sf::Color &color);
 		void setFillColorRectangle(const sf::Color &color);
 		void setOutlineThickness(float x);

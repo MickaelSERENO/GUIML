@@ -1,5 +1,7 @@
 #include "Updatable.h"
 
+bool guiml::Updatable::focusIsCheck = false;
+
 namespace guiml
 {
 
@@ -26,11 +28,22 @@ namespace guiml
 	{
 		if(m_parent)
 			m_parent->removeChild(this);
+
 		for(std::list<Updatable*>::iterator it = m_child.begin(); it != m_child.end(); ++it)
 		{
 			if(*it)
 				delete (*it);
 			it = m_child.erase(it);
+		}
+	}
+
+	void Updatable::updateFocus()
+	{
+		for(std::list<Updatable*>::reverse_iterator it = m_child.rbegin(); it != m_child.rend(); ++it)
+		{
+			if(Updatable::focusIsCheck == true)
+				return;
+			(*it)->updateFocus();
 		}
 	}
 
@@ -69,12 +82,12 @@ namespace guiml
 		EventManager* event = getEventManagerFromRootParent();
 		m_parent = parent;	
 		m_event = getEventManagerFromRootParent();
+		
+		if(event != m_event) //if the EventManager is not the same, then the Window's root parent is not the same. Then, we update the relative rect.
+			m_changeWindow=true;
 
 		if(parent)
 			m_parent->addChild(this, pos);
-
-		if(event != m_event) //if the EventManager is not the same, then the Window's root parent is not the same. Then, we update the relative rect.
-			m_changeWindow=true;
 	}
 
 	bool Updatable::removeChild(Updatable *child)

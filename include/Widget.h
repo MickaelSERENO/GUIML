@@ -43,11 +43,14 @@ namespace guiml
 		 */
 		Widget(const Widget &copy);
 
+
 		/*! \brief Update the Widget.
 		 *
 		 *	\param drawables List who will be complete by Widget's drawable. This function in this root class doesn't complete drawables (because he haven't) but it update all the Widget's child.
 		 */
 		virtual void update(IRender &render);
+
+		virtual void draw(IRender &render);
 
 		/*! \brief Update the Widget or not.
 		 * 
@@ -55,6 +58,7 @@ namespace guiml
 		 */
 		virtual void drawWidget(bool drawing);
 
+		void setStaticToView(bool dontMove);
 		/*! \brief Update the Widget's children or not.
 		 *  
 		 *   \param drawing Boolean for knowing if you want to update the Widget's children or not.
@@ -147,6 +151,8 @@ namespace guiml
 		 * */
 		bool isDrawing() const;
 
+		bool isStaticToView() const;
+
 		/*! \brief Return the relative Widget's position (with Window's resize).
 		 */
 		const sf::Vector2f& getPosition() const;
@@ -191,8 +197,10 @@ namespace guiml
 		 */
 		virtual void resizeWidget(const sf::Vector2f& defaultWindowSize, const sf::Vector2f& newWindowSize);
 		virtual Widget* copy() const;
+		static const Widget* getFocus();
 	protected:
 		bool m_isDrawing; /*!< Update the Widget or not ? */
+		bool m_isStaticToView;
 		sf::Vector2f m_pos; /*!< The relative Widget's position (with Window's resize). */
 		sf::Vector2f m_size; /*!< The relative Widget's size (with Window's resize). */
 		sf::Vector2f m_virtualPos; /*!< The absolute Widget's position (without Window's resize). */
@@ -201,6 +209,9 @@ namespace guiml
 		std::list<Widget*> m_widgetChild;
 
 		static RessourcesManager<sf::Texture*> fileLoading;
+		static Widget* widgetMouseSelect;
+		static bool focusIsCheck;
+		virtual void updateFocus();
 	};
 }
 

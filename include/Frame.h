@@ -20,6 +20,7 @@ namespace guiml
 		#include "SurchargeMethode.h"
 		Frame(Updatable *parent, const sf::FloatRect &rect, const sf::Color &backgroundColor = sf::Color::Black, const Image &backgroundImage = Image(), const Label &title = Label(), const sf::Color &backgroundTitle = sf::Color(255, 255, 255, 255), bool drawButtonMoveFrame=true);
 
+		void updateFocus();
 		void update(IRender &render);
 		virtual void draw(const sf::Drawable &drawable, const sf::RenderStates &states=sf::RenderStates::Default);
 
@@ -35,10 +36,10 @@ namespace guiml
 
 		void setDrawButtonMoveFrame(bool drawButtonMoveFrame);
 		void resetView();
+		virtual sf::Vector2f getViewPosition() const;
 
 		const Label& getLabelTitle() const;
 		sf::FloatRect getRectMoveFrame() const;
-		sf::FloatRect getViewport() const;
 		bool getDrawButtonMoveFrame() const;
 
 		const PosText& positionTitle() const;

@@ -16,11 +16,13 @@ namespace guiml
 		Label();
 		Label(const Label &copy);
 
-		virtual void update(IRender &render);
+		virtual void updateFocus();
+		virtual void draw(IRender &render);
 		void lighten();
 
 		const sf::String &getString() const;
 		const sf::Text &getText() const;
+		bool getUpdateFocus() const;
 
 		void setOrigin(float x, float y);
 		void setOrigin(sf::Vector2f &pos);
@@ -42,10 +44,12 @@ namespace guiml
 
 		void setPosition(float x, float y);
 		void setSize(float x, float y);
+		void setUpdateFocus(bool updateFocus);
 		Label& operator=(const Label &copy);
 		Widget* copy() const;
 	private:
 		sf::Text m_text;
+		bool m_updateFocus;
 	};
 }
 

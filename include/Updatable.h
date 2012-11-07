@@ -71,19 +71,27 @@ namespace guiml
 			Updatable *m_parent; /*!< The Updatable's parent. */
 			EventManager *m_event;
 			bool m_changeWindow; /*!< If Window is change in the setParent's function */
+			static bool focusIsCheck;
 
 			template <typename T>
 			std::list<T*> extractFromUpdatableChild() const
 			{
+				return extractFromUpdatableList<T>(m_child);
+			}
+
+			template <typename T>
+			std::list<T*> extractFromUpdatableList(std::list<Updatable*> fromExtract) const
+			{
 				std::list<T*> list;
-				for(std::list<Updatable*>::const_iterator it = m_child.begin(); it != m_child.end(); ++it)
-					if(T* child = dynamic_cast<T*>(*it))
-						list.push_back(child);
+				for(std::list<Updatable*>::const_iterator it = fromExtract.begin(); it != fromExtract.end(); ++it)
+					if(T* extracted = dynamic_cast<T*>(*it))
+						list.push_back(extracted);
 
 				return list;
 			}
 
 			virtual EventManager* getEventManagerFromRootParent() const;
+			virtual void updateFocus();
 	};
 }
 

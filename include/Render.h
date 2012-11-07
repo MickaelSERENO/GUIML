@@ -84,10 +84,13 @@ namespace guiml
 			 */
 			void setViewPosition(float x, float y);
 			
+			void setViewSize(const sf::Vector2f &size);
+			void setViewSize(float x, float y);
+
 			/*! \brief Set the view's position and size.
 			 *	\param rect The new position and size.
 			 */
-			void setRectView(const sf::FloatRect &rect);
+			void setViewport(const sf::FloatRect &rect);
 
 			/*! \bief If you want to have the default view.
 			 * 
@@ -113,12 +116,17 @@ namespace guiml
 			/*! \brief get the view's rect.
 			 */
 			virtual sf::FloatRect getViewport() const;
+
+			virtual sf::Vector2f getViewPosition() const;
+			
+			bool isInView(const sf::FloatRect &rect) const;
 		protected:
 			sf::View m_renderView; /*!< The Render view  */
 			sf::FloatRect m_viewLimit; /*!< The limit of the view's position */
 			sf::Color m_backgroundColor; /*!< The background color. */
 			std::string m_renderTitle; /*!< The render's title. */
 			Image m_backgroundImage; /*!< The background image.  */
+			virtual void updateFocus();
 	};
 }
 

@@ -13,6 +13,8 @@ namespace guiml
 		else
 			setRect(rect);
 		drawWidget(true);
+		m_textLighten.setUpdateFocus(false);
+		m_text.setUpdateFocus(false);
 	}
 
 	Button::Button(Updatable *parent, const Image &image, const sf::FloatRect &rect) : Widget(parent, rect), Active(), m_hasBackground(true), m_hasLabel(false), m_background(image), m_text(NULL), m_backgroundLighten(image), m_textLighten(NULL), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left)
@@ -25,6 +27,8 @@ namespace guiml
 		else
 			setRect(rect);
 		drawWidget(true);
+		m_backgroundLighten.setUpdateFocus(false);
+		m_background.setUpdateFocus(false);
 	}
 
 	Button::Button(Updatable *parent, const Label &text, const Image &image, const sf::FloatRect &rect) : Widget(parent, rect), Active(), m_hasBackground(true), m_hasLabel(true), m_background(image), m_text(text), m_backgroundLighten(image), m_textLighten(text), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left)
@@ -38,6 +42,10 @@ namespace guiml
 		else
 			setRect(rect);
 		drawWidget(true);
+		m_textLighten.setUpdateFocus(false);
+		m_text.setUpdateFocus(false);
+		m_backgroundLighten.setUpdateFocus(false);
+		m_background.setUpdateFocus(false);
 	}
 
 	Button::Button(Updatable *parent, const sf::FloatRect &rect) : Widget(parent, rect), Active(), m_hasBackground(false), m_hasLabel(false), m_currentBackground(NULL), m_currentLabel(NULL), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left)
@@ -109,7 +117,7 @@ namespace guiml
 
 	bool Button::updateSelection()
 	{
-		if((m_event && m_event->isMouseInRect(getRect())) || m_isSelectCopy)
+		if(Widget::widgetMouseSelect == this || m_isSelectCopy)
 			m_isSelect = true;
 
 		else
@@ -193,6 +201,12 @@ namespace guiml
 			m_backgroundLighten.setPosition(posx, posy);
 		}
 
+		if(m_hasLabel)
+		{
+			m_text.setPosition(posx, posy);
+			m_textLighten.setPosition(posx, posy);
+		}
+
 		Widget::setPosition(posx, posy);
 		centerLabel();
 	}
@@ -222,6 +236,9 @@ namespace guiml
 		m_hasBackground = true;
 		updateSelection();
 		setRect(getVirtualRect());
+
+		m_backgroundLighten.setUpdateFocus(false);
+		m_background.setUpdateFocus(false);
 	}
 
 	void Button::setLabel(const Label &string)
@@ -232,6 +249,8 @@ namespace guiml
 		m_hasLabel = true;
 		updateSelection();
 		setRect(getVirtualRect());
+		m_textLighten.setUpdateFocus(false);
+		m_text.setUpdateFocus(false);
 	}
 
 	void Button::setKeyboardWhoActived(const sf::Keyboard::Key &key)

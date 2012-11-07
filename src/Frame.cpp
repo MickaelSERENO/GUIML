@@ -20,8 +20,14 @@ namespace guiml
 
 		create(m_virtualSize.x, m_virtualSize.y);
 		resetView();
+		m_spriteFrame.setTexture(getTexture(), true);
 		if(!drawButtonMoveFrame)
 			m_buttonMoveFrame.drawWidget(false);
+	}
+
+	void Frame::updateFocus()
+	{
+		Updatable::updateFocus();
 	}
 
 	void Frame::update(IRender &render)
@@ -36,16 +42,15 @@ namespace guiml
 			}
 
 			std::list<Widget*> child = extractFromUpdatableChild<Widget>();
-
 			for(std::list<Widget*>::iterator it = child.begin(); it != child.end(); ++it)
 				if(*it)
 					(*it)->move(m_virtualPos.x, m_virtualPos.y); 
 
 			clear(m_backgroundColor);
+			Updatable::updateFocus();
 			Widget::update(*this);
+
 			display();
-			m_spriteFrame.setTexture(getTexture());
-			m_spriteFrame.setPosition(sf::Vector2f(m_virtualPos.x, m_virtualPos.y));
 			render.draw(m_spriteFrame);
 			
 			for(std::list<Widget*>::iterator it = child.begin(); it != child.end(); ++it)
@@ -73,11 +78,7 @@ namespace guiml
 		Render::setView(view);
 		sf::RenderTexture::setView(view);
 		if(&view != &m_renderView)
-		{
 			moveView(m_virtualPos.x, m_virtualPos.y);
-			sf::FloatRect viewPort = getViewport();
-			m_buttonMoveFrame.setPosition(viewPort.left + m_virtualPos.x, viewPort.top + m_virtualPos.y);
-		}
 	}
 
 	void Frame::resetView()
@@ -95,8 +96,9 @@ namespace guiml
 
 	void Frame::setPosition(float x, float y)
 	{
-		moveView(x - m_virtualPos.x, y - m_virtualPos.y);
+		moveView(x-m_virtualPos.x, y-m_virtualPos.y);
 		Widget::setPosition(x, y);
+		m_spriteFrame.setPosition(m_virtualPos);
 	}
 
 	void Frame::setBackgroundTitle(const sf::Color &colorTitle)
@@ -171,6 +173,14 @@ namespace guiml
 		return m_posTitle;
 	}
 
+	sf::Vector2f Frame::getViewPosition() const
+	{
+		sf::Vector2f initial = Render::getViewPosition();
+		initial.x -= m_virtualPos.x;
+		initial.y -= m_virtualPos.y;
+		return initial;
+	}
+
 	bool Frame::isMoving()
 	{
 		if(!m_isMoving && m_event)
@@ -187,14 +197,5 @@ namespace guiml
 		else if(!(m_event && (m_event->getPressedKey(m_buttonMoveFrame.getKeyboardWhoActived()) || m_event->getMouseClicked(m_buttonMoveFrame.getClickMouseWhoActived()))))
 			m_isMoving = false;
 		return m_isMoving;
-	}
-
-	sf::FloatRect Frame::getViewport() const
-	{
-		sf::FloatRect rect = m_renderView.getViewport();
-		rect.left -= m_virtualPos.x;
-		rect.top -= m_virtualPos.y;
-
-		return rect;
 	}
 }
