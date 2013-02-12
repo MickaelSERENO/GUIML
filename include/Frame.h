@@ -7,13 +7,6 @@
 
 namespace guiml
 {
-	enum PosText
-	{
-		CENTER,
-		RIGHT,
-		LEFT
-	};
-
 	class Frame : public Render, public sf::RenderTexture
 	{
 	public:
@@ -30,7 +23,6 @@ namespace guiml
 		void setBackgroundTitle(const sf::Color &colorTitle);
 		void setBackgroundTitle(const Image &image);
 		void setRectMovingFrame(const sf::FloatRect &rect);
-		void setTitlePos(const PosText &posTitle);
 		void setBackgroundImage(const Image &backgroundImage);
 		void setView(const sf::View &view);
 
@@ -44,10 +36,10 @@ namespace guiml
 
 		const PosText& positionTitle() const;
 		bool isMoving();
+		virtual bool isInView(const sf::FloatRect& rect) const;
 	protected:
 		void testIsMoving();
 		sf::Sprite m_spriteFrame;
-		guiml::Label m_title;
 		Button m_buttonMoveFrame;
 		PosText m_posTitle;
 		bool m_isMoving;

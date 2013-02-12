@@ -105,28 +105,18 @@ namespace guiml
 		return m_renderView;
 	}
 
-	sf::FloatRect Render::getViewport() const
+	const sf::FloatRect& Render::getViewport() const
 	{
 		return m_renderView.getViewport();
+	}
+
+	sf::FloatRect Render::getViewRect() const
+	{
+		return sf::FloatRect(getViewPosition(), m_renderView.getSize());
 	}
 
 	sf::Vector2f Render::getViewPosition() const
 	{
 		return sf::Vector2f(m_renderView.getCenter().x - m_renderView.getSize().x/2, m_renderView.getCenter().y - m_renderView.getSize().y/2);
-	}
-
-	bool Render::isInView(const sf::FloatRect &rect) const
-	{
-		sf::Vector2f viewPos = m_renderView.getCenter();
-		sf::Vector2f viewSize = m_renderView.getSize();
-		viewPos.x -= viewSize.x/2;
-		viewPos.y -= viewSize.y/2;
-
-		if(rect.left + rect.width <= viewPos.x
-			||rect.left >= viewPos.x + viewSize.x
-			||rect.top + rect.height <= viewPos.y
-			||rect.top >= viewPos.y + viewSize.y)
-			return false;
-		return true;
 	}
 }

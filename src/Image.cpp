@@ -254,6 +254,19 @@ namespace guiml
 		return m_updateFocus;
 	}
 
+	sf::FloatRect Image::getRect() const
+	{
+		return m_sprite.getGlobalBounds();
+	}
+
+	sf::FloatRect Image::getVirtualRect() const
+	{
+		sf::FloatRect rect = Widget::getVirtualRect();
+		rect.left -= m_sprite.getOrigin().x;
+		rect.top -= m_sprite.getOrigin().y;
+		return rect;
+	}
+
 	void Image::setOrigin(float x, float y)
 	{
 		m_sprite.setOrigin(x, y);

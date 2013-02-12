@@ -4,6 +4,7 @@
 #include <list>
 #include <iostream>
 #include <stdexcept>
+#include "equation.h"
 #include "EventManager.h"
 #include "IRender.h"
 

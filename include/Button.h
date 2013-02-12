@@ -57,6 +57,7 @@ namespace guiml
 		void centerLabel(); //Center the Label with regard to the background
 		bool m_hasBackground;
 		bool m_hasLabel;
+		bool m_setCharacterSize;
 
 		Image m_background;
 		Label m_text;

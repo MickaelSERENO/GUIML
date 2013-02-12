@@ -2,8 +2,9 @@
 
 namespace guiml
 {
-	Frame::Frame(Updatable *parent, const sf::FloatRect &rect, const sf::Color &backgroundColor, const Image &backgroundImage, const Label &title, const sf::Color &backgroundTitle, bool drawButtonMoveFrame) : Render(parent, rect, backgroundColor, backgroundImage), sf::RenderTexture(), m_title(title), m_buttonMoveFrame(NULL, guiml::Label(), guiml::Image(), sf::FloatRect(0, 0, rect.width, title.getSize().y)), m_posTitle(PosText::CENTER), m_isMoving(false), m_hasAddChild(false)
+	Frame::Frame(Updatable *parent, const sf::FloatRect &rect, const sf::Color &backgroundColor, const Image &backgroundImage, const Label &title, const sf::Color &backgroundTitle, bool drawButtonMoveFrame) : Render(parent, rect, backgroundColor, backgroundImage), sf::RenderTexture(), m_buttonMoveFrame(NULL, guiml::Label(), guiml::Image(), sf::FloatRect(0, 0, rect.width, title.getSize().y)), m_posTitle(PosText::CENTER), m_isMoving(false), m_hasAddChild(false)
 	{
+		setRect(getVirtualRect());
 		m_movingAllChild = false;
 
 		sf::Texture texture;
@@ -12,11 +13,7 @@ namespace guiml
 
 		m_buttonMoveFrame.setParent(this);
 		m_buttonMoveFrame.setBackground(Image(NULL, sprite));
-
-		m_title.setParent(this);
-		m_title.setOriginMiddle();
-		m_title.setPosition(m_virtualSize.x / 2, 0);
-		m_title.setColor(sf::Color::White);
+		m_buttonMoveFrame.setLabel(title);
 
 		create(m_virtualSize.x, m_virtualSize.y);
 		resetView();
@@ -44,18 +41,18 @@ namespace guiml
 			std::list<Widget*> child = extractFromUpdatableChild<Widget>();
 			for(std::list<Widget*>::iterator it = child.begin(); it != child.end(); ++it)
 				if(*it)
-					(*it)->move(m_virtualPos.x, m_virtualPos.y); 
+					(*it)->move(m_virtualPos.x-getViewPosition().x, m_virtualPos.y-getViewPosition().y); 
 
 			clear(m_backgroundColor);
 			Updatable::updateFocus();
-			Widget::update(*this);
+			Updatable::update(*this);
 
 			display();
 			render.draw(m_spriteFrame);
-			
+
 			for(std::list<Widget*>::iterator it = child.begin(); it != child.end(); ++it)
 				if(*it)
-					(*it)->move(-m_virtualPos.x, -m_virtualPos.y); 
+					(*it)->move(-m_virtualPos.x+getViewPosition().x, -m_virtualPos.y+getViewPosition().y); 
 		}
 	}
 
@@ -66,11 +63,8 @@ namespace guiml
 
 	void Frame::setTitle(const Label &title)
 	{
-		m_title = title;
-		m_title.setParent(this);
-		m_buttonMoveFrame.setCharacterSize(m_buttonMoveFrame.getVirtualSize().y);
-		setTitlePos(m_posTitle);
-		Render::setTitle(title.getString().toAnsiString());
+		m_buttonMoveFrame.setLabel(title);
+		m_buttonMoveFrame.setSize(m_virtualSize.x, title.getVirtualSize().y);
 	}
 
 	void Frame::setView(const sf::View &view)
@@ -91,7 +85,6 @@ namespace guiml
 		create(x, y);
 		Widget::setSize(x, y);
 		m_buttonMoveFrame.setSize(sf::Vector2f(m_virtualSize.x, m_buttonMoveFrame.getVirtualSize().y));
-		setTitlePos(m_posTitle);
 	}
 
 	void Frame::setPosition(float x, float y)
@@ -120,28 +113,6 @@ namespace guiml
 		m_buttonMoveFrame.setRect(rect);
 	}
 
-	void Frame::setTitlePos(const PosText &posTitle)
-	{
-		m_posTitle = posTitle;
-		if(m_posTitle == PosText::CENTER)
-		{
-			m_title.setOriginMiddle();
-			m_title.setPosition(m_virtualPos.x + m_virtualSize.x / 2, m_virtualPos.y);
-		}
-
-		else if(m_posTitle == PosText::RIGHT)
-		{
-			m_title.setRightOrigin();
-			m_title.setPosition(m_virtualPos.x + m_virtualSize.x, m_virtualPos.y);
-		}
-
-		else if(m_posTitle==PosText::LEFT)
-		{
-			m_title.setDefaultOrigin();
-			m_title.setPosition(m_virtualPos);
-		}
-	}
-
 	void Frame::setBackgroundImage(const Image &backgroundImage)
 	{
 		Render::setBackgroundImage(backgroundImage);
@@ -151,11 +122,6 @@ namespace guiml
 	void Frame::setDrawButtonMoveFrame(bool drawButtonMoveFrame)
 	{
 		m_buttonMoveFrame.drawWidget(drawButtonMoveFrame);
-	}
-
-	const Label& Frame::getLabelTitle() const
-	{
-		return m_title;
 	}
 
 	sf::FloatRect Frame::getRectMoveFrame() const
@@ -197,5 +163,14 @@ namespace guiml
 		else if(!(m_event && (m_event->getPressedKey(m_buttonMoveFrame.getKeyboardWhoActived()) || m_event->getMouseClicked(m_buttonMoveFrame.getClickMouseWhoActived()))))
 			m_isMoving = false;
 		return m_isMoving;
+	}
+
+	bool Frame::isInView(const sf::FloatRect& rect) const
+	{
+		sf::FloatRect viewRect = getViewRect();
+		viewRect.left += m_virtualPos.x;
+		viewRect.top += m_virtualPos.y;
+
+		return rectCollision(rect, viewRect);
 	}
 }

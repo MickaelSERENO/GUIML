@@ -6,10 +6,10 @@ guiml::Widget* guiml::Widget::widgetMouseSelect = NULL;
 
 namespace guiml
 {
-	Widget::Widget(Updatable *parent, const sf::FloatRect &rect) : Updatable(parent), m_isDrawing(true), m_isStaticToView(true), m_pos(rect.left, rect.top), m_size(rect.width, rect.height), m_virtualPos(rect.left, rect.top), m_virtualSize(rect.width, rect.height), m_movingAllChild(false)
+	Widget::Widget(Updatable *parent, const sf::FloatRect &rect) : Updatable(parent), m_isDrawing(true), m_isStaticToView(true), m_pos(rect.left, rect.top), m_size(rect.width, rect.height), m_virtualPos(rect.left, rect.top), m_virtualSize(rect.width, rect.height), m_movingAllChild(false), m_posWithoutDataView(m_virtualPos)
 	{}
 
-	Widget::Widget(const Widget &copy) : Updatable(copy), m_isDrawing(copy.m_isDrawing), m_isStaticToView(true), m_pos(copy.m_pos), m_size(copy.m_size), m_virtualPos(copy.m_virtualPos), m_virtualSize(copy.m_virtualSize), m_movingAllChild(copy.m_movingAllChild)
+	Widget::Widget(const Widget &copy) : Updatable(copy), m_isDrawing(copy.m_isDrawing), m_isStaticToView(true), m_pos(copy.m_pos), m_size(copy.m_size), m_virtualPos(copy.m_virtualPos), m_virtualSize(copy.m_virtualSize), m_movingAllChild(copy.m_movingAllChild), m_posWithoutDataView(m_virtualPos)
 	{}
 
 	Widget& Widget::operator=(const Widget &copy)
@@ -23,6 +23,8 @@ namespace guiml
 			m_virtualPos = copy.m_virtualPos;
 			m_virtualSize = copy.m_virtualSize;
 			m_movingAllChild = copy.m_movingAllChild;
+			m_posWithoutDataView = copy.m_posWithoutDataView;
+			m_isStaticToView = copy.m_isStaticToView;
 		}
 
 		return *this;
@@ -43,10 +45,16 @@ namespace guiml
 	void Widget::update(IRender &render)
 	{
 		if(m_changeWindow)
-			setRect(getVirtualRect());
+			setRect(sf::FloatRect(m_virtualPos, m_virtualSize));
 
-//		if(m_isStaticToView)
-//			setPosition(m_virtualPos.x + render.getViewPosition().x - render.getView().getSize().x/2, m_virtualPos.y + render.getViewPosition().y - render.getView().getSize().y/2); 
+		/* if(m_isStaticToView)
+		{
+			sf::Vector2f m_posInit = m_posWithoutDataView;
+			setPosition(m_posWithoutDataView.x + render.getViewPosition().x, m_posWithoutDataView.y + render.getViewPosition().y);
+			m_posWithoutDataView = m_posInit;
+		}*/
+
+	//	if(m_isDrawing)
 		if(m_isDrawing && render.isInView(getVirtualRect()))
 			draw(render);
 
@@ -99,7 +107,8 @@ namespace guiml
 		}
 		else
 			m_pos = sf::Vector2f(x, y);
-		m_virtualPos = sf::Vector2f(x, y);;
+		m_virtualPos = sf::Vector2f(x, y);
+		m_posWithoutDataView = sf::Vector2f(x, y);
 	}
 
 	void Widget::setSize(float x, float y)

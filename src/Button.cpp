@@ -2,7 +2,7 @@
 
 namespace guiml
 {
-	Button::Button(Updatable *parent, const Label &text, const sf::FloatRect &rect) : Widget(parent, rect), Active(), m_hasBackground(false), m_hasLabel(true), m_background(NULL), m_text(text), m_backgroundLighten(NULL), m_textLighten(text), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left)
+	Button::Button(Updatable *parent, const Label &text, const sf::FloatRect &rect) : Widget(parent, rect), Active(), m_hasBackground(false), m_hasLabel(true), m_setCharacterSize(false), m_background(NULL), m_text(text), m_backgroundLighten(NULL), m_textLighten(text), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left)
 	{
 		m_textLighten.lighten();
 		m_currentBackground = &m_background;
@@ -17,7 +17,7 @@ namespace guiml
 		m_text.setUpdateFocus(false);
 	}
 
-	Button::Button(Updatable *parent, const Image &image, const sf::FloatRect &rect) : Widget(parent, rect), Active(), m_hasBackground(true), m_hasLabel(false), m_background(image), m_text(NULL), m_backgroundLighten(image), m_textLighten(NULL), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left)
+	Button::Button(Updatable *parent, const Image &image, const sf::FloatRect &rect) : Widget(parent, rect), Active(), m_hasBackground(true), m_hasLabel(false), m_setCharacterSize(false), m_background(image), m_text(NULL), m_backgroundLighten(image), m_textLighten(NULL), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left)
 	{
 		m_backgroundLighten.lighten();
 		m_currentBackground = &m_background;
@@ -31,7 +31,7 @@ namespace guiml
 		m_background.setUpdateFocus(false);
 	}
 
-	Button::Button(Updatable *parent, const Label &text, const Image &image, const sf::FloatRect &rect) : Widget(parent, rect), Active(), m_hasBackground(true), m_hasLabel(true), m_background(image), m_text(text), m_backgroundLighten(image), m_textLighten(text), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left)
+	Button::Button(Updatable *parent, const Label &text, const Image &image, const sf::FloatRect &rect) : Widget(parent, rect), Active(), m_hasBackground(true), m_hasLabel(true), m_setCharacterSize(false), m_background(image), m_text(text), m_backgroundLighten(image), m_textLighten(text), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left)
 	{
 		m_textLighten.lighten();
 		m_backgroundLighten.lighten();
@@ -48,13 +48,13 @@ namespace guiml
 		m_background.setUpdateFocus(false);
 	}
 
-	Button::Button(Updatable *parent, const sf::FloatRect &rect) : Widget(parent, rect), Active(), m_hasBackground(false), m_hasLabel(false), m_currentBackground(NULL), m_currentLabel(NULL), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left)
+	Button::Button(Updatable *parent, const sf::FloatRect &rect) : Widget(parent, rect), Active(), m_hasBackground(false), m_hasLabel(false), m_setCharacterSize(false), m_currentBackground(NULL), m_currentLabel(NULL), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left)
 	{}
 
-	Button::Button() : Widget (NULL), Active(NULL), m_hasBackground(false), m_hasLabel(false), m_currentBackground(NULL), m_currentLabel(NULL), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left)
+	Button::Button() : Widget (NULL), Active(NULL), m_hasBackground(false), m_hasLabel(false), m_setCharacterSize(false), m_currentBackground(NULL), m_currentLabel(NULL), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left)
 	{}
 
-	Button::Button(const Button &copy) : Widget(copy), Active(), m_hasBackground(copy.m_hasBackground), m_hasLabel(copy.m_hasLabel), m_background(copy.m_background), m_text(copy.m_text), m_backgroundLighten(copy.m_backgroundLighten), m_textLighten(copy.m_textLighten), m_howActivedKeyboard(copy.m_howActivedKeyboard), m_howActivedClickMouse(copy.m_howActivedClickMouse)
+	Button::Button(const Button &copy) : Widget(copy), Active(), m_hasBackground(copy.m_hasBackground), m_hasLabel(copy.m_hasLabel), m_setCharacterSize(copy.m_setCharacterSize), m_background(copy.m_background), m_text(copy.m_text), m_backgroundLighten(copy.m_backgroundLighten), m_textLighten(copy.m_textLighten), m_howActivedKeyboard(copy.m_howActivedKeyboard), m_howActivedClickMouse(copy.m_howActivedClickMouse)
 	{
 		m_currentBackground = &m_background;
 		m_currentLabel = &m_text;
@@ -69,6 +69,7 @@ namespace guiml
 			Active::operator=(copy);
 			m_hasBackground = copy.m_hasBackground;
 			m_hasLabel = copy.m_hasLabel;
+			m_setCharacterSize = copy.m_setCharacterSize;
 			m_background = copy.m_background;
 			m_text = copy.m_text;
 			m_textLighten = copy.m_textLighten;
@@ -213,17 +214,25 @@ namespace guiml
 
 	void Button::setSize(float sizex, float sizey)
 	{
+	
 		if(m_hasBackground)
 		{
 			m_background.setSize(sizex, sizey);
 			m_backgroundLighten.setSize(sizex, sizey);
 		}
 
-		if(m_hasLabel)
+		if(m_hasLabel && !m_setCharacterSize)
 		{
 			m_text.setTextWidthSize(sizex);
 			m_textLighten.setTextWidthSize(sizex);
+
+			if(sizey > 0 && m_text.getVirtualSize().y > sizey)
+			{
+				m_text.setTextHeightSize(sizey);
+				m_textLighten.setTextHeightSize(sizey);
+			}
 		}
+
 		Widget::setSize(sizex, sizey);
 		centerLabel();
 	}
@@ -271,6 +280,8 @@ namespace guiml
 			m_textLighten.setCharacterSize(newsize);
 		}
 		centerLabel();
+
+		m_setCharacterSize=true;
 	}
 
 	const Label* Button::getLabel() const

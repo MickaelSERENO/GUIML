@@ -2,7 +2,6 @@
 #define DEF_IMAGE
 
 #include "Widget.h"
-#include "equation.h"
 #include <algorithm>
 #include <sstream>
 
@@ -32,6 +31,8 @@ namespace guiml
 		int getSizeRoundEdge() const;
 		bool getDelTextureCreated() const;	
 		bool getUpdateFocus() const;
+		virtual sf::FloatRect getRect() const;
+		virtual sf::FloatRect getVirtualRect() const;
 
 		void setOrigin(float x, float y);
 		void setOrigin(const sf::Vector2f &pos);

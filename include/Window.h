@@ -54,6 +54,7 @@ namespace guiml
 
 		unsigned int getFramerate();
 		virtual void resizeWidget(const sf::Vector2f& defaultWindowSize, const sf::Vector2f& newWindowSize);
+		virtual bool isInView(const sf::FloatRect &rect) const;
 	protected:
 		float m_framerate;
 

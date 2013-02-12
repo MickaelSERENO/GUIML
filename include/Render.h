@@ -115,11 +115,11 @@ namespace guiml
 
 			/*! \brief get the view's rect.
 			 */
-			virtual sf::FloatRect getViewport() const;
+			virtual const sf::FloatRect& getViewport() const;
+
+			sf::FloatRect getViewRect() const;
 
 			virtual sf::Vector2f getViewPosition() const;
-			
-			bool isInView(const sf::FloatRect &rect) const;
 		protected:
 			sf::View m_renderView; /*!< The Render view  */
 			sf::FloatRect m_viewLimit; /*!< The limit of the view's position */

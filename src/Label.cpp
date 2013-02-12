@@ -78,6 +78,16 @@ namespace guiml
 		return m_updateFocus;
 	}
 
+	sf::FloatRect Label::getRect() const
+	{
+		return m_text.getGlobalBounds();
+	}
+
+	sf::FloatRect Label::getVirtualRect() const
+	{
+		return m_text.getGlobalBounds();
+	}
+
 	void Label::setOrigin(float x, float y)
 	{
 		m_text.setOrigin(x, y);
@@ -95,7 +105,7 @@ namespace guiml
 
 	void Label::setOriginMiddle()
 	{
-		setOrigin(m_text.getGlobalBounds().width / 2, m_text.getGlobalBounds().height / 2);
+		setOrigin(m_text.getLocalBounds().left + m_text.getLocalBounds().width / 2, m_text.getLocalBounds().top + m_text.getLocalBounds().height / 2);
 	}
 
 	void Label::setRightOrigin()
@@ -135,9 +145,18 @@ namespace guiml
 	{
 		guiml::Label copy(NULL, m_text.getString(), *(m_text.getFont()));
 		copy.setCharacterSize(getText().getCharacterSize());
+
 		if(getString().getSize() != 0)
 			setCharacterSize(m_text.getCharacterSize() * size / copy.getVirtualSize().x);
 	}	
+
+	void Label::setTextHeightSize(unsigned int size)
+	{
+		unsigned int i;
+		for(i=1; m_virtualSize.y < size || i==1; i++)
+			setCharacterSize(i);
+		setCharacterSize(i-1);
+	}
 
 	void Label::setCharacterSize(unsigned int size)
 	{

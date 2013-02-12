@@ -29,7 +29,6 @@ namespace guiml
 			Widget::resizeWidget(m_event->getDefaultWindowSize(), m_event->getNewWindowSize());
 		m_framerate = 1 / (m_event->getElapsedTime() * 0.001);
 
-		clear(m_backgroundColor);
 		if(!m_parent)
 		{
 			Widget::widgetMouseSelect=NULL;
@@ -39,6 +38,7 @@ namespace guiml
 		Updatable::updateFocus();
 		Widget::update(*this);
 		display();
+		clear(m_backgroundColor);
 	}
 
 	void Window::draw(const sf::Drawable &drawable, const sf::RenderStates &states)
@@ -97,5 +97,10 @@ namespace guiml
 	void Window::resizeWidget(const sf::Vector2f& defaultWindowSize, const sf::Vector2f& newWindowSize)
 	{
 		return;
+	}
+
+	bool Window::isInView(const sf::FloatRect &rect) const
+	{
+		return rectCollision(rect, getViewRect());
 	}
 }

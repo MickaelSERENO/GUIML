@@ -5,6 +5,13 @@
 
 namespace guiml
 {
+	enum PosText
+	{
+		CENTER,
+		RIGHT,
+		LEFT
+	};
+
 	class Label : public Widget
 	{
 	public:
@@ -23,6 +30,8 @@ namespace guiml
 		const sf::String &getString() const;
 		const sf::Text &getText() const;
 		bool getUpdateFocus() const;
+		virtual sf::FloatRect getRect() const;
+		virtual sf::FloatRect getVirtualRect() const;
 
 		void setOrigin(float x, float y);
 		void setOrigin(sf::Vector2f &pos);
@@ -35,6 +44,7 @@ namespace guiml
 
 		void setFontText(const sf::Font &font);
 		void setTextWidthSize(unsigned int size);
+		void setTextHeightSize(unsigned int size);
 		void setCharacterSize(unsigned int size);
 		void setColor(const sf::Color &color);
 		
