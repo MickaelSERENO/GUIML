@@ -28,7 +28,6 @@ namespace guiml
 
 		void setDrawButtonMoveFrame(bool drawButtonMoveFrame);
 		void resetView();
-		virtual sf::Vector2f getViewPosition() const;
 
 		const Label& getLabelTitle() const;
 		sf::FloatRect getRectMoveFrame() const;
@@ -36,7 +35,8 @@ namespace guiml
 
 		const PosText& positionTitle() const;
 		bool isMoving();
-		virtual bool isInView(const sf::FloatRect& rect) const;
+
+		virtual sf::Vector2f getRenderViewPosition() const;
 	protected:
 		void testIsMoving();
 		sf::Sprite m_spriteFrame;

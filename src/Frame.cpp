@@ -14,6 +14,7 @@ namespace guiml
 		m_buttonMoveFrame.setParent(this);
 		m_buttonMoveFrame.setBackground(Image(NULL, sprite));
 		m_buttonMoveFrame.setLabel(title);
+		m_buttonMoveFrame.setStaticToView(true);
 
 		create(m_virtualSize.x, m_virtualSize.y);
 		resetView();
@@ -38,21 +39,12 @@ namespace guiml
 				setPosition((newMousePosition.x/multiplicateMousePos.x)-m_mousePos.x, (newMousePosition.y/multiplicateMousePos.y)-m_mousePos.y);
 			}
 
-			std::list<Widget*> child = extractFromUpdatableChild<Widget>();
-			for(std::list<Widget*>::iterator it = child.begin(); it != child.end(); ++it)
-				if(*it)
-					(*it)->move(m_virtualPos.x-getViewPosition().x, m_virtualPos.y-getViewPosition().y); 
-
 			clear(m_backgroundColor);
 			Updatable::updateFocus();
 			Updatable::update(*this);
 
 			display();
 			render.draw(m_spriteFrame);
-
-			for(std::list<Widget*>::iterator it = child.begin(); it != child.end(); ++it)
-				if(*it)
-					(*it)->move(-m_virtualPos.x+getViewPosition().x, -m_virtualPos.y+getViewPosition().y); 
 		}
 	}
 
@@ -71,8 +63,6 @@ namespace guiml
 	{
 		Render::setView(view);
 		sf::RenderTexture::setView(view);
-		if(&view != &m_renderView)
-			moveView(m_virtualPos.x, m_virtualPos.y);
 	}
 
 	void Frame::resetView()
@@ -89,7 +79,6 @@ namespace guiml
 
 	void Frame::setPosition(float x, float y)
 	{
-		moveView(x-m_virtualPos.x, y-m_virtualPos.y);
 		Widget::setPosition(x, y);
 		m_spriteFrame.setPosition(m_virtualPos);
 	}
@@ -116,7 +105,8 @@ namespace guiml
 	void Frame::setBackgroundImage(const Image &backgroundImage)
 	{
 		Render::setBackgroundImage(backgroundImage);
-		m_backgroundImage.setRect(sf::FloatRect(m_virtualPos.x, m_virtualPos.y - m_buttonMoveFrame.getSize().y, m_virtualSize.x, m_virtualSize.y));
+		if(m_buttonMoveFrame.isDrawing())
+			m_backgroundImage.setRect(sf::FloatRect(m_virtualPos.x, m_virtualPos.y - m_buttonMoveFrame.getSize().y, m_virtualSize.x, m_virtualSize.y-m_buttonMoveFrame.getSize().y));
 	}
 
 	void Frame::setDrawButtonMoveFrame(bool drawButtonMoveFrame)
@@ -134,17 +124,17 @@ namespace guiml
 		return m_buttonMoveFrame.isDrawing();
 	}
 
+	sf::Vector2f getRenderViewPosition() const
+	{
+		sf::Vector2f vector = getSommeViewPosition();
+		vector.x -= m_virtualPos.x;
+		vector.y -= m_virtualPos.y;
+		return vector;
+	}
+
 	const PosText& Frame::positionTitle() const
 	{
 		return m_posTitle;
-	}
-
-	sf::Vector2f Frame::getViewPosition() const
-	{
-		sf::Vector2f initial = Render::getViewPosition();
-		initial.x -= m_virtualPos.x;
-		initial.y -= m_virtualPos.y;
-		return initial;
 	}
 
 	bool Frame::isMoving()
@@ -165,12 +155,4 @@ namespace guiml
 		return m_isMoving;
 	}
 
-	bool Frame::isInView(const sf::FloatRect& rect) const
-	{
-		sf::FloatRect viewRect = getViewRect();
-		viewRect.left += m_virtualPos.x;
-		viewRect.top += m_virtualPos.y;
-
-		return rectCollision(rect, viewRect);
-	}
 }

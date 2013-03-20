@@ -14,6 +14,7 @@ namespace guiml
 			virtual sf::Vector2f getViewPosition() const=0;
 			virtual sf::FloatRect getViewRect() const=0;
 			virtual const sf::View& getView() const=0;
+			virtual sf::Vector2f getSommeViewPosition() const=0;
 	};
 }
 

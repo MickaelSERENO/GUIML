@@ -119,4 +119,19 @@ namespace guiml
 	{
 		return sf::Vector2f(m_renderView.getCenter().x - m_renderView.getSize().x/2, m_renderView.getCenter().y - m_renderView.getSize().y/2);
 	}
+
+	sf::Vector2f Render::getSommeViewPosition() const
+	{
+		return sf::Vector2f(Updatable::getRenderViewPosition().x + getViewPosition().x, Updatable::getRenderViewPosition().y + getViewPosition().y);
+	}
+
+  	bool Render::isInView(const sf::FloatRect& rect) const
+	{
+		return rectCollision(rect, getViewRect());
+	}
+
+	sf::Vector2f Render::getRenderViewPosition() const
+	{
+		return getSommeViewPosition();
+	}
 }

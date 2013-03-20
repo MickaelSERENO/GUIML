@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "equation.h"
 
 const unsigned int NBR_KEYS = 321;
 const unsigned int NBR_CLICS = 3;
@@ -26,7 +27,7 @@ public:
 	template <typename T>
 	bool isMouseInRect(const sf::Rect<T> &rect) const //See if the mouse is in the area of rect.
 	{
-		if(m_mousePos.x > rect.left
+	  	if(m_mousePos.x > rect.left
 		&& m_mousePos.x < rect.left + rect.width
 		&& m_mousePos.y > rect.top
 		&& m_mousePos.y < rect.top + rect.height)

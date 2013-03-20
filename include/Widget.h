@@ -79,6 +79,10 @@ namespace guiml
 		 */
 		virtual void setPosition(float x, float y);
 
+		void setPositionWithoutDataView(float x, float y);
+
+		void setPositionWithoutDataView(const sf::Vector2f &pos);
+
 		/*! \brief Set the absolute Widget's size (without Window's resize).
 		 *
 		 *  \param newSize The sf::Vector2f who contain the size on "x" and on "y"
@@ -161,6 +165,10 @@ namespace guiml
 		 */
 		const sf::Vector2f& getVirtualPosition() const;
 
+		sf::Vector2f getPosWithoutDataView();
+
+		const sf::Vector2f& getVirtualPosWithoutDataView();
+
 		/*! \brief Return the relative Widget's size (with Window's resize).
 		 */
 		const sf::Vector2f& getSize() const;
@@ -177,6 +185,11 @@ namespace guiml
 		/*! \brief Return the absolute Widget's rect (without Window's resize).
 		 */
 		virtual sf::FloatRect getVirtualRect() const;
+
+		sf::FloatRect getRectWithoutDataView();
+
+		sf::FloatRect getVirtualRectWithoutDataView();
+		virtual sf::Vector2f getRenderViewPosition() const;
 
 		/*! \brief Set the relative Widget's rect (with Window's resize).
 		 *
@@ -206,6 +219,8 @@ namespace guiml
 		sf::Vector2f m_virtualPos; /*!< The absolute Widget's position (without Window's resize). */
 		sf::Vector2f m_virtualSize; /*!< The absolute Widget's size (without Window's resize). */
 		sf::Vector2f m_posWithoutDataView;
+
+		sf::Vector2f m_posSaved;
 		bool m_movingAllChild; /*!< When the Widget's position is set, do we must moving the child ? */
 		std::list<Widget*> m_widgetChild;
 

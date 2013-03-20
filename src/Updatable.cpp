@@ -153,4 +153,10 @@ namespace guiml
 	{
 		return m_event;
 	}
+
+	sf::Vector2f Updatable::getRenderViewPosition() const
+	{
+		if(m_parent)
+			return m_parent->getRenderViewPosition();
+	}
 }

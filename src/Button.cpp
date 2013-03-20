@@ -15,6 +15,11 @@ namespace guiml
 		drawWidget(true);
 		m_textLighten.setUpdateFocus(false);
 		m_text.setUpdateFocus(false);
+
+		m_background.setStaticToView(false);
+		m_backgroundLighten.setStaticToView(false);
+		m_text.setStaticToView(false);
+		m_textLighten.setStaticToView(false);
 	}
 
 	Button::Button(Updatable *parent, const Image &image, const sf::FloatRect &rect) : Widget(parent, rect), Active(), m_hasBackground(true), m_hasLabel(false), m_setCharacterSize(false), m_background(image), m_text(NULL), m_backgroundLighten(image), m_textLighten(NULL), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left)
@@ -29,6 +34,11 @@ namespace guiml
 		drawWidget(true);
 		m_backgroundLighten.setUpdateFocus(false);
 		m_background.setUpdateFocus(false);
+
+		m_background.setStaticToView(false);
+		m_backgroundLighten.setStaticToView(false);
+		m_text.setStaticToView(false);
+		m_textLighten.setStaticToView(false);
 	}
 
 	Button::Button(Updatable *parent, const Label &text, const Image &image, const sf::FloatRect &rect) : Widget(parent, rect), Active(), m_hasBackground(true), m_hasLabel(true), m_setCharacterSize(false), m_background(image), m_text(text), m_backgroundLighten(image), m_textLighten(text), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left)
@@ -46,6 +56,11 @@ namespace guiml
 		m_text.setUpdateFocus(false);
 		m_backgroundLighten.setUpdateFocus(false);
 		m_background.setUpdateFocus(false);
+
+		m_background.setStaticToView(false);
+		m_backgroundLighten.setStaticToView(false);
+		m_text.setStaticToView(false);
+		m_textLighten.setStaticToView(false);
 	}
 
 	Button::Button(Updatable *parent, const sf::FloatRect &rect) : Widget(parent, rect), Active(), m_hasBackground(false), m_hasLabel(false), m_setCharacterSize(false), m_currentBackground(NULL), m_currentLabel(NULL), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left)
@@ -102,6 +117,7 @@ namespace guiml
 			deselectIt();
 			disactiveIt();
 		}
+		
 		Widget::update(render);
 	}
 
@@ -248,6 +264,9 @@ namespace guiml
 
 		m_backgroundLighten.setUpdateFocus(false);
 		m_background.setUpdateFocus(false);
+
+		m_background.setStaticToView(false);
+		m_backgroundLighten.setStaticToView(false);
 	}
 
 	void Button::setLabel(const Label &string)
@@ -260,6 +279,8 @@ namespace guiml
 		setRect(getVirtualRect());
 		m_textLighten.setUpdateFocus(false);
 		m_text.setUpdateFocus(false);
+		m_text.setStaticToView(false);
+		m_textLighten.setStaticToView(false);
 	}
 
 	void Button::setKeyboardWhoActived(const sf::Keyboard::Key &key)

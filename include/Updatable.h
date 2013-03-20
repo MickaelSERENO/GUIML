@@ -66,6 +66,7 @@ namespace guiml
 
 			bool hasChangeWindow() const;
 			EventManager* getEventManager();
+			virtual sf::Vector2f getRenderViewPosition() const;
 
 		protected:
 			std::list <Updatable*> m_child; /*!< Child's list. */

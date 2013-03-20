@@ -98,9 +98,4 @@ namespace guiml
 	{
 		return;
 	}
-
-	bool Window::isInView(const sf::FloatRect &rect) const
-	{
-		return rectCollision(rect, getViewRect());
-	}
 }
