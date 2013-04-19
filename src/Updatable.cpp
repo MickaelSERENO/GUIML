@@ -49,6 +49,7 @@ namespace guiml
 
 	void Updatable::update(IRender &render)
 	{
+		m_changeWindow = false;
 		for(std::list<Updatable*>::iterator it = m_child.begin(); it!=m_child.end(); ++it)
 			if(*it)
 				(*it)->update(render);

@@ -69,7 +69,6 @@ namespace guiml
 			draw(render);
 
 		Updatable::update(render);
-		m_changeWindow = false;
 	}
 
 	void Widget::draw(IRender &render)
