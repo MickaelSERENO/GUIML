@@ -5,21 +5,20 @@ namespace guiml
 	Label::Label(Updatable *parent, const std::string &string, const sf::Font &font, const sf::Vector2f &position, int characterSize) : Widget(parent, sf::FloatRect(position.x, position.y, characterSize * string.size(), characterSize)), m_text(sf::String(string), font)
 	{
 		m_focus=false;
-		setPosition(position.x, position.y);
+		setPosition(position);
 		setCharacterSize(characterSize);
 	}
 
 	Label::Label(Updatable *parent, const sf::String &string, const sf::Font &font, const sf::Vector2f &position, int characterSize) : Widget(parent, sf::FloatRect(position.x, position.y, characterSize * string.getSize(), characterSize)), m_text(string, font)
 	{
 		m_focus=false;
-		setPosition(position.x, position.y);
+		setPosition(position);
 		setCharacterSize(characterSize);
 	}
 
 	Label::Label(Updatable *parent, const sf::Text &text, const sf::Vector2f &position, int characterSize) : Widget(parent, sf::FloatRect(position.x, position.y, characterSize * text.getString().getSize(), characterSize)), m_text(text)
 	{
 		m_focus=false;
-		setPosition(position.x, position.y);
 		setCharacterSize(characterSize);
 	}
 

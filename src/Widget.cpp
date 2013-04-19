@@ -46,7 +46,6 @@ namespace guiml
 			{
 				Updatable::focusIsCheck = true;
 				Widget::widgetMouseSelect=this;
-				return;
 			}
 
 			Updatable::updateFocus();

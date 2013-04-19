@@ -42,7 +42,10 @@ namespace guiml
 		for(std::list<Updatable*>::reverse_iterator it = m_child.rbegin(); it != m_child.rend(); ++it)
 		{
 			if(Updatable::focusIsCheck == true)
+			{
+				focusIsCheck = false;
 				return;
+			}
 			(*it)->updateFocus();
 		}
 	}
