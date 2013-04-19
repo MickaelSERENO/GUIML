@@ -120,7 +120,7 @@ namespace guiml
 		return m_buttonMoveFrame.isDrawing();
 	}
 
-	sf::Vector2f Frame::getRenderViewPosition() const
+	sf::Vector2f Frame::getRenderViewPositionOnScreen() const
 	{
 		sf::Vector2f vector = getSommeViewPosition();
 		vector.x -= m_virtualPos.x;

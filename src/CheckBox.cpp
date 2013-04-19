@@ -45,13 +45,13 @@ namespace guiml
 
 	void CheckBox::setSize(float x, float y)
 	{
+		Widget::setSize(x, y);
 		m_rectangle.setSize(sf::Vector2f(x-2*m_rectangle.getOutlineThickness(), y-2*m_rectangle.getOutlineThickness()));
 		m_line1[0].position = sf::Vector2f(m_rectangle.getPosition().x, m_rectangle.getPosition().y);
 		m_line1[1].position = sf::Vector2f(m_rectangle.getPosition().x+m_rectangle.getSize().x, m_rectangle.getPosition().y + m_rectangle.getSize().y);
 		
 		m_line2[0].position = sf::Vector2f(m_rectangle.getPosition().x + m_rectangle.getSize().x, m_rectangle.getPosition().y);
 		m_line2[1].position = sf::Vector2f(m_rectangle.getPosition().x,m_rectangle.getPosition().y+m_rectangle.getSize().y);
-		Widget::setSize(x, y);
 	}
 
 	void CheckBox::setPosition(float x, float y, bool withOrigin)
