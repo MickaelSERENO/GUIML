@@ -23,6 +23,16 @@
 
 namespace guiml
 {
+	enum Position
+	{
+		TopRight,
+		TopLeft,
+		Center,
+		BottomRight,
+		BottomLeft,
+		Other
+	};
+
 	/*!
 	 * \class Widget
 	 * \brief Root class for create Widgets.
@@ -58,6 +68,7 @@ namespace guiml
 		 */
 		virtual void drawWidget(bool drawing);
 
+		void setUpdateFocus(bool focus);
 		void setStaticToView(bool dontMove);
 		/*! \brief Update the Widget's children or not.
 		 *  
@@ -65,23 +76,26 @@ namespace guiml
 		 */
 		void drawAllChild(bool drawing);
 
+		void setOrigin(float x, float y);
+		void setOrigin(const sf::Vector2f &origin);
+		void setPosOrigin(const Position& position);
 
 		/*! \brief Set the absolute position (without Window's resize).
 		 *
 		 *	\param newPos The sf::Vector2f who contain the position on "x" and on "y"
 		 * */
-		virtual void setPosition(const sf::Vector2f &newPos);
+		virtual void setPosition(const sf::Vector2f &newPos, bool withOrigin=true);
 
 		/*! \brief Set the absolute Widget's position (without Window's resize).
 		 * 
 		 *  \param x The position on "x"
 		 *  \param y The position on "y" 
 		 */
-		virtual void setPosition(float x, float y);
+		virtual void setPosition(float x, float y, bool withOrigin=true);
 
-		void setPositionWithoutDataView(float x, float y);
+		void setPositionOnScreen(float x, float y, bool withOrigin=true);
 
-		void setPositionWithoutDataView(const sf::Vector2f &pos);
+		void setPositionOnScreen(const sf::Vector2f &pos, bool withOrigin=true);
 
 		/*! \brief Set the absolute Widget's size (without Window's resize).
 		 *
@@ -135,6 +149,8 @@ namespace guiml
 		 */
 		virtual void scale(const sf::Vector2f &scaling);
 
+		virtual void setScale(float x, float y);
+		virtual void setScale(const sf::Vector2f &scaling);
 		/*! \brief Scale the Widget
 		 * 
 		 *  \param x This value represent the value on "x" and "y" for scalling the Widget.
@@ -159,15 +175,19 @@ namespace guiml
 
 		/*! \brief Return the relative Widget's position (with Window's resize).
 		 */
-		const sf::Vector2f& getPosition() const;
+
+		bool getUpdateFocus() const;
+		const sf::Vector2f& getOrigin() const;
+		Position getPosOrigin() const;
 
 		/*! \brief Return the absolute Widget's position (without Window's resize).
 		 */
-		const sf::Vector2f& getVirtualPosition() const;
+		sf::Vector2f getPosition(bool withOrigin=true) const;
+		sf::Vector2f getVirtualPosition(bool withOrigin=true) const;
 
-		sf::Vector2f getPosWithoutDataView();
+		sf::Vector2f getPosOnScreen(bool withOrigin=true);
 
-		const sf::Vector2f& getVirtualPosWithoutDataView();
+		sf::Vector2f getVirtualPosOnScreen(bool withOrigin = true);
 
 		/*! \brief Return the relative Widget's size (with Window's resize).
 		 */
@@ -176,7 +196,7 @@ namespace guiml
 		/*! \brief Return the absolute Widget's size (without Window's resize).
 		 */
 		const sf::Vector2f& getVirtualSize() const; 
-
+		const sf::Vector2f& getScale() const;
 
 		/*! \brief Return the relative Widget's rect (with Window's resize).
 		 */
@@ -186,9 +206,9 @@ namespace guiml
 		 */
 		virtual sf::FloatRect getVirtualRect() const;
 
-		sf::FloatRect getRectWithoutDataView();
+		sf::FloatRect getRectOnScreen();
 
-		sf::FloatRect getVirtualRectWithoutDataView();
+		sf::FloatRect getVirtualRectOnScreen();
 		virtual sf::Vector2f getRenderViewPosition() const;
 
 		/*! \brief Set the relative Widget's rect (with Window's resize).
@@ -214,15 +234,19 @@ namespace guiml
 	protected:
 		bool m_isDrawing; /*!< Update the Widget or not ? */
 		bool m_isStaticToView;
+		sf::Vector2f m_origin;
 		sf::Vector2f m_pos; /*!< The relative Widget's position (with Window's resize). */
 		sf::Vector2f m_size; /*!< The relative Widget's size (with Window's resize). */
 		sf::Vector2f m_virtualPos; /*!< The absolute Widget's position (without Window's resize). */
 		sf::Vector2f m_virtualSize; /*!< The absolute Widget's size (without Window's resize). */
-		sf::Vector2f m_posWithoutDataView;
+		sf::Vector2f m_posOnScreen;
 
 		sf::Vector2f m_posSaved;
+		sf::Vector2f m_scale;
 		bool m_movingAllChild; /*!< When the Widget's position is set, do we must moving the child ? */
 		std::list<Widget*> m_widgetChild;
+		bool m_focus;
+		Position m_posOrigin;
 
 		static RessourcesManager<sf::Texture*> fileLoading;
 		static Widget* widgetMouseSelect;

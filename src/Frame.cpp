@@ -2,18 +2,15 @@
 
 namespace guiml
 {
-	Frame::Frame(Updatable *parent, const sf::FloatRect &rect, const sf::Color &backgroundColor, const Image &backgroundImage, const Label &title, const sf::Color &backgroundTitle, bool drawButtonMoveFrame) : Render(parent, rect, backgroundColor, backgroundImage), sf::RenderTexture(), m_buttonMoveFrame(NULL, guiml::Label(), guiml::Image(), sf::FloatRect(0, 0, rect.width, title.getSize().y)), m_posTitle(PosText::CENTER), m_isMoving(false), m_hasAddChild(false)
+	Frame::Frame(Updatable *parent, const sf::FloatRect &rect, const sf::Color &backgroundColor, const Image &backgroundImage, const Label &title, const sf::Color &backgroundTitle, bool drawButtonMoveFrame) : Render(parent, rect, backgroundColor, backgroundImage), sf::RenderTexture(), m_buttonMoveFrame(NULL, guiml::Label(), guiml::Image(NULL, sf::Sprite(), true), sf::FloatRect(0, 0, rect.width, title.getVirtualSize().y)), m_isMoving(false), m_hasAddChild(false)
 	{
 		setRect(getVirtualRect());
 		m_movingAllChild = false;
 
 		sf::Texture texture;
-		sf::Sprite sprite(texture, sf::IntRect(0, 0, rect.width, title.getSize().y));
-		sprite.setColor(backgroundTitle);
-
 		m_buttonMoveFrame.setParent(this);
-		m_buttonMoveFrame.setBackground(Image(NULL, sprite));
 		m_buttonMoveFrame.setLabel(title);
+		setBackgroundTitle(sf::Color::Red);
 		m_buttonMoveFrame.setStaticToView(true);
 
 		create(m_virtualSize.x, m_virtualSize.y);
@@ -42,7 +39,6 @@ namespace guiml
 			clear(m_backgroundColor);
 			Updatable::updateFocus();
 			Updatable::update(*this);
-
 			display();
 			render.draw(m_spriteFrame);
 		}
@@ -77,7 +73,7 @@ namespace guiml
 		m_buttonMoveFrame.setSize(sf::Vector2f(m_virtualSize.x, m_buttonMoveFrame.getVirtualSize().y));
 	}
 
-	void Frame::setPosition(float x, float y)
+	void Frame::setPosition(float x, float y, bool withOrigin)
 	{
 		Widget::setPosition(x, y);
 		m_spriteFrame.setPosition(m_virtualPos);
@@ -124,17 +120,12 @@ namespace guiml
 		return m_buttonMoveFrame.isDrawing();
 	}
 
-	sf::Vector2f getRenderViewPosition() const
+	sf::Vector2f Frame::getRenderViewPosition() const
 	{
 		sf::Vector2f vector = getSommeViewPosition();
 		vector.x -= m_virtualPos.x;
 		vector.y -= m_virtualPos.y;
 		return vector;
-	}
-
-	const PosText& Frame::positionTitle() const
-	{
-		return m_posTitle;
 	}
 
 	bool Frame::isMoving()
@@ -154,5 +145,4 @@ namespace guiml
 			m_isMoving = false;
 		return m_isMoving;
 	}
-
 }

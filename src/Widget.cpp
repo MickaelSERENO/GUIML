@@ -6,10 +6,10 @@ guiml::Widget* guiml::Widget::widgetMouseSelect = NULL;
 
 namespace guiml
 {
-	Widget::Widget(Updatable *parent, const sf::FloatRect &rect) : Updatable(parent), m_isDrawing(true), m_isStaticToView(false), m_pos(rect.left, rect.top), m_size(rect.width, rect.height), m_virtualPos(rect.left, rect.top), m_virtualSize(rect.width, rect.height), m_posWithoutDataView(m_virtualPos.x - getRenderViewPosition().x, m_virtualPos.y - getRenderViewPosition().y), m_posSaved(m_virtualPos), m_movingAllChild(false)
+	Widget::Widget(Updatable *parent, const sf::FloatRect &rect) : Updatable(parent), m_isDrawing(true), m_isStaticToView(false), m_origin(0, 0), m_pos(rect.left, rect.top), m_size(rect.width, rect.height), m_virtualPos(rect.left, rect.top), m_virtualSize(rect.width, rect.height), m_posOnScreen(m_virtualPos.x - getRenderViewPosition().x, m_virtualPos.y - getRenderViewPosition().y), m_posSaved(m_virtualPos), m_scale(1,1), m_movingAllChild(false), m_focus(true), m_posOrigin(TopLeft)
 	{}
 
-	Widget::Widget(const Widget &copy) : Updatable(copy), m_isDrawing(copy.m_isDrawing), m_isStaticToView(copy.m_isStaticToView), m_pos(copy.m_pos), m_size(copy.m_size), m_virtualPos(copy.m_virtualPos), m_virtualSize(copy.m_virtualSize), m_posWithoutDataView(m_virtualPos), m_posSaved(copy.m_posSaved), m_movingAllChild(copy.m_movingAllChild)
+	Widget::Widget(const Widget &copy) : Updatable(copy), m_isDrawing(copy.m_isDrawing), m_isStaticToView(copy.m_isStaticToView), m_origin(copy.m_origin), m_pos(copy.m_pos), m_size(copy.m_size), m_virtualPos(copy.m_virtualPos), m_virtualSize(copy.m_virtualSize), m_posOnScreen(m_virtualPos), m_posSaved(copy.m_posSaved), m_scale(copy.m_scale), m_movingAllChild(copy.m_movingAllChild), m_focus(copy.m_focus), m_posOrigin(copy.m_posOrigin)
 	{}
 
 	Widget& Widget::operator=(const Widget &copy)
@@ -18,14 +18,18 @@ namespace guiml
 		{
 			Updatable::operator=(copy);
 			m_isDrawing = copy.m_isDrawing;
+			m_origin = copy.m_origin;
 			m_pos = copy.m_pos;
 			m_size = copy.m_size;
 			m_virtualPos = copy.m_virtualPos;
 			m_virtualSize = copy.m_virtualSize;
 			m_movingAllChild = copy.m_movingAllChild;
-			m_posWithoutDataView = copy.m_posWithoutDataView;
+			m_posOnScreen = copy.m_posOnScreen;
 			m_isStaticToView = copy.m_isStaticToView;
 			m_posSaved = copy.m_posSaved;
+			m_scale = copy.m_scale;
+			m_focus=copy.m_focus;
+			m_posOrigin = copy.m_posOrigin;
 		}
 
 		return *this;
@@ -33,18 +37,20 @@ namespace guiml
 
 	void Widget::updateFocus()
 	{
-		sf::Vector2f renderParentViewPosition = getRenderViewPosition();
-		m_posWithoutDataView = sf::Vector2f(m_virtualPos.x - renderParentViewPosition.x, m_virtualPos.y - renderParentViewPosition.y);
-
-		std::cout << m_posWithoutDataView.x << " " << m_posWithoutDataView.y <<std::endl;
-		if(m_isDrawing && m_event && m_event->isMouseInRect(getRectWithoutDataView()))
+		if(m_focus)
 		{
-			Updatable::focusIsCheck = true;
-			Widget::widgetMouseSelect=this;
-			return;
-		}
+			sf::Vector2f renderParentViewPosition = getRenderViewPosition();
+			getPosOnScreen();
 
-		Updatable::updateFocus();
+			if(m_isDrawing && m_event && m_event->isMouseInRect(getRectOnScreen()))
+			{
+				Updatable::focusIsCheck = true;
+				Widget::widgetMouseSelect=this;
+				return;
+			}
+
+			Updatable::updateFocus();
+		}
 	}
 
 	void Widget::update(IRender &render)
@@ -81,17 +87,57 @@ namespace guiml
 				child->drawWidget(drawing);
 	}
 
+	void Widget::setUpdateFocus(bool focus)
+	{
+		m_focus = focus;
+	}
+
 	void Widget::setStaticToView(bool dontMove)
 	{
 		m_isStaticToView=dontMove;
 	}
 
-	void Widget::setPosition(const sf::Vector2f &pos)
+	void Widget::setOrigin(const sf::Vector2f& origin)
+	{
+		setOrigin(origin.x, origin.y);
+	}
+
+	void Widget::setOrigin(float x, float y)
+	{
+		m_origin=sf::Vector2f(x, y);
+		setPosition(m_virtualPos.x+x, m_virtualPos.y+y, false);
+	}
+
+	void Widget::setPosOrigin(const Position& position)
+	{
+		switch(position)
+		{
+			case TopRight:
+				m_origin=sf::Vector2f(m_size.x, 0);
+				break;
+			case TopLeft:
+				m_origin=sf::Vector2f(0, 0);
+				break;
+			case Center:
+				m_origin=sf::Vector2f(m_size.x/2, m_size.y/2);
+				break;
+			case BottomRight:
+				m_origin=sf::Vector2f(m_size.x, m_size.y);
+				break;
+			case BottomLeft:
+				m_origin=sf::Vector2f(0, m_size.y);
+				break;
+		}
+		setPosition(m_virtualPos);
+		m_posOrigin=position;
+	}
+
+	void Widget::setPosition(const sf::Vector2f &pos, bool withOrigin)
 	{
 		setPosition(pos.x, pos.y);
 	}
 
-	void Widget::setPosition(float x, float y)
+	void Widget::setPosition(float x, float y, bool withOrigin)
 	{
 /*  	if(m_movingAllChild)
 			for(std::list<Updatable*>::iterator it = m_child.begin(); it != m_child.end(); ++it)
@@ -105,30 +151,50 @@ namespace guiml
 			if(defaultWindowSize.x != 0 && defaultWindowSize.y != 0)
 			{
 				sf::Vector2f newWindowSize = m_event->getNewWindowSize();
-				m_pos = sf::Vector2f(x * newWindowSize.x/defaultWindowSize.x, y * newWindowSize.y / defaultWindowSize.y);
+				if(withOrigin)
+					m_pos = sf::Vector2f((-m_origin.x + x) * newWindowSize.x/defaultWindowSize.x, (-m_origin.y + y) * newWindowSize.y / defaultWindowSize.y);
+				else
+					m_pos = sf::Vector2f(x * newWindowSize.x/defaultWindowSize.x, y * newWindowSize.y / defaultWindowSize.y);
+
 			}
+
+			else
+			{
+				if(withOrigin)
+					m_pos = sf::Vector2f(x-m_origin.x, y-m_origin.y);
+				else
+					m_pos = sf::Vector2f(x, y);
+			}
+		}
+		else
+		{
+			if(withOrigin)
+				m_pos = sf::Vector2f(x-m_origin.x, y-m_origin.y);
 			else
 				m_pos = sf::Vector2f(x, y);
 		}
+		if(withOrigin)
+			m_virtualPos = sf::Vector2f(x-m_origin.x, y-m_origin.y);
 		else
-			m_pos = sf::Vector2f(x, y);
-		m_virtualPos = sf::Vector2f(x, y);
+			m_virtualPos = sf::Vector2f(x, y);
+
 		m_posSaved = m_virtualPos;
 	}
 
-	void Widget::setPositionWithoutDataView(const sf::Vector2f &pos)
+	void Widget::setPositionOnScreen(const sf::Vector2f &pos, bool withOrigin)
 	{
-		setPositionWithoutDataView(pos.x, pos.y);
+		setPositionOnScreen(pos.x, pos.y, withOrigin);
 	}
 
-	void Widget::setPositionWithoutDataView(float x, float y)
+	void Widget::setPositionOnScreen(float x, float y, bool withOrigin)
 	{
-		setPosition(x+getRenderViewPosition().x, y+getRenderViewPosition().y);
-		m_posWithoutDataView = sf::Vector2f(x, y);
+		setPosition(x-getRenderViewPosition().x, y-getRenderViewPosition().y, withOrigin);
+		m_posOnScreen = sf::Vector2f(x, y);
 	}
 	
 	void Widget::setSize(float x, float y)
 	{
+		m_scale=(1,1);
 		if(m_event)
 		{
 			sf::Vector2f defaultWindowSize = m_event->getDefaultWindowSize();
@@ -143,12 +209,13 @@ namespace guiml
 		else
 			m_size = sf::Vector2f(x, y);
 		m_virtualSize = sf::Vector2f(x, y);;
+		setPosOrigin(m_posOrigin);
 	}
 
 	void Widget::setRect(const sf::FloatRect &rect)
 	{
 		setSize(rect.width, rect.height);
-		setPosition(rect.left, rect.top);
+		setPosition(rect.left, rect.top, false);
 	}
 
 	void Widget::scale(float x)
@@ -164,11 +231,23 @@ namespace guiml
 	void Widget::scale(float x, float y)
 	{
 		setSize(x * m_size.x, y * m_size.y);
+		m_scale = sf::Vector2f(x*m_scale.x, y*m_scale.y);
+	}
+
+	void Widget::setScale(const sf::Vector2f &scale)
+	{
+		setScale(scale.x, scale.y);
+	}
+
+	void Widget::setScale(float x, float y)
+	{
+		setSize(m_size*x/m_scale.x, m_size*y/m_scale.y);
+		m_scale = sf::Vector2f(x,y);
 	}
 
 	void Widget::move(float x, float y)
 	{
-		setPosition(m_virtualPos.x + x, m_virtualPos.y + y);
+		setPosition(m_virtualPos.x + x, m_virtualPos.y + y, false);
 	}
 
 	void Widget::move(const sf::Vector2f &addPosition)
@@ -214,9 +293,33 @@ namespace guiml
 		return m_isStaticToView;
 	}
 
-	const sf::Vector2f& Widget::getPosition() const 
+	const sf::Vector2f& Widget::getOrigin() const
 	{
-		return m_pos;
+		return m_origin;
+	}
+
+	Position Widget::getPosOrigin() const
+	{
+		return m_posOrigin;
+	}
+
+	bool Widget::getUpdateFocus() const
+	{
+		return m_focus;
+	}
+
+	sf::Vector2f Widget::getPosition(bool withOrigin) const 
+	{
+		if(withOrigin==false)
+			return m_pos;
+		if(m_pos.x == 0 && m_pos.y == 0)
+			return m_origin; 
+		else if(m_pos.x == 0)
+			return sf::Vector2f(m_origin.x, m_pos.y/m_virtualPos.y*(m_virtualPos.y+m_origin.y));
+		else if(m_pos.y==0)
+			return sf::Vector2f(m_pos.x/m_virtualPos.x*(m_virtualPos.y+m_origin.y), +m_origin.y);
+		else
+			return sf::Vector2f(m_pos.x/m_virtualPos.x*(m_virtualPos.y+m_origin.y), m_pos.y/m_virtualPos.y*(m_virtualPos.y+m_origin.y));
 	}
 
 	const sf::Vector2f& Widget::getSize() const 
@@ -224,32 +327,38 @@ namespace guiml
 		return m_size;
 	}
 
-	const sf::Vector2f& Widget::getVirtualPosition() const 
+	sf::Vector2f Widget::getVirtualPosition(bool withOrigin) const 
 	{
-		return m_virtualPos;
+		if(withOrigin==false)
+			return m_virtualPos;
+		else
+			return sf::Vector2f(m_virtualPos.x +m_origin.x, m_virtualPos.y + m_origin.y);
 	}
 
-	sf::Vector2f Widget::getPosWithoutDataView()
+	sf::Vector2f Widget::getPosOnScreen(bool withOrigin)
 	{
 		sf::Vector2f renderParentViewPosition = getRenderViewPosition();
-		m_posWithoutDataView = sf::Vector2f(m_virtualPos.x - renderParentViewPosition.x, m_virtualPos.y - renderParentViewPosition.y);
+		sf::Vector2f pos = getPosition(withOrigin);
+		if(m_event)
+		{
+			sf::Vector2f defaultWindowSize = m_event->getDefaultWindowSize();
+			if(defaultWindowSize.x != 0 && defaultWindowSize.y != 0)
+			{
+				sf::Vector2f newWindowSize = m_event->getNewWindowSize();
+				renderParentViewPosition = sf::Vector2f(renderParentViewPosition.x * newWindowSize.x/defaultWindowSize.x, renderParentViewPosition.y * newWindowSize.y / defaultWindowSize.y);
+			}
+		}
+		m_posOnScreen = sf::Vector2f(pos.x - renderParentViewPosition.x, pos.y - renderParentViewPosition.y);
 
-		if(m_pos.x == 0 && m_pos.y != 0)
-			return sf::Vector2f(m_posWithoutDataView.x, m_posWithoutDataView.y * (m_pos.y/m_virtualPos.y));
-		else if(m_pos.x != 0 && m_pos.y == 0)
-			return sf::Vector2f(m_posWithoutDataView.x * (m_pos.x/m_virtualPos.x), m_posWithoutDataView.y);
-		else if(m_pos.x == 0 && m_pos.y == 0)
-			return sf::Vector2f(m_posWithoutDataView.x, m_posWithoutDataView.y);
-
-		return sf::Vector2f(m_posWithoutDataView.x * (m_pos.x/m_virtualPos.x), m_posWithoutDataView.y * (m_pos.y/m_virtualPos.y));
+		return m_posOnScreen;
 	}
 
-	const sf::Vector2f& Widget::getVirtualPosWithoutDataView()
+	sf::Vector2f Widget::getVirtualPosOnScreen(bool withOrigin)
 	{
 		sf::Vector2f renderParentViewPosition = getRenderViewPosition();
-		m_posWithoutDataView = sf::Vector2f(m_virtualPos.x - renderParentViewPosition.x, m_virtualPos.y - renderParentViewPosition.y);
-
-		return m_posWithoutDataView;
+		getPosOnScreen(withOrigin);
+		sf::Vector2f virtualPos = getVirtualPosition(withOrigin);
+		return sf::Vector2f(virtualPos.x - renderParentViewPosition.x, virtualPos.y - renderParentViewPosition.y);
 	}
 
 	const sf::Vector2f& Widget::getVirtualSize() const 
@@ -257,24 +366,29 @@ namespace guiml
 		return m_virtualSize;
 	}
 
+	const sf::Vector2f& Widget::getScale() const
+	{
+		return m_scale;
+	}
+
 	sf::FloatRect Widget::getRect()const 
 	{
-		return sf::FloatRect(m_pos.x, m_pos.y, m_size.x, m_size.y);
+		return sf::FloatRect(m_pos, m_size);
 	}
 	
 	sf::FloatRect Widget::getVirtualRect() const
 	{
-		return sf::FloatRect(m_virtualPos.x, m_virtualPos.y, m_virtualSize.x, m_virtualSize.y);
+		return sf::FloatRect(m_virtualPos, m_virtualSize);
 	}
 
-	sf::FloatRect Widget::getRectWithoutDataView()
+	sf::FloatRect Widget::getRectOnScreen()
 	{
-		return sf::FloatRect(getPosWithoutDataView(), m_size);
+		return sf::FloatRect(getPosOnScreen(false), m_size);
 	}
 
-	sf::FloatRect Widget::getVirtualRectWithoutDataView()
+	sf::FloatRect Widget::getVirtualRectOnScreen()
 	{
-		return sf::FloatRect(getVirtualPosWithoutDataView(), m_virtualSize);
+		return sf::FloatRect(getVirtualPosOnScreen(false), m_virtualSize);
 	}
 
 	sf::Vector2f Widget::getRenderViewPosition() const

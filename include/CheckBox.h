@@ -17,7 +17,7 @@ namespace guiml
 		virtual void draw(IRender &render);
 
 		void setSize(float x, float y);
-		void setPosition(float x, float y);
+		void setPosition(float x, float y, bool withOrigin=true);
 	
 		void setKeyboardWhoActived(const sf::Keyboard::Key &key);
 		void setClickMouseWhoActived(const sf::Mouse::Button &mouseButton);

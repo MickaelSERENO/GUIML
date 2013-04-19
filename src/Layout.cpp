@@ -16,8 +16,9 @@ namespace guiml
 			{
 				if(widgets[i][j])
 				{
-					m_widgetList[i].push_back(widgets[i][j]->copy());
+					m_widgetList[i].push_back(widgets[i][j]);
 				}
+
 				else
 					m_widgetList[i].push_back(new Widget(NULL));
 				m_widgetList[i][j]->setParent(this);

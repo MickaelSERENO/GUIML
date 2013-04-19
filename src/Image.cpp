@@ -5,8 +5,9 @@ RessourcesManager<sf::Texture*> guiml::Image::Image::textures;
 namespace guiml
 {
 	//-------------------------All constructor with various parameters--------------------------//
-	Image::Image(Updatable *parent, const std::string &path, bool delTextureCreated, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0), m_delTextureCreated(delTextureCreated), m_updateFocus(false)
+	Image::Image(Updatable *parent, const std::string &path, bool delTextureCreated, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0), m_delTextureCreated(delTextureCreated)
 	{
+		m_focus=false;
 		sf::Texture *texture;
 		if(!Widget::fileLoading.existe(path))
 		{
@@ -36,8 +37,9 @@ namespace guiml
 			setRect(sf::FloatRect(0, 0, texture->getSize().x, texture->getSize().y));
 	}
 
-	Image::Image(Updatable *parent, const sf::Image &image, bool delTextureCreated, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0), m_delTextureCreated(delTextureCreated), m_updateFocus(false)
+	Image::Image(Updatable *parent, const sf::Image &image, bool delTextureCreated, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0), m_delTextureCreated(delTextureCreated)
 	{
+		m_focus=false;
 		sf::Texture *texture = new sf::Texture();
 		try
 		{
@@ -63,8 +65,9 @@ namespace guiml
 			setRect(sf::FloatRect(0, 0, texture->getSize().x, texture->getSize().y));
 	}
 
-	Image::Image(Updatable *parent, const sf::Texture &texture, bool delTextureCreated, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0), m_delTextureCreated(delTextureCreated), m_updateFocus(false)
+	Image::Image(Updatable *parent, const sf::Texture &texture, bool delTextureCreated, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0), m_delTextureCreated(delTextureCreated)
 	{
+		m_focus=false;
 		setImage(texture);
 		if (rect != sf::FloatRect(0, 0, 0, 0))
 			setRect(rect);
@@ -72,8 +75,9 @@ namespace guiml
 			setRect(sf::FloatRect(0, 0, texture.getSize().x, texture.getSize().y));
 	}
 
-	Image::Image(Updatable *parent, const sf::Sprite &sprite, bool delTextureCreated, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0), m_delTextureCreated(delTextureCreated), m_updateFocus(false)
+	Image::Image(Updatable *parent, const sf::Sprite &sprite, bool delTextureCreated, const sf::FloatRect &rect) : Widget(parent, rect), m_sizeRoundEdge(0), m_delTextureCreated(delTextureCreated)
 	{
+		m_focus=false;
 		setImage(sprite);
 		if (rect != sf::FloatRect(0, 0, 0, 0))
 			setRect(rect);
@@ -81,15 +85,16 @@ namespace guiml
 			setRect(m_sprite.getGlobalBounds());
 	}
 
-	Image::Image(Updatable *parent) : Widget(parent), m_sizeRoundEdge(0), m_delTextureCreated(false), m_updateFocus(false)
-	{}
+	Image::Image(Updatable *parent) : Widget(parent), m_sizeRoundEdge(0), m_delTextureCreated(false)
+	{
+		m_focus=false;
+	}
 
 	Image::Image(const Image &copy) : Widget(copy)
 	{
 		setImage(copy.m_sprite);
 		m_sizeRoundEdge = copy.m_sizeRoundEdge;
 		m_delTextureCreated = copy.m_delTextureCreated;
-		m_updateFocus = copy.m_updateFocus;
 	}
 
 	Image& Image::operator=(const Image &copy)
@@ -100,7 +105,6 @@ namespace guiml
 			m_sprite = copy.m_sprite;
 			m_sizeRoundEdge = copy.m_sizeRoundEdge;
 			m_delTextureCreated = copy.m_delTextureCreated;
-			m_updateFocus = copy.m_updateFocus;
 		}
 
 		return *this;
@@ -114,12 +118,6 @@ namespace guiml
 	}
 	//-----------------------------End of constructor------------------------------------------//
 	
-	void Image::updateFocus()
-	{
-		if(m_updateFocus)
-			Widget::updateFocus();
-	}
-
 	void Image::draw(IRender &render)
 	{
 		render.draw(m_sprite);
@@ -249,37 +247,9 @@ namespace guiml
 		return m_delTextureCreated;
 	}
 
-	bool Image::getUpdateFocus() const
-	{
-		return m_updateFocus;
-	}
-
 	sf::FloatRect Image::getRect() const
 	{
 		return m_sprite.getGlobalBounds();
-	}
-
-	sf::FloatRect Image::getVirtualRect() const
-	{
-		sf::FloatRect rect = Widget::getVirtualRect();
-		rect.left -= m_sprite.getOrigin().x;
-		rect.top -= m_sprite.getOrigin().y;
-		return rect;
-	}
-
-	void Image::setOrigin(float x, float y)
-	{
-		m_sprite.setOrigin(x, y);
-	}
-
-	void Image::setOrigin(const sf::Vector2f &pos)
-	{
-		setOrigin(pos.x, pos.y);
-	}
-
-	void Image::setOriginMiddle()
-	{
-		setOrigin(m_virtualSize.x / 2, m_virtualSize.y / 2);
 	}
 
 	void Image::setColor(const sf::Color &color)
@@ -301,12 +271,14 @@ namespace guiml
 	void Image::setImage(const sf::Texture &texture, bool resetRect)
 	{
 		m_sprite.setTexture(texture, resetRect);
+		m_sprite.setOrigin(0, 0);
 		setRect(getVirtualRect());
 	}
 
 	void Image::setImage(const sf::Sprite &sprite)
 	{
 		m_sprite = sprite;
+		m_sprite.setOrigin(0, 0);
 		setRect(getVirtualRect());
 	}
 
@@ -333,6 +305,7 @@ namespace guiml
 			texture = Widget::fileLoading.get(path);
 		m_sprite.setTexture(*texture);
 		setRect(getVirtualRect());
+		m_sprite.setOrigin(0, 0);
 	}
 
 	void Image::setImage(const sf::Image &image)
@@ -357,28 +330,24 @@ namespace guiml
 		m_textureCreated.push_back(name);
 		m_sprite.setTexture(*texture);
 		setRect(getVirtualRect());
+		m_sprite.setOrigin(0, 0);
 	}
 	
 	void Image::setSize(float x, float y)
 	{
-		m_sprite.setScale(x/m_sprite.getLocalBounds().width, y/m_sprite.getLocalBounds().height);
 		Widget::setSize(x, y);
+		m_sprite.setScale(x/m_sprite.getLocalBounds().width, y/m_sprite.getLocalBounds().height);
 	}
 
-	void Image::setPosition(float x, float y)
+	void Image::setPosition(float x, float y, bool withOrigin)
 	{
-		m_sprite.setPosition(x, y);
-		Widget::setPosition(x, y);
+		Widget::setPosition(x, y, withOrigin);
+		m_sprite.setPosition(m_virtualPos.x, m_virtualPos.y);
 	}
 
 	void Image::setDelTextureCreated(bool delTextureCreated)
 	{
 		m_delTextureCreated = delTextureCreated;
-	}
-
-	void Image::setUpdateFocus(bool updateFocus)
-	{
-		m_updateFocus = updateFocus;
 	}
 
     Widget*	Image::copy() const

@@ -2,28 +2,38 @@
 
 namespace guiml
 {
-	Label::Label(Updatable *parent, const std::string &string, const sf::Font &font, const sf::Vector2f &position, int characterSize) : Widget(parent, sf::FloatRect(position.x, position.y, characterSize * string.size(), characterSize)), m_text(sf::String(string), font), m_updateFocus(false)
+	Label::Label(Updatable *parent, const std::string &string, const sf::Font &font, const sf::Vector2f &position, int characterSize) : Widget(parent, sf::FloatRect(position.x, position.y, characterSize * string.size(), characterSize)), m_text(sf::String(string), font)
 	{
-		setRect(sf::FloatRect(position.x, position.y, characterSize * string.size(), characterSize));
+		m_focus=false;
+		setPosition(position.x, position.y);
+		setCharacterSize(characterSize);
 	}
 
-	Label::Label(Updatable *parent, const sf::String &string, const sf::Font &font, const sf::Vector2f &position, int characterSize) : Widget(parent, sf::FloatRect(position.x, position.y, characterSize * string.getSize(), characterSize)), m_text(string, font), m_updateFocus(false)
+	Label::Label(Updatable *parent, const sf::String &string, const sf::Font &font, const sf::Vector2f &position, int characterSize) : Widget(parent, sf::FloatRect(position.x, position.y, characterSize * string.getSize(), characterSize)), m_text(string, font)
 	{
-		setRect(sf::FloatRect(position.x, position.y, characterSize * string.getSize(), characterSize));
+		m_focus=false;
+		setPosition(position.x, position.y);
+		setCharacterSize(characterSize);
 	}
 
-	Label::Label(Updatable *parent, const sf::Text &text, const sf::Vector2f &position, int characterSize) : Widget(parent, sf::FloatRect(position.x, position.y, characterSize * text.getString().getSize(), characterSize)), m_text(text), m_updateFocus(false)
+	Label::Label(Updatable *parent, const sf::Text &text, const sf::Vector2f &position, int characterSize) : Widget(parent, sf::FloatRect(position.x, position.y, characterSize * text.getString().getSize(), characterSize)), m_text(text)
 	{
-		setRect(sf::FloatRect(position.x, position.y, characterSize * text.getString().getSize(), characterSize));
+		m_focus=false;
+		setPosition(position.x, position.y);
+		setCharacterSize(characterSize);
 	}
 
-	Label::Label(Updatable *parent) : Widget(parent), m_updateFocus(false)
-	{}
+	Label::Label(Updatable *parent) : Widget(parent)
+	{
+		m_focus=false;
+	}
 
-	Label::Label() : Widget(NULL), m_updateFocus(false)
-	{}
+	Label::Label() : Widget(NULL)
+	{
+		m_focus=false;
+	}
 
-	Label::Label(const Label &copy) : Widget(copy), m_text(copy.m_text), m_updateFocus(false)
+	Label::Label(const Label &copy) : Widget(copy), m_text(copy.m_text)
 	{
 	}
 
@@ -33,15 +43,9 @@ namespace guiml
 		{
 			Widget::operator=(copy);
 			m_text = copy.m_text;
-			m_updateFocus = copy.m_updateFocus;
+			m_focus = copy.m_focus;
 		}
 		return *this;
-	}
-
-	void Label::updateFocus()
-	{
-		if(m_updateFocus)
-			Widget::updateFocus();
 	}
 
 	void Label::draw(IRender &render)
@@ -73,11 +77,6 @@ namespace guiml
 		return m_text;
 	}
 
-	bool Label::getUpdateFocus() const
-	{
-		return m_updateFocus;
-	}
-
 	sf::FloatRect Label::getRect() const
 	{
 		return m_text.getGlobalBounds();
@@ -86,31 +85,6 @@ namespace guiml
 	sf::FloatRect Label::getVirtualRect() const
 	{
 		return m_text.getGlobalBounds();
-	}
-
-	void Label::setOrigin(float x, float y)
-	{
-		m_text.setOrigin(x, y);
-	}
-
-	void Label::setOrigin(sf::Vector2f &pos)
-	{
-		setOrigin(pos.x, pos.y);
-	}
-
-	void Label::setDefaultOrigin()
-	{
-		setOrigin(0, 0);
-	}
-
-	void Label::setOriginMiddle()
-	{
-		setOrigin(m_text.getLocalBounds().left + m_text.getLocalBounds().width / 2, m_text.getLocalBounds().top + m_text.getLocalBounds().height / 2);
-	}
-
-	void Label::setRightOrigin()
-	{
-		setOrigin(m_virtualSize.x, m_virtualSize.y);
 	}
 
 	void Label::rotate(float angle)
@@ -130,10 +104,10 @@ namespace guiml
 		setRect(m_text.getGlobalBounds());
 	}
 
-	void Label::setPosition(float x, float y)
+	void Label::setPosition(float x, float y, bool withOrigin)
 	{
-		Widget::setPosition(x, y);
-		m_text.setPosition(x, y);
+		Widget::setPosition(x, y, withOrigin);
+		m_text.setPosition(m_virtualPos.x, m_virtualPos.y);
 	}
 
 	void Label::setFontText(const sf::Font &font)
@@ -153,7 +127,7 @@ namespace guiml
 	void Label::setTextHeightSize(unsigned int size)
 	{
 		unsigned int i;
-		for(i=1; m_virtualSize.y < size || i==1; i++)
+		for(i=1; m_text.getGlobalBounds().height < size || i==1; i++)
 			setCharacterSize(i);
 		setCharacterSize(i-1);
 	}
@@ -179,23 +153,21 @@ namespace guiml
 	{
 		m_text = string;
 		setRect(getVirtualRect());
+		m_text.setOrigin(sf::Vector2f(0, 0));
 	}
 
 	void Label::setLabel(const sf::String &string)
 	{
 		m_text.setString(string);
 		setRect(getVirtualRect());
+		m_text.setOrigin(sf::Vector2f(0, 0));
 	}
 
 	void Label::setLabel(const std::string &string)
 	{
 		setLabel(sf::String(string));
 		setRect(getVirtualRect());
-	}
-
-	void Label::setUpdateFocus(bool updateFocus)
-	{
-		m_updateFocus = updateFocus;
+		m_text.setOrigin(sf::Vector2f(0, 0));
 	}
 
 	Widget* Label::copy() const

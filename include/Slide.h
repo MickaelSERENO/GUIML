@@ -3,7 +3,7 @@
 
 namespace guiml
 {
-	enum Position
+	enum Orientation
 	{
 		HORIZONTAL,
 		VERTICAL
@@ -19,8 +19,8 @@ namespace guiml
 	{
 	public:
 		#include "SurchargeMethode.h"
-		Slide(Updatable *parent, const sf::Vector2f& extremesValues, const sf::FloatRect &globalRect, int cursorSize=-1, const Position& position = Position::VERTICAL, int pourcentageGlobalRectangle=100);
-		Slide(Updatable *parent, float valueMin, float valueMax, const sf::FloatRect &rect, int cursorSize = -1, const Position& position = Position::VERTICAL, int pourcentageGlobalRectangle=100);
+		Slide(Updatable *parent, const sf::Vector2f& extremesValues, const sf::FloatRect &globalRect, int cursorSize=-1, const Orientation& position = Orientation::VERTICAL, int pourcentageGlobalRectangle=100);
+		Slide(Updatable *parent, float valueMin, float valueMax, const sf::FloatRect &rect, int cursorSize = -1, const Orientation& position = Orientation::VERTICAL, int pourcentageGlobalRectangle=100);
 		Slide(Updatable *parent);
 		Slide();
 
@@ -32,9 +32,9 @@ namespace guiml
 		void update(IRender &render);
 
 		void setSize(float x, float y);
-		void setPosition(float x, float y);
+		void setOrientation(float x, float y);
 
-		void setPosition(const Position &position);
+		void setOrientation(const Orientation &position);
 
 		void setExtremesValues(const sf::Vector2f &extremesValues);
 
@@ -50,7 +50,7 @@ namespace guiml
 
 		sf::Vector2f m_extremesValues;
 		float m_value;
-		Position m_position;
+		Orientation m_position;
 
 		bool m_isSelect;
 		bool m_isActive;

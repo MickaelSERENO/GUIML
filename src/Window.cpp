@@ -35,10 +35,10 @@ namespace guiml
 			Updatable::focusIsCheck=false;
 		}
 
-		Updatable::updateFocus();
-		Widget::update(*this);
-		display();
 		clear(m_backgroundColor);
+		Updatable::updateFocus();
+		Updatable::update(*this);
+		display();
 	}
 
 	void Window::draw(const sf::Drawable &drawable, const sf::RenderStates &states)
@@ -49,7 +49,6 @@ namespace guiml
 	void Window::setPosition(float x, float y)
 	{
 		RenderWindow::setPosition(sf::Vector2i(x, y));
-		Widget::setPosition(x, y);
 	}
 
 	void Window::setSize(float x, float y)

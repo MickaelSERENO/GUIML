@@ -20,6 +20,7 @@ namespace guiml
 		m_backgroundLighten.setStaticToView(false);
 		m_text.setStaticToView(false);
 		m_textLighten.setStaticToView(false);
+		centerLabel();
 	}
 
 	Button::Button(Updatable *parent, const Image &image, const sf::FloatRect &rect) : Widget(parent, rect), Active(), m_hasBackground(true), m_hasLabel(false), m_setCharacterSize(false), m_background(image), m_text(NULL), m_backgroundLighten(image), m_textLighten(NULL), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left)
@@ -39,6 +40,7 @@ namespace guiml
 		m_backgroundLighten.setStaticToView(false);
 		m_text.setStaticToView(false);
 		m_textLighten.setStaticToView(false);
+		centerLabel();
 	}
 
 	Button::Button(Updatable *parent, const Label &text, const Image &image, const sf::FloatRect &rect) : Widget(parent, rect), Active(), m_hasBackground(true), m_hasLabel(true), m_setCharacterSize(false), m_background(image), m_text(text), m_backgroundLighten(image), m_textLighten(text), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left)
@@ -61,6 +63,7 @@ namespace guiml
 		m_backgroundLighten.setStaticToView(false);
 		m_text.setStaticToView(false);
 		m_textLighten.setStaticToView(false);
+		centerLabel();
 	}
 
 	Button::Button(Updatable *parent, const sf::FloatRect &rect) : Widget(parent, rect), Active(), m_hasBackground(false), m_hasLabel(false), m_setCharacterSize(false), m_currentBackground(NULL), m_currentLabel(NULL), m_howActivedKeyboard(sf::Keyboard::Escape), m_howActivedClickMouse(sf::Mouse::Left)
@@ -125,10 +128,8 @@ namespace guiml
 	{
 		if(m_hasLabel)
 		{
-			m_text.setOriginMiddle();
-			m_text.setPosition(m_virtualPos.x + m_virtualSize.x / 2, m_virtualPos.y + m_virtualSize.y / 2);
-			m_textLighten.setOriginMiddle();
-			m_textLighten.setPosition(m_virtualPos.x + m_virtualSize.x / 2, m_virtualPos.y + m_virtualSize.y / 2);
+			m_text.setPosOrigin(Center);
+			m_textLighten.setPosOrigin(Center);
 		}
 	}
 
@@ -210,27 +211,25 @@ namespace guiml
 		m_textLighten.drawWidget(drawing);
 	}
 
-	void Button::setPosition(float posx, float posy)
+	void Button::setPosition(float posx, float posy, bool withOrigin)
 	{
+		Widget::setPosition(posx, posy, withOrigin);
 		if(m_hasBackground)
 		{
-			m_background.setPosition(posx, posy);
-			m_backgroundLighten.setPosition(posx, posy);
+			m_background.setPosition(m_virtualPos.x, m_virtualPos.y);
+			m_backgroundLighten.setPosition(m_virtualPos.x, m_virtualPos.y);
 		}
 
 		if(m_hasLabel)
 		{
-			m_text.setPosition(posx, posy);
-			m_textLighten.setPosition(posx, posy);
+			m_text.setPosition(m_virtualPos.x+m_virtualSize.x/2, m_virtualPos.y+m_virtualSize.y/2);
+			m_textLighten.setPosition(m_virtualPos.x+m_virtualSize.x/2, m_virtualPos.y+m_virtualSize.y/2);
 		}
 
-		Widget::setPosition(posx, posy);
-		centerLabel();
 	}
 
 	void Button::setSize(float sizex, float sizey)
 	{
-	
 		if(m_hasBackground)
 		{
 			m_background.setSize(sizex, sizey);
@@ -281,6 +280,7 @@ namespace guiml
 		m_text.setUpdateFocus(false);
 		m_text.setStaticToView(false);
 		m_textLighten.setStaticToView(false);
+		centerLabel();
 	}
 
 	void Button::setKeyboardWhoActived(const sf::Keyboard::Key &key)

@@ -19,7 +19,7 @@ namespace guiml
 
 		void setTitle(const Label &title);
 		void setSize(float x, float y);
-		void setPosition(float x, float y);
+		void setPosition(float x, float y, bool withOrigin=true);
 		void setBackgroundTitle(const sf::Color &colorTitle);
 		void setBackgroundTitle(const Image &image);
 		void setRectMovingFrame(const sf::FloatRect &rect);
@@ -33,7 +33,6 @@ namespace guiml
 		sf::FloatRect getRectMoveFrame() const;
 		bool getDrawButtonMoveFrame() const;
 
-		const PosText& positionTitle() const;
 		bool isMoving();
 
 		virtual sf::Vector2f getRenderViewPosition() const;
@@ -41,7 +40,6 @@ namespace guiml
 		void testIsMoving();
 		sf::Sprite m_spriteFrame;
 		Button m_buttonMoveFrame;
-		PosText m_posTitle;
 		bool m_isMoving;
 		bool m_hasAddChild;
 		sf::Vector2f m_mousePos;

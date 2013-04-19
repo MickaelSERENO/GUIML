@@ -158,5 +158,7 @@ namespace guiml
 	{
 		if(m_parent)
 			return m_parent->getRenderViewPosition();
+		else
+			return sf::Vector2f(0, 0);
 	}
 }

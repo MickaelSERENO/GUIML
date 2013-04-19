@@ -2,9 +2,9 @@
 
 namespace guiml
 {
-	Slide::Slide(Updatable *parent, const sf::Vector2f &extremesValues, const sf::FloatRect &rect, int cursorSize, const Position& position, int pourcentageGlobalRectangle) : Widget(parent, rect), m_cursor(this), m_buttonUp(this), m_buttonDown(this), m_extremesValues(extremesValues), m_value(0), m_position(position), m_isSelect(false), m_isActive(false), m_pourcentageGlobalRectangle(pourcentageGlobalRectangle)
+	Slide::Slide(Updatable *parent, const sf::Vector2f &extremesValues, const sf::FloatRect &rect, int cursorSize, const Orientation& position, int pourcentageGlobalRectangle) : Widget(parent, rect), m_cursor(this), m_buttonUp(this), m_buttonDown(this), m_extremesValues(extremesValues), m_value(0), m_position(position), m_isSelect(false), m_isActive(false), m_pourcentageGlobalRectangle(pourcentageGlobalRectangle)
 	{
-		if(position == Position::VERTICAL)
+		if(position == Orientation::VERTICAL)
 		{
 			if(cursorSize <= 0 || cursorSize >= rect.width)
 				cursorSize = rect.width;
@@ -27,17 +27,17 @@ namespace guiml
 		}
 	}
 
-	Slide::Slide(Updatable *parent, float valueMin, float valueMax, const sf::FloatRect &rect, int cursorSize, const Position &position, int pourcentageGlobalRectangle) : Widget(parent, rect), m_extremesValues(sf::Vector2f(valueMin, valueMax)), m_value(0), m_position(position), m_isSelect(false), m_isActive(false), m_pourcentageGlobalRectangle(pourcentageGlobalRectangle)
+	Slide::Slide(Updatable *parent, float valueMin, float valueMax, const sf::FloatRect &rect, int cursorSize, const Orientation &position, int pourcentageGlobalRectangle) : Widget(parent, rect), m_extremesValues(sf::Vector2f(valueMin, valueMax)), m_value(0), m_position(position), m_isSelect(false), m_isActive(false), m_pourcentageGlobalRectangle(pourcentageGlobalRectangle)
 	{
 
 	}
 
-	Slide::Slide(Updatable *parent) : Widget(parent, sf::FloatRect(0, 0, 0, 0)), m_extremesValues(sf::Vector2f(0, 0)), m_position(Position::VERTICAL)
+	Slide::Slide(Updatable *parent) : Widget(parent, sf::FloatRect(0, 0, 0, 0)), m_extremesValues(sf::Vector2f(0, 0)), m_position(Orientation::VERTICAL)
 	{
 
 	}
 
-	Slide::Slide() : Widget(NULL, sf::FloatRect(0, 0, 0, 0)), m_extremesValues(sf::Vector2f(0, 0)), m_position(Position::VERTICAL)
+	Slide::Slide() : Widget(NULL, sf::FloatRect(0, 0, 0, 0)), m_extremesValues(sf::Vector2f(0, 0)), m_position(Orientation::VERTICAL)
 	{
 
 	}
@@ -55,12 +55,12 @@ namespace guiml
 
 	}
 
-	void Slide::setPosition(float x, float y)
+	void Slide::setOrientation(float x, float y)
 	{
 
 	}
 
-	void setPosition(const Position& position)
+	void setOrientation(const Orientation& position)
 	{
 
 	}

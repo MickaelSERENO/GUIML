@@ -4,16 +4,10 @@ namespace guiml
 {
 	CheckBox::CheckBox(Updatable *parent, const sf::FloatRect &rect) : Widget(parent, rect), Active(), m_rectangle(sf::Vector2f(rect.width, rect.height)), m_line1(sf::Lines, 2), m_line2(sf::Lines, 2), m_howActivedKeyboard(sf::Keyboard::End), m_howActivedClickMouse(sf::Mouse::Left)
 	{
-		m_rectangle.setPosition(rect.left, rect.top);
 		setOutlineColorRectangle(sf::Color::White);
 		setOutlineThickness(2);
 		setCrossColor(sf::Color::Black);
-
-		m_line1[0].position = sf::Vector2f(rect.left, rect.top);
-		m_line1[1].position = sf::Vector2f(rect.left + rect.width, rect.top + rect.height);
-
-		m_line2[0].position = sf::Vector2f(rect.left + rect.width, rect.top);
-		m_line2[1].position = sf::Vector2f(rect.left, rect.top + rect.height);
+		setRect(rect);
 	}
 
 	CheckBox::CheckBox(const CheckBox &copy) : Widget(copy), Active(), m_rectangle(copy.m_rectangle), m_line1(copy.m_line1), m_line2(copy.m_line2), m_howActivedKeyboard(copy.m_howActivedKeyboard), m_howActivedClickMouse(copy.m_howActivedClickMouse){}
@@ -51,25 +45,25 @@ namespace guiml
 
 	void CheckBox::setSize(float x, float y)
 	{
-		m_rectangle.setSize(sf::Vector2f(x, y));
-		m_line1[1].position = sf::Vector2f(m_virtualPos.x + x, m_virtualPos.y + y);
+		m_rectangle.setSize(sf::Vector2f(x-2*m_rectangle.getOutlineThickness(), y-2*m_rectangle.getOutlineThickness()));
+		m_line1[0].position = sf::Vector2f(m_rectangle.getPosition().x, m_rectangle.getPosition().y);
+		m_line1[1].position = sf::Vector2f(m_rectangle.getPosition().x+m_rectangle.getSize().x, m_rectangle.getPosition().y + m_rectangle.getSize().y);
 		
-		m_line2[0].position = sf::Vector2f(m_virtualPos.x + x, m_virtualPos.y);
-		m_line2[1].position = sf::Vector2f(m_virtualPos.x, y + m_virtualPos.y);
+		m_line2[0].position = sf::Vector2f(m_rectangle.getPosition().x + m_rectangle.getSize().x, m_rectangle.getPosition().y);
+		m_line2[1].position = sf::Vector2f(m_rectangle.getPosition().x,m_rectangle.getPosition().y+m_rectangle.getSize().y);
 		Widget::setSize(x, y);
 	}
 
-	void CheckBox::setPosition(float x, float y)
+	void CheckBox::setPosition(float x, float y, bool withOrigin)
 	{
-		m_rectangle.setPosition(x, y);
+		Widget::setPosition(x, y, withOrigin);
+		m_rectangle.setPosition(m_virtualPos.x+m_rectangle.getOutlineThickness(), m_virtualPos.y+m_rectangle.getOutlineThickness());
 
-		m_line1[0].position = sf::Vector2f(x, y);
-		m_line1[1].position = sf::Vector2f(x + m_virtualSize.x, y + m_virtualSize.y);
-
-		m_line2[0].position = sf::Vector2f(x + m_virtualSize.x, y);
-		m_line2[1].position = sf::Vector2f(x, m_virtualSize.y + y);
-
-		Widget::setPosition(x, y);
+		m_line1[0].position = sf::Vector2f(m_rectangle.getPosition().x, m_rectangle.getPosition().y);
+		m_line1[1].position = sf::Vector2f(m_rectangle.getPosition().x+m_rectangle.getSize().x, m_rectangle.getPosition().y + m_rectangle.getSize().y);
+		
+		m_line2[0].position = sf::Vector2f(m_rectangle.getPosition().x + m_rectangle.getSize().x, m_rectangle.getPosition().y);
+		m_line2[1].position = sf::Vector2f(m_rectangle.getPosition().x,m_rectangle.getPosition().y+m_rectangle.getSize().y);
 	}
 
 	void CheckBox::setKeyboardWhoActived(const sf::Keyboard::Key &key)

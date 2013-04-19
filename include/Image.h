@@ -23,20 +23,14 @@ namespace guiml
 		virtual ~Image();
 		//-----------------------and of constructor----------------------//
 
-		virtual void updateFocus();
 		virtual void draw(IRender &render); //methode Show version guiml::Image
 		void lighten(const sf::FloatRect &rect = sf::FloatRect(0, 0, 0, 0));
 		void roundEdge(int size);
 		const sf::Sprite &getSprite() const; //return the sprite
 		int getSizeRoundEdge() const;
 		bool getDelTextureCreated() const;	
-		bool getUpdateFocus() const;
-		virtual sf::FloatRect getRect() const;
-		virtual sf::FloatRect getVirtualRect() const;
+		sf::FloatRect getRect() const;
 
-		void setOrigin(float x, float y);
-		void setOrigin(const sf::Vector2f &pos);
-		void setOriginMiddle();
 		void setColor(const sf::Color &color);
 
 		void setTextureRect(const sf::FloatRect &rect);
@@ -47,9 +41,8 @@ namespace guiml
 		void setImage(const std::string &path);
 		void setImage(const sf::Image &image);
 		void setSize(float x, float y);
-		void setPosition(float x, float y);
+		void setPosition(float x, float y, bool withOrigin=true);
 		void setDelTextureCreated(bool delTextureCreated);
-		void setUpdateFocus(bool updateFocus);
 
 		Widget* copy() const;
 	protected:
@@ -59,7 +52,6 @@ namespace guiml
 		int m_sizeRoundEdge;
 		bool m_delTextureCreated;
 		std::vector<std::string> m_textureCreated;
-		bool m_updateFocus;
 	};
 }
 
