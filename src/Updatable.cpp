@@ -52,6 +52,7 @@ namespace guiml
 
 	void Updatable::update(IRender &render)
 	{
+		m_changeWindow = false;
 		for(std::list<Updatable*>::iterator it = m_child.begin(); it!=m_child.end(); ++it)
 			if(*it)
 				(*it)->update(render);
@@ -165,7 +166,7 @@ namespace guiml
 	sf::Vector2f Updatable::getRenderViewPosition() const
 	{
 		if(m_parent)
-			return m_parent->getRenderViewPositionOnScreen();
+			return m_parent->getRenderViewPosition();
 		else
 			return sf::Vector2f(0, 0);
 	}
@@ -173,7 +174,7 @@ namespace guiml
 	sf::Vector2f Updatable::getRenderViewPositionOnScreen() const
 	{
 		if(m_parent)
-			return m_parent->getRenderViewPosition();
+			return m_parent->getRenderViewPositionOnScreen();
 		else
 			return sf::Vector2f(0, 0);
 	}

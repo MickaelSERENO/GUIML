@@ -247,7 +247,6 @@ namespace guiml
 
 		static RessourcesManager<sf::Texture*> fileLoading;
 		static Widget* widgetMouseSelect;
-		static bool focusIsCheck;
 		virtual void updateFocus();
 	};
 }

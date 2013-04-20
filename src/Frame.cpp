@@ -10,8 +10,8 @@ namespace guiml
 		sf::Texture texture;
 		m_buttonMoveFrame.setParent(this);
 		m_buttonMoveFrame.setLabel(title);
-		setBackgroundTitle(sf::Color::Red);
-		m_buttonMoveFrame.setStaticToView(true);
+		m_buttonMoveFrame.setStaticToView(true, true);
+		setBackgroundTitle(backgroundTitle);
 
 		create(m_virtualSize.x, m_virtualSize.y);
 		resetView();
