@@ -21,8 +21,6 @@ namespace guiml
 
 		const sf::String &getString() const;
 		const sf::Text &getText() const;
-		virtual sf::FloatRect getRect() const;
-		virtual sf::FloatRect getVirtualRect() const;
 
 		void rotate(float angle);
 		void setStyle(sf::Uint32 style);

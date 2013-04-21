@@ -220,16 +220,16 @@ namespace guiml
 			m_backgroundLighten.setPosition(m_virtualPos.x, m_virtualPos.y);
 		}
 
-		if(m_hasLabel)
+	  	if(m_hasLabel)
 		{
 			m_text.setPosition(m_virtualPos.x+m_virtualSize.x/2, m_virtualPos.y+m_virtualSize.y/2);
 			m_textLighten.setPosition(m_virtualPos.x+m_virtualSize.x/2, m_virtualPos.y+m_virtualSize.y/2);
 		}
-
 	}
 
 	void Button::setSize(float sizex, float sizey)
 	{
+		Widget::setSize(sizex, sizey);
 		if(m_hasBackground)
 		{
 			m_background.setSize(sizex, sizey);
@@ -248,7 +248,6 @@ namespace guiml
 			}
 		}
 
-		Widget::setSize(sizex, sizey);
 		centerLabel();
 	}
 

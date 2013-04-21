@@ -76,16 +76,6 @@ namespace guiml
 		return m_text;
 	}
 
-	sf::FloatRect Label::getRect() const
-	{
-		return m_text.getGlobalBounds();
-	}
-
-	sf::FloatRect Label::getVirtualRect() const
-	{
-		return m_text.getGlobalBounds();
-	}
-
 	void Label::rotate(float angle)
 	{
 		m_text.rotate(angle);
