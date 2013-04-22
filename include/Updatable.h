@@ -39,6 +39,8 @@ namespace guiml
 			 * */
 			virtual void setParent(Updatable *parent, int pos = -1);
 
+			void setChangeWindow(bool change);
+
 			/*! \brief Remove the child of the Updatable's child's list. It return true if the removing is correct, else it return false(maybe the parameter child is not a widget's child).
 			 *
 			 *  \param child The pointeur of the child who will be delete of the widget's child's list. 
@@ -66,8 +68,8 @@ namespace guiml
 
 			bool hasChangeWindow() const;
 			EventManager* getEventManager();
+			virtual sf::Vector2f getRenderViewPositionOnScreen() const;
 			virtual sf::Vector2f getRenderViewPosition() const;
-
 		protected:
 			std::list <Updatable*> m_child; /*!< Child's list. */
 			Updatable *m_parent; /*!< The Updatable's parent. */

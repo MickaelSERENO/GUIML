@@ -65,11 +65,11 @@ namespace guiml
 		/*! \brief Update the Widget or not.
 		 * 
 		 *	\param drawing Boolean for knowing if you want to update the widget or not.
-		 */
+	 */
 		virtual void drawWidget(bool drawing);
 
 		void setUpdateFocus(bool focus);
-		void setStaticToView(bool dontMove);
+		void setStaticToView(bool dontMove, bool changePosition = false);
 		/*! \brief Update the Widget's children or not.
 		 *  
 		 *   \param drawing Boolean for knowing if you want to update the Widget's children or not.
@@ -209,7 +209,6 @@ namespace guiml
 		sf::FloatRect getRectOnScreen();
 
 		sf::FloatRect getVirtualRectOnScreen();
-		virtual sf::Vector2f getRenderViewPosition() const;
 
 		/*! \brief Set the relative Widget's rect (with Window's resize).
 		 *
@@ -239,9 +238,6 @@ namespace guiml
 		sf::Vector2f m_size; /*!< The relative Widget's size (with Window's resize). */
 		sf::Vector2f m_virtualPos; /*!< The absolute Widget's position (without Window's resize). */
 		sf::Vector2f m_virtualSize; /*!< The absolute Widget's size (without Window's resize). */
-		sf::Vector2f m_posOnScreen;
-
-		sf::Vector2f m_posSaved;
 		sf::Vector2f m_scale;
 		bool m_movingAllChild; /*!< When the Widget's position is set, do we must moving the child ? */
 		std::list<Widget*> m_widgetChild;

@@ -35,7 +35,7 @@ namespace guiml
 
 		bool isMoving();
 
-		virtual sf::Vector2f getRenderViewPosition() const;
+		virtual sf::Vector2f getRenderViewPositionOnScreen() const;
 	protected:
 		void testIsMoving();
 		sf::Sprite m_spriteFrame;

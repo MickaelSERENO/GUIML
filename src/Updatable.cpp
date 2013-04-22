@@ -43,7 +43,7 @@ namespace guiml
 		{
 			if(Updatable::focusIsCheck == true)
 			{
-				focusIsCheck = false;
+				Updatable::focusIsCheck == false;
 				return;
 			}
 			(*it)->updateFocus();
@@ -153,6 +153,11 @@ namespace guiml
 		return m_changeWindow;
 	}
 
+	void Updatable::setChangeWindow(bool change)
+	{
+		m_changeWindow=change;
+	}
+
 	EventManager* Updatable::getEventManager()
 	{
 		return m_event;
@@ -162,6 +167,14 @@ namespace guiml
 	{
 		if(m_parent)
 			return m_parent->getRenderViewPosition();
+		else
+			return sf::Vector2f(0, 0);
+	}
+
+	sf::Vector2f Updatable::getRenderViewPositionOnScreen() const
+	{
+		if(m_parent)
+			return m_parent->getRenderViewPositionOnScreen();
 		else
 			return sf::Vector2f(0, 0);
 	}

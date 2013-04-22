@@ -27,7 +27,13 @@ namespace guiml
 
 	void Render::setView(const sf::View &view)
 	{
+		sf::Vector2f back = getRenderViewPosition();
 		m_renderView = view;
+
+		std::list<Widget*> widgetChild = extractFromUpdatableChild<Widget>();	
+		for(std::list<Widget*>::const_iterator it = widgetChild.begin(); it != widgetChild.end(); ++it)
+			if((*it)->isStaticToView())
+				(*it)->setPosition((*it)->getVirtualPosition() - back);
 	}
 
 	void Render::moveView(const sf::Vector2f &move)
@@ -37,8 +43,8 @@ namespace guiml
 
 	void Render::moveView(float x, float y)
 	{
-		m_renderView.move(x, y);
-		setView(m_renderView);
+		sf::View view = m_renderView;
+		view.move(x,y);
 	}
 
 	void Render::resizeView(const sf::Vector2f& size)
@@ -107,17 +113,17 @@ namespace guiml
 
 	sf::FloatRect Render::getViewRect() const
 	{
-		return sf::FloatRect(getViewPosition(), m_renderView.getSize());
+		return sf::FloatRect(getRenderViewPosition(), m_renderView.getSize());
 	}
 
-	sf::Vector2f Render::getViewPosition() const
+	sf::Vector2f Render::getRenderViewPosition() const
 	{
 		return sf::Vector2f(m_renderView.getCenter().x - m_renderView.getSize().x/2, m_renderView.getCenter().y - m_renderView.getSize().y/2);
 	}
 
 	sf::Vector2f Render::getSommeViewPosition() const
 	{
-		return sf::Vector2f(Updatable::getRenderViewPosition().x + getViewPosition().x, Updatable::getRenderViewPosition().y + getViewPosition().y);
+		return sf::Vector2f(Updatable::getRenderViewPositionOnScreen().x + getRenderViewPosition().x, Updatable::getRenderViewPositionOnScreen().y + getRenderViewPosition().y);
 	}
 
   	bool Render::isInView(const sf::FloatRect& rect) const
@@ -125,7 +131,7 @@ namespace guiml
 		return rectCollision(rect, getViewRect());
 	}
 
-	sf::Vector2f Render::getRenderViewPosition() const
+	sf::Vector2f Render::getRenderViewPositionOnScreen() const
 	{
 		return getSommeViewPosition();
 	}

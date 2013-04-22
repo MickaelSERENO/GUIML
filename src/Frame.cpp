@@ -10,8 +10,8 @@ namespace guiml
 		sf::Texture texture;
 		m_buttonMoveFrame.setParent(this);
 		m_buttonMoveFrame.setLabel(title);
-		setBackgroundTitle(sf::Color::Red);
-		m_buttonMoveFrame.setStaticToView(true);
+		m_buttonMoveFrame.setStaticToView(true, true);
+		setBackgroundTitle(backgroundTitle);
 
 		create(m_virtualSize.x, m_virtualSize.y);
 		resetView();
@@ -120,7 +120,7 @@ namespace guiml
 		return m_buttonMoveFrame.isDrawing();
 	}
 
-	sf::Vector2f Frame::getRenderViewPosition() const
+	sf::Vector2f Frame::getRenderViewPositionOnScreen() const
 	{
 		sf::Vector2f vector = getSommeViewPosition();
 		vector.x -= m_virtualPos.x;
