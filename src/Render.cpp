@@ -5,12 +5,7 @@ namespace guiml
 	Render::Render(Updatable *parent, const sf::FloatRect &rect, const sf::Color &backgroundColor, const Image &backgroundImage) : Widget(parent, rect), IRender(), m_backgroundColor(backgroundColor)
 	{
 		setBackgroundImage(backgroundImage);
-	}
-
-	void Render::updateFocus()
-	{
-		if(m_event && m_event->isMouseInRect(getRect()))
-			Updatable::updateFocus();
+		m_focus = false;
 	}
 
 	void Render::setBackgroundImage(const Image &backgroundImage)
